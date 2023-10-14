@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,9 +17,19 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational.Design" Version="1.1.6" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.11.1" />
     <PackageReference Include="MySql.EntityFrameworkCore" Version="5.0.3" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.1.4" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.11.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DataAnalytics\Application\CommandServices\" />
+    <Folder Include="DataAnalytics\Application\EventServices\" />
+    <Folder Include="DataAnalytics\Application\QueryServices\" />
+    <Folder Include="DataAnalytics\Domain\Model\" />
+    <Folder Include="DataAnalytics\Domain\Repositories\" />
+    <Folder Include="DataAnalytics\Infrastructure\" />
+    <Folder Include="DataAnalytics\Interfaces\REST\Resources\" />
   </ItemGroup>
 
 </Project>
