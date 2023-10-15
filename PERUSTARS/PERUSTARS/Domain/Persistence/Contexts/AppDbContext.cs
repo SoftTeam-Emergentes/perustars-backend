@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Models;
 
 namespace PERUSTARS.Domain.Persistence.Contexts
 {
@@ -28,7 +29,7 @@ namespace PERUSTARS.Domain.Persistence.Contexts
         public DbSet<Specialty> Specialties { get; set; }
         public DbSet<Interest> Interests { get; set; }
         public DbSet<FavoriteArtwork> FavoriteArtworks { get; set; }
-        public DbSet<User> Users { get; set; }
+        
         public DbSet<ClaimTicket> ClaimTickets { get; set; }
 
 
@@ -253,16 +254,7 @@ namespace PERUSTARS.Domain.Persistence.Contexts
 
 
 
-                                //*******************************************//
-                                                /*USERS*/
-                                //*******************************************//
-
-            builder.Entity<User>().ToTable("Users");
-            builder.Entity<User>().HasKey(u => u.Id);
-            builder.Entity<User>().Property(u => u.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<User>().Property(u => u.Username).IsRequired();
-            builder.Entity<User>().Property(u => u.PasswordHash).IsRequired();
-            builder.Entity<User>().Ignore(u => u.Token);
+                                
 
 
 

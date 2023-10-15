@@ -16,8 +16,12 @@ using PERUSTARS.Domain.Services;
 using PERUSTARS.Exceptions;
 using PERUSTARS.Persistence.Repositories;
 using PERUSTARS.Services;
-using PERUSTARS.Settings;
 using System.Text;
+using PERUSTARS.IdentityAndAccountManagement.Authorization.Settings;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Persistence.Repositories;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Services;
+using PERUSTARS.IdentityAndAccountManagement.Persistence.Repositories;
+using PERUSTARS.IdentityAndAccountManagement.Services;
 
 namespace PERUSTARS
 {

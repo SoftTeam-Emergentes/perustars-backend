@@ -8,5 +8,10 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
         {
 
         }
+
+        public virtual DbSet<object> getDbSet(string dbSetName)
+        {
+            return null;
+        }
     }
 }

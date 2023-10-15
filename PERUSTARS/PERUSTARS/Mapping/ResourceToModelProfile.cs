@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using PERUSTARS.Domain.Models;
 using PERUSTARS.Resources;
 using PERUSTARS.Domain.Services.Communications;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Models;
 
 namespace PERUSTARS.Mapping
 {
@@ -19,7 +20,7 @@ namespace PERUSTARS.Mapping
             CreateMap<SaveClaimTicketResource, ClaimTicket>();
             CreateMap<SaveEventAssistanceResource, EventAssistance>();
             CreateMap<SaveHobbyistResource, Hobbyist>();
-            CreateMap<RegisterRequest, User>();
+            
         }
     }
 }
