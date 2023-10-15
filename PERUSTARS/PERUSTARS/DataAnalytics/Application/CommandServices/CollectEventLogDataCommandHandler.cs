@@ -3,22 +3,29 @@ using System.Threading;
 using System.Threading.Tasks;
 using PERUSTARS.DataAnalytics.Application.Commands;
 using PERUSTARS.Shared.Domain.Repositories;
+using PERUSTARS.DataAnalytics.Domain.Services;
+using PERUSTARS.DataAnalytics.Domain.Model.Aggregates;
+using PERUSTARS.DataAnalytics.Domain.Model.Events;
+using AutoMapper;
 
 namespace PERUSTARS.DataAnalytics.Application.CommandServices
 {
     public class CollectEventLogDataCommandHandler : IRequestHandler<CollectEventLogDataCommand, bool>
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IPublisher _publisher;
+        private readonly IMapper _mapper;
 
-        public CollectEventLogDataCommandHandler(IUnitOfWork unitOfWork)
+        public CollectEventLogDataCommandHandler(IPublisher publisher, IMapper mapper)
         {
-            _unitOfWork = unitOfWork;
+            _publisher = publisher;
+            _mapper = mapper;
         }
 
         public async Task<bool> Handle(CollectEventLogDataCommand request, CancellationToken cancellationToken)
         {
-            await _unitOfWork.CompleteAsync();
-            return true;
+            EventLogDataCollectedEvent domainEvent = _mapper.Map<EventLogDataCollectedEvent>(request);
+            await _publisher.Publish(domainEvent, cancellationToken);
+            return await Task.FromResult(true);
         }
     }
 }
