@@ -10,6 +10,7 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    <PackageReference Include="MediatR" Version="12.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.5" />
@@ -30,6 +31,8 @@
     <Folder Include="DataAnalytics\Domain\Repositories\" />
     <Folder Include="DataAnalytics\Infrastructure\" />
     <Folder Include="DataAnalytics\Interfaces\REST\Resources\" />
+    <Folder Include="ProfileManagement\Application\Commands\" />
+    <Folder Include="ProfileManagement\Domain\Services\" />
   </ItemGroup>
 
 </Project>
