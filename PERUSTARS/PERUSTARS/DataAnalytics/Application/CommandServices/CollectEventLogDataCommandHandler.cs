@@ -23,6 +23,7 @@ namespace PERUSTARS.DataAnalytics.Application.CommandServices
 
         public async Task<bool> Handle(CollectEventLogDataCommand request, CancellationToken cancellationToken)
         {
+            // TODO: Implement mapping profiles to map this command to its respective domain event
             EventLogDataCollectedEvent domainEvent = _mapper.Map<EventLogDataCollectedEvent>(request);
             await _publisher.Publish(domainEvent, cancellationToken);
             return await Task.FromResult(true);
