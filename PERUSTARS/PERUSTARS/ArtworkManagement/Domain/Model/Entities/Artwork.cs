@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Numerics;
 using PERUSTARS.ArtworkManagement.Domain.Model.Enumerations;
 using PERUSTARS.ArtworkManagement.Domain.Model.ValueObjects;

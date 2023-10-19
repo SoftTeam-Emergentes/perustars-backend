@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Numerics;
 
 namespace PERUSTARS.ArtworkManagement.Domain.Model.Entities
 {
