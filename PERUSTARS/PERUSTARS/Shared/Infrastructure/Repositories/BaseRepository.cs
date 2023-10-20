@@ -8,8 +8,8 @@ namespace PERUSTARS.Shared.Infrastructure.Repositories
 {
     public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
-        protected readonly BaseDbContext _dbContext;
-        public BaseRepository(BaseDbContext dbContext)
+        protected readonly AppDbContext _dbContext;
+        public BaseRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }
