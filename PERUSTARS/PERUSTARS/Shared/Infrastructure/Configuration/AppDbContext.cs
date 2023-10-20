@@ -9,6 +9,8 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Hobbyist> Hobbyists { get; set; }
         public DbSet<Follower> Followers { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<EventAssistance> EventAssistances { get; set; }
 
         public AppDbContext(DbContextOptions dbContextOptions): base(dbContextOptions)
         {
@@ -44,6 +46,11 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
              //   .HasForeignKey(f => f.ArtistId);
 
             builder.Entity<Follower>().ToTable("followers");
+
+            builder.Entity<Event>().ToTable("events");
+            builder.Entity<Event>().HasKey(e => e.EventId);
+            builder.Entity<Event>().Property(e=>e.EventId).IsRequired().ValueGeneratedOnAdd();
+
 
         }
     }
