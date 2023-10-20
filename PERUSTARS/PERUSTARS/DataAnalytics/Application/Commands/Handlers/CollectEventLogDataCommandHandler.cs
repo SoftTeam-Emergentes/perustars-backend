@@ -8,7 +8,7 @@ using PERUSTARS.DataAnalytics.Domain.Model.Aggregates;
 using PERUSTARS.DataAnalytics.Domain.Model.Events;
 using AutoMapper;
 
-namespace PERUSTARS.DataAnalytics.Application.CommandServices
+namespace PERUSTARS.DataAnalytics.Application.Commands.Handlers
 {
     public class CollectEventLogDataCommandHandler : IRequestHandler<CollectEventLogDataCommand, bool>
     {

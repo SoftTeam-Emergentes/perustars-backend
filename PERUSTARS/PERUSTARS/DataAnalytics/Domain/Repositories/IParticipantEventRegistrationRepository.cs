@@ -1,6 +1,5 @@
-﻿using PERUSTARS.DataAnalytics.Domain.Model.Aggregates;
-using PERUSTARS.Shared.Domain.Repositories;
-using PERUSTARS.Shared.Infrastructure.Repositories;
+﻿using PERUSTARS.Shared.Domain.Repositories;
+using PERUSTARS.DataAnalytics.Domain.Model.Entities;
 
 namespace PERUSTARS.DataAnalytics.Domain.Repositories
 {

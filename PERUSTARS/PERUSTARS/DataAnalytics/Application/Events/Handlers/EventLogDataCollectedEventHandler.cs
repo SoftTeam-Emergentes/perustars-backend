@@ -7,7 +7,7 @@ using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PERUSTARS.DataAnalytics.Application.EventServices
+namespace PERUSTARS.DataAnalytics.Application.Events.Handlers
 {
     public class EventLogDataCollectedEventHandler : INotificationHandler<EventLogDataCollectedEvent>
     {
