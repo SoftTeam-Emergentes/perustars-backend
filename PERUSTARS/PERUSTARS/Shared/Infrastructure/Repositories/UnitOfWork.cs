@@ -6,15 +6,15 @@ namespace PERUSTARS.Shared.Infrastructure.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly BaseDbContext _baseDbContext;
+        private readonly AppDbContext _dbContext;
         
-        public UnitOfWork(BaseDbContext baseDbContext)
+        public UnitOfWork(AppDbContext baseDbContext)
         {
-            _baseDbContext = baseDbContext;
+            _dbContext = baseDbContext;
         }
         public async Task CompleteAsync()
         {
-            await _baseDbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
