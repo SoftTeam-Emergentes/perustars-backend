@@ -1,7 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PERUSTARS.Domain.Models;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Model;
+using Artist = PERUSTARS.ProfileManagement.Domain.Model.Entities.Artist;
+using Follower = PERUSTARS.ProfileManagement.Domain.Model.Entities.Follower;
+using Hobbyist = PERUSTARS.ProfileManagement.Domain.Model.Entities.Hobbyist;
 
 namespace PERUSTARS.Shared.Infrastructure.Configuration
+
+
 {
     public class AppDbContext: DbContext
     {
@@ -28,22 +33,27 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
 
             builder.Entity<Artist>().ToTable("artists");
             
-           // builder.Entity<Artist>().HasOne<Artist>(a => a.User)
-                    //.WithOne(u => u.Artist)
-                    //.HasForeignKey<Artist>(a => a.Id);
+            builder.Entity<Artist>()
+                    .HasOne(a => a.User)
+                    .WithOne(a=>a.Artist)
+                    .HasForeignKey<Artist>(a => a.ArtistId).IsRequired();
 
-                    builder.Entity<Hobbyist>().ToTable("hobbyists");
-                //.HasOne(u => u.User)
-               // .WithOne(h => h.Hobbyst)
-               // .HasForeignKey<Hobbyist>(h => h.Id);
+            builder.Entity<Hobbyist>().ToTable("hobbyists");
+                    
+            builder.Entity<Hobbyist>()
+                    .HasOne(u => u.User)
+                    .WithOne(u => u.Hobbyist)
+                    .HasForeignKey<Hobbyist>(u => u.HobbyistId).IsRequired();
 
-            //builder.Entity<Hobbyist>().HasOne(h => h.Follower)
-              //  .WithOne(f => f.Hobbyist)
-              //  .HasForeignKey<Follower>(f => f.HobbyistId);
+            builder.Entity<Hobbyist>()
+                    .HasMany(h => h.Followers)
+                    .WithOne(h => h.Hobbyist)
+                    .HasForeignKey(h => h.HobbyistId);
 
-            //builder.Entity<Artist>().HasMany(a => a.Follower)
-             //   .WithOne(f => f.Artist)
-             //   .HasForeignKey(f => f.ArtistId);
+            builder.Entity<Artist>()
+                    .HasMany(a => a.Followers)
+                    .WithOne(a => a.Artist)
+                    .HasForeignKey(a => a.ArtistId);
 
             builder.Entity<Follower>().ToTable("followers");
 
