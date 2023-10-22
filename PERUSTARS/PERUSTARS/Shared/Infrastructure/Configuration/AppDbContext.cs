@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PERUSTARS.Domain.Models;
+using PERUSTARS.AtEventManagement.Domain.Model;
+using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
 
 namespace PERUSTARS.Shared.Infrastructure.Configuration
 {
@@ -9,8 +11,8 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Hobbyist> Hobbyists { get; set; }
         public DbSet<Follower> Followers { get; set; }
-        public DbSet<Event> Events { get; set; }
-        public DbSet<EventAssistance> EventAssistances { get; set; }
+        public DbSet<ArtEvent> Events { get; set; }
+        public DbSet<Participant> EventAssistances { get; set; }
 
         public AppDbContext(DbContextOptions dbContextOptions): base(dbContextOptions)
         {
@@ -47,9 +49,28 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
 
             builder.Entity<Follower>().ToTable("followers");
 
-            builder.Entity<Event>().ToTable("events");
-            builder.Entity<Event>().HasKey(e => e.EventId);
-            builder.Entity<Event>().Property(e=>e.EventId).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<ArtEvent>().ToTable("ArtEvents");
+            builder.Entity<ArtEvent>().HasKey(a => a.Id);
+            builder.Entity<ArtEvent>().Property(a => a.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<ArtEvent>()
+                .HasOne(a => a.Artist)
+                .WithMany(a => a.ArtEvents)
+                .HasForeignKey(a => a.ArtistId);
+            builder.Entity<ArtEvent>()
+                .HasMany(a => a.Participants)
+                .WithOne(p => p.ArtEvent)
+                .HasForeignKey(p => p.ArtEventId);
+            builder.Entity<Participant>().ToTable("Participants");
+            builder.Entity<Participant>().HasKey(p => p.Id);
+            builder.Entity<Participant>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Participant>()
+                .HasOne(p => p.Hobyst)
+                .WithMany(h => h.Participants)
+                .HasForeignKey(p => p.HobystId);
+
+
+
+            
 
 
         }
