@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 using User = PERUSTARS.IdentityAndAccountManagement.Domain.Model.User;
-
+using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
 namespace PERUSTARS.ProfileManagement.Domain.Model.Entities
 {
     public class Hobbyist: User
@@ -14,6 +14,6 @@ namespace PERUSTARS.ProfileManagement.Domain.Model.Entities
 
         public List<Follower> Followers { get; set; }
 
-        //public List<EventAssistance> Assistance { get; set; }
+        public List<Participant> Participants { get; set; }
     }
 }
