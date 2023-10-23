@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Numerics;
 using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
-using PERUSTARS.ProfileManagement.Domain.Model;
+using PERUSTARS.ProfileManagement.Domain.Model.Entities;
+
 namespace PERUSTARS.AtEventManagement.Domain.Model.Aggregates
 {
     public class ArtEvent
