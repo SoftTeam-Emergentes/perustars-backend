@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Numerics;
-using User = PERUSTARS.IdentityAndAccountManagement.Domain.Model.User;
+using User = PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates.User;
 
 namespace PERUSTARS.ProfileManagement.Domain.Model.Entities
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using PERUSTARS.IdentityAndAccountManagement.Domain.Model;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Repositories;
 using PERUSTARS.IdentityAndAccountManagement.Infrastructure.Context;
 using PERUSTARS.Shared.Infrastructure.Configuration;

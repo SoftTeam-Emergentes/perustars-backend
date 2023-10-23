@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PERUSTARS.DataAnalytics.Domain.Model.Entities;
-using PERUSTARS.IdentityAndAccountManagement.Domain.Model;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates;
 using PERUSTARS.Shared.Extensions;
 using System;
 
@@ -38,8 +38,9 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             
             builder.Entity<Artist>()
                     .HasOne(a => a.User)
-                    .WithOne(a=>a.Artist)
+                    .WithOne()
                     .HasForeignKey<Artist>(a => a.ArtistId);
+
             builder.Entity<Artist>().Property(a => a.Age);
             builder.Entity<Artist>().Property(a => a.Followers);
             builder.Entity<Artist>().Property(a => a.User);
@@ -60,11 +61,11 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             //builder.Entity<Hobbyist>().HasCheckConstraint("Age <= 120");
             builder.Entity<Hobbyist>().Property(a => a.User);
             builder.Entity<Hobbyist>().Property(a => a.Followers);
-            
-                    
+
+
             builder.Entity<Hobbyist>()
                     .HasOne(u => u.User)
-                    .WithOne(u => u.Hobbyist)
+                    .WithOne()
                     .HasForeignKey<Hobbyist>(u => u.HobbyistId);
 
             builder.Entity<Hobbyist>()
