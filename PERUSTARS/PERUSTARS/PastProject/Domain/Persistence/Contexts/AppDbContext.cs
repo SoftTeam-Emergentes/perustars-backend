@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using PERUSTARS.IdentityAndAccountManagement.Domain.Models;
 
 namespace PERUSTARS.Domain.Persistence.Contexts
 {

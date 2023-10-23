@@ -2,6 +2,7 @@
 using PERUSTARS.Shared.Domain.Repositories;
 using PERUSTARS.Shared.Infrastructure.Configuration;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Threading.Tasks;
 
 namespace PERUSTARS.Shared.Infrastructure.Repositories
@@ -18,7 +19,7 @@ namespace PERUSTARS.Shared.Infrastructure.Repositories
             await _dbContext.Set<TEntity>().AddAsync(entity);
         }
 
-        public async Task<TEntity?> FindByIdAsync(int id)
+        public async Task<TEntity?> FindByIdAsync(BigInteger id)
         {
             return await _dbContext.Set<TEntity>().FindAsync(id);
         }

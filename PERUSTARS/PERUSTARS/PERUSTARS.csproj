@@ -11,11 +11,7 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
-<<<<<<< HEAD
     <PackageReference Include="MediatR" Version="12.1.1" />
-=======
-    <PackageReference Include="MediatR" Version="10.0.1" />
->>>>>>> 246e66a0c1398bdb9afa38364e275b8a4b248b47
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.5" />

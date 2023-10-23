@@ -1,8 +1,8 @@
 ﻿using System.Numerics;
 
-namespace PERUSTARS.IdentityAndAccountManagement.Domain.Model;
+namespace PERUSTARS.IdentityAndAccountManagement.Domain.Queries;
 
-public class User
+public class GetUserQueryResponse
 {
     public BigInteger UserId { get; set; }
     public string FirstName { get; set; }

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using PERUSTARS.Domain.Models;
 using PERUSTARS.Resources;
 using PERUSTARS.Domain.Services.Communications;
-using PERUSTARS.IdentityAndAccountManagement.Domain.Models;
 
 namespace PERUSTARS.Mapping
 {

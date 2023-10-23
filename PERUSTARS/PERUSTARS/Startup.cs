@@ -17,11 +17,7 @@ using PERUSTARS.Exceptions;
 using PERUSTARS.Persistence.Repositories;
 using PERUSTARS.Services;
 using System.Text;
-using PERUSTARS.IdentityAndAccountManagement.Authorization.Settings;
-using PERUSTARS.IdentityAndAccountManagement.Domain.Persistence.Repositories;
-using PERUSTARS.IdentityAndAccountManagement.Domain.Services;
-using PERUSTARS.IdentityAndAccountManagement.Persistence.Repositories;
-using PERUSTARS.IdentityAndAccountManagement.Services;
+using PERUSTARS.PastProject.IdentityAndAccountManagement.Authorization.Settings;
 
 namespace PERUSTARS
 {
