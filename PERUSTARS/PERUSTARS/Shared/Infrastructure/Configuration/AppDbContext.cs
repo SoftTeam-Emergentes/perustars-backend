@@ -2,6 +2,7 @@
 using PERUSTARS.Domain.Models;
 using PERUSTARS.AtEventManagement.Domain.Model;
 using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
+using PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Entities;
 
 namespace PERUSTARS.Shared.Infrastructure.Configuration
 {
@@ -13,6 +14,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
         public DbSet<Follower> Followers { get; set; }
         public DbSet<ArtEvent> Events { get; set; }
         public DbSet<Participant> EventAssistances { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         public AppDbContext(DbContextOptions dbContextOptions): base(dbContextOptions)
         {
@@ -34,7 +36,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
                     //.WithOne(u => u.Artist)
                     //.HasForeignKey<Artist>(a => a.Id);
 
-                    builder.Entity<Hobbyist>().ToTable("hobbyists");
+            builder.Entity<Hobbyist>().ToTable("hobbyists");
                 //.HasOne(u => u.User)
                // .WithOne(h => h.Hobbyst)
                // .HasForeignKey<Hobbyist>(h => h.Id);
@@ -48,7 +50,6 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
              //   .HasForeignKey(f => f.ArtistId);
 
             builder.Entity<Follower>().ToTable("followers");
-
             builder.Entity<ArtEvent>().ToTable("ArtEvents");
             builder.Entity<ArtEvent>().HasKey(a => a.Id);
             builder.Entity<ArtEvent>().Property(a => a.Id).IsRequired().ValueGeneratedOnAdd();
@@ -67,6 +68,17 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
                 .HasOne(p => p.Hobyst)
                 .WithMany(h => h.Participants)
                 .HasForeignKey(p => p.HobystId);
+
+
+            // -------CommunicationAndNotificationManagement Bounded Context--------
+            
+            builder.Entity<Notification>().ToTable("Notifications");
+            builder.Entity<Notification>().HasKey(n => n.id);
+            builder.Entity<Notification>().Property(n => n.id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Notification>().Property(n => n.Title).IsRequired();
+            builder.Entity<Notification>().Property(n => n.Description);
+            
+
 
 
 

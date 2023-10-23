@@ -24,13 +24,23 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CommunicationManagement\Application\" />
-    <Folder Include="CommunicationManagement\Application\Commands\" />
-    <Folder Include="CommunicationManagement\Application\CommandServices\" />
-    <Folder Include="CommunicationManagement\Domain\Repositories\" />
-    <Folder Include="CommunicationManagement\Domain\Services\" />
-    <Folder Include="CommunicationManagement\Infrastructure\" />
-    <Folder Include="CommunicationManagement\Interfaces\" />
+    <Folder Include="CommunicationAndNotificationManagement\Application\" />
+    <Folder Include="CommunicationAndNotificationManagement\Application\Commands\" />
+    <Folder Include="CommunicationAndNotificationManagement\Application\Commands\Handlers\" />
+    <Folder Include="CommunicationAndNotificationManagement\Application\Commands\Services\" />
+    <Folder Include="CommunicationAndNotificationManagement\Application\Events\" />
+    <Folder Include="CommunicationAndNotificationManagement\Application\QueryServices\" />
+    <Folder Include="CommunicationAndNotificationManagement\Domain\Model\Commands\" />
+    <Folder Include="CommunicationAndNotificationManagement\Domain\Model\Events\" />
+    <Folder Include="CommunicationAndNotificationManagement\Domain\Model\Queries\" />
+    <Folder Include="CommunicationAndNotificationManagement\Domain\Model\ValueObjects\" />
+    <Folder Include="CommunicationAndNotificationManagement\Domain\Repositories\" />
+    <Folder Include="CommunicationAndNotificationManagement\Domain\Services\" />
+    <Folder Include="CommunicationAndNotificationManagement\Infraestructure\" />
+    <Folder Include="CommunicationAndNotificationManagement\Infraestructure\Repositories\" />
+    <Folder Include="CommunicationAndNotificationManagement\Interfaces\" />
+    <Folder Include="CommunicationAndNotificationManagement\Interfaces\REST\" />
+    <Folder Include="CommunicationAndNotificationManagement\Interfaces\REST\Resources\" />
     <Folder Include="DataAnalytics\Application\Commands\Services\" />
     <Folder Include="DataAnalytics\Application\Events\Services\" />
     <Folder Include="DataAnalytics\Application\QueryServices\" />
@@ -43,7 +53,6 @@
     <Folder Include="DataAnalytics\Interfaces\REST\Resources\" />
     <Folder Include="ArtworkManagement\" />
     <Folder Include="ArtEventManagement\" />
-    <Folder Include="CommunicationAndNotificationManagement\" />
     <Folder Include="ConductReportsManagement\" />
     <Folder Include="ProfileManagement\" />
   </ItemGroup>
