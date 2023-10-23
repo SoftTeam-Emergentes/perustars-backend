@@ -19,9 +19,7 @@ namespace PERUSTARS.DataAnalytics.Application.Events.Handlers
 
         public async Task Handle(EventLogDataCollectedEvent notification, CancellationToken cancellationToken)
         {
-            ConcurrentQueue<DataAnalytic> data = DataAnalyticsFormatter.pendingToCompleteDataAnalyticsElements;
-            DataAnalytic newDataAnalytic = _mapper.Map<DataAnalytic>(notification);
-            data.Enqueue(newDataAnalytic);
+            
         }
     }
 }

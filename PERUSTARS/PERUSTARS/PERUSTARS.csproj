@@ -25,21 +25,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DataAnalytics\Application\Commands\Services\" />
-    <Folder Include="DataAnalytics\Application\Events\Services\" />
+    <Folder Include="DataAnalytics\Application\CommandServices\" />
+    <Folder Include="DataAnalytics\Application\EventServices\" />
     <Folder Include="DataAnalytics\Application\QueryServices\" />
-    <Folder Include="DataAnalytics\Domain\Model\Queries\" />
-    <Folder Include="DataAnalytics\Domain\Model\ValueObjects\" />
+    <Folder Include="DataAnalytics\Domain\Model\" />
     <Folder Include="DataAnalytics\Domain\Repositories\" />
-    <Folder Include="DataAnalytics\Domain\Services\" />
     <Folder Include="DataAnalytics\Infrastructure\" />
-    <Folder Include="DataAnalytics\Infrastructure\Repositories\" />
     <Folder Include="DataAnalytics\Interfaces\REST\Resources\" />
-    <Folder Include="ArtworkManagement\" />
-    <Folder Include="ArtEventManagement\" />
-    <Folder Include="CommunicationAndNotificationManagement\" />
-    <Folder Include="ConductReportsManagement\" />
-    <Folder Include="ProfileManagement\" />
   </ItemGroup>
 
 </Project>
