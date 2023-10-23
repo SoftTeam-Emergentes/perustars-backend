@@ -9,6 +9,7 @@ namespace PERUSTARS.AtEventManagement.Domain.Model.Aggregates
         public string UserName { get; set; }
         public DateTime RegisterDateTime { get; set; }
         public DateTime CheckInDateTime { get; set; }
+        public DateTime ParticipantRegistrationDateTime { get; set; }
         public long? HobystId { get; set; }
         public Hobyst Hobyst { get; set; }
         public ArtEvent ArtEvent { get; set; }
