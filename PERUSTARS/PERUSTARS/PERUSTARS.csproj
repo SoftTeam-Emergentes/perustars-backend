@@ -27,9 +27,6 @@
     <Folder Include="DataAnalytics\Application\QueryServices\" />
     <Folder Include="DataAnalytics\Domain\Model\Queries\" />
     <Folder Include="DataAnalytics\Domain\Model\ValueObjects\" />
-    <Folder Include="DataAnalytics\Domain\Repositories\" />
-    <Folder Include="DataAnalytics\Infrastructure\" />
-    <Folder Include="DataAnalytics\Infrastructure\Repositories\" />
     <Folder Include="DataAnalytics\Interfaces\REST\Resources\" />
     <Folder Include="ArtworkManagement\" />
     <Folder Include="ArtEventManagement\" />

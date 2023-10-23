@@ -1,16 +1,18 @@
 ﻿using PERUSTARS.DataAnalytics.Domain.Model.Enums;
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Numerics;
 
 namespace PERUSTARS.DataAnalytics.Domain.Model.Entities
 {
     public class ParticipantEventRegistration
     {
-        public BigInteger Id { get; set; }
-        public BigInteger HobyistId { get; set; }
+        public long Id { get; set; }
+        public long HobyistId { get; set; }
         public string EventTitle { get; set; }
-        public BigInteger ArtistId { get; set; }
+        public long ArtistId { get; set; }
         public DateTime RegistrationDate { get; set; }
-        public EventParticipationStatus EventParticipationStatus { get; set; }
+        public bool Collected { get; set; } = false;
     }
 }
