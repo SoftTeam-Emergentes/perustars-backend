@@ -1,32 +1,29 @@
 ﻿using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using PERUSTARS.DataAnalytics.Application.Commands;
-using PERUSTARS.Shared.Domain.Repositories;
-using PERUSTARS.DataAnalytics.Domain.Services;
-using PERUSTARS.DataAnalytics.Domain.Model.Aggregates;
-using PERUSTARS.DataAnalytics.Domain.Model.Events;
 using AutoMapper;
+using System.Collections.Generic;
+using PERUSTARS.DataAnalytics.Domain.Model.Entities;
+using PERUSTARS.DataAnalytics.Domain.Repositories;
 
 namespace PERUSTARS.DataAnalytics.Application.Commands.Handlers
 {
-    public class CollectEventLogDataCommandHandler : IRequestHandler<CollectEventLogDataCommand, bool>
+    public class CollectEventLogDataCommandHandler : IRequestHandler<CollectEventLogDataCommand, IEnumerable<ParticipantEventRegistration>>
     {
         private readonly IPublisher _publisher;
         private readonly IMapper _mapper;
+        private readonly IParticipantEventRegistrationRepository _participantEventRegistrationRepository;
 
-        public CollectEventLogDataCommandHandler(IPublisher publisher, IMapper mapper)
+        public CollectEventLogDataCommandHandler(IPublisher publisher, IMapper mapper, IParticipantEventRegistrationRepository participantEventRegistrationRepository)
         {
             _publisher = publisher;
             _mapper = mapper;
+            _participantEventRegistrationRepository = participantEventRegistrationRepository;
         }
 
-        public async Task<bool> Handle(CollectEventLogDataCommand request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ParticipantEventRegistration>> Handle(CollectEventLogDataCommand request, CancellationToken cancellationToken)
         {
-            // TODO: Implement mapping profiles to map this command to its respective domain event
-            EventLogDataCollectedEvent domainEvent = _mapper.Map<EventLogDataCollectedEvent>(request);
-            await _publisher.Publish(domainEvent, cancellationToken);
-            return await Task.FromResult(true);
+            return await _participantEventRegistrationRepository.GetAllNotCollectedParticipantEventRegistrationsAsync();
         }
     }
 }
