@@ -1,6 +1,7 @@
-﻿namespace PERUSTARS.AtEventManagement.Domain.Model.Commads
+﻿using System;
+
+namespace PERUSTARS.AtEventManagement.Domain.Model.Commads
 {
-    public class RescheduleArtEventCommand
-    {
-    }
+    public record RescheduleArtEventCommand(DateTime StartDateTime);
+
 }

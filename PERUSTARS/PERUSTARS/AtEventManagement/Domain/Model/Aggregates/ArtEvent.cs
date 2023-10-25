@@ -8,6 +8,7 @@ namespace PERUSTARS.AtEventManagement.Domain.Model.Aggregates
 {
     public class ArtEvent
     {
+        
         public long? Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
