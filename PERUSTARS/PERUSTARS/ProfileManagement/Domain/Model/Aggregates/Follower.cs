@@ -1,4 +1,4 @@
-namespace PERUSTARS.ProfileManagement.Domain.Model.Entities
+namespace PERUSTARS.ProfileManagement.Domain.Model.Aggregates
 {
     public class Follower
     {

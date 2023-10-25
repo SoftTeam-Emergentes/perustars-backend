@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model;
-using Artist = PERUSTARS.ProfileManagement.Domain.Model.Entities.Artist;
-using Follower = PERUSTARS.ProfileManagement.Domain.Model.Entities.Follower;
-using Hobbyist = PERUSTARS.ProfileManagement.Domain.Model.Entities.Hobbyist;
+using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 
 namespace PERUSTARS.Shared.Infrastructure.Configuration
 

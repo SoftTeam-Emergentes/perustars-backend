@@ -4,7 +4,7 @@ using PERUSTARS.ProfileManagement.Domain.Model.Enum;
 using User = PERUSTARS.IdentityAndAccountManagement.Domain.Model.User;
 
 
-namespace PERUSTARS.ProfileManagement.Domain.Model.Entities
+namespace PERUSTARS.ProfileManagement.Domain.Model.Aggregates
 {
     public class Artist : User
     {
