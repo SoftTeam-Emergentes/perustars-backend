@@ -6,6 +6,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ArtEventManagement\**" />
+    <Compile Remove="ArtworkManagement\**" />
+    <Compile Remove="CommunicationAndNotificationManagement\**" />
+    <Compile Remove="ConductReportsManagement\**" />
+    <Content Remove="ArtEventManagement\**" />
+    <Content Remove="ArtworkManagement\**" />
+    <Content Remove="CommunicationAndNotificationManagement\**" />
+    <Content Remove="ConductReportsManagement\**" />
+    <EmbeddedResource Remove="ArtEventManagement\**" />
+    <EmbeddedResource Remove="ArtworkManagement\**" />
+    <EmbeddedResource Remove="CommunicationAndNotificationManagement\**" />
+    <EmbeddedResource Remove="ConductReportsManagement\**" />
+    <None Remove="ArtEventManagement\**" />
+    <None Remove="ArtworkManagement\**" />
+    <None Remove="CommunicationAndNotificationManagement\**" />
+    <None Remove="ConductReportsManagement\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
@@ -35,11 +54,6 @@
 
     <Folder Include="ProfileManagement\Application\Commands\" />
     <Folder Include="ProfileManagement\Domain\Services\" />
-
-    <Folder Include="ArtworkManagement\" />
-    <Folder Include="ArtEventManagement\" />
-    <Folder Include="CommunicationAndNotificationManagement\" />
-    <Folder Include="ConductReportsManagement\" />
     <Folder Include="ProfileManagement\" />
   </ItemGroup>
 

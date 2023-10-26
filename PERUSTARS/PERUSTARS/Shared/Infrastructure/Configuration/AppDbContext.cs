@@ -100,7 +100,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             builder.Entity<Participant>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Participant>()
                 .HasOne(p => p.Hobyst)
-                .WithMany(h => h.Participants)
+                .WithMany()
                 .HasForeignKey(p => p.HobystId);
 
 
@@ -132,6 +132,11 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
 
             #endregion
 
+
+
+            // Views
+            builder.Entity<Participant>().HasNoKey().ToView("participants_view");
+            
 
             builder.ApplySnakeCaseNamingConvention();
 
