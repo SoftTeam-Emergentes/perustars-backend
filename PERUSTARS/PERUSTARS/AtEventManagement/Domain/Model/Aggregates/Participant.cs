@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Numerics;
+using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.ProfileManagement.Domain.Model.Entities;
 
 namespace PERUSTARS.AtEventManagement.Domain.Model.Aggregates
@@ -24,9 +25,9 @@ namespace PERUSTARS.AtEventManagement.Domain.Model.Aggregates
             UserName = userName;
             RegisterDateTime = registerDateTime;
             CheckInDateTime = checkInDateTime;
-            HobystId = hobystId;
+            HobbyistId = hobbyistId;
             ArtEventId = artEventId;
-            Hobyst = hobyst;
+            Hobbyist = hobbyist;
             ArtEvent = artEvent;
             Collected = collected;
         }

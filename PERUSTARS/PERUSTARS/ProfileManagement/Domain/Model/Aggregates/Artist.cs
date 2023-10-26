@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using System.Numerics;
+using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Model;
 using PERUSTARS.ProfileManagement.Domain.Model.Enum;
 using User = PERUSTARS.IdentityAndAccountManagement.Domain.Model.User;
-using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
 
-namespace PERUSTARS.ProfileManagement.Domain.Model.Entities
+
+
+namespace PERUSTARS.ProfileManagement.Domain.Model.Aggregates
 {
     public class Artist : User
     {
@@ -27,8 +30,8 @@ namespace PERUSTARS.ProfileManagement.Domain.Model.Entities
         //public IList<Artwork> Artworks { get; set; } = new List<Artwork>();
 
         public List<ArtEvent> ArtEvents { get; set; }
-
-
         public List<Follower> Followers { get; set; }
+        
+        public bool Collected  { get; set; } = false;
     }
 }

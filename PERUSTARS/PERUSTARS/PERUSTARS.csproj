@@ -34,7 +34,6 @@
     <Folder Include="DataAnalytics\Interfaces\REST\Resources\" />
 
     <Folder Include="ProfileManagement\Application\Commands\" />
-    <Folder Include="ProfileManagement\Domain\Services\" />
 
     <Folder Include="ArtworkManagement\" />
     <Folder Include="ArtEventManagement\" />
