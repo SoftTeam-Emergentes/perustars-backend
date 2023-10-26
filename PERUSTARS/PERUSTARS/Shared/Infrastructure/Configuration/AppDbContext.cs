@@ -8,7 +8,7 @@ using PERUSTARS.Shared.Extensions;
 using System;
 
 using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
-
+using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
 
 namespace PERUSTARS.Shared.Infrastructure.Configuration
 
@@ -22,8 +22,8 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Hobbyist> Hobbyists { get; set; }
         public DbSet<Follower> Followers { get; set; }
-        public DbSet<ArtEvent> Events { get; set; }
-        public DbSet<Participant> EventAssistances { get; set; }
+        public DbSet<ArtEvent> ArtEvents { get; set; }
+        public DbSet<Participant> Participants { get; set; }
 
         public AppDbContext(DbContextOptions dbContextOptions): base(dbContextOptions)
         {
@@ -96,9 +96,15 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             builder.Entity<ArtEvent>().Property(a => a.Title).IsRequired();
             builder.Entity<ArtEvent>().Property(a => a.Description).IsRequired();
             builder.Entity<ArtEvent>().Property(a => a.StartDateTime).IsRequired();
-            builder.Entity<ArtEvent>().Property(a => a.Location).IsRequired();
+            builder.Entity<ArtEvent>().OwnsOne(ae => ae.Location, location =>
+            {
+                location.Property(l => l.Country).IsRequired();
+                location.Property(l => l.City).IsRequired();
+                location.Property(l => l.Latitude).IsRequired();
+                location.Property(l => l.Longitude).IsRequired();
+            });
             builder.Entity<ArtEvent>().Property(a => a.IsOnline).IsRequired();
-            builder.Entity<ArtEvent>().Property(a=>a.CurrentStatus).IsRequired();
+            builder.Entity<ArtEvent>().Property(a => a.CurrentStatus).HasConversion(v => v.ToString(), v => (ArtEventStatus)Enum.Parse(typeof(ArtEventStatus), v));
             builder.Entity<ArtEvent>().Property(a=>a.Collected).HasDefaultValue(false).IsRequired();
             
             builder.Entity<Participant>().ToTable("Participants");
@@ -110,7 +116,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             builder.Entity<Participant>().Property(p=>p.ParticipantRegistrationDateTime).HasColumnType("timestamp").HasDefaultValue(DateTime.UtcNow).IsRequired();
             builder.Entity<Participant>().Property(p => p.Collected).HasDefaultValue(false).IsRequired();
             builder.Entity<Participant>()
-                .HasOne(p => p.Hobbyist)
+                .HasOne(p => p.Hobyst)
                 .WithMany(h => h.Participants)
                 .HasForeignKey(p => p.HobbyistId);
 
