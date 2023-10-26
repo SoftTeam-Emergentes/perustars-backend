@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PERUSTARS.ArtworkManagement.Interface
+namespace PERUSTARS.ArtworkManagement.Interfaces.REST
 {
     public interface ArtworkController
     {

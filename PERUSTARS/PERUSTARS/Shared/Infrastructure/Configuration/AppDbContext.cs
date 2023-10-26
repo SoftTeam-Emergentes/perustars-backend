@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PERUSTARS.Domain.Models;
-using PERUSTARS.AtEventManagement.Domain.Model;
+using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
 using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Model;
 
 namespace PERUSTARS.Shared.Infrastructure.Configuration
 {
@@ -13,6 +13,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
         public DbSet<Follower> Followers { get; set; }
         public DbSet<ArtEvent> Events { get; set; }
         public DbSet<Participant> EventAssistances { get; set; }
+        public DbSet<Artwork> Artworks { get; set; }
 
         public AppDbContext(DbContextOptions dbContextOptions): base(dbContextOptions)
         {
@@ -28,13 +29,13 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             // ...Poner más atributos ...
 
 
-            builder.Entity<Artist>().ToTable("artists");
+            // builder.Entity<Artist>().ToTable("artists");
             
            // builder.Entity<Artist>().HasOne<Artist>(a => a.User)
                     //.WithOne(u => u.Artist)
                     //.HasForeignKey<Artist>(a => a.Id);
 
-                    builder.Entity<Hobbyist>().ToTable("hobbyists");
+                    // builder.Entity<Hobbyist>().ToTable("hobbyists");
                 //.HasOne(u => u.User)
                // .WithOne(h => h.Hobbyst)
                // .HasForeignKey<Hobbyist>(h => h.Id);
@@ -47,7 +48,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
              //   .WithOne(f => f.Artist)
              //   .HasForeignKey(f => f.ArtistId);
 
-            builder.Entity<Follower>().ToTable("followers");
+            // builder.Entity<Follower>().ToTable("followers");
 
             builder.Entity<ArtEvent>().ToTable("ArtEvents");
             builder.Entity<ArtEvent>().HasKey(a => a.Id);
@@ -70,8 +71,26 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
 
 
 
+            /********************************************/
+            /*            ARTWORK MANAGEMENT            */
+            /********************************************/
+            builder.Entity<Artwork>().ToTable("Artworks");
+            builder.Entity<Artwork>().HasKey(a => a.Id);
+            builder.Entity<Artwork>().Property(a => a.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Artwork>()
+                .HasOne(a => a.Artist)
+                .WithMany(a => a.Artworks)
+                .HasForeignKey(a => a.ArtistId);
+            builder.Entity<Artwork>().Property(a => a.Title).IsRequired();
+            builder.Entity<Artwork>().Property(a => a.Description).IsRequired();
+            builder.Entity<Artwork>().Property(a => a.MainContent).IsRequired();
+            builder.Entity<Artwork>().Property(a => a.Price).IsRequired();
+            builder.Entity<Artwork>().Property(a => a.HobbyistsList).IsRequired();
+            builder.Entity<Artwork>().Property(a => a.CoverImage).IsRequired();
+            builder.Entity<Artwork>().Property(a => a.ReviewsList).IsRequired();
+            builder.Entity<Artwork>().Property(a => a.PublishedAt).IsRequired();
+            builder.Entity<Artwork>().Property(a => a.Status).IsRequired();
             
-
 
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PERUSTARS.ArtworkManagement.Infrastructure
+namespace PERUSTARS.ArtworkManagement.Infrastructure.Repositories
 {
     public class ArtworkRepository
     {

@@ -1,12 +1,16 @@
-﻿using System.Numerics;
-
-namespace PERUSTARS.ArtworkManagement.Domain.Model.Entities
+﻿namespace PERUSTARS.ArtworkManagement.Domain.Model.Entities
 {
     public class HobbyistFavoriteArtwork
     {
-        public BigInteger Id { get; set; }
-        public BigInteger ArtworkId { get; set; }
-        public BigInteger HobbyistId { get; set; }
+        public long Id { get; set; }
+        public long ArtworkId { get; set; }
+        public long HobbyistId { get; set; }
 
+        public HobbyistFavoriteArtwork(long id, long artworkId, long hobbyistId)
+        {
+            Id = id;
+            ArtworkId = artworkId;
+            HobbyistId = hobbyistId;
+        }
     }
 }
