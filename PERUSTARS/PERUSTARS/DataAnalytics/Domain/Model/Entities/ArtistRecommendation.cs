@@ -4,7 +4,7 @@ using System;
 
 namespace PERUSTARS.DataAnalytics.Domain.Model.Entities
 {
-    public class ArtistArtworkRecommendation
+    public class ArtistRecommendation
     {
         public long Id { get; set; }
         public long HobyistId { get; set; }

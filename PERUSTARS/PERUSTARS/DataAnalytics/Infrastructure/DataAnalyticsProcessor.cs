@@ -18,12 +18,17 @@ namespace PERUSTARS.DataAnalytics.Infrastructure
 
         public IEnumerable<MLTrainingData> ProcessData()
         {
-            IEnumerable<MLTrainingData> trainingData = new List<MLTrainingData>();
-            //var result = _appDbContext.ParticipantEventRegistrations
-            //    .Join(_appDbContext.ArtistRecommendations);
-            
-
-            return trainingData;
+            IQueryable<MLTrainingData> processingQuery = from ArtistRecomendation in _appDbContext.ArtistRecommendations
+                        join Participant in _appDbContext.EventAssistances on ArtistRecomendation.ArtistId equals Participant.ArtEvent.ArtistId
+                        join Follower in _appDbContext.Followers on Participant.ArtEvent.ArtistId equals Follower.ArtistId
+                        where ArtistRecomendation.Collected == false || Participant.ArtEvent.Collected == false || Follower.Collected == false
+                        group new { ArtistRecomendation, Participant, Follower } by ArtistRecomendation.ArtistId into grupo
+                        select new MLTrainingData
+                        {
+                            ArtistRecommendationArtistId = grupo.Key,
+                            ArtistRecommendationHobbyistId = grupo.Select(item => item.ArtistRecomendation.HobyistId).ToList().First()
+                        };
+            return processingQuery.ToList();
         }
     }
 }

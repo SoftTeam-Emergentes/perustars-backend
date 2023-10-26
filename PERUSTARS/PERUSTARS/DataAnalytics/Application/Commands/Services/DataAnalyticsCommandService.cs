@@ -21,7 +21,7 @@ namespace PERUSTARS.DataAnalytics.Application.Commands.Services
             CollectRecommendedArtworkDataCommand collectRecommendedArtworkDataCommand = new CollectRecommendedArtworkDataCommand();
 
             IEnumerable<ParticipantEventRegistration> eventLogDataDataCollection = await _mediator.Send(collectEventLogDataCommand);
-            IEnumerable<ArtistArtworkRecommendation> artworkRecommendationsData = await _mediator.Send(collectRecommendedArtworkDataCommand);
+            IEnumerable<ArtistRecommendation> artworkRecommendationsData = await _mediator.Send(collectRecommendedArtworkDataCommand);
 
             return new MLTrainingData();
         }

@@ -15,7 +15,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
     {
         public DbSet<User> Users { get; set; }
         public DbSet<ParticipantEventRegistration> ParticipantEventRegistrations { get; set; }
-        public DbSet<ArtistArtworkRecommendation> ArtistRecommendations { get; set; }
+        public DbSet<ArtistRecommendation> ArtistRecommendations { get; set; }
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Hobbyist> Hobbyists { get; set; }
         public DbSet<Follower> Followers { get; set; }
@@ -122,21 +122,16 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
 
             #region ArtistRecommendations
 
-            builder.Entity<ArtistArtworkRecommendation>().ToTable("ArtistRecommendations");
-            builder.Entity<ArtistArtworkRecommendation>().HasKey(ar => ar.Id);
-            builder.Entity<ArtistArtworkRecommendation>().Property(ar => ar.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<ArtistArtworkRecommendation>().Property(ar => ar.ArtistId).IsRequired();
-            builder.Entity<ArtistArtworkRecommendation>().Property(ar => ar.HobyistId).IsRequired();
-            builder.Entity<ArtistArtworkRecommendation>().Property(ar => ar.RecommendationDateTime).HasColumnType("timestamp").HasDefaultValue(DateTime.UtcNow).IsRequired();
-            builder.Entity<ArtistArtworkRecommendation>().Property(ar => ar.Collected).HasDefaultValue(false).IsRequired();
+            builder.Entity<ArtistRecommendation>().ToTable("ArtistRecommendations");
+            builder.Entity<ArtistRecommendation>().HasKey(ar => ar.Id);
+            builder.Entity<ArtistRecommendation>().Property(ar => ar.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<ArtistRecommendation>().Property(ar => ar.ArtistId).IsRequired();
+            builder.Entity<ArtistRecommendation>().Property(ar => ar.HobyistId).IsRequired();
+            builder.Entity<ArtistRecommendation>().Property(ar => ar.RecommendationDateTime).HasColumnType("timestamp").HasDefaultValue(DateTime.UtcNow).IsRequired();
+            builder.Entity<ArtistRecommendation>().Property(ar => ar.Collected).HasDefaultValue(false).IsRequired();
 
             #endregion
 
-
-
-            // Views
-            builder.Entity<Participant>().HasNoKey().ToView("participants_view");
-            
 
             builder.ApplySnakeCaseNamingConvention();
 

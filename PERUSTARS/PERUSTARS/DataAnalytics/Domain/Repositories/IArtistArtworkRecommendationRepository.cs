@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.DataAnalytics.Domain.Repositories
 {
-    public interface IArtistArtworkRecommendationRepository: IBaseRepository<ArtistArtworkRecommendation>
+    public interface IArtistArtworkRecommendationRepository: IBaseRepository<ArtistRecommendation>
     {
-        Task<IEnumerable<ArtistArtworkRecommendation>> GetAllNotCollectedArtistRecommendationsAsync();
+        Task<IEnumerable<ArtistRecommendation>> GetAllNotCollectedArtistRecommendationsAsync();
     }
 }

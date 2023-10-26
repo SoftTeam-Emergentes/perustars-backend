@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.DataAnalytics.Infrastructure.Repositories
 {
-    public class ArtistArtworkRecommendationRepository : BaseRepository<ArtistArtworkRecommendation>, IArtistArtworkRecommendationRepository
+    public class ArtistArtworkRecommendationRepository : BaseRepository<ArtistRecommendation>, IArtistArtworkRecommendationRepository
     {
         public ArtistArtworkRecommendationRepository(AppDbContext dbContext) : base(dbContext)
         {
         }
 
-        public async Task<IEnumerable<ArtistArtworkRecommendation>> GetAllNotCollectedArtistRecommendationsAsync()
+        public async Task<IEnumerable<ArtistRecommendation>> GetAllNotCollectedArtistRecommendationsAsync()
         {
             return await _dbContext.ArtistRecommendations
                 .Where(ar => ar.Collected == false)

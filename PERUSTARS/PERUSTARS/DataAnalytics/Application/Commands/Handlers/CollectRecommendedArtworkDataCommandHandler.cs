@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.DataAnalytics.Application.Commands.Handlers
 {
-    public class CollectRecommendedArtworkDataCommandHandler : IRequestHandler<CollectRecommendedArtworkDataCommand, IEnumerable<ArtistArtworkRecommendation>>
+    public class CollectRecommendedArtworkDataCommandHandler : IRequestHandler<CollectRecommendedArtworkDataCommand, IEnumerable<ArtistRecommendation>>
     {
         private readonly IPublisher _publisher;
         private readonly IArtistArtworkRecommendationRepository _artistArtworkRecommendationRepository;
@@ -20,7 +20,7 @@ namespace PERUSTARS.DataAnalytics.Application.Commands.Handlers
             _artistArtworkRecommendationRepository = artistArtworkRecommendationRepository;
         }
 
-        public async Task<IEnumerable<ArtistArtworkRecommendation>> Handle(CollectRecommendedArtworkDataCommand request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ArtistRecommendation>> Handle(CollectRecommendedArtworkDataCommand request, CancellationToken cancellationToken)
         {
             return await _artistArtworkRecommendationRepository.GetAllNotCollectedArtistRecommendationsAsync();
         }

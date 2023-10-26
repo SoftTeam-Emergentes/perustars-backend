@@ -2,5 +2,7 @@
 {
     public class MLTrainingData
     {
+        public long ArtistRecommendationArtistId;
+        public long ArtistRecommendationHobbyistId;
     }
 }
