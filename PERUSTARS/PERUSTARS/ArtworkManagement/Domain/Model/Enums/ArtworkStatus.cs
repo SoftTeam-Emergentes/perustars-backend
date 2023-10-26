@@ -1,4 +1,4 @@
-﻿namespace PERUSTARS.ArtworkManagement.Domain.Model.Enumerations
+﻿namespace PERUSTARS.ArtworkManagement.Domain.Model.Enums
 {
     public enum ArtworkStatus
     {

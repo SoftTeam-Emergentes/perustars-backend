@@ -1,26 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using PERUSTARS.ArtworkManagement.Domain.Model.Enumerations;
+using PERUSTARS.ArtworkManagement.Domain.Model.Enums;
 using PERUSTARS.ArtworkManagement.Domain.Model.ValueObjects;
+using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 
 namespace PERUSTARS.ArtworkManagement.Domain.Model.Entities
 {
     public class Artwork
     {
         public long Id { get; set; }
-        public Title Title { get; set; }
-        public Description Description { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
         public ArtworkContent MainContent { get; set; }
         public float Price { get; set; }
-        public IEnumerable<HobbyistFavoriteArtwork> HobbyistsList { get; set; }
+        public IEnumerable<HobbyistFavoriteArtwork> LikedHobbyistsList { get; set; }
         public ArtworkContent CoverImage { get; set; }
-        public IEnumerable<Review> ReviewsList { get; set; }
+        public IEnumerable<ArtworkReview> ReviewsList { get; set; }
         public DateTime PublishedAt { get; set; }
         public ArtworkStatus Status { get; set; }
         public long ArtistId { get; set; }
         public Artist Artist { get; set; }
+        public IEnumerable<ArtworkRecommendation> ArtworkRecommendations { get; set; }
 
-        public Artwork(long id, long artistId, Title title, Description description, ArtworkContent mainContent, float price, IEnumerable<HobbyistFavoriteArtwork> hobbyistsList, ArtworkContent coverImage, IEnumerable<Review> reviewsList, DateTime publishedAt, ArtworkStatus status)
+        public Artwork(long id, long artistId, string title, string description, ArtworkContent mainContent, float price, IEnumerable<HobbyistFavoriteArtwork> hobbyistsList, ArtworkContent coverImage, IEnumerable<ArtworkReview> reviewsList, DateTime publishedAt, ArtworkStatus status)
         {
             Id = id;
             ArtistId = artistId;
@@ -28,7 +30,7 @@ namespace PERUSTARS.ArtworkManagement.Domain.Model.Entities
             Description = description;
             MainContent = mainContent;
             Price = price;
-            HobbyistsList = hobbyistsList;
+            LikedHobbyistsList = hobbyistsList;
             CoverImage = coverImage;
             ReviewsList = reviewsList;
             PublishedAt = publishedAt;

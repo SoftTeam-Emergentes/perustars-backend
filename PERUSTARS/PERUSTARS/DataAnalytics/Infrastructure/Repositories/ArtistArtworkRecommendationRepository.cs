@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.DataAnalytics.Infrastructure.Repositories
 {
-    public class ParticipantEventRegistrationRepository : BaseRepository<ParticipantEventRegistration>, IParticipantEventRegistrationRepository
+    public class ArtistArtworkRecommendationRepository : BaseRepository<ArtworkRecommendation>, IArtistArtworkRecommendationRepository
     {
-        public ParticipantEventRegistrationRepository(AppDbContext dbContext) : base(dbContext)
+        public ArtistArtworkRecommendationRepository(AppDbContext dbContext) : base(dbContext)
         {
         }
 
-        public async Task<IEnumerable<ParticipantEventRegistration>> GetAllNotCollectedParticipantEventRegistrationsAsync()
+        public async Task<IEnumerable<ArtworkRecommendation>> GetAllNotCollectedArtistRecommendationsAsync()
         {
-            return await _dbContext.ParticipantEventRegistrations
-                .Where(p => p.Collected == false)
+            return await _dbContext.ArtistRecommendations
+                .Where(ar => ar.Collected == false)
                 .ToListAsync();
         }
     }
