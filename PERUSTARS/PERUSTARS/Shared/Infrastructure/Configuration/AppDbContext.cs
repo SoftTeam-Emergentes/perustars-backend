@@ -55,7 +55,6 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             builder.Entity<Artist>().Property(a => a.SocialMediaLink).HasMaxLength(255);
             builder.Entity<Artist>().Property(a => a.Collected).HasDefaultValue(false);
             
-            
 
             builder.Entity<Hobbyist>().ToTable("Hobbyists");
             builder.Entity<Hobbyist>().HasKey(a => a.HobbyistId);
@@ -94,23 +93,35 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             builder.Entity<ArtEvent>().ToTable("ArtEvents");
             builder.Entity<ArtEvent>().HasKey(a => a.Id);
             builder.Entity<ArtEvent>().Property(a => a.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<ArtEvent>()
-                .HasOne(a => a.Artist)
-                .WithMany(a => a.ArtEvents)
-                .HasForeignKey(a => a.ArtistId);
-            builder.Entity<ArtEvent>()
-                .HasMany(a => a.Participants)
-                .WithOne(p => p.ArtEvent)
-                .HasForeignKey(p => p.ArtEventId);
+            builder.Entity<ArtEvent>().Property(a => a.Title).IsRequired();
+            builder.Entity<ArtEvent>().Property(a => a.Description).IsRequired();
+            builder.Entity<ArtEvent>().Property(a => a.StartDateTime).IsRequired();
+            builder.Entity<ArtEvent>().Property(a => a.Location).IsRequired();
+            builder.Entity<ArtEvent>().Property(a => a.IsOnline).IsRequired();
+            builder.Entity<ArtEvent>().Property(a=>a.CurrentStatus).IsRequired();
+            builder.Entity<ArtEvent>().Property(a=>a.Collected).HasDefaultValue(false).IsRequired();
+            
             builder.Entity<Participant>().ToTable("Participants");
             builder.Entity<Participant>().HasKey(p => p.Id);
             builder.Entity<Participant>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Participant>().Property(p => p.UserName).IsRequired();
+            builder.Entity<Participant>().Property(p=>p.RegisterDateTime).IsRequired();
+            builder.Entity<Participant>().Property(p=>p.CheckInDateTime).IsRequired();
+            builder.Entity<Participant>().Property(p=>p.ParticipantRegistrationDateTime).HasColumnType("timestamp").HasDefaultValue(DateTime.UtcNow).IsRequired();
+            builder.Entity<Participant>().Property(p => p.Collected).HasDefaultValue(false).IsRequired();
             builder.Entity<Participant>()
                 .HasOne(p => p.Hobbyist)
                 .WithMany(h => h.Participants)
                 .HasForeignKey(p => p.HobbyistId);
 
-
+            builder.Entity<ArtEvent>()
+                .HasOne(ae => ae.Artist)
+                .WithMany(ar => ar.ArtEvents)
+                .HasForeignKey(ae => ae.ArtistId);
+            builder.Entity<ArtEvent>()
+                .HasMany(ae => ae.Participants)
+                .WithOne(p => p.ArtEvent)
+                .HasForeignKey(p => p.ArtEventId);
             //builder.Entity<Event>().ToTable("events");
             //builder.Entity<Event>().HasKey(e => e.EventId);
             //builder.Entity<Event>().Property(e=>e.EventId).IsRequired().ValueGeneratedOnAdd();

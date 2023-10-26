@@ -3,6 +3,7 @@ using System.Numerics;
 using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model;
 using PERUSTARS.ProfileManagement.Domain.Model.Enum;
+using User = PERUSTARS.IdentityAndAccountManagement.Domain.Model.User;
 
 
 
