@@ -22,9 +22,9 @@ namespace PERUSTARS.DataAnalytics.Application.Jobs
             return Task.CompletedTask;
         }
 
-        public void ProcessDataAndSendToML(object state)
+        public async void ProcessDataAndSendToML(object state)
         {
-           
+            await _dataAnalyticsCommandService.SaveTrainingDataToDb();
         }
 
         public Task StopAsync(CancellationToken cancellationToken)

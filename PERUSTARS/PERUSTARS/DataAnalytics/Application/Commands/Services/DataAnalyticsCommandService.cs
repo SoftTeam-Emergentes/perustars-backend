@@ -1,7 +1,9 @@
 ﻿using MediatR;
-using PERUSTARS.DataAnalytics.Domain.Model.Commands;
 using PERUSTARS.DataAnalytics.Domain.Model.Entities;
+using PERUSTARS.DataAnalytics.Domain.Repositories;
 using PERUSTARS.DataAnalytics.Domain.Services;
+using PERUSTARS.DataAnalytics.Infrastructure;
+using PERUSTARS.Shared.Infrastructure.Configuration;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,25 +11,26 @@ namespace PERUSTARS.DataAnalytics.Application.Commands.Services
 {
     public class DataAnalyticsCommandService : IDataAnalyticsCommandService
     {
-        private IMediator _mediator;
-        public DataAnalyticsCommandService(IMediator mediator)
+        private readonly IMediator _mediator;
+        private readonly DataAnalyticsProcessor _dataAnalyticsProcessor;
+        private readonly IMLTrainingDataRepository _mLTrainingDataRepository;
+        public DataAnalyticsCommandService(IMediator mediator, AppDbContext dbContext,IMLTrainingDataRepository mLTrainingDataRepository)
         {
             _mediator = mediator;
+            _dataAnalyticsProcessor = new DataAnalyticsProcessor(dbContext);
+            _mLTrainingDataRepository = mLTrainingDataRepository;
         }
 
         public async Task<MLTrainingData> RetrieveTrainingDataToML()
         {
-            CollectEventLogDataCommand collectEventLogDataCommand = new CollectEventLogDataCommand();
-            CollectRecommendedArtworkDataCommand collectRecommendedArtworkDataCommand = new CollectRecommendedArtworkDataCommand();
 
-            IEnumerable<ParticipantEventRegistration> eventLogDataDataCollection = await _mediator.Send(collectEventLogDataCommand);
-<<<<<<< HEAD
-            IEnumerable<ArtistRecommendation> artworkRecommendationsData = await _mediator.Send(collectRecommendedArtworkDataCommand);
-=======
-            IEnumerable<ArtworkRecommendation> artworkRecommendationsData = await _mediator.Send(collectRecommendedArtworkDataCommand);
->>>>>>> 9558cddde4fa7558354244a9aaff9582135ab6db
+            return await Task.FromResult(new MLTrainingData());
+        }
 
-            return new MLTrainingData();
+        public async Task SaveTrainingDataToDb()
+        {
+            IEnumerable<MLTrainingData> newTrainingData = _dataAnalyticsProcessor.ProcessData();
+            await _mLTrainingDataRepository.AddAllTrainingData(newTrainingData);
         }
     }
 }

@@ -11,5 +11,7 @@ namespace PERUSTARS.DataAnalytics.Domain.Model.Entities
         public DateTime FollowerRegistrationDatetime { get; set; }
         public long EventParticipantHobyistId { get; set; }
         public DateTime EventParticipantRegistrationDatetime { get; set; }
+        public long ArtworkReviewHobbyistId { get; set; }
+        public DateTime ArtworkReviewRegistrationDatetime { get; set; }
     }
 }

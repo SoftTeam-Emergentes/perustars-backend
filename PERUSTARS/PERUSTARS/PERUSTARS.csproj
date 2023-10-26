@@ -25,6 +25,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="ArtworkManagement\Domain\Model\Entities\Artwork.cs" />
+    <Compile Include="ArtworkManagement\Domain\Model\Entities\ArtworkRecommendation.cs" />
+    <Compile Include="ArtworkManagement\Domain\Model\Entities\ArtworkReview.cs" />
+    <Compile Include="ArtworkManagement\Domain\Model\Entities\HobbyistFavoriteArtwork.cs" />
+    <Compile Include="ArtworkManagement\Domain\Model\Enums\ArtworkStatus.cs" />
+    <Compile Include="ArtworkManagement\Domain\Model\ValueObjects\ArtworkContent.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
@@ -47,19 +56,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ArtworkManagement\Application\" />
-    <Folder Include="ArtworkManagement\Application\Commands\" />
-    <Folder Include="ArtworkManagement\Application\Commands\Handlers\" />
-    <Folder Include="ArtworkManagement\Application\Commands\Services\" />
-    <Folder Include="ArtworkManagement\Application\Events\" />
-    <Folder Include="ArtworkManagement\Application\Events\Handlers\" />
-    <Folder Include="ArtworkManagement\Application\Events\Services\" />
-    <Folder Include="ArtworkManagement\Application\QueryServices\" />
-    <Folder Include="ArtworkManagement\Domain\Model\Aggregates\" />
-    <Folder Include="ArtworkManagement\Domain\Model\Commands\" />
-    <Folder Include="ArtworkManagement\Domain\Model\Events\" />
-    <Folder Include="ArtworkManagement\Domain\Repositories\" />
-    <Folder Include="ArtworkManagement\Domain\Services\" />
     <Folder Include="ArtworkManagement\Infrastructure\Repositories\" />
     <Folder Include="ArtworkManagement\Interfaces\REST\" />
     <Folder Include="ArtworkManagement\Interfaces\REST\Resources\" />
@@ -71,9 +67,6 @@
     <Folder Include="DataAnalytics\Interfaces\REST\Resources\" />
     <Folder Include="ProfileManagement\Application\Commands\" />
     <Folder Include="ProfileManagement\Domain\Services\" />
-    <Folder Include="ArtEventManagement\" />
-    <Folder Include="CommunicationAndNotificationManagement\" />
-    <Folder Include="ConductReportsManagement\" />
     <Folder Include="ProfileManagement\" />
   </ItemGroup>
 

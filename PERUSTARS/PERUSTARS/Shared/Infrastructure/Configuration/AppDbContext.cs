@@ -28,6 +28,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
         public DbSet<HobbyistFavoriteArtwork> HobbyistFavoriteArtworks { get; set; }
         public DbSet<ArtEvent> ArtEvents { get; set; }
         public DbSet<Participant> Participants { get; set; }
+        public DbSet<MLTrainingData> TrainingData { get; set; } 
 
         public AppDbContext(DbContextOptions dbContextOptions): base(dbContextOptions)
         {
@@ -117,12 +118,12 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             builder.Entity<Participant>().Property(p => p.UserName).IsRequired();
             builder.Entity<Participant>().Property(p=>p.RegisterDateTime).IsRequired();
             builder.Entity<Participant>().Property(p=>p.CheckInDateTime).IsRequired();
-            builder.Entity<Participant>().Property(p=>p.ParticipantRegistrationDateTime).HasColumnType("timestamp").HasDefaultValue(DateTime.UtcNow).IsRequired();
+            builder.Entity<Participant>().Property(p=>p.RegisterDateTime).HasColumnType("timestamp").HasDefaultValue(DateTime.UtcNow).IsRequired();
             builder.Entity<Participant>().Property(p => p.Collected).HasDefaultValue(false).IsRequired();
             builder.Entity<Participant>()
-                .HasOne(p => p.Hobyst)
+                .HasOne(p => p.Hobbyist)
                 .WithMany()
-                .HasForeignKey(p => p.HobystId);
+                .HasForeignKey(p => p.HobbyistId);
 
             builder.Entity<ArtEvent>()
                 .HasOne(ae => ae.Artist)
@@ -235,6 +236,21 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
                 .HasOne(h => h.Artwork)
                 .WithMany(a => a.LikedHobbyistsList)
                 .HasForeignKey(h => h.ArtworkId);
+
+            #endregion
+
+            #region MLTrainingData
+
+            builder.Entity<MLTrainingData>().HasNoKey().ToTable("MLTrainingData");
+            builder.Entity<MLTrainingData>().Property(ml => ml.ArtistRecommendationArtistId).IsRequired();
+            builder.Entity<MLTrainingData>().Property(ml => ml.ArtistRecommendationDatetime).HasColumnName("timestamp").IsRequired();
+            builder.Entity<MLTrainingData>().Property(ml => ml.ArtistRecommendationHobbyistId).IsRequired();
+            builder.Entity<MLTrainingData>().Property(ml => ml.ArtworkReviewHobbyistId).IsRequired();
+            builder.Entity<MLTrainingData>().Property(ml => ml.ArtworkReviewRegistrationDatetime).HasColumnName("timestamp").IsRequired();
+            builder.Entity<MLTrainingData>().Property(ml => ml.FollowerHobyistId).IsRequired();
+            builder.Entity<MLTrainingData>().Property(ml => ml.FollowerRegistrationDatetime).HasColumnName("timestamp").IsRequired();
+            builder.Entity<MLTrainingData>().Property(ml => ml.EventParticipantHobyistId).IsRequired();
+            builder.Entity<MLTrainingData>().Property(ml => ml.EventParticipantRegistrationDatetime).HasColumnName("timestamp").IsRequired();
 
             #endregion
 

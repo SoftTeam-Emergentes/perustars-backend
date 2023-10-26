@@ -7,5 +7,6 @@ namespace PERUSTARS.DataAnalytics.Domain.Services
     public interface IDataAnalyticsCommandService
     {
         Task<MLTrainingData> RetrieveTrainingDataToML();
+        Task SaveTrainingDataToDb();
     }
 }
