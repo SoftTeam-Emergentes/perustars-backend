@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Numerics;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
+
 
 namespace PERUSTARS.AtEventManagement.Domain.Model.Aggregates
 {
@@ -10,8 +10,9 @@ namespace PERUSTARS.AtEventManagement.Domain.Model.Aggregates
         public string UserName { get; set; }
         public DateTime RegisterDateTime { get; set; }
         public DateTime CheckInDateTime { get; set; }
+        public DateTime ParticipantRegistrationDateTime { get; set; }
         public long? HobbyistId { get; set; }
-        public Hobbyist Hobbyist { get; set; }
+        public Hobbyist Hobyst { get; set; }
         public ArtEvent ArtEvent { get; set; }
         public long? ArtEventId { get; set; }
         public bool Collected { get; set; }
@@ -25,7 +26,7 @@ namespace PERUSTARS.AtEventManagement.Domain.Model.Aggregates
             CheckInDateTime = checkInDateTime;
             HobbyistId = hobbyistId;
             ArtEventId = artEventId;
-            Hobbyist = hobbyist;
+            Hobyst = hobbyist;
             ArtEvent = artEvent;
             Collected = collected;
         }

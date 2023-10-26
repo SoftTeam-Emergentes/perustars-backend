@@ -1,3 +1,4 @@
+using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
 using System.Collections.Generic;
 using System.Numerics;
 using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
@@ -19,7 +20,7 @@ namespace PERUSTARS.ProfileManagement.Domain.Model.Aggregates
         public List<Participant> Participants { get; set; }
         
         public bool Collected  { get; set; } = false;
-
+        public List<Participant> Participants { get; set; }
         //public List<EventAssistance> Assistance { get; set; }
     }
 }
