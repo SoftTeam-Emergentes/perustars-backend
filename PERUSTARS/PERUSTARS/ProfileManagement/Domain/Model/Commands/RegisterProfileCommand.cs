@@ -16,7 +16,6 @@ namespace PERUSTARS.ProfileManagement.Domain.Model.Commands
     }
     public class RegisterProfileArtistCommand : RegisterProfileCommand<ArtistResource>
     {
-        public BigInteger ArtistId { get; set; }
         public string BrandName { get; set; } //Nickname
         public string Description { get; set; }
         public string Phrase { get; set; }
@@ -26,6 +25,8 @@ namespace PERUSTARS.ProfileManagement.Domain.Model.Commands
         public List<Follower> Followers { get; set; }
         public List<string>SocialMediaLink { get; set; } //SocialNetwork
     }
+    
+    
 
     public class RegisterProfileHobbyistCommand : RegisterProfileCommand<HobbyistResource>
     {

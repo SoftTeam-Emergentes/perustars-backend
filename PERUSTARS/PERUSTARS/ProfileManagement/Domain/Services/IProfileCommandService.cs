@@ -9,5 +9,8 @@ namespace PERUSTARS.ProfileManagement.Domain.Model.Services
     {
         Task<ArtistResource> executeRegisterProfileCommand(RegisterProfileArtistCommand artistProfileCommand);
         Task<HobbyistResource> executeRegisterProfileCommand(RegisterProfileHobbyistCommand hobbyistProfileCommand);
+
+        Task<ProfileResource> executeRegisterProfileCommand(RegisterProfileArtistCommand artistProfileCommand,
+            RegisterProfileHobbyistCommand registerProfileHobbyistCommand);
     }
 }

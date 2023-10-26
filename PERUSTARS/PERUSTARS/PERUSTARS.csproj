@@ -33,13 +33,11 @@
     <Folder Include="DataAnalytics\Domain\Model\ValueObjects\" />
     <Folder Include="DataAnalytics\Interfaces\REST\Resources\" />
 
-    <Folder Include="ProfileManagement\Application\Commands\" />
-
     <Folder Include="ArtworkManagement\" />
     <Folder Include="ArtEventManagement\" />
     <Folder Include="CommunicationAndNotificationManagement\" />
     <Folder Include="ConductReportsManagement\" />
-    <Folder Include="ProfileManagement\" />
+    <Folder Include="ProfileManagement\Application\Events\Handlers\" />
   </ItemGroup>
 
 </Project>
