@@ -19,7 +19,7 @@ namespace PERUSTARS.Shared.Infrastructure.Repositories
             await _dbContext.Set<TEntity>().AddAsync(entity);
         }
 
-        public async Task<TEntity?> FindByIdAsync(BigInteger id)
+        public async Task<TEntity?> FindByIdAsync(long id)
         {
             return await _dbContext.Set<TEntity>().FindAsync(id);
         }

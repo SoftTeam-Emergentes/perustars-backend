@@ -6,6 +6,7 @@ namespace PERUSTARS.IdentityAndAccountManagement.Domain.Services
 {
     public interface IIdentityAndAccountManagementCommandService
     {
-        Task<UserResource> executeRegisterUserCommand(RegisterUserCommand registerUserCommand);
+        Task<UserResource> ExecuteRegisterUserCommand(RegisterUserCommand registerUserCommand);
+        Task<AuthenticateResponse> ExecuteLogInUserCommand(LogInUserCommand logInUserCommand);
     }
 }

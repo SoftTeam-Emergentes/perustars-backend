@@ -13,9 +13,14 @@ namespace PERUSTARS.IdentityAndAccountManagement.Application.Commands.Services
         {
             _mediator = mediator;
         }
-        public async Task<UserResource> executeRegisterUserCommand(RegisterUserCommand registerUserCommand)
+        public async Task<UserResource> ExecuteRegisterUserCommand(RegisterUserCommand registerUserCommand)
         {
             return await _mediator.Send(registerUserCommand);
+        }
+
+        public async Task<AuthenticateResponse> ExecuteLogInUserCommand(LogInUserCommand logInUserCommand)
+        {
+            return await _mediator.Send(logInUserCommand);
         }
     }
 }

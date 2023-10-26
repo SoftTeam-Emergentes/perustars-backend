@@ -32,6 +32,7 @@
     <Folder Include="DataAnalytics\Domain\Repositories\" />
     <Folder Include="DataAnalytics\Infrastructure\" />
     <Folder Include="DataAnalytics\Interfaces\REST\Resources\" />
+    <Folder Include="IdentityAndAccountManagement\Infrastructure\Context\" />
   </ItemGroup>
 
 </Project>

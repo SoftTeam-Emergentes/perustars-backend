@@ -5,6 +5,7 @@ using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Commands;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Services;
 using PERUSTARS.IdentityAndAccountManagement.Interfaces.REST.Resources;
 using System.Threading.Tasks;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Attributes;
 
 namespace PERUSTARS.IdentityAndAccountManagement.Interfaces.REST
 {
@@ -20,11 +21,22 @@ namespace PERUSTARS.IdentityAndAccountManagement.Interfaces.REST
             _identityAndAccountManagementCommandService = identityAndAccountManagementCommandService;
         }
         [HttpPost("register")]
+        [AllowAnonymous]
         public async Task<IActionResult> RegisterNewUser([FromBody] RegisterUserRequest registerUserRequest)
         {
             RegisterUserCommand registerUserCommand = _mapper.Map<RegisterUserCommand>(registerUserRequest);
-            UserResource userResource = await _identityAndAccountManagementCommandService.executeRegisterUserCommand(registerUserCommand);
+            UserResource userResource = await _identityAndAccountManagementCommandService.ExecuteRegisterUserCommand(registerUserCommand);
             return Ok(userResource);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("login")]
+        public async Task<IActionResult> Authenticate([FromBody] AuthenticateRequest authenticateRequest)
+        {
+            LogInUserCommand logInUserCommand = _mapper.Map<LogInUserCommand>(authenticateRequest);
+            AuthenticateResponse authenticateResponse =
+                await _identityAndAccountManagementCommandService.ExecuteLogInUserCommand(logInUserCommand);
+            return Ok(authenticateResponse);
         }
     }
 }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 using PERUSTARS.ProfileManagement.Domain.Model.Enum;
-using User = PERUSTARS.IdentityAndAccountManagement.Domain.Model.User;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates;
 
 
 namespace PERUSTARS.ProfileManagement.Domain.Model.Entities
