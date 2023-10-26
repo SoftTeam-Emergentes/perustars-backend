@@ -28,6 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="AtEventManagement\Application\ArtEvent\Queries\" />
+    <Folder Include="AtEventManagement\Application\Participant\Commands\" />
+    <Folder Include="AtEventManagement\Application\Participant\Queries\" />
+    <Folder Include="AtEventManagement\Domain\Services\Participant\" />
     <Folder Include="DataAnalytics\Application\QueryServices\" />
     <Folder Include="DataAnalytics\Domain\Model\Queries\" />
     <Folder Include="DataAnalytics\Domain\Model\ValueObjects\" />
