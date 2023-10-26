@@ -102,9 +102,9 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             builder.Entity<Participant>().HasKey(p => p.Id);
             builder.Entity<Participant>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Participant>()
-                .HasOne(p => p.Hobyst)
+                .HasOne(p => p.Hobbyist)
                 .WithMany(h => h.Participants)
-                .HasForeignKey(p => p.HobystId);
+                .HasForeignKey(p => p.HobbyistId);
 
 
             //builder.Entity<Event>().ToTable("events");

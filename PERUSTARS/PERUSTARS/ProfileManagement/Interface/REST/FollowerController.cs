@@ -1,6 +1,6 @@
 namespace PERUSTARS.ProfileManagement.Inteface
 {
-    public class FollowerRepository
+    public class FollowerController
     {
         
     }

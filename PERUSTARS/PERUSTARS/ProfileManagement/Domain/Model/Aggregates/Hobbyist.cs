@@ -13,6 +13,8 @@ namespace PERUSTARS.ProfileManagement.Domain.Model.Aggregates
         //public List<FavoriteArtwork> FavoriteArtworks { get; set; }
 
         public List<Follower> Followers { get; set; }
+        
+        public bool Collected  { get; set; } = false;
 
         //public List<EventAssistance> Assistance { get; set; }
     }
