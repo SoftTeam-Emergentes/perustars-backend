@@ -1,6 +1,6 @@
-﻿using PERUSTARS.ProfileManagement.Domain.Model.Entities;
-using System;
-using System.Numerics;
+﻿using System;
+using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
+
 
 namespace PERUSTARS.AtEventManagement.Domain.Model.Aggregates
 {
@@ -10,22 +10,22 @@ namespace PERUSTARS.AtEventManagement.Domain.Model.Aggregates
         public string UserName { get; set; }
         public DateTime RegisterDateTime { get; set; }
         public DateTime CheckInDateTime { get; set; }
-        public long? HobystId { get; set; }
-        public Hobbyist Hobyst { get; set; }
+        public long? HobbyistId { get; set; }
+        public Hobbyist Hobbyist { get; set; }
         public ArtEvent ArtEvent { get; set; }
         public long? ArtEventId { get; set; }
         public bool Collected { get; set; }
 
 
-        public Participant(long id, string userName, DateTime registerDateTime, DateTime checkInDateTime, long? hobystId, long? artEventId, Hobyst hobyst, ArtEvent artEvent, bool collected)
+        public Participant(long id, string userName, DateTime registerDateTime, DateTime checkInDateTime, long? hobbyistId, long? artEventId, Hobbyist hobbyist, ArtEvent artEvent, bool collected)
         {
             Id = id;
             UserName = userName;
             RegisterDateTime = registerDateTime;
             CheckInDateTime = checkInDateTime;
-            HobystId = hobystId;
+            HobbyistId = hobbyistId;
             ArtEventId = artEventId;
-            Hobyst = hobyst;
+            Hobbyist = hobbyist;
             ArtEvent = artEvent;
             Collected = collected;
         }

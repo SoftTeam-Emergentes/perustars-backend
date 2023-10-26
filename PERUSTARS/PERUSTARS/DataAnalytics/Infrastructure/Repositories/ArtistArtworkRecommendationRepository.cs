@@ -14,7 +14,6 @@ namespace PERUSTARS.DataAnalytics.Infrastructure.Repositories
         public ArtistArtworkRecommendationRepository(AppDbContext dbContext) : base(dbContext)
         {
         }
-
         public async Task<IEnumerable<ArtistRecommendation>> GetAllNotCollectedArtistRecommendationsAsync()
         {
             return await _dbContext.ArtistRecommendations

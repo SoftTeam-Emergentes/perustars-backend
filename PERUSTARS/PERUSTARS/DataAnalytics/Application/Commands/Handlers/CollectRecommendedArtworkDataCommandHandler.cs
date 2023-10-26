@@ -19,7 +19,6 @@ namespace PERUSTARS.DataAnalytics.Application.Commands.Handlers
             _publisher = publisher;
             _artistArtworkRecommendationRepository = artistArtworkRecommendationRepository;
         }
-
         public async Task<IEnumerable<ArtistRecommendation>> Handle(CollectRecommendedArtworkDataCommand request, CancellationToken cancellationToken)
         {
             return await _artistArtworkRecommendationRepository.GetAllNotCollectedArtistRecommendationsAsync();
