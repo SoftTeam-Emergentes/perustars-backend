@@ -20,7 +20,6 @@ namespace PERUSTARS.ProfileManagement.Domain.Model.Aggregates
         public List<Participant> Participants { get; set; }
         
         public bool Collected  { get; set; } = false;
-        public List<Participant> Participants { get; set; }
         //public List<EventAssistance> Assistance { get; set; }
     }
 }
