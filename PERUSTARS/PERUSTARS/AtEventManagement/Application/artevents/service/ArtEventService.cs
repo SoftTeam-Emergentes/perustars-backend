@@ -17,5 +17,9 @@ namespace PERUSTARS.AtEventManagement.Application.artevents.service
             string response = await _mediator.Send(registerArtEventCommand);
             return response;
         }
+        public async Task<string> cancelArtEventeService(CancelArtEventCommand cancelArtEventCommand) {
+            string response = await _mediator.Send(cancelArtEventCommand);
+            return response;
+        }
     }
 }
