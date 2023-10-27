@@ -36,7 +36,7 @@ namespace PERUSTARS.AtEventManagement.Application.artevents.commands
                 collected:false
                 );
             await _artEventRepository.AddAsync(artEvent);
-            return Task.FromResult("Usuario registrado exitosamente");
+            return await Task.FromResult("Usuario registrado exitosamente");
 
         }
     }
