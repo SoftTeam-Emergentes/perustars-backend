@@ -15,8 +15,13 @@ namespace PERUSTARS.AtEventManagement.Application.artevents.commands
         {
             _artEventRepository = artEventRepository;
         }
+
         public async Task<string> Handle(RegisterArtEventCommand request, CancellationToken cancellationToken)
         {
+            //Primero se debe validar si existe el artista con el Id dado
+
+            //"return No existe el Artista con el Id dado"
+            //-----------------------------------
             var artEvent = new ArtEvent(
                 id: 0,
                 title: request.Title,
