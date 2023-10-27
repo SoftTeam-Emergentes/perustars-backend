@@ -4,10 +4,11 @@ using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
 namespace PERUSTARS.AtEventManagement.Domain.Model.Commads
 {
     public class EditArtEventCommand: IRequest<string> {
-        string title { get; set; }
-        string description { get; set; }
-        Location location { get; set; }
-        bool isOnline { get; set; }
+        public int id { get; set; }
+        public string title { get; set; }
+        public string description { get; set; }
+        public Location location { get; set; }
+        public bool isOnline { get; set; }
     }
  
 }
