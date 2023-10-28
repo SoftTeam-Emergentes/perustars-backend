@@ -8,7 +8,6 @@ namespace PERUSTARS.Shared.Profiles
     {
         public ResourceToCommand()
         {
-
             
             CreateMap<ProfileResource, RegisterProfileArtistCommand>()
                 .ForMember(a=>a.User, b=> b.MapFrom(c=>c.User))

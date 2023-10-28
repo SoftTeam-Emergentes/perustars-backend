@@ -15,19 +15,16 @@ namespace PERUSTARS.ProfileManagement.Domain.Model.Commands
         public int Age { get; set; }
     }
     public class RegisterProfileArtistCommand : RegisterProfileCommand<ArtistResource>
-    {
+    { 
         public string BrandName { get; set; } //Nickname
         public string Description { get; set; }
         public string Phrase { get; set; }
         public int ContactNumber { get; set; }
         public string ContactEmail { get; set; }
         public Genre Genre { get; set; }
-        public List<Follower> Followers { get; set; }
         public List<string>SocialMediaLink { get; set; } //SocialNetwork
     }
     
-    
-
     public class RegisterProfileHobbyistCommand : RegisterProfileCommand<HobbyistResource>
     {
         public BigInteger HobbyistId { get; set; }

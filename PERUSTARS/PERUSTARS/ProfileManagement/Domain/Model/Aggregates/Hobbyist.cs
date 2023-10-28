@@ -7,7 +7,7 @@ namespace PERUSTARS.ProfileManagement.Domain.Model.Aggregates
     public class Hobbyist: User
     {
         public BigInteger HobbyistId { get; set; }
-        public User User { get; set; }
+        public User  User { get; set; }
         public int Age { get; set; }
         //public List<Interest> Interests { get; set; }
         //public List<FavoriteArtwork> FavoriteArtworks { get; set; }
