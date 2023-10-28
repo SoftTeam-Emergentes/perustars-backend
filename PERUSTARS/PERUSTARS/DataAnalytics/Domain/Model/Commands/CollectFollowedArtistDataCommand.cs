@@ -3,7 +3,7 @@ using PERUSTARS.DataAnalytics.Domain.Model.Enums;
 
 namespace PERUSTARS.DataAnalytics.Domain.Model.Commands
 {
-    public class CollectFollowedArtistData: IRequest<bool>
+    public class CollectFollowedArtistDataCommand: IRequest<bool>
     {
         public long HobbyistId { get; }
         public long ArtistId { get; }

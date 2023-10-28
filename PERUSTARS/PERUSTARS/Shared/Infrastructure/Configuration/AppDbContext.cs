@@ -222,6 +222,12 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             #region MLTrainingData
 
             builder.Entity<MLTrainingData>().HasNoKey().ToTable("MLTrainingData");
+            builder.Entity<MLTrainingData>().Property(ml => ml.Score).IsRequired();
+            builder.Entity<MLTrainingData>().Property(ml => ml.InteractionType)
+               .HasConversion<string>()
+               .HasMaxLength(20)
+               .IsRequired();
+            builder.Entity<MLTrainingData>().Property(ml => ml.Collected).HasDefaultValue(false).IsRequired();
             
 
             #endregion

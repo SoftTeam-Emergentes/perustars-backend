@@ -74,6 +74,8 @@ namespace PERUSTARS
 
             // Dependency Injection Configuration
 
+            
+
             services.AddScoped<IArtistRepository, ArtistRepository>();
             services.AddScoped<IArtworkRepository, ArtworkRepository>();
             services.AddScoped<IHobbyistRepository, HobbyistRepository>();

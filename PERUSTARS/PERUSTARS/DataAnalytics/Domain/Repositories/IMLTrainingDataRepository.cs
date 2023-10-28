@@ -7,5 +7,6 @@ namespace PERUSTARS.DataAnalytics.Domain.Repositories
 {
     public interface IMLTrainingDataRepository: IBaseRepository<MLTrainingData>
     {
+        Task<IEnumerable<MLTrainingData>> GetAllNotProccessedTrainingDataAsync();
     }
 }

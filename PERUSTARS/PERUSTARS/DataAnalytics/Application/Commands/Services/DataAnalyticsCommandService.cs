@@ -11,25 +11,15 @@ namespace PERUSTARS.DataAnalytics.Application.Commands.Services
 {
     public class DataAnalyticsCommandService : IDataAnalyticsCommandService
     {
-        private readonly IMediator _mediator;
-        private readonly DataAnalyticsProcessor _dataAnalyticsProcessor;
         private readonly IMLTrainingDataRepository _mLTrainingDataRepository;
-        public DataAnalyticsCommandService(IMediator mediator, AppDbContext dbContext,IMLTrainingDataRepository mLTrainingDataRepository)
+        public DataAnalyticsCommandService(IMLTrainingDataRepository mLTrainingDataRepository)
         {
-            _mediator = mediator;
-            _dataAnalyticsProcessor = new DataAnalyticsProcessor(dbContext);
             _mLTrainingDataRepository = mLTrainingDataRepository;
         }
 
-        public async Task<MLTrainingData> RetrieveTrainingDataToML()
+        public async Task<IEnumerable<MLTrainingData>> RetrieveTrainingDataToML()
         {
-
-            return await Task.FromResult(new MLTrainingData());
-        }
-
-        public async Task SaveTrainingDataToDb()
-        {
-            
+            return await _mLTrainingDataRepository.GetAllNotProccessedTrainingDataAsync();
         }
     }
 }

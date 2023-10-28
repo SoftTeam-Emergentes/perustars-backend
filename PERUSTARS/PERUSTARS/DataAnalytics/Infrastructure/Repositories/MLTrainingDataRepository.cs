@@ -1,4 +1,5 @@
-﻿using PERUSTARS.DataAnalytics.Domain.Model.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using PERUSTARS.DataAnalytics.Domain.Model.Entities;
 using PERUSTARS.DataAnalytics.Domain.Repositories;
 using PERUSTARS.Shared.Domain.Repositories;
 using PERUSTARS.Shared.Infrastructure.Configuration;
@@ -14,6 +15,12 @@ namespace PERUSTARS.DataAnalytics.Infrastructure.Repositories
         public MLTrainingDataRepository(AppDbContext dbContext) : base(dbContext)
         {
 
+        }
+        public async Task<IEnumerable<MLTrainingData>> GetAllNotProccessedTrainingDataAsync()
+        {
+            return await _dbContext.TrainingData
+                .Where(ml => ml.Collected == false)
+                .ToListAsync();
         }
     }
 }

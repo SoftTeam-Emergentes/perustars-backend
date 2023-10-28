@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using PERUSTARS.DataAnalytics.Domain.Model.Commands;
 using PERUSTARS.DataAnalytics.Domain.Model.Entities;
 using PERUSTARS.DataAnalytics.Domain.Repositories;
 using System.Threading;
@@ -7,21 +8,21 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.DataAnalytics.Application.Commands.Handlers
 {
-    public class CollectEventLogDataCommandHandler : IRequestHandler<CollectEventLogDataCommand, bool>
+    public class CollectArtworkReviewDataCommandHandler : IRequestHandler<CollectArtworkReviewDataCommand, bool>
     {
         private readonly IMLTrainingDataRepository _trainingDataRepository;
         private readonly IMapper _mapper;
 
-        public CollectEventLogDataCommandHandler(IMLTrainingDataRepository trainingDataRepository)
+        public CollectArtworkReviewDataCommandHandler(IMLTrainingDataRepository trainingDataRepository, IMapper mapper)
         {
             _trainingDataRepository = trainingDataRepository;
+            _mapper = mapper;
         }
 
-        public async Task<bool> Handle(CollectEventLogDataCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(CollectArtworkReviewDataCommand command, CancellationToken cancellationToken)
         {
-            MLTrainingData trainingData = _mapper.Map<MLTrainingData>(request);
-            // Dado que se trata de el registro de un participante de un evento se asigna el score de 4
-            trainingData.Score = 4;
+            // El commando ejecutado ya debería tener el score del 1 al 5
+            MLTrainingData trainingData = _mapper.Map<MLTrainingData>(command);
             await _trainingDataRepository.AddAsync(trainingData);
             return await Task.FromResult(true);
         }
