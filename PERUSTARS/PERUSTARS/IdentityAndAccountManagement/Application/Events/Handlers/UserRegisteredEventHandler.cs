@@ -8,14 +8,14 @@ namespace PERUSTARS.IdentityAndAccountManagement.Application.Events.Handlers
 {
     public class UserRegisteredEventHandler : INotificationHandler<UserRegisteredEvent>
     {
-        private ILogger _logger;
-        public UserRegisteredEventHandler(ILogger<UserRegisteredEventHandler> logger)
+        //private ILogger _logger;
+        public UserRegisteredEventHandler(/*ILogger<UserRegisteredEventHandler> logger*/)
         {
-            _logger = logger;
+            //_logger = logger;
         }
         public async Task Handle(UserRegisteredEvent userRegisteredEvent, CancellationToken cancellationToken)
         {
-            _logger.LogInformation($"User with id {userRegisteredEvent.UserId}");
+            //_logger.LogInformation($"User with id {userRegisteredEvent.UserId}");
         }
     }
 }

@@ -17,6 +17,9 @@ using PERUSTARS.IdentityAndAccountManagement.Infrastructure.Repositories;
 using PERUSTARS.Shared.Domain.Repositories;
 using PERUSTARS.Shared.Infrastructure.Configuration;
 using PERUSTARS.Shared.Infrastructure.Repositories;
+using System.Reflection;
+using Microsoft.AspNetCore.Http;
+using System.Net;
 
 namespace PERUSTARS
 {
@@ -73,12 +76,19 @@ namespace PERUSTARS
 
             // Dependency Injection Configuration
 
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IIdentityAndAccountManagementCommandService, IdentityAndAccountManagementCommandService>();
             
             // Apply Endpoints Naming Convention
             services.AddRouting(options => options.LowercaseUrls = true);
+
+            services.Configure<ExceptionHandlerOptions>(options => {
+                options.ExceptionHandler = default;
+                options.ExceptionHandlingPath = PathString.FromUriComponent("/error");
+            });
 
             // AutoMapper Setup
             services.AddAutoMapper(typeof(Startup).Assembly);
@@ -101,7 +111,6 @@ namespace PERUSTARS
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PERUSTARS v1"));
                       
-            
 
             app.UseHttpsRedirection();
 

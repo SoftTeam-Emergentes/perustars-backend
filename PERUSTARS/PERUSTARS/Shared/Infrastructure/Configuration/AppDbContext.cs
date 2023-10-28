@@ -29,6 +29,8 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             builder.Entity<User>().Property(u => u.Email).IsRequired();
             builder.Entity<User>().Property(u => u.FirstName);
             builder.Entity<User>().Property(u => u.LastName).IsRequired();
+            builder.Entity<User>().Property(u => u.Email).IsRequired();
+            builder.Entity<User>().Property(u => u.PasswordHash).IsRequired();
             
             
             builder.ApplySnakeCaseNamingConvention();

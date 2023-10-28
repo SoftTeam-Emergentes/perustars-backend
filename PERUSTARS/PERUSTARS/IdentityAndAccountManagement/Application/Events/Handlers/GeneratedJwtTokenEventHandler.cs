@@ -8,15 +8,15 @@ namespace PERUSTARS.IdentityAndAccountManagement.Application.Events.Handlers;
 
 public class GeneratedJwtTokenEventHandler: INotificationHandler<GeneratedJwtTokenEvent>
 {
-    private ILogger _logger;
+    
 
-    public GeneratedJwtTokenEventHandler(ILogger logger)
+    public GeneratedJwtTokenEventHandler()
     {
-        _logger = logger;
+        
     }
     
     public async Task Handle(GeneratedJwtTokenEvent notification, CancellationToken cancellationToken)
     {
-        _logger.LogInformation($"Generated token: {notification.Token}");
+        return;
     }
 }
