@@ -24,6 +24,9 @@ namespace PERUSTARS.AtEventManagement.Infrastructure
         {
             return await _dbContext.ArtEvents.Where(a => a.ArtistId == artistId).ToListAsync();
         }
+        public async Task<IEnumerable<ArtEvent>> findByHobbyistIdAsync(int hobbyistId) { 
+            return await _dbContext.ArtEvents.Where(a=>a.Participants.Any(p=>p.HobbyistId==hobbyistId)).ToListAsync();
+        }
 
         public new async Task<ArtEvent> FindByIdAsync(int id)
         {
