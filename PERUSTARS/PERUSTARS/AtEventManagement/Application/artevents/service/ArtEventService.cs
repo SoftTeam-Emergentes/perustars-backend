@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using PERUSTARS.AtEventManagement.Domain.Model.Commads;
+using PERUSTARS.AtEventManagement.Domain.Model.Repositories;
 using PERUSTARS.AtEventManagement.Domain.Services.ArtEvent;
 using System.Threading.Tasks;
 
