@@ -4,10 +4,8 @@ namespace PERUSTARS.ProfileManagement.Interface.REST.Resources
 {
     public class FollowerResource
     {
-        public Hobbyist Hobbyist { get; set; }
+        public long FollowerId { get; set; }
         public long HobbyistId { get; set; }
-
-        public Artist Artist { get; set; }
         public long ArtistId { get; set; }
     }
 }

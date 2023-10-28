@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Numerics;
 using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
 using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
@@ -15,6 +16,9 @@ namespace PERUSTARS.ProfileManagement.Domain.Model.Aggregates
         public BigInteger ArtistId { get; set; }
         
         public User User { get; set; }
+        
+        [ForeignKey("User")]
+        public long UserId { get; set; }
         public string BrandName { get; set; } //Nickname
         public string Description { get; set; }
         public string Phrase { get; set; }

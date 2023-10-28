@@ -56,7 +56,6 @@
     <Folder Include="ArtEventManagement\" />
     <Folder Include="CommunicationAndNotificationManagement\" />
     <Folder Include="ConductReportsManagement\" />
-    <Folder Include="ProfileManagement\Application\Events\Handlers\" />
   </ItemGroup>
 
 </Project>

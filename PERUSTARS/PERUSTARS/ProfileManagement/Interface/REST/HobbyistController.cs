@@ -2,7 +2,8 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using PERUSTARS.ProfileManagement.Domain.Model.Commands;
-using PERUSTARS.ProfileManagement.Domain.Model.Services;
+using PERUSTARS.ProfileManagement.Domain.Services;
+
 using PERUSTARS.ProfileManagement.Interface.REST.Resources;
 
 namespace PERUSTARS.ProfileManagement.Interface.REST
@@ -23,7 +24,7 @@ namespace PERUSTARS.ProfileManagement.Interface.REST
         public async Task<IActionResult> RegisterNewProfileHobbyist([FromBody] RegisterHobbyistProfile registerHobbyistProfile)
         {
             RegisterProfileHobbyistCommand registerProfileHobbyistCommand = _mapper.Map<RegisterProfileHobbyistCommand>(registerHobbyistProfile);
-            HobbyistResource hobbyistResource = await _profileCommandService.executeRegisterProfileCommand(registerProfileHobbyistCommand);
+            HobbyistResource hobbyistResource = await _profileCommandService.ExecuteRegisterProfileCommand(registerProfileHobbyistCommand);
             return Ok(hobbyistResource);
         }
     }

@@ -41,17 +41,13 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             builder.Entity<User>().HasKey(u => u.Id);
             builder.Entity<User>().Property(u => u.Id).IsRequired().ValueGeneratedOnAdd();
      
-            builder.Entity<Artist>().ToTable("Artists");
             
-            builder.Entity<Artist>()
-                    .HasOne(a => a.User)
-                    .WithOne()
-                    .HasForeignKey<Artist>(a => a.ArtistId);
+            builder.Entity<Artist>().ToTable("Artists");
+            builder.Entity<Artist>().HasKey(a => a.ArtistId);
             builder.Entity<Artist>().Property(a => a.Age);
             builder.Entity<Artist>().Property(a => a.Followers);
-            builder.Entity<Artist>().Property(a => a.User);
             builder.Entity<Artist>().Property(a => a.Description);
-            builder.Entity<Artist>().Property(a => a.Genre);
+            builder.Entity<Artist>().Property(a => a.Genre).HasConversion<string>();
             builder.Entity<Artist>().Property(a => a.Phrase);
             builder.Entity<Artist>().Property(a => a.BrandName).HasMaxLength(50);
             builder.Entity<Artist>().Property(a => a.ContactEmail).HasMaxLength(80);
@@ -65,29 +61,36 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             builder.Entity<Hobbyist>().Property(a => a.HobbyistId).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Hobbyist>().Property(a => a.Age);
             //builder.Entity<Hobbyist>().HasCheckConstraint("Age <= 120");
-            builder.Entity<Hobbyist>().Property(a => a.User);
-            builder.Entity<Hobbyist>().Property(a => a.Followers);
+            builder.Entity<Hobbyist>().Property(a => a.FollowedArtists);
             builder.Entity<Hobbyist>().Property(a => a.Collected).HasDefaultValue(false);
             
+            builder.Entity<Artist>()
+                .HasOne(a=>a.User)
+                .WithOne()
+                .HasForeignKey<Artist>(a => a.UserId);
                     
             builder.Entity<Hobbyist>()
                     .HasOne(u => u.User)
                     .WithOne()
-                    .HasForeignKey<Hobbyist>(u => u.HobbyistId);
+                    .HasForeignKey<Hobbyist>(u => u.UserId);
 
-            builder.Entity<Hobbyist>()
-                    .HasMany(h => h.Followers)
-                    .WithOne(h => h.Hobbyist)
-                    .HasForeignKey(h => h.HobbyistId);
+            builder.Entity<Follower>()
+                    .HasOne(f =>f.Artist)
+                    .WithMany(a => a.Followers)
+                    .HasForeignKey(h => h.ArtistId);
+            
+            builder.Entity<Follower>()
+                .HasOne(f =>f.Hobbyist)
+                .WithMany(a => a.FollowedArtists)
+                .HasForeignKey(h => h.HobbyistId);
 
             builder.Entity<Artist>()
                     .HasMany(a => a.Followers)
                     .WithOne(a => a.Artist)
-                    .HasForeignKey(a => a.ArtistId);
+                    .HasForeignKey(a => a.FollowerId);
 
             builder.Entity<Follower>().ToTable("Followers");
-            builder.Entity<Follower>().Property(f => f.Hobbyist);
-            builder.Entity<Follower>().Property(f => f.Artist);
+            builder.Entity<Follower>().HasKey(f => f.FollowerId);
             builder.Entity<Follower>().Property(f => f.ArtistId);
             builder.Entity<Follower>().Property(f => f.HobbyistId);
             builder.Entity<Follower>().Property(a => a.RegistrationDate);

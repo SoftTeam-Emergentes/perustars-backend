@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using PERUSTARS.ProfileManagement.Domain.Model.Commands;
-using PERUSTARS.ProfileManagement.Domain.Model.Services;
+using PERUSTARS.ProfileManagement.Domain.Services;
 using PERUSTARS.ProfileManagement.Interface.REST.Resources;
 
 namespace PERUSTARS.ProfileManagement.Application.Commands.Services
@@ -16,20 +16,14 @@ namespace PERUSTARS.ProfileManagement.Application.Commands.Services
             _mediator = mediator;
         }
 
-        public async Task<ArtistResource> executeRegisterProfileCommand(RegisterProfileArtistCommand artistProfileCommand)
+        public async Task<ArtistResource> ExecuteRegisterProfileCommand(RegisterProfileArtistCommand artistProfileCommand)
         {
             return await _mediator.Send(artistProfileCommand);
         }
 
-        public Task<HobbyistResource> executeRegisterProfileCommand(RegisterProfileHobbyistCommand hobbyistProfileCommand)
+        public async Task<HobbyistResource> ExecuteRegisterProfileCommand(RegisterProfileHobbyistCommand hobbyistProfileCommand)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<ProfileResource> executeRegisterProfileCommand(RegisterProfileArtistCommand artistProfileCommand,
-            RegisterProfileHobbyistCommand registerProfileHobbyistCommand)
-        {
-            throw new System.NotImplementedException();
+            return await _mediator.Send(hobbyistProfileCommand);
         }
     }
     

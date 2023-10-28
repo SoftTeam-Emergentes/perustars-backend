@@ -8,14 +8,9 @@ namespace PERUSTARS.Shared.Profiles
     {
         public ResourceToCommand()
         {
-            
-            CreateMap<ProfileResource, RegisterProfileArtistCommand>()
-                .ForMember(a=>a.User, b=> b.MapFrom(c=>c.User))
-                .ForMember(a=>a.Age,b=>b.MapFrom(c=>c.Age));
-            CreateMap<ProfileResource, RegisterProfileHobbyistCommand>()
-                .ForMember(a=>a.User, b=> b.MapFrom(c=>c.User))
-                .ForMember(a=>a.Age,b=>b.MapFrom(c=>c.Age));
 
+            CreateMap<ArtistResource, RegisterProfileArtistCommand>();
+            CreateMap<HobbyistResource, RegisterProfileHobbyistCommand>();
         }
     }
 }

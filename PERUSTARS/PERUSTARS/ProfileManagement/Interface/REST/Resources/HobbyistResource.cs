@@ -7,7 +7,7 @@ namespace PERUSTARS.ProfileManagement.Interface.REST.Resources
 {
     public class HobbyistResource
     {
-        public BigInteger HobbyistId { get; set; }
-        public List<Follower> Followers { get; set; }
+        public long HobbyistId { get; set; }
+        public int Age { get; set; }
     }
 }

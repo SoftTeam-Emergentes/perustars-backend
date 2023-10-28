@@ -8,6 +8,7 @@ namespace PERUSTARS.ProfileManagement.Interface.REST.Resources
     public class RegisterArtistProfile: RegisterUserRequest
     {
         [Required]
+        public int Age { get; set; }
         public string BrandName { get; set; }
         public string Description { get; set; }
         public string Phrase { get; set; }
