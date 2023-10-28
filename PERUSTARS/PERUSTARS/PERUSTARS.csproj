@@ -60,6 +60,7 @@
     <Folder Include="ArtworkManagement\Interfaces\REST\" />
     <Folder Include="ArtworkManagement\Interfaces\REST\Resources\" />
     <Folder Include="DataAnalytics\Application\Commands\Services\" />
+    <Folder Include="DataAnalytics\Application\Events\Handlers\" />
     <Folder Include="DataAnalytics\Application\Events\Services\" />
     <Folder Include="DataAnalytics\Application\QueryServices\" />
     <Folder Include="DataAnalytics\Domain\Model\Queries\" />

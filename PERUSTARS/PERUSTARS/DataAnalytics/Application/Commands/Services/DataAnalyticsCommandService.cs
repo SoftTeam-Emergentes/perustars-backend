@@ -29,8 +29,7 @@ namespace PERUSTARS.DataAnalytics.Application.Commands.Services
 
         public async Task SaveTrainingDataToDb()
         {
-            IEnumerable<MLTrainingData> newTrainingData = _dataAnalyticsProcessor.ProcessData();
-            await _mLTrainingDataRepository.AddAllTrainingData(newTrainingData);
+            
         }
     }
 }

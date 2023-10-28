@@ -1,29 +1,27 @@
-﻿using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
-using System.Collections.Generic;
+﻿using AutoMapper;
+using MediatR;
 using PERUSTARS.DataAnalytics.Domain.Model.Entities;
 using PERUSTARS.DataAnalytics.Domain.Repositories;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace PERUSTARS.DataAnalytics.Application.Commands.Handlers
 {
-    public class CollectEventLogDataCommandHandler : IRequestHandler<CollectEventLogDataCommand, IEnumerable<ParticipantEventRegistration>>
+    public class CollectEventLogDataCommandHandler : IRequestHandler<CollectEventLogDataCommand, bool>
     {
-        private readonly IPublisher _publisher;
+        private readonly IMLTrainingDataRepository _trainingDataRepository;
         private readonly IMapper _mapper;
-        private readonly IParticipantEventRegistrationRepository _participantEventRegistrationRepository;
 
-        public CollectEventLogDataCommandHandler(IPublisher publisher, IMapper mapper, IParticipantEventRegistrationRepository participantEventRegistrationRepository)
+        public CollectEventLogDataCommandHandler(IMLTrainingDataRepository trainingDataRepository)
         {
-            _publisher = publisher;
-            _mapper = mapper;
-            _participantEventRegistrationRepository = participantEventRegistrationRepository;
+            _trainingDataRepository = trainingDataRepository;
         }
 
-        public async Task<IEnumerable<ParticipantEventRegistration>> Handle(CollectEventLogDataCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(CollectEventLogDataCommand request, CancellationToken cancellationToken)
         {
-            return await _participantEventRegistrationRepository.GetAllNotCollectedParticipantEventRegistrationsAsync();
+            MLTrainingData trainingData = _mapper.Map<MLTrainingData>(request);
+            await _trainingDataRepository.AddAsync(trainingData);
+            return await Task.FromResult(true);
         }
     }
 }

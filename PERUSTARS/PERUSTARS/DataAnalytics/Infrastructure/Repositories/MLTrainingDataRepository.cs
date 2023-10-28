@@ -15,10 +15,5 @@ namespace PERUSTARS.DataAnalytics.Infrastructure.Repositories
         {
 
         }
-
-        public async Task AddAllTrainingData(IEnumerable<MLTrainingData> entities)
-        {
-            await _dbContext.TrainingData.AddRangeAsync(entities);
-        }
     }
 }

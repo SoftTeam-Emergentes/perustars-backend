@@ -15,8 +15,6 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
     public class AppDbContext: DbContext
     {
         public DbSet<User> Users { get; set; }
-        public DbSet<ParticipantEventRegistration> ParticipantEventRegistrations { get; set; }
-        public DbSet<ArtistRecommendation> ArtistRecommendations { get; set; }
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Hobbyist> Hobbyists { get; set; }
         public DbSet<Follower> Followers { get; set; }
@@ -136,18 +134,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             //builder.Entity<Event>().ToTable("events");
             //builder.Entity<Event>().HasKey(e => e.EventId);
             //builder.Entity<Event>().Property(e=>e.EventId).IsRequired().ValueGeneratedOnAdd();
-            #region ParticipantEventRegistrations
-
-            builder.Entity<ParticipantEventRegistration>().ToTable("ParticipantEventRegistrations");
-            builder.Entity<ParticipantEventRegistration>().HasKey(p => p.Id);
-            builder.Entity<ParticipantEventRegistration>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<ParticipantEventRegistration>().Property(p => p.EventTitle).IsRequired();
-            builder.Entity<ParticipantEventRegistration>().Property(p => p.ArtistId).IsRequired();
-            builder.Entity<ParticipantEventRegistration>().Property(p => p.HobyistId).IsRequired();
-            builder.Entity<ParticipantEventRegistration>().Property(p => p.RegistrationDate).HasColumnType("timestamp").HasDefaultValue(DateTime.UtcNow).IsRequired();
-            builder.Entity<ParticipantEventRegistration>().Property(p => p.Collected).HasDefaultValue(false).IsRequired();
-
-            #endregion
+           
 
             
             #region Artworks
@@ -173,13 +160,6 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             
             #endregion
 
-            builder.Entity<ArtistRecommendation>().ToTable("ArtistRecommendations");
-            builder.Entity<ArtistRecommendation>().HasKey(ar => ar.Id);
-            builder.Entity<ArtistRecommendation>().Property(ar => ar.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<ArtistRecommendation>().Property(ar => ar.ArtistId).IsRequired();
-            builder.Entity<ArtistRecommendation>().Property(ar => ar.HobyistId).IsRequired();
-            builder.Entity<ArtistRecommendation>().Property(ar => ar.RecommendationDateTime).HasColumnType("timestamp").HasDefaultValue(DateTime.UtcNow).IsRequired();
-            builder.Entity<ArtistRecommendation>().Property(ar => ar.Collected).HasDefaultValue(false).IsRequired();
             #region ArtworkRecommendations
 
             builder.Entity<ArtworkRecommendation>().ToTable("ArtworkRecommendations");
@@ -242,15 +222,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             #region MLTrainingData
 
             builder.Entity<MLTrainingData>().HasNoKey().ToTable("MLTrainingData");
-            builder.Entity<MLTrainingData>().Property(ml => ml.ArtistRecommendationArtistId).IsRequired();
-            builder.Entity<MLTrainingData>().Property(ml => ml.ArtistRecommendationDatetime).HasColumnName("timestamp").IsRequired();
-            builder.Entity<MLTrainingData>().Property(ml => ml.ArtistRecommendationHobbyistId).IsRequired();
-            builder.Entity<MLTrainingData>().Property(ml => ml.ArtworkReviewHobbyistId).IsRequired();
-            builder.Entity<MLTrainingData>().Property(ml => ml.ArtworkReviewRegistrationDatetime).HasColumnName("timestamp").IsRequired();
-            builder.Entity<MLTrainingData>().Property(ml => ml.FollowerHobyistId).IsRequired();
-            builder.Entity<MLTrainingData>().Property(ml => ml.FollowerRegistrationDatetime).HasColumnName("timestamp").IsRequired();
-            builder.Entity<MLTrainingData>().Property(ml => ml.EventParticipantHobyistId).IsRequired();
-            builder.Entity<MLTrainingData>().Property(ml => ml.EventParticipantRegistrationDatetime).HasColumnName("timestamp").IsRequired();
+            
 
             #endregion
 
