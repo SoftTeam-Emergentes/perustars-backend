@@ -13,6 +13,7 @@ namespace PERUSTARS.ProfileManagement.Domain.Model.Commands
     {
 
         public int Age { get; set; }
+        public long ArtistId { get; set; }
         public string BrandName { get; set; } //Nickname
         public string Description { get; set; }
         public string Phrase { get; set; }
@@ -26,6 +27,7 @@ namespace PERUSTARS.ProfileManagement.Domain.Model.Commands
     public class EditProfileHobbyistCommand : IRequest<HobbyistResource>
     {
         public int Age { get; set; }
+        public long HobbyistId { get; set; }
         public List<Follower> Followers { get; set; }
     }
 

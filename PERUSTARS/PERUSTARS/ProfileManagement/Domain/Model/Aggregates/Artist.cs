@@ -13,7 +13,7 @@ namespace PERUSTARS.ProfileManagement.Domain.Model.Aggregates
 {
     public class Artist : User
     {
-        public BigInteger ArtistId { get; set; }
+        public long ArtistId { get; set; }
         
         public User User { get; set; }
         

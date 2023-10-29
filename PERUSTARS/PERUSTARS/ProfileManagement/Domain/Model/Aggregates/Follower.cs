@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace PERUSTARS.ProfileManagement.Domain.Model.Aggregates
 {

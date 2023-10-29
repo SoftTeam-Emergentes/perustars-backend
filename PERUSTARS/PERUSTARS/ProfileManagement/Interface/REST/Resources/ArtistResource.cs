@@ -1,6 +1,7 @@
 
 
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Numerics;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
@@ -10,6 +11,7 @@ namespace PERUSTARS.ProfileManagement.Interface.REST.Resources
 {
     public class ArtistResource
     {
+        [ForeignKey("User")]
         public long UserId { get; set; }
         public long ArtistId { get; set; }
         public int Age { get; set; }

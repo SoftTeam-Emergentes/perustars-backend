@@ -1,13 +1,16 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model;
 using PERUSTARS.ProfileManagement.Domain.Model.Enum;
 
 namespace PERUSTARS.ProfileManagement.Interface.REST.Resources
 {
-    public class RegisterArtistProfile: RegisterUserRequest
+    public class RegisterArtistProfile
     {
         [Required]
+        [ForeignKey("User")]
+        public long UserId { get; set; }
         public int Age { get; set; }
         public string BrandName { get; set; }
         public string Description { get; set; }
