@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.AtEventManagement.Interfaces.rest
 {
-    [Route("/api/v1/artevents/[]")]
+    [Route("/api/v1/artevents/[controller]")]
     public class ArtEventController :ControllerBase
     {
         private readonly IMapper _mapper;

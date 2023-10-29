@@ -1,27 +1,21 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
+using Microsoft.AspNetCore.Diagnostics;
+using PERUSTARS.Shared.Domain.Repositories;
+using PERUSTARS.Shared.Infrastructure.Configuration;
+using PERUSTARS.Shared.Infrastructure.Repositories;
 using PERUSTARS.AtEventManagement.Application.artevents.service;
 using PERUSTARS.AtEventManagement.Domain.Model.Repositories;
 using PERUSTARS.AtEventManagement.Domain.Services.ArtEvent;
 using PERUSTARS.AtEventManagement.Infrastructure;
-using PERUSTARS.Domain.Models;
-using PERUSTARS.Domain.Persistence.Contexts;
-using PERUSTARS.Domain.Persistence.Repositories;
-using PERUSTARS.Domain.Services;
-using PERUSTARS.Exceptions;
-using PERUSTARS.Persistence.Repositories;
-using PERUSTARS.Services;
-using PERUSTARS.Settings;
-using System.Text;
+
 
 namespace PERUSTARS
 {
@@ -78,35 +72,16 @@ namespace PERUSTARS
 
             // Dependency Injection Configuration
 
-            services.AddScoped<IArtistRepository, ArtistRepository>();
-            services.AddScoped<IArtworkRepository, ArtworkRepository>();
-            services.AddScoped<IHobbyistRepository, HobbyistRepository>();
-            services.AddScoped<IEventRepository, EventRepository>();
-            services.AddScoped<IClaimTicketRepository, ClaimTicketRepository>();
-            services.AddScoped<IInterestRepository, InterestRepository>();
-            services.AddScoped<IFavoriteArtworkRepository, FavoriteArtworkRepository>();
-            services.AddScoped<ISpecialtyRepository, SpecialtyRepository>();
-            services.AddScoped<IFollowerRepository, FollowerRepository>();
-            services.AddScoped<IEventAssistanceRepository, EventAssistanceRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
+
             services.AddScoped<IArtEventRepository, ArtEventRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddScoped<IArtworkService, ArtworkService>();
-            services.AddScoped<IArtistService, ArtistService>();
-            services.AddScoped<IHobbyistService, HobbyistService>();
-            services.AddScoped<ISpecialtyService, SpecialtyService>();
-            services.AddScoped<IFollowerService, FollowerService>();
+
 
             services.AddScoped<IArtEventCommandService, ArtEventService>();
             services.AddScoped<IArtEventQueryService, ArtEventQueryService>();
 
-            services.AddScoped<IInterestService, InterestService>();
-            services.AddScoped<IEventAssistanceService, EventAssistanceService>();
-            services.AddScoped<IFavoriteArtworkService, FavoriteArtworkService>();
-            services.AddScoped<IClaimTicketService, ClaimTicketService>();
-            services.AddScoped<ISpecialtyService, SpecialtyService>();
-            services.AddScoped<IUserService, UserService>();
+
 
 
             // Apply Endpoints Naming Convention
