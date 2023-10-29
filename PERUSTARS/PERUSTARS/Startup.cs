@@ -20,6 +20,7 @@ using PERUSTARS.Shared.Infrastructure.Repositories;
 using System.Reflection;
 using Microsoft.AspNetCore.Http;
 using System.Net;
+using PERUSTARS.Shared.Profiles;
 
 namespace PERUSTARS
 {
@@ -71,7 +72,7 @@ namespace PERUSTARS
 
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseNpgsql(Configuration.GetConnectionString("PostgreSQLConnection"));
             });
 
             // Dependency Injection Configuration
@@ -91,7 +92,10 @@ namespace PERUSTARS
             });
 
             // AutoMapper Setup
-            services.AddAutoMapper(typeof(Startup).Assembly);
+            services.AddAutoMapper(typeof(ModelToResourceProfile),
+                typeof(CommandToModelProfile),
+                typeof(ResourceToCommandProfile),
+                typeof(ResourceToModelProfile));
 
             services.AddSwaggerGen(c =>
             {

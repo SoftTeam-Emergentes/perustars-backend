@@ -18,13 +18,11 @@ public class LogInUserCommandHandler: IRequestHandler<LogInUserCommand, Authenti
     private readonly IPublisher _publisher;
     private readonly IMapper _mapper;
     private readonly IUserRepository _userRepository;
-    private readonly IUnitOfWork _unitOfWork;
     private readonly IRequestHandler<GenerateJwtTokenCommand, string> _generateJwtTokenHandler; // Agregar la inyección de dependencia
 
     public LogInUserCommandHandler(IUserRepository userRepository, IUnitOfWork unitOfWork, IMapper mapper, IPublisher publisher, IRequestHandler<GenerateJwtTokenCommand, string> generateJwtTokenHandler)
     {
         _userRepository = userRepository;
-        _unitOfWork = unitOfWork;
         _mapper = mapper;
         _publisher = publisher;
         _generateJwtTokenHandler = generateJwtTokenHandler;

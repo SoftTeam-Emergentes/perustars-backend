@@ -4,11 +4,12 @@ using PERUSTARS.IdentityAndAccountManagement.Interfaces.REST.Resources;
 
 namespace PERUSTARS.Shared.Profiles
 {
-    public class ResourceToCommand: Profile
+    public class ResourceToCommandProfile: Profile
     {
-        public ResourceToCommand()
+        public ResourceToCommandProfile()
         {
             CreateMap<RegisterUserRequest, RegisterUserCommand>();
+            CreateMap<AuthenticateRequest, LogInUserCommand>();
         }
     }
 }

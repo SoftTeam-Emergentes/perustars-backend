@@ -32,11 +32,10 @@ namespace PERUSTARS.IdentityAndAccountManagement.Application.Commands.Handlers
         public async Task<UserResource> Handle(RegisterUserCommand registerUserCommand, CancellationToken cancellationToken)
         {
             // TODO: Registrar Usuario como sabemos hacerlo
-            UserResource userResource = new UserResource();
             if (_userRepository.ExistsByEmail(registerUserCommand.Email))
                 throw new AppException($"Email '{registerUserCommand.Email}' is already taken.");
 
-            var user = _mapper.Map<User>(registerUserCommand);
+            var user = _mapper.Map<RegisterUserCommand, User>(registerUserCommand);
 
             user.PasswordHash = BCryptNet.HashPassword(registerUserCommand.Password);
 
@@ -55,6 +54,7 @@ namespace PERUSTARS.IdentityAndAccountManagement.Application.Commands.Handlers
                 UserId = user.UserId
             };
             await _publisher.Publish(userRegisteredEvent);
+            var userResource = _mapper.Map<User, UserResource>(user);
             return userResource;
         }
     }
