@@ -15,48 +15,40 @@ namespace PERUSTARS.AtEventManagement.Application.artevents.service
         }
         public async Task<string> registerArtEventService(RegisterArtEventCommand registerArtEventCommand)
         {
-            string response = await _mediator.Send(registerArtEventCommand);
-            return response;
+            return await _mediator.Send(registerArtEventCommand);
         }
         public async Task<string> cancelArtEventeService(CancelArtEventCommand cancelArtEventCommand) {
-            string response = await _mediator.Send(cancelArtEventCommand);
-            return response;
+            return await _mediator.Send(cancelArtEventCommand);
         }
 
         public async Task<string> registerParticipantToArtEvent(RegisterParticipantToArtEventCommand registerParticipantToArtEventCommand)
         {
-            string response = await _mediator.Send(registerParticipantToArtEventCommand);
-            return response;
+            return await _mediator.Send(registerParticipantToArtEventCommand);
         }
 
         public async Task<string> cancelArtEvent(CancelArtEventCommand cancelArtEventCommand)
         {
-            string response = await _mediator.Send(cancelArtEventCommand);
-            return response;
+            return await _mediator.Send(cancelArtEventCommand);
         }
 
         public async Task<string> editArtEvent(EditArtEventCommand editArtEventCommand)
         {
-            string response = await _mediator.Send(editArtEventCommand);
-            return response;
+            return await _mediator.Send(editArtEventCommand);
         }
 
         public async Task<string> finishArtEvent(FinishArtEventCommand finishArtEventCommand)
         {
-            string response = await _mediator.Send(finishArtEventCommand);
-            return response;
+            return await _mediator.Send(finishArtEventCommand);
         }
 
         public async Task<string> rescheduleArtEvent(RescheduleArtEventCommand rescheduleArtEventCommand)
         {
-            string response = await _mediator.Send(rescheduleArtEventCommand);
-            return response;
+            return await _mediator.Send(rescheduleArtEventCommand);
         }
 
         public async Task<string> startArtEventCommand(StartArtEventCommand startArtEventCommand)
         {
-            string response = await _mediator.Send(startArtEventCommand);
-            return response;
+            return await _mediator.Send(startArtEventCommand);
         }
     }
 }

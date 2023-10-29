@@ -3,6 +3,7 @@ using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
 using PERUSTARS.AtEventManagement.Domain.Model.Commads;
 using PERUSTARS.AtEventManagement.Domain.Model.Repositories;
 using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
+using PERUSTARS.Shared.Domain.Repositories;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,9 +12,11 @@ namespace PERUSTARS.AtEventManagement.Application.artevents.commands
     public class EditArtEventCommandHandler : IRequestHandler<EditArtEventCommand, string>
     {
         private readonly IArtEventRepository _artEventRepository;
-        public EditArtEventCommandHandler(IArtEventRepository artEventRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public EditArtEventCommandHandler(IArtEventRepository artEventRepository, IUnitOfWork unitOfWork)
         {
             _artEventRepository = artEventRepository;
+            _unitOfWork = unitOfWork;
         }
         public async Task<string> Handle(EditArtEventCommand request, CancellationToken cancellationToken)
         {
@@ -25,10 +28,11 @@ namespace PERUSTARS.AtEventManagement.Application.artevents.commands
                 artEvent.Location = request.location;
                 artEvent.IsOnline = request.isOnline;
                 _artEventRepository.Update(artEvent);
-                return await Task.FromResult("Art event edited succesfully!!");
+                await _unitOfWork.CompleteAsync();
+                return "Art event edited succesfully!!";
             }
             else {
-                return await Task.FromResult("Art event with the given id doesn't exist");
+                return "Art event with the given id doesn't exist";
             }
         }
     }

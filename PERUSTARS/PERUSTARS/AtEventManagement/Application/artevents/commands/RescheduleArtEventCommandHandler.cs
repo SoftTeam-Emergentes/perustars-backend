@@ -3,6 +3,7 @@ using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
 using PERUSTARS.AtEventManagement.Domain.Model.Commads;
 using PERUSTARS.AtEventManagement.Domain.Model.Repositories;
 using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
+using PERUSTARS.Shared.Domain.Repositories;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,9 +12,11 @@ namespace PERUSTARS.AtEventManagement.Application.artevents.commands
     public class RescheduleArtEventCommandHandler : IRequestHandler<RescheduleArtEventCommand, string>
     {
         private readonly IArtEventRepository _artEventRepository;
-        public RescheduleArtEventCommandHandler(IArtEventRepository artEventRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public RescheduleArtEventCommandHandler(IArtEventRepository artEventRepository, IUnitOfWork unitOfWork)
         {
             _artEventRepository = artEventRepository;
+            _unitOfWork = unitOfWork;
         }
         public async Task<string> Handle(RescheduleArtEventCommand request, CancellationToken cancellationToken)
         {
@@ -23,10 +26,11 @@ namespace PERUSTARS.AtEventManagement.Application.artevents.commands
                 artEvent.StartDateTime = request.newDate;
                 artEvent.CurrentStatus = ArtEventStatus.RESCHEDULED;
                 _artEventRepository.Update(artEvent);
-                return await Task.FromResult("Art Event rescheduled!!");
+                await _unitOfWork.CompleteAsync();
+                return "Art Event rescheduled!!";
             }
             else {
-                return await Task.FromResult("The art event with the given id doesn't exist");
+                return "The art event with the given id doesn't exist";
             }
         }
 

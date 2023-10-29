@@ -9,7 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using PERUSTARS.AtEventManagement.Application.artevents.service;
 using PERUSTARS.AtEventManagement.Domain.Model.Repositories;
+using PERUSTARS.AtEventManagement.Domain.Services.ArtEvent;
 using PERUSTARS.AtEventManagement.Infrastructure;
 using PERUSTARS.Domain.Models;
 using PERUSTARS.Domain.Persistence.Contexts;
@@ -95,7 +97,10 @@ namespace PERUSTARS
             services.AddScoped<IHobbyistService, HobbyistService>();
             services.AddScoped<ISpecialtyService, SpecialtyService>();
             services.AddScoped<IFollowerService, FollowerService>();
-            services.AddScoped<IEventService, EventService>();
+
+            services.AddScoped<IArtEventCommandService, ArtEventService>();
+            services.AddScoped<IArtEventQueryService, ArtEventQueryService>();
+
             services.AddScoped<IInterestService, InterestService>();
             services.AddScoped<IEventAssistanceService, EventAssistanceService>();
             services.AddScoped<IFavoriteArtworkService, FavoriteArtworkService>();

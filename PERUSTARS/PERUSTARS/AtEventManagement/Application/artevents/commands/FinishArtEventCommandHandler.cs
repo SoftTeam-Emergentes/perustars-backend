@@ -3,6 +3,7 @@ using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
 using PERUSTARS.AtEventManagement.Domain.Model.Commads;
 using PERUSTARS.AtEventManagement.Domain.Model.Repositories;
 using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
+using PERUSTARS.Shared.Domain.Repositories;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,9 +12,11 @@ namespace PERUSTARS.AtEventManagement.Application.artevents.commands
     public class FinishArtEventCommandHandler : IRequestHandler<FinishArtEventCommand, string>
     {
         private readonly IArtEventRepository _artEventRepository;
-        public FinishArtEventCommandHandler(IArtEventRepository artEventRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public FinishArtEventCommandHandler(IArtEventRepository artEventRepository, IUnitOfWork unitOfWork)
         {
             _artEventRepository = artEventRepository;
+            _unitOfWork = unitOfWork;
         }
         public async Task<string> Handle(FinishArtEventCommand request, CancellationToken cancellationToken)
         {
@@ -22,10 +25,11 @@ namespace PERUSTARS.AtEventManagement.Application.artevents.commands
             {
                 artevent.CurrentStatus = ArtEventStatus.CANCELLED;
                 _artEventRepository.Update(artevent);
-                return await Task.FromResult("Evento marcado como finalizado");
+                await _unitOfWork.CompleteAsync();
+                return "Evento marcado como finalizado";
             }
             else {
-                return await Task.FromResult("The art event with the given id doesn't exist");
+                return "The art event with the given id doesn't exist";
             }
         }
     }

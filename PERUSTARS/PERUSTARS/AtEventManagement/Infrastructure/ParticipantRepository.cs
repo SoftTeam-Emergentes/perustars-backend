@@ -14,38 +14,38 @@ namespace PERUSTARS.AtEventManagement.Infrastructure
         public ParticipantRepository(AppDbContext dbContext) : base(dbContext)
         {
         }
-        public new async Task AddAsync(Participant entity)
-        {
-            await _dbContext.Participants.AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
-
-        }
-
-        public new async Task<Participant> FindByIdAsync(int id)
-        {
-            return await _dbContext.Participants.FindAsync(id);
-        }
-
-        public new async Task<IEnumerable<Participant>> ListAsync()
-        {
-            return await _dbContext.Participants.ToListAsync();
-        }
-
-        public new async void Remove(Participant entity)
-        {
-            var participant=await _dbContext.Participants.FindAsync(entity);
-            if (participant != null)
-            {
-                _dbContext.Participants.Remove(participant);
-                await _dbContext.SaveChangesAsync();
-            }
-        }
-
-        public new async void Update(Participant entity)
-        {
-            _dbContext.Participants.Update(entity);
-            await _dbContext.SaveChangesAsync();
-        }
+        //public new async Task AddAsync(Participant entity)
+        //{
+        //    await _dbContext.Participants.AddAsync(entity);
+        //    await _dbContext.SaveChangesAsync();
+        //
+        //}
+        //
+        //public new async Task<Participant> FindByIdAsync(int id)
+        //{
+        //    return await _dbContext.Participants.FindAsync(id);
+        //}
+        //
+        //public new async Task<IEnumerable<Participant>> ListAsync()
+        //{
+        //    return await _dbContext.Participants.ToListAsync();
+        //}
+        //
+        //public new async void Remove(Participant entity)
+        //{
+        //    var participant=await _dbContext.Participants.FindAsync(entity);
+        //    if (participant != null)
+        //    {
+        //        _dbContext.Participants.Remove(participant);
+        //        await _dbContext.SaveChangesAsync();
+        //    }
+        //}
+        //
+        //public new async void Update(Participant entity)
+        //{
+        //    _dbContext.Participants.Update(entity);
+        //    await _dbContext.SaveChangesAsync();
+        //}
 
         public async Task<IEnumerable<Participant>> findByArtEventIdAsync(int artEventId)
         {

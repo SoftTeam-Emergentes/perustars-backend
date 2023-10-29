@@ -3,6 +3,7 @@ using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
 using PERUSTARS.AtEventManagement.Domain.Model.Commads;
 using PERUSTARS.AtEventManagement.Domain.Model.Repositories;
 using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
+using PERUSTARS.Shared.Domain.Repositories;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,10 +11,12 @@ namespace PERUSTARS.AtEventManagement.Application.artevents.commands
 {
     public class RegisterArtEventCommandHandler : IRequestHandler<RegisterArtEventCommand, string>
     {
-        IArtEventRepository _artEventRepository;
-        public RegisterArtEventCommandHandler(IArtEventRepository artEventRepository)
+        private readonly IArtEventRepository _artEventRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        public RegisterArtEventCommandHandler(IArtEventRepository artEventRepository, IUnitOfWork unitOfWork)
         {
             _artEventRepository = artEventRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<string> Handle(RegisterArtEventCommand request, CancellationToken cancellationToken)
@@ -36,7 +39,8 @@ namespace PERUSTARS.AtEventManagement.Application.artevents.commands
                 collected:false
                 );
             await _artEventRepository.AddAsync(artEvent);
-            return await Task.FromResult("Usuario registrado exitosamente");
+            await _unitOfWork.CompleteAsync();
+            return "Art event registered succesfully!!";
 
         }
     }

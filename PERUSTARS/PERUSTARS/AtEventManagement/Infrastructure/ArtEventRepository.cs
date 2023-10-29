@@ -28,30 +28,30 @@ namespace PERUSTARS.AtEventManagement.Infrastructure
             return await _dbContext.ArtEvents.Where(a=>a.Participants.Any(p=>p.HobbyistId==hobbyistId)).ToListAsync();
         }
 
-        public new async Task<ArtEvent> FindByIdAsync(int id)
-        {
-            return await _dbContext.ArtEvents.FindAsync(id);
-        }
-
-        public new async Task<IEnumerable<ArtEvent>> ListAsync()
-        {
-            return await _dbContext.ArtEvents.ToListAsync();
-        }
-
-        public new async void Remove(ArtEvent entity)
-        {
-            var artEvent=await _dbContext.ArtEvents.FindAsync(entity);
-            if(artEvent!=null)
-            {
-                _dbContext.ArtEvents.Remove(artEvent);
-                await _dbContext.SaveChangesAsync();
-            }
-        }
-
-        public new async void Update(ArtEvent entity)
-        {
-            _dbContext.ArtEvents.Update(entity);
-            await _dbContext.SaveChangesAsync();
-        }
+        //public new async Task<ArtEvent> FindByIdAsync(int id)
+        //{
+        //    return await _dbContext.ArtEvents.FindAsync(id);
+        //}
+        //
+        //public new async Task<IEnumerable<ArtEvent>> ListAsync()
+        //{
+        //    return await _dbContext.ArtEvents.ToListAsync();
+        //}
+        //
+        //public new async void Remove(ArtEvent entity)
+        //{
+        //    var artEvent=await _dbContext.ArtEvents.FindAsync(entity);
+        //    if(artEvent!=null)
+        //    {
+        //        _dbContext.ArtEvents.Remove(artEvent);
+        //        await _dbContext.SaveChangesAsync();
+        //    }
+        //}
+        //
+        //public new async void Update(ArtEvent entity)
+        //{
+        //    _dbContext.ArtEvents.Update(entity);
+        //    await _dbContext.SaveChangesAsync();
+        //}
     }
 }
