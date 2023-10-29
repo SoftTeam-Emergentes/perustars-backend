@@ -16,6 +16,17 @@ namespace PERUSTARS.AtEventManagement.Domain.Model.Commads
         public long ArtistId { get; set; }
         public ArtEventStatus CurrentStatus { get; set; }
         public bool Collected { get; set; }
+        public RegisterArtEventCommand(string title, string description, DateTime? startDateTime, Location location, bool? isOnline, long artistId, ArtEventStatus currentStatus, bool collected)
+        {
+            Title = title;
+            Description = description;
+            StartDateTime = startDateTime;
+            Location = location;
+            IsOnline = isOnline;
+            ArtistId = artistId;
+            CurrentStatus = currentStatus;
+            Collected = collected;
+        }
     }
 
 }
