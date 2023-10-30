@@ -1,6 +1,8 @@
-namespace PERUSTARS.ProfileManagement.Domain.Model.Entities
+using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
+
+namespace PERUSTARS.ProfileManagement.Interface.REST.Resources
 {
-    public class Follower
+    public class FollowerResource
     {
         public Hobbyist Hobbyist { get; set; }
         public long HobbyistId { get; set; }
