@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using System.Collections.Generic;
 using PERUSTARS.DataAnalytics.Domain.Model.Entities;
+using PERUSTARS.DataAnalytics.Domain.Repositories;
 
 namespace PERUSTARS.DataAnalytics.Application.Commands.Handlers
 {
@@ -11,16 +12,18 @@ namespace PERUSTARS.DataAnalytics.Application.Commands.Handlers
     {
         private readonly IPublisher _publisher;
         private readonly IMapper _mapper;
+        private readonly IParticipantEventRegistrationRepository _participantEventRegistrationRepository;
 
-        public CollectEventLogDataCommandHandler(IPublisher publisher, IMapper mapper)
+        public CollectEventLogDataCommandHandler(IPublisher publisher, IMapper mapper, IParticipantEventRegistrationRepository participantEventRegistrationRepository)
         {
             _publisher = publisher;
             _mapper = mapper;
+            _participantEventRegistrationRepository = participantEventRegistrationRepository;
         }
 
         public async Task<IEnumerable<ParticipantEventRegistration>> Handle(CollectEventLogDataCommand request, CancellationToken cancellationToken)
         {
-            return await Task.FromResult(new List<ParticipantEventRegistration>());
+            return await _participantEventRegistrationRepository.GetAllNotCollectedParticipantEventRegistrationsAsync();
         }
     }
 }

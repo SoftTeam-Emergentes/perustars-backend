@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +10,11 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
-    <PackageReference Include="MediatR" Version="12.1.1" />
+
+
+
+    <PackageReference Include="MediatR" Version="10.0.1" />
+
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.5" />
@@ -19,22 +22,39 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational.Design" Version="1.1.6" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.11.1" />
     <PackageReference Include="MySql.EntityFrameworkCore" Version="5.0.3" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.1.4" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.11.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DataAnalytics\Application\CommandServices\" />
-    <Folder Include="DataAnalytics\Application\EventServices\" />
+    <Folder Include="ArtworkManagement\Application\" />
+    <Folder Include="ArtworkManagement\Application\Commands\" />
+    <Folder Include="ArtworkManagement\Application\Commands\Handlers\" />
+    <Folder Include="ArtworkManagement\Application\Commands\Services\" />
+    <Folder Include="ArtworkManagement\Application\Events\" />
+    <Folder Include="ArtworkManagement\Application\Events\Handlers\" />
+    <Folder Include="ArtworkManagement\Application\Events\Services\" />
+    <Folder Include="ArtworkManagement\Application\QueryServices\" />
+    <Folder Include="ArtworkManagement\Domain\Model\Aggregates\" />
+    <Folder Include="ArtworkManagement\Domain\Model\Commands\" />
+    <Folder Include="ArtworkManagement\Domain\Model\Events\" />
+    <Folder Include="ArtworkManagement\Domain\Repositories\" />
+    <Folder Include="ArtworkManagement\Domain\Services\" />
+    <Folder Include="ArtworkManagement\Infrastructure\Repositories\" />
+    <Folder Include="ArtworkManagement\Interfaces\REST\" />
+    <Folder Include="ArtworkManagement\Interfaces\REST\Resources\" />
+    <Folder Include="DataAnalytics\Application\Commands\Services\" />
+    <Folder Include="DataAnalytics\Application\Events\Services\" />
     <Folder Include="DataAnalytics\Application\QueryServices\" />
-    <Folder Include="DataAnalytics\Domain\Model\" />
-    <Folder Include="DataAnalytics\Domain\Repositories\" />
-    <Folder Include="DataAnalytics\Infrastructure\" />
-    <Folder Include="DataAnalytics\Infrastructure\Repositories\" />
+    <Folder Include="DataAnalytics\Domain\Model\Queries\" />
+    <Folder Include="DataAnalytics\Domain\Model\ValueObjects\" />
     <Folder Include="DataAnalytics\Interfaces\REST\Resources\" />
-    <Folder Include="IdentityAndAccountManagement\Infrastructure\Context\" />
+    <Folder Include="ProfileManagement\Application\Commands\" />
+    <Folder Include="ArtEventManagement\" />
+    <Folder Include="CommunicationAndNotificationManagement\" />
+    <Folder Include="ConductReportsManagement\" />
+    <Folder Include="ProfileManagement\" />
   </ItemGroup>
 
 </Project>

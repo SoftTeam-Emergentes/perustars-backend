@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using PERUSTARS.DataAnalytics.Domain.Model.Entities;
+using PERUSTARS.DataAnalytics.Domain.Repositories;
 using PERUSTARS.Shared.Infrastructure.Configuration;
 using System;
 using System.Collections.Generic;

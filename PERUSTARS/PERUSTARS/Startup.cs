@@ -1,26 +1,23 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using PERUSTARS.Domain.Models;
+using PERUSTARS.Domain.Persistence.Contexts;
+using PERUSTARS.Domain.Persistence.Repositories;
+using PERUSTARS.Domain.Services;
+using PERUSTARS.Exceptions;
+using PERUSTARS.Persistence.Repositories;
+using PERUSTARS.Services;
+using PERUSTARS.Settings;
 using System.Text;
-using Microsoft.AspNetCore.Diagnostics;
-using PERUSTARS.IdentityAndAccountManagement.Application.Commands.Services;
-using PERUSTARS.IdentityAndAccountManagement.Application.Middleware;
-using PERUSTARS.IdentityAndAccountManagement.Application.Settings;
-using PERUSTARS.IdentityAndAccountManagement.Domain.Repositories;
-using PERUSTARS.IdentityAndAccountManagement.Domain.Services;
-using PERUSTARS.IdentityAndAccountManagement.Infrastructure.Repositories;
-using PERUSTARS.Shared.Domain.Repositories;
-using PERUSTARS.Shared.Infrastructure.Configuration;
-using PERUSTARS.Shared.Infrastructure.Repositories;
-using System.Reflection;
-using Microsoft.AspNetCore.Http;
-using System.Net;
-using PERUSTARS.Shared.Profiles;
 
 namespace PERUSTARS
 {
@@ -72,30 +69,44 @@ namespace PERUSTARS
 
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseNpgsql(Configuration.GetConnectionString("PostgreSQLConnection"));
+                options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
             });
 
             // Dependency Injection Configuration
 
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+            services.AddScoped<IArtistRepository, ArtistRepository>();
+            services.AddScoped<IArtworkRepository, ArtworkRepository>();
+            services.AddScoped<IHobbyistRepository, HobbyistRepository>();
+            services.AddScoped<IEventRepository, EventRepository>();
+            services.AddScoped<IClaimTicketRepository, ClaimTicketRepository>();
+            services.AddScoped<IInterestRepository, InterestRepository>();
+            services.AddScoped<IFavoriteArtworkRepository, FavoriteArtworkRepository>();
+            services.AddScoped<ISpecialtyRepository, SpecialtyRepository>();
+            services.AddScoped<IFollowerRepository, FollowerRepository>();
+            services.AddScoped<IEventAssistanceRepository, EventAssistanceRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IIdentityAndAccountManagementCommandService, IdentityAndAccountManagementCommandService>();
-            
+
+            services.AddScoped<IArtworkService, ArtworkService>();
+            services.AddScoped<IArtistService, ArtistService>();
+            services.AddScoped<IHobbyistService, HobbyistService>();
+            services.AddScoped<ISpecialtyService, SpecialtyService>();
+            services.AddScoped<IFollowerService, FollowerService>();
+            services.AddScoped<IEventService, EventService>();
+            services.AddScoped<IInterestService, InterestService>();
+            services.AddScoped<IEventAssistanceService, EventAssistanceService>();
+            services.AddScoped<IFavoriteArtworkService, FavoriteArtworkService>();
+            services.AddScoped<IClaimTicketService, ClaimTicketService>();
+            services.AddScoped<ISpecialtyService, SpecialtyService>();
+            services.AddScoped<IUserService, UserService>();
+
+
             // Apply Endpoints Naming Convention
             services.AddRouting(options => options.LowercaseUrls = true);
 
-            services.Configure<ExceptionHandlerOptions>(options => {
-                options.ExceptionHandler = default;
-                options.ExceptionHandlingPath = PathString.FromUriComponent("/error");
-            });
-
             // AutoMapper Setup
-            services.AddAutoMapper(typeof(ModelToResourceProfile),
-                typeof(CommandToModelProfile),
-                typeof(ResourceToCommandProfile),
-                typeof(ResourceToModelProfile));
+            services.AddAutoMapper(typeof(Startup).Assembly);
 
             services.AddSwaggerGen(c =>
             {
@@ -115,6 +126,7 @@ namespace PERUSTARS
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PERUSTARS v1"));
                       
+            
 
             app.UseHttpsRedirection();
 
@@ -132,9 +144,6 @@ namespace PERUSTARS
             app.UseAuthorization();
 
             app.UseMiddleware<ExceptionHandlerMiddleware>();
-            app.UseMiddleware<ErrorHandlerMiddleware>();
-
-            app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
