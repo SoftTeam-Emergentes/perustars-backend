@@ -13,7 +13,7 @@
 
 
 
-    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MediatR" Version="12.1.1" />
 
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.5" />
@@ -31,9 +31,12 @@
     <Folder Include="AtEventManagement\Application\ArtEvent\Queries\" />
     <Folder Include="AtEventManagement\Application\Participant\Commands\" />
     <Folder Include="AtEventManagement\Domain\Services\Participant\" />
+    <Folder Include="DataAnalytics\Application\Commands\Handlers\" />
     <Folder Include="DataAnalytics\Application\QueryServices\" />
     <Folder Include="DataAnalytics\Domain\Model\Queries\" />
     <Folder Include="DataAnalytics\Domain\Model\ValueObjects\" />
+    <Folder Include="DataAnalytics\Domain\Repositories\" />
+    <Folder Include="DataAnalytics\Infrastructure\Repositories\" />
     <Folder Include="DataAnalytics\Interfaces\REST\Resources\" />
 
     <Folder Include="ProfileManagement\Application\Commands\" />

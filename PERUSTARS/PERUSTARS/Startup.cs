@@ -15,7 +15,8 @@ using PERUSTARS.AtEventManagement.Application.artevents.service;
 using PERUSTARS.AtEventManagement.Domain.Model.Repositories;
 using PERUSTARS.AtEventManagement.Domain.Services.ArtEvent;
 using PERUSTARS.AtEventManagement.Infrastructure;
-
+using PERUSTARS.AtEventManagement.Application;
+using System.Reflection;
 
 namespace PERUSTARS
 {
@@ -72,7 +73,7 @@ namespace PERUSTARS
 
             // Dependency Injection Configuration
 
-
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
             services.AddScoped<IArtEventRepository, ArtEventRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

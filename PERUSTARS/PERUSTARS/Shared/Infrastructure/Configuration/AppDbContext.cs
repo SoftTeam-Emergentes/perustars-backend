@@ -45,7 +45,6 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
                     .HasForeignKey<Artist>(a => a.ArtistId);
             builder.Entity<Artist>().Property(a => a.Age);
             builder.Entity<Artist>().Property(a => a.Followers);
-            builder.Entity<Artist>().Property(a => a.User);
             builder.Entity<Artist>().Property(a => a.Description);
             builder.Entity<Artist>().Property(a => a.Genre);
             builder.Entity<Artist>().Property(a => a.Phrase);
@@ -57,29 +56,17 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             
 
             builder.Entity<Hobbyist>().ToTable("Hobbyists");
-            builder.Entity<Hobbyist>().HasKey(a => a.HobbyistId);
             builder.Entity<Hobbyist>().Property(a => a.HobbyistId).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Hobbyist>().Property(a => a.Age);
             //builder.Entity<Hobbyist>().HasCheckConstraint("Age <= 120");
             builder.Entity<Hobbyist>().Property(a => a.User);
             builder.Entity<Hobbyist>().Property(a => a.Followers);
             builder.Entity<Hobbyist>().Property(a => a.Collected).HasDefaultValue(false);
-            
-                    
-            builder.Entity<Hobbyist>()
-                    .HasOne(u => u.User)
-                    .WithOne()
-                    .HasForeignKey<Hobbyist>(u => u.HobbyistId);
 
-            builder.Entity<Hobbyist>()
-                    .HasMany(h => h.Followers)
-                    .WithOne(h => h.Hobbyist)
-                    .HasForeignKey(h => h.HobbyistId);
-
-            builder.Entity<Artist>()
-                    .HasMany(a => a.Followers)
-                    .WithOne(a => a.Artist)
-                    .HasForeignKey(a => a.ArtistId);
+                  //builder.Entity<Artist>()
+                  //        .HasMany(a => a.Followers)
+                  //        .WithOne(a => a.Artist)
+                  //        .HasForeignKey(a => a.ArtistId);
 
             builder.Entity<Follower>().ToTable("Followers");
             builder.Entity<Follower>().Property(f => f.Hobbyist);

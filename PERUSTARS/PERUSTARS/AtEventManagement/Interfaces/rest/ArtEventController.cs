@@ -29,7 +29,5 @@ namespace PERUSTARS.AtEventManagement.Interfaces.rest
             string response = await _artEventCommandService.registerArtEventService(registerArtEventCommand);
             return Ok(response);
         }
-
-        [HttpGet]
     }
 }

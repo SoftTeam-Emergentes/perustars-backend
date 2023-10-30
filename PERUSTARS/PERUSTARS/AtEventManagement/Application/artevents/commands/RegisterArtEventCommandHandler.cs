@@ -30,12 +30,12 @@ namespace PERUSTARS.AtEventManagement.Application.artevents.commands
                 title: request.Title,
                 description: request.Description,
                 startDateTime: request.StartDateTime,
-                location: request.Location,
+                Location: request.Location,
                 isOnline: request.IsOnline,
                 artistId: request.ArtistId,
                 currentStatus: ArtEventStatus.REGISTERED,
-                participants:null,
-                artist:null,
+                Participants:null,
+                Artist:null,
                 collected:false
                 );
             await _artEventRepository.AddAsync(artEvent);
