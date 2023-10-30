@@ -24,16 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ConductsReportsManagement\Application\Events\Handlers\" />
-    <Folder Include="ConductsReportsManagement\Application\QueryServices\" />
-    <Folder Include="ConductsReportsManagement\Domain\Model\Aggregates\" />
-    <Folder Include="ConductsReportsManagement\Domain\Model\Commands\" />
-    <Folder Include="ConductsReportsManagement\Domain\Model\Events\" />
-    <Folder Include="ConductsReportsManagement\Domain\Model\ValueObjects\" />
-    <Folder Include="ConductsReportsManagement\Domain\Model\Queries\" />
+    <Folder Include="ConductsReportsManagement\Domain\Model\Aggregate\" />
     <Folder Include="ConductsReportsManagement\Domain\Services\" />
-    <Folder Include="ConductsReportsManagement\Infrastructure\Repositories\" />
-    <Folder Include="ConductsReportsManagement\Interfaces\REST\Resources\" />
     <Folder Include="DataAnalytics\Application\Commands\Services\" />
     <Folder Include="DataAnalytics\Application\Events\Services\" />
     <Folder Include="DataAnalytics\Application\QueryServices\" />

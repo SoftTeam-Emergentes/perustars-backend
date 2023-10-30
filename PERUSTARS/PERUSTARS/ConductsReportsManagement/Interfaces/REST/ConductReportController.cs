@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PERUSTARS.ConductsReportsManagement.Interfaces
+namespace PERUSTARS.ConductsReportsManagement.Interfaces.REST
 {
     public class ConductReportController
     {
-
     }
 }
