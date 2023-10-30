@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
 using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
-using User = PERUSTARS.IdentityAndAccountManagement.Domain.Model.User;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates;
 
 namespace PERUSTARS.ProfileManagement.Domain.Model.Aggregates
 {

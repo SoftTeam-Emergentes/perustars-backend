@@ -1,15 +1,15 @@
 ﻿using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using PERUSTARS.Domain.Models;
-using PERUSTARS.Domain.Persistence.Repositories;
-using PERUSTARS.Domain.Services.Communications;
-using PERUSTARS.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PERUSTARS.PastProject.Domain.Models;
+using PERUSTARS.PastProject.Domain.Persistence.Repositories;
+using PERUSTARS.PastProject.Domain.Services.Communications;
+using PERUSTARS.PastProject.Services;
 
 namespace PERUSTARS.Test
 {
