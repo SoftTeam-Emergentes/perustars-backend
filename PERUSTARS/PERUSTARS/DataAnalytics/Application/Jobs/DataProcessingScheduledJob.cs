@@ -24,7 +24,7 @@ namespace PERUSTARS.DataAnalytics.Application.Jobs
 
         public async void ProcessDataAndSendToML(object state)
         {
-            await _dataAnalyticsCommandService.SaveTrainingDataToDb();
+           
         }
 
         public Task StopAsync(CancellationToken cancellationToken)

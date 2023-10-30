@@ -10,18 +10,22 @@
     <Compile Remove="ArtworkManagement\**" />
     <Compile Remove="CommunicationAndNotificationManagement\**" />
     <Compile Remove="ConductReportsManagement\**" />
+    <Compile Remove="DataAnalytics\Application\Events\**" />
     <Content Remove="ArtEventManagement\**" />
     <Content Remove="ArtworkManagement\**" />
     <Content Remove="CommunicationAndNotificationManagement\**" />
     <Content Remove="ConductReportsManagement\**" />
+    <Content Remove="DataAnalytics\Application\Events\**" />
     <EmbeddedResource Remove="ArtEventManagement\**" />
     <EmbeddedResource Remove="ArtworkManagement\**" />
     <EmbeddedResource Remove="CommunicationAndNotificationManagement\**" />
     <EmbeddedResource Remove="ConductReportsManagement\**" />
+    <EmbeddedResource Remove="DataAnalytics\Application\Events\**" />
     <None Remove="ArtEventManagement\**" />
     <None Remove="ArtworkManagement\**" />
     <None Remove="CommunicationAndNotificationManagement\**" />
     <None Remove="ConductReportsManagement\**" />
+    <None Remove="DataAnalytics\Application\Events\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -60,8 +64,6 @@
     <Folder Include="ArtworkManagement\Interfaces\REST\" />
     <Folder Include="ArtworkManagement\Interfaces\REST\Resources\" />
     <Folder Include="DataAnalytics\Application\Commands\Services\" />
-    <Folder Include="DataAnalytics\Application\Events\Handlers\" />
-    <Folder Include="DataAnalytics\Application\Events\Services\" />
     <Folder Include="DataAnalytics\Application\QueryServices\" />
     <Folder Include="DataAnalytics\Domain\Model\Queries\" />
     <Folder Include="DataAnalytics\Domain\Model\ValueObjects\" />
