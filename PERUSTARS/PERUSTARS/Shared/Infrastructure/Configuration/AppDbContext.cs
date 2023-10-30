@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
 using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
+using PERUSTARS.ArtworkManagement.Domain.Model.Aggregates;
 using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
 using PERUSTARS.DataAnalytics.Domain.Model.Entities;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model;

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
 using PERUSTARS.ArtworkManagement.Domain.Model.Enums;
 using PERUSTARS.ArtworkManagement.Domain.Model.ValueObjects;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 
-namespace PERUSTARS.ArtworkManagement.Domain.Model.Entities
+namespace PERUSTARS.ArtworkManagement.Domain.Model.Aggregates
 {
     public class Artwork
     {

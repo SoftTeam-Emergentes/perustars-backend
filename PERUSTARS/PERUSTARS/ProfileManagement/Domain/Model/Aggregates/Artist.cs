@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Numerics;
+using PERUSTARS.ArtworkManagement.Domain.Model.Aggregates;
 using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
 using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
-using PERUSTARS.IdentityAndAccountManagement.Domain.Model;
 using PERUSTARS.ProfileManagement.Domain.Model.Enum;
 using User = PERUSTARS.IdentityAndAccountManagement.Domain.Model.User;
 
