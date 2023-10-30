@@ -6,7 +6,7 @@ using System.Numerics;
 
 namespace PERUSTARS.DataAnalytics.Domain.Model.Commands
 {
-    public class CollectRecommendedArtworkDataCommand: IRequest<IEnumerable<ArtworkRecommendation>>
+    public class CollectRecommendedArtworkDataCommand: IRequest<IEnumerable<ArtistArtworkRecommendation>>
     {
 
     }

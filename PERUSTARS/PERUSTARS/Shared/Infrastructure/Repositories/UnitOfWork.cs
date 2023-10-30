@@ -1,4 +1,4 @@
-﻿using PERUSTARS.Domain.Persistence.Repositories;
+﻿using PERUSTARS.Shared.Domain.Repositories;
 using PERUSTARS.Shared.Infrastructure.Configuration;
 using System.Threading.Tasks;
 

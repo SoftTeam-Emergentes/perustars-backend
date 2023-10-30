@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
-using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
+using PERUSTARS.ProfileManagement.Domain.Model.Entities;
 
 namespace PERUSTARS.AtEventManagement.Domain.Model.Aggregates
 {
     public class ArtEvent
     {
-        
         public long? Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
