@@ -6,6 +6,7 @@ using PERUSTARS.DataAnalytics.Domain.Repositories;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
 
 namespace PERUSTARS.DataAnalytics.Application.Commands.Handlers
 {

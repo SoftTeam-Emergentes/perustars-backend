@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using PERUSTARS.ProfileManagement.Domain.Model.Commands;
-using PERUSTARS.ProfileManagement.Domain.Model.Services;
+using PERUSTARS.ProfileManagement.Domain.Services;
 using PERUSTARS.ProfileManagement.Interface.REST.Resources;
 
 

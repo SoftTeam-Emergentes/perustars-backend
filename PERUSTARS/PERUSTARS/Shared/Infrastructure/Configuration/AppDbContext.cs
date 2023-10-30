@@ -3,10 +3,10 @@ using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
 using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
 using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
 using PERUSTARS.DataAnalytics.Domain.Model.Entities;
-using PERUSTARS.IdentityAndAccountManagement.Domain.Model;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.Shared.Extensions;
 using System;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates;
 
 namespace PERUSTARS.Shared.Infrastructure.Configuration
 
@@ -37,9 +37,18 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            #region Users
             builder.Entity<User>().ToTable("Users");
-            builder.Entity<User>().HasKey(u => u.Id);
-            builder.Entity<User>().Property(u => u.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<User>().HasKey(u => u.UserId);
+            builder.Entity<User>().Property(u => u.UserId).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<User>().Property(u => u.Email).IsRequired();
+            builder.Entity<User>().Property(u => u.FirstName);
+            builder.Entity<User>().Property(u => u.LastName).IsRequired();
+            builder.Entity<User>().Property(u => u.Email).IsRequired();
+            builder.Entity<User>().Property(u => u.PasswordHash).IsRequired();
+            #endregion
+            
      
             builder.Entity<Artist>().ToTable("Artists");
             
@@ -137,14 +146,14 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             //builder.Entity<Event>().Property(e=>e.EventId).IsRequired().ValueGeneratedOnAdd();
             #region ParticipantEventRegistrations
 
-            builder.Entity<ParticipantEventRegistration>().ToTable("ParticipantEventRegistrations");
+            /*builder.Entity<ParticipantEventRegistration>().ToTable("ParticipantEventRegistrations");
             builder.Entity<ParticipantEventRegistration>().HasKey(p => p.Id);
             builder.Entity<ParticipantEventRegistration>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<ParticipantEventRegistration>().Property(p => p.EventTitle).IsRequired();
             builder.Entity<ParticipantEventRegistration>().Property(p => p.ArtistId).IsRequired();
             builder.Entity<ParticipantEventRegistration>().Property(p => p.HobyistId).IsRequired();
             builder.Entity<ParticipantEventRegistration>().Property(p => p.RegistrationDate).HasColumnType("timestamp").HasDefaultValue(DateTime.UtcNow).IsRequired();
-            builder.Entity<ParticipantEventRegistration>().Property(p => p.Collected).HasDefaultValue(false).IsRequired();
+            builder.Entity<ParticipantEventRegistration>().Property(p => p.Collected).HasDefaultValue(false).IsRequired();*/
 
             #endregion
 
