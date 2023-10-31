@@ -1,9 +1,8 @@
 ﻿using System;
-using MediatR;
 
-namespace PERUSTARS.ArtworkManagement.Domain.Model.Events
+namespace PERUSTARS.ArtworkManagement.Interfaces.REST.Resources
 {
-    public class ArtworkReviewedEvent : INotification
+    public class ArtworkReviewResource
     {
         public long Id { get; set; }
         public long ArtworkId { get; set; }

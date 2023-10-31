@@ -1,9 +1,10 @@
 ﻿using MediatR;
 using PERUSTARS.ArtworkManagement.Domain.Model.ValueObjects;
+using PERUSTARS.ArtworkManagement.Interfaces.REST.Resources;
 
 namespace PERUSTARS.ArtworkManagement.Domain.Model.Commands
 {
-    public class UploadArtworkCommand : IRequest<string>
+    public class UploadArtworkCommand : IRequest<ArtworkResource>
     {
         public string Title { get; set; }
         public string Description { get; set; }

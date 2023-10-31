@@ -28,20 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ArtworkManagement\Application\" />
-    <Folder Include="ArtworkManagement\Application\Commands\" />
-    <Folder Include="ArtworkManagement\Application\Commands\Handlers\" />
-    <Folder Include="ArtworkManagement\Application\Commands\Services\" />
-    <Folder Include="ArtworkManagement\Application\Events\" />
-    <Folder Include="ArtworkManagement\Application\Events\Handlers\" />
     <Folder Include="ArtworkManagement\Application\Events\Services\" />
-    <Folder Include="ArtworkManagement\Application\QueryServices\" />
     <Folder Include="ArtworkManagement\Domain\Model\Aggregates\" />
     <Folder Include="ArtworkManagement\Domain\Repositories\" />
-    <Folder Include="ArtworkManagement\Domain\Services\" />
     <Folder Include="ArtworkManagement\Infrastructure\Repositories\" />
-    <Folder Include="ArtworkManagement\Interfaces\REST\" />
-    <Folder Include="ArtworkManagement\Interfaces\REST\Resources\" />
     <Folder Include="DataAnalytics\Application\Commands\Services\" />
     <Folder Include="DataAnalytics\Application\Events\Services\" />
     <Folder Include="DataAnalytics\Application\QueryServices\" />

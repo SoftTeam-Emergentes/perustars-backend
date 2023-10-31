@@ -1,8 +1,9 @@
 ﻿using MediatR;
+using PERUSTARS.ArtworkManagement.Interfaces.REST.Resources;
 
 namespace PERUSTARS.ArtworkManagement.Domain.Model.Commands
 {
-    public class ReviewArtworkCommand : IRequest<string>
+    public class ReviewArtworkCommand : IRequest<ArtworkReviewResource>
     {
         public long ArtworkId { get; set; }
         public long HobbyistId { get; set; }
