@@ -1,12 +1,11 @@
-﻿using MediatR;
-using Org.BouncyCastle.Math;
-using PERUSTARS.DataAnalytics.Application.Commands;
+﻿using System.Collections.Generic;
+using MediatR;
+using PERUSTARS.DataAnalytics.Domain.Model.Entities;
 
-namespace PERUSTARS.DataAnalytics.Application.Commands
+namespace PERUSTARS.DataAnalytics.Domain.Model.Commands
 {
-    public class CollectEventLogDataCommand: IRequest<bool>
+    public class CollectEventLogDataCommand: IRequest<IEnumerable<ParticipantEventRegistration>>
     {
-        public BigInteger EventParticipationArtistId { get; set; }
-        public BigInteger HobbyistId { get; set; }
+
     }
 }
