@@ -3,8 +3,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Math;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.ProfileManagement.Domain.Model.Commands;
+using PERUSTARS.ProfileManagement.Domain.Repositories;
 using PERUSTARS.Shared.Infrastructure.Configuration;
 
 namespace PERUSTARS.ProfileManagement.Application.Commands.Handlers
@@ -12,10 +14,14 @@ namespace PERUSTARS.ProfileManagement.Application.Commands.Handlers
     public class FollowArtistCommandHandler : IRequestHandler<FollowArtistCommand, Unit>
     {
         private readonly AppDbContext _context;
+        private readonly IArtistRepository _artistRepository;
 
-        public FollowArtistCommandHandler(AppDbContext context)
+        public FollowArtistCommandHandler(AppDbContext context, IArtistRepository artistRepository)
         {
             _context = context;
+            _artistRepository= artistRepository;
+
+
         }
 
         public async Task<Unit> Handle(FollowArtistCommand request, CancellationToken cancellationToken)
@@ -40,11 +46,13 @@ namespace PERUSTARS.ProfileManagement.Application.Commands.Handlers
             // Agregar la relación de seguimiento
             var follower = new Follower { HobbyistId = hobbyist.HobbyistId, ArtistId = artist.ArtistId };
             _context.Followers.Add(follower);
+            
+            artist.FollowersArtist.Add(follower);
 
            
             //artist.NumberOfFollowers++;
 
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
         }

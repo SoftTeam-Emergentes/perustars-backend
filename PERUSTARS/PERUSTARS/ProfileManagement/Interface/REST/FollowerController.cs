@@ -1,12 +1,10 @@
-<<<<<<< HEAD
 using System;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PERUSTARS.ProfileManagement.Domain.Model.Commands;
+using PERUSTARS.ProfileManagement.Domain.Services;
 
-=======
->>>>>>> 2fee3da5ad887de408f6ed620d123f3bf2f009cd
 namespace PERUSTARS.ProfileManagement.Interface.REST
 {
     [ApiController]
@@ -14,10 +12,12 @@ namespace PERUSTARS.ProfileManagement.Interface.REST
     public class FollowerController:ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IProfileCommandService _profileCommandService;
 
-        public FollowerController(IMediator mediator)
+        public FollowerController(IMediator mediator, IProfileCommandService profileCommandService)
         {
             _mediator = mediator;
+            _profileCommandService = profileCommandService;
         }
 
         [HttpPost("follower")]
@@ -25,12 +25,14 @@ namespace PERUSTARS.ProfileManagement.Interface.REST
         {
             try
             {
-                await _mediator.Send(followArtistCommand);
-                return Ok("The hobbyist has begun to follow the artist.");
+               await _profileCommandService.ExecuteFollowArtistCommand(followArtistCommand);
+                
+                //await _mediator.Send(followArtistCommand); //u
+                return Ok("The hobbyist has begun to follow the artist.");//u
             }
-            catch (Exception ex)
+            catch (Exception ex)//u
             {
-                return BadRequest($"Error could not follow the artist {ex.Message}");
+                return BadRequest($"Error could not follow the artist {ex.Message}");//u
             }
         }
     }

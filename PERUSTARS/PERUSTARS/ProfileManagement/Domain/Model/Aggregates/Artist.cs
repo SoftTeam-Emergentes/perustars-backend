@@ -1,18 +1,14 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Numerics;
-using PERUSTARS.ArtworkManagement.Domain.Model.Aggregates;
-using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
-using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
+using System.Text.Json.Serialization;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates;
 using PERUSTARS.ProfileManagement.Domain.Model.Enum;
 
 
 
-
 namespace PERUSTARS.ProfileManagement.Domain.Model.Aggregates
 {
-    public class Artist : User
+    public class Artist 
     {
         public long ArtistId { get; set; }
         
@@ -32,11 +28,11 @@ namespace PERUSTARS.ProfileManagement.Domain.Model.Aggregates
 
         //public long SpecialtyId { get; set; }
         //public Specialty SpecialtyArt { get; set; }
+        [JsonIgnore]
+        [ForeignKey("Follower")]
+        public List<Follower> FollowersArtist { get; set; }
 
-        public List<Artwork> Artworks { get; set; }
-        public List<ArtworkRecommendation> ArtworkRecommendations { get; set; }
-        public List<ArtEvent> ArtEvents { get; set; }
-        public List<Follower> Followers { get; set; }
+        public Follower Follower { get; set; }
         
         public bool Collected  { get; set; } = false;
     }

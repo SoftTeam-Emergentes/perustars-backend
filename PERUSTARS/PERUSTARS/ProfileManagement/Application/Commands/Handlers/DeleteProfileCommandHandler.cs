@@ -25,7 +25,7 @@ namespace PERUSTARS.ProfileManagement.Application.Commands.Handlers
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Unit> Handle(DeleteProfileArtistCommand request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteProfileArtistCommand request, CancellationToken cancellationToken)
         {
             var artistProfile = await _artistRepository.GetArtistByIdAsync(request.ArtistId);
             if (artistProfile == null)
@@ -37,10 +37,9 @@ namespace PERUSTARS.ProfileManagement.Application.Commands.Handlers
             if (!success)
             {
                 throw new ProfileDeletionException("The profile was not deleted");
-            }
-
-            return Unit.Value;
-        }
+            } 
+            
+        } 
     }
     
     public class DeleteProfileHobbyistCommandHandler :IRequestHandler<DeleteProfileHobbyistCommand>
@@ -59,7 +58,7 @@ namespace PERUSTARS.ProfileManagement.Application.Commands.Handlers
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Unit> Handle(DeleteProfileHobbyistCommand request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteProfileHobbyistCommand request, CancellationToken cancellationToken)
         {
             var hobbyistProfile = await _hobbyistRepository.GetHobbyistByIdAsync(request.HobbyistId);
             if (hobbyistProfile == null)
@@ -72,8 +71,6 @@ namespace PERUSTARS.ProfileManagement.Application.Commands.Handlers
             {
                 throw new ProfileDeletionException("The profile was not deleted");
             }
-
-            return Unit.Value;
-        }
+        } 
     }
 }

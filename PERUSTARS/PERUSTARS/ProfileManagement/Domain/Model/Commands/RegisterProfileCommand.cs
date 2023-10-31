@@ -12,7 +12,7 @@ namespace PERUSTARS.ProfileManagement.Domain.Model.Commands
 {
     public class RegisterProfileArtistCommand: IRequest<ArtistResource>
     {
-        public User User { get; set; }
+        public long UserId { get; set; }
         public int Age { get; set; }
         
         public string BrandName { get; set; } //Nickname
@@ -22,12 +22,14 @@ namespace PERUSTARS.ProfileManagement.Domain.Model.Commands
         public string ContactEmail { get; set; }
         public Genre Genre { get; set; }
         public List<string>SocialMediaLink { get; set; } //SocialNetwork
+        //Seguir
+        public List<int> FollowersArtist { get; set; }
     }
  
     
     public class RegisterProfileHobbyistCommand : IRequest<HobbyistResource>
     {
-        public User User { get; set; }
+        public long UserId { get; set; }
         public int Age { get; set; }
     }
 

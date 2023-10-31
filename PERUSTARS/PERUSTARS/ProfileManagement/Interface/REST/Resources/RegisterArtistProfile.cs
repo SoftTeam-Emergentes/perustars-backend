@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model;
-using PERUSTARS.IdentityAndAccountManagement.Interfaces.REST.Resources;
+using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.ProfileManagement.Domain.Model.Enum;
 
 namespace PERUSTARS.ProfileManagement.Interface.REST.Resources
@@ -20,5 +20,6 @@ namespace PERUSTARS.ProfileManagement.Interface.REST.Resources
         public string ContactEmail { get; set; }
         public Genre Genre { get; set; }
         public List<string>SocialMediaLink { get; set; }
+       
     }
 }

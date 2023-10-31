@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
+using PERUSTARS.IdentityAndAccountManagement.Application.Exceptions;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.ProfileManagement.Domain.Model.Commands;
 using PERUSTARS.ProfileManagement.Domain.Model.Events;
@@ -34,13 +35,13 @@ namespace PERUSTARS.ProfileManagement.Application.Commands.Handlers
         {
             //TO-DO
 
-            ArtistResource artistResource = new ArtistResource();
+            
             
             if (_artistRepository.ExistsByBrandName(registerProfileArtistCommand.BrandName))
-                throw new ApplicationException($"BrandName '{registerProfileArtistCommand.BrandName}' is already taken.");
+                throw new AppException($"BrandName '{registerProfileArtistCommand.BrandName}' is already taken.");
 
 
-            var artist = _mapper.Map<Artist>(registerProfileArtistCommand);
+            var artist = _mapper.Map<RegisterProfileArtistCommand, Artist>(registerProfileArtistCommand);
 
 
             try
@@ -51,7 +52,7 @@ namespace PERUSTARS.ProfileManagement.Application.Commands.Handlers
             catch (Exception e)
             {
 
-                throw new ApplicationException($"An error occurred while saving the artist: {e.Message}");
+                throw new AppException($"An error occurred while saving the artist: {e.Message}");
             }
 
             ProfileRegisteredEvent profileRegisteredEvent = new ProfileRegisteredEvent()
@@ -60,7 +61,7 @@ namespace PERUSTARS.ProfileManagement.Application.Commands.Handlers
             };
 
             await _publisher.Publish(profileRegisteredEvent);
-
+            var artistResource = _mapper.Map<Artist, ArtistResource>(artist);
             return artistResource;
         }
 
@@ -86,8 +87,7 @@ namespace PERUSTARS.ProfileManagement.Application.Commands.Handlers
         public async Task<HobbyistResource> Handle(RegisterProfileHobbyistCommand registerProfileHobbyistCommand,
             CancellationToken cancellationToken)
         {
-            HobbyistResource hobbyistResource = new HobbyistResource();
-            var hobbyist = _mapper.Map<Hobbyist>(registerProfileHobbyistCommand);
+            var hobbyist = _mapper.Map<RegisterProfileHobbyistCommand, Hobbyist>(registerProfileHobbyistCommand);
             try
             {
                 await _hobbyistRepository.AddAsync(hobbyist);
@@ -104,7 +104,7 @@ namespace PERUSTARS.ProfileManagement.Application.Commands.Handlers
             };
             
             await _publisher.Publish(profileRegisteredEvent);
-
+            var hobbyistResource = _mapper.Map<Hobbyist, HobbyistResource>(hobbyist);
             return hobbyistResource;
         }
         

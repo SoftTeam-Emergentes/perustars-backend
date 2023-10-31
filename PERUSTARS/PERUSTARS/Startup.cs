@@ -13,11 +13,10 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
-using PERUSTARS.ArtworkManagement.Infrastructure.Repositories;
 using PERUSTARS.IdentityAndAccountManagement.Application.Settings;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Repositories;
 using PERUSTARS.IdentityAndAccountManagement.Infrastructure.Repositories;
-using PERUSTARS.ProfileManagement.Domain.Persistence;
+
 using PERUSTARS.Shared.Domain.Repositories;
 using PERUSTARS.Shared.Infrastructure.Configuration;
 using PERUSTARS.Shared.Infrastructure.Repositories;
@@ -26,6 +25,10 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using PERUSTARS.IdentityAndAccountManagement.Application.Commands.Services;
 using PERUSTARS.IdentityAndAccountManagement.Application.Middleware;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Services;
+using PERUSTARS.ProfileManagement.Application.Commands.Services;
+using PERUSTARS.ProfileManagement.Domain.Repositories;
+using PERUSTARS.ProfileManagement.Domain.Services;
+using PERUSTARS.ProfileManagement.Infrastructure.Repositories;
 
 namespace PERUSTARS
 {
@@ -77,7 +80,7 @@ namespace PERUSTARS
 
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseNpgsql(Configuration.GetConnectionString("PostgreSQLConnection"));
             });
 
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
@@ -110,6 +113,10 @@ namespace PERUSTARS
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IIdentityAndAccountManagementCommandService, IdentityAndAccountManagementCommandService>();
+            services.AddScoped<IProfileCommandService, ProfileCommandService>();
+            services.AddScoped<IArtistRepository, ArtistRepository>();
+            services.AddScoped<IHobbyistRepository, HobbyistRepository>();
+
 
             // Apply Endpoints Naming Convention
             services.AddRouting(options => options.LowercaseUrls = true);

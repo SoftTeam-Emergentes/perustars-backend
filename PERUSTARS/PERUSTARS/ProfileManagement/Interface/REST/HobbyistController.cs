@@ -1,15 +1,16 @@
 using System;
 using System.Threading.Tasks;
 using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PERUSTARS.ProfileManagement.Application.Exceptions;
+using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.ProfileManagement.Domain.Model.Commands;
 using PERUSTARS.ProfileManagement.Domain.Services;
-<<<<<<< HEAD
 
-=======
->>>>>>> 2fee3da5ad887de408f6ed620d123f3bf2f009cd
 using PERUSTARS.ProfileManagement.Interface.REST.Resources;
+using PERUSTARS.Shared.Infrastructure.Configuration;
 
 namespace PERUSTARS.ProfileManagement.Interface.REST
 {
@@ -19,10 +20,14 @@ namespace PERUSTARS.ProfileManagement.Interface.REST
     {
         private readonly IProfileCommandService _profileCommandService;
         private readonly IMapper _mapper;
-        public HobbyistController(IProfileCommandService profileCommandService, IMapper mapper)
+        private readonly AppDbContext _context;
+        private readonly IMediator _mediator;
+        public HobbyistController(IProfileCommandService profileCommandService, IMediator mediator, IMapper mapper, AppDbContext context)
         {
             _mapper = mapper;
             _profileCommandService = profileCommandService;
+            _context = context;
+            _mediator = mediator;
         }
 
         [HttpPost("register")]
@@ -30,6 +35,19 @@ namespace PERUSTARS.ProfileManagement.Interface.REST
         {
             RegisterProfileHobbyistCommand registerProfileHobbyistCommand = _mapper.Map<RegisterProfileHobbyistCommand>(registerHobbyistProfile);
             HobbyistResource hobbyistResource = await _profileCommandService.ExecuteRegisterProfileCommand(registerProfileHobbyistCommand);
+            return Ok(hobbyistResource);
+        }
+        [HttpGet("{hobbyistId}")]
+        public async Task<IActionResult> GetHobbyist(long hobbyistId)
+        {
+            var hobbyist = await _context.Hobbyists.Include(a => a.FollowedArtists)
+                .FirstOrDefaultAsync(a => a.HobbyistId == hobbyistId);
+            if (hobbyist == null)
+            {
+                return NotFound();
+            }
+            var hobbyistResource = _mapper.Map<Hobbyist, HobbyistResource>(hobbyist);
+
             return Ok(hobbyistResource);
         }
         
@@ -49,10 +67,11 @@ namespace PERUSTARS.ProfileManagement.Interface.REST
         }
         
         [HttpPut("edit/{hobbyistId}")]
-        public async Task<IActionResult> EditProfileHobbyist(long hobbyistId, [FromBody]  HobbyistResource hobbyistResource)
+        public async Task<IActionResult> EditProfileHobbyist(long hobbyistId, [FromBody]  HobbyistEditResource hobbyistResource)
         {
             EditProfileHobbyistCommand editProfileHobbyistCommand = new EditProfileHobbyistCommand()
             {
+                HobbyistId = hobbyistId,
                 Age=hobbyistResource.Age
             };
 

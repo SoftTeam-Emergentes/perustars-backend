@@ -8,10 +8,10 @@ using PERUSTARS.ProfileManagement.Interface.REST.Resources;
 
 namespace PERUSTARS.ProfileManagement.Domain.Model.Commands
 {
-   
+   //ArtistResource
     public class EditProfileArtistCommand: IRequest<ArtistResource>
     {
-
+        
         public int Age { get; set; }
         public long ArtistId { get; set; }
         public string BrandName { get; set; } //Nickname
