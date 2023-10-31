@@ -26,5 +26,10 @@ namespace PERUSTARS.AtEventManagement.Application.Participant.Queries
         {
             return _participantRepository.FindByIdAsync(id).Result;
         }
+
+        public IEnumerable<Domain.Model.Aggregates.Participant> GetParticipants()
+        {
+            return _participantRepository.ListAsync().Result;
+        }
     }
 }

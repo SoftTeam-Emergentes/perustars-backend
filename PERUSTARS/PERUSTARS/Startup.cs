@@ -17,6 +17,8 @@ using PERUSTARS.AtEventManagement.Domain.Services.ArtEvent;
 using PERUSTARS.AtEventManagement.Infrastructure;
 using PERUSTARS.AtEventManagement.Application;
 using System.Reflection;
+using MySql.Data.MySqlClient;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace PERUSTARS
 {
@@ -81,7 +83,6 @@ namespace PERUSTARS
 
             services.AddScoped<IArtEventCommandService, ArtEventService>();
             services.AddScoped<IArtEventQueryService, ArtEventQueryService>();
-
 
 
 
