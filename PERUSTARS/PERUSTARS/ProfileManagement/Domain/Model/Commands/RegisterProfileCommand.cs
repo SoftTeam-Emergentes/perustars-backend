@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using MediatR;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.ProfileManagement.Domain.Model.Enum;
 using PERUSTARS.ProfileManagement.Interface.REST.Resources;

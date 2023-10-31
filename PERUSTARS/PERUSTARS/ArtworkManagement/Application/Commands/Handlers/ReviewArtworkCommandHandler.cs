@@ -51,7 +51,7 @@ namespace PERUSTARS.ArtworkManagement.Application.Commands.Handlers
             var existingArtworkReview = await _artworkReviewRepository.FindArtworkReviewByHobbyistIdAndArtworkIdAsync(request.HobbyistId, request.ArtworkId);
             if (existingArtworkReview != null)
             {
-                throw new ApplicationException($"Artwork already reviewed by hobbyist id: {existingHobbyist.Id}");
+                throw new ApplicationException($"Artwork already reviewed by hobbyist id: {existingHobbyist.HobbyistId}");
             }
 
             var artworkReview = _mapper.Map<ArtworkReview>(request);

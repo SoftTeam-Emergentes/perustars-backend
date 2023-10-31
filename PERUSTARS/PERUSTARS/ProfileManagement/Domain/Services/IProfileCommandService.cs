@@ -1,9 +1,8 @@
-
 using System.Threading.Tasks;
 using PERUSTARS.ProfileManagement.Domain.Model.Commands;
 using PERUSTARS.ProfileManagement.Interface.REST.Resources;
 
-namespace PERUSTARS.ProfileManagement.Domain.Model.Services
+namespace PERUSTARS.ProfileManagement.Domain.Services
 {
     public interface IProfileCommandService
     {

@@ -15,7 +15,7 @@ using PERUSTARS.Shared.Domain.Repositories;
 
 namespace PERUSTARS.ArtworkManagement.Application.Commands.Handlers
 {
-    public class RecommendArtworkCommandHandler : IRequestHandler<RecommendArtworkCommand, ArtworkResource>
+    public class RecommendArtworkCommandHandler : IRequestHandler<RecommendArtworkCommand, ArtworkRecommendationResource>
     {
         private readonly IPublisher _publisher;
         private readonly IMapper _mapper;
@@ -33,7 +33,7 @@ namespace PERUSTARS.ArtworkManagement.Application.Commands.Handlers
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<ArtworkResource> Handle(RecommendArtworkCommand request, CancellationToken cancellationToken)
+        public async Task<ArtworkRecommendationResource> Handle(RecommendArtworkCommand request, CancellationToken cancellationToken)
         {
             var existingArtwork = await _artworkRepository.FindArtworkByIdAsync(request.ArtworkId);
             if (existingArtwork == null)
@@ -82,7 +82,7 @@ namespace PERUSTARS.ArtworkManagement.Application.Commands.Handlers
 
             await _publisher.Publish(artworkRecommendedEvent);
 
-            return _mapper.Map<ArtworkResource>(artworkRecommendation);
+            return _mapper.Map<ArtworkRecommendationResource>(artworkRecommendation);
         }
     }
 }

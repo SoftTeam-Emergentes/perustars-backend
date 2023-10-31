@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model;
+using PERUSTARS.IdentityAndAccountManagement.Interfaces.REST.Resources;
 using PERUSTARS.ProfileManagement.Domain.Model.Enum;
 
 namespace PERUSTARS.ProfileManagement.Interface.REST.Resources

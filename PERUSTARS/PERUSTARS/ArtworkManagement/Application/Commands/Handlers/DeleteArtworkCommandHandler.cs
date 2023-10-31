@@ -9,7 +9,7 @@ using PERUSTARS.ArtworkManagement.Application.Exceptions;
 
 namespace PERUSTARS.ArtworkManagement.Application.Commands.Handlers
 {
-    public class DeleteArtworkCommandHandler : IRequestHandler<DeleteArtworkCommand>
+    public class DeleteArtworkCommandHandler : IRequestHandler<DeleteArtworkCommand, Unit>
     {
         private readonly IPublisher _publisher;
         private readonly IMapper _mapper;
