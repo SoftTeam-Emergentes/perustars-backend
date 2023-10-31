@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using PERUSTARS.ConductsReportsManagement.Domain.Model.Entities;
 using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
 using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
 using PERUSTARS.ArtworkManagement.Domain.Model.Aggregates;
@@ -10,8 +11,6 @@ using System;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates;
 
 namespace PERUSTARS.Shared.Infrastructure.Configuration
-
-
 {
     public class AppDbContext: DbContext
     {
@@ -21,6 +20,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Hobbyist> Hobbyists { get; set; }
         public DbSet<Follower> Followers { get; set; }
+        public DbSet<ConductReport> ConductReports { get; set; }
         public DbSet<ArtEvent> Events { get; set; }
         public DbSet<Participant> EventAssistances { get; set; }
         public DbSet<Artwork> Artworks { get; set; }
@@ -38,6 +38,14 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<ConductReport>().ToTable("ConductReport");
+            builder.Entity<ConductReport>().HasKey(c => c.id);
+            builder.Entity<ConductReport>().Property(c => c.id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<ConductReport>().Property(c => c.Title).IsRequired();
+            builder.Entity<ConductReport>().Property(c => c.Description).IsRequired();
+            builder.Entity<ConductReport>().Property(c => c.DateTimeReport);
+            builder.Entity<ConductReport>().Property(c => c.HobbystId).IsRequired();
 
             #region Users
             builder.Entity<User>().ToTable("Users");
