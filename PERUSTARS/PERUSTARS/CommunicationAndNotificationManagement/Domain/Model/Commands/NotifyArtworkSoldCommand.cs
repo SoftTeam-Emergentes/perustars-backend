@@ -4,6 +4,6 @@ namespace PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Commands
 {
     public class NotifyArtworkSoldCommand
     {
-
+        
     }
 }

@@ -24,12 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CommunicationAndNotificationManagement\Application\" />
-    <Folder Include="CommunicationAndNotificationManagement\Application\Commands\" />
-    <Folder Include="CommunicationAndNotificationManagement\Application\Commands\Handlers\" />
     <Folder Include="CommunicationAndNotificationManagement\Application\Commands\Services\" />
-    <Folder Include="CommunicationAndNotificationManagement\Application\Events\" />
-    <Folder Include="CommunicationAndNotificationManagement\Application\QueryServices\" />
     <Folder Include="CommunicationAndNotificationManagement\Domain\Services\" />
     <Folder Include="CommunicationAndNotificationManagement\Interfaces\" />
     <Folder Include="CommunicationAndNotificationManagement\Interfaces\REST\" />
