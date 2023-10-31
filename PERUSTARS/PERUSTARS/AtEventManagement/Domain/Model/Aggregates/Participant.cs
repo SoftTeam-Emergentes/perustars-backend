@@ -17,7 +17,7 @@ namespace PERUSTARS.AtEventManagement.Domain.Model.Aggregates
         public long? ArtEventId { get; set; }
         public bool Collected { get; set; }
 
-
+        public Participant() { }
         public Participant(long id, string userName, DateTime registerDateTime, DateTime? checkInDateTime, long? hobbyistId, long? artEventId, Hobbyist hobbyist, ArtEvent artEvent, bool collected)
         {
             Id = id;

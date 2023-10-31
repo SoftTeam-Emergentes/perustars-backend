@@ -21,6 +21,7 @@ namespace PERUSTARS.AtEventManagement.Domain.Model.Aggregates
         public IEnumerable<Participant> Participants { get; set; }
         public bool Collected { get; set; }
 
+        public ArtEvent() { }
         public ArtEvent(long? id, 
             string title, 
             string description, 

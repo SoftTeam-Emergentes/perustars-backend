@@ -9,6 +9,7 @@ using System;
 
 using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
 using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
+using System.Reflection.Emit;
 
 namespace PERUSTARS.Shared.Infrastructure.Configuration
 
@@ -38,20 +39,22 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             builder.Entity<User>().Property(u => u.Id).IsRequired().ValueGeneratedOnAdd();
      
             builder.Entity<Artist>().ToTable("Artists");
-            
+            builder.Entity<Artist>()
+            .HasBaseType<User>();
+            builder.Entity<Artist>().Property(a=>a.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Artist>()
                     .HasOne(a => a.User)
-                    .WithOne()
+                    .WithOne(u=>u.artist)
                     .HasForeignKey<Artist>(a => a.ArtistId);
             builder.Entity<Artist>().Property(a => a.Age);
-            builder.Entity<Artist>().Property(a => a.Followers);
+            //builder.Entity<Artist>().Property(a => a.Followers);
             builder.Entity<Artist>().Property(a => a.Description);
             builder.Entity<Artist>().Property(a => a.Genre);
             builder.Entity<Artist>().Property(a => a.Phrase);
             builder.Entity<Artist>().Property(a => a.BrandName).HasMaxLength(50);
             builder.Entity<Artist>().Property(a => a.ContactEmail).HasMaxLength(80);
             builder.Entity<Artist>().Property(a => a.ContactNumber);
-            builder.Entity<Artist>().Property(a => a.SocialMediaLink).HasMaxLength(255);
+            //builder.Entity<Artist>().Property(a => a.SocialMediaLink).HasMaxLength(255);
             builder.Entity<Artist>().Property(a => a.Collected).HasDefaultValue(false);
             
 
@@ -59,8 +62,8 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             builder.Entity<Hobbyist>().Property(a => a.HobbyistId).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Hobbyist>().Property(a => a.Age);
             //builder.Entity<Hobbyist>().HasCheckConstraint("Age <= 120");
-            builder.Entity<Hobbyist>().Property(a => a.User);
-            builder.Entity<Hobbyist>().Property(a => a.Followers);
+            //builder.Entity<Hobbyist>().Property(a => a.User);
+            //builder.Entity<Hobbyist>().Property(a => a.Followers);
             builder.Entity<Hobbyist>().Property(a => a.Collected).HasDefaultValue(false);
 
                   //builder.Entity<Artist>()
@@ -69,8 +72,10 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
                   //        .HasForeignKey(a => a.ArtistId);
 
             builder.Entity<Follower>().ToTable("Followers");
-            builder.Entity<Follower>().Property(f => f.Hobbyist);
-            builder.Entity<Follower>().Property(f => f.Artist);
+            builder.Entity<Follower>().HasKey(f => f.Id);
+            builder.Entity<Follower>().Property(f => f.Id).IsRequired().ValueGeneratedOnAdd();
+            //builder.Entity<Follower>().Property(f => f.Hobbyist);
+            //builder.Entity<Follower>().Property(f => f.Artist);
             builder.Entity<Follower>().Property(f => f.ArtistId);
             builder.Entity<Follower>().Property(f => f.HobbyistId);
             builder.Entity<Follower>().Property(a => a.RegistrationDate);
