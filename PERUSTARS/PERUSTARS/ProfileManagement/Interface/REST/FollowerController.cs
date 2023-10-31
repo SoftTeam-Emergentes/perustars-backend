@@ -1,9 +1,12 @@
+<<<<<<< HEAD
 using System;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PERUSTARS.ProfileManagement.Domain.Model.Commands;
 
+=======
+>>>>>>> 2fee3da5ad887de408f6ed620d123f3bf2f009cd
 namespace PERUSTARS.ProfileManagement.Interface.REST
 {
     [ApiController]

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
 using PERUSTARS.DataAnalytics.Domain.Model.Commands;
 using PERUSTARS.DataAnalytics.Domain.Model.Entities;
 using PERUSTARS.DataAnalytics.Domain.Services;

@@ -1,5 +1,5 @@
 ﻿using System;
-using PERUSTARS.ArtworkManagement.Domain.Model.ValueObjects;
+using PERUSTARS.ArtworkManagement.Domain.Model.Aggregates;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 
 namespace PERUSTARS.ArtworkManagement.Domain.Model.Entities

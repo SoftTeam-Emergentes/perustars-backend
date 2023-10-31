@@ -2,7 +2,12 @@ using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
+<<<<<<< HEAD
 using User = PERUSTARS.IdentityAndAccountManagement.Domain.Model.User;
+=======
+using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates;
+>>>>>>> 2fee3da5ad887de408f6ed620d123f3bf2f009cd
 
 namespace PERUSTARS.ProfileManagement.Domain.Model.Aggregates
 {

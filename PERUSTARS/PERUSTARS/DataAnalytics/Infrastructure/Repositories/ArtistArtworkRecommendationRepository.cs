@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
 using PERUSTARS.DataAnalytics.Domain.Model.Entities;
 using PERUSTARS.DataAnalytics.Domain.Repositories;
 using PERUSTARS.Shared.Infrastructure.Configuration;

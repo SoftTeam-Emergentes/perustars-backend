@@ -43,7 +43,7 @@ namespace SpecTest.Artist
             {
                 try
                 {
-                    var artist = row.CreateInstance<PERUSTARS.Domain.Models.Artist>();
+                    var artist = row.CreateInstance<PERUSTARS.PastProject.Domain.Models.Artist>();
                     var data = JsonData(artist);
                     var result = Task.Run(async () => await Client.PostAsync(ArtistEndPoint, data)).Result;
                     Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Add Artist Integration Test Completed");
@@ -67,7 +67,7 @@ namespace SpecTest.Artist
         {
             try
             {
-                var artist = dto.CreateInstance<PERUSTARS.Domain.Models.Artist>();
+                var artist = dto.CreateInstance<PERUSTARS.PastProject.Domain.Models.Artist>();
                 var data = JsonData(artist);
                 var result = Task.Run(async () => await Client.PostAsync(ArtistEndPoint, data)).Result;
                 Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Add Artist Integration Test Completed");
@@ -94,10 +94,10 @@ namespace SpecTest.Artist
         [Then(@"artist details should be")]
         public void ThenArtistDetailsShouldBe(Table dto)
         {
-            var artist = dto.CreateInstance<PERUSTARS.Domain.Models.Artist>();
+            var artist = dto.CreateInstance<PERUSTARS.PastProject.Domain.Models.Artist>();
             var result = Task.Run(async () => await Client.GetAsync($"{ArtistEndPoint}/{artist.Id}")).Result;
             Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Artist Details Integration Test Completed");
-            var artistToCompare = ObjectData<PERUSTARS.Domain.Models.Artist>(result.Content.ReadAsStringAsync().Result);
+            var artistToCompare = ObjectData<PERUSTARS.PastProject.Domain.Models.Artist>(result.Content.ReadAsStringAsync().Result);
             Assert.IsTrue(dto.IsEquivalentToInstance(artistToCompare));
         }
 
@@ -112,7 +112,7 @@ namespace SpecTest.Artist
         {
             var result = Task.Run(async () => await Client.GetAsync(ArtistEndPoint)).Result;
             Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Get All Artists Integration Test Completed");
-            var artists = ObjectData<List<PERUSTARS.Domain.Models.Artist>>(result.Content.ReadAsStringAsync().Result);
+            var artists = ObjectData<List<PERUSTARS.PastProject.Domain.Models.Artist>>(result.Content.ReadAsStringAsync().Result);
             Assert.IsTrue(dto.RowCount == artists.Count, "Input and Out artist count matched");
         }
 
@@ -128,11 +128,11 @@ namespace SpecTest.Artist
         {
             try
             {
-                var artist = dto.CreateInstance<PERUSTARS.Domain.Models.Artist>();
+                var artist = dto.CreateInstance<PERUSTARS.PastProject.Domain.Models.Artist>();
                 var data = JsonData(artist);
                 var result = Task.Run(async () => await Client.PutAsync($"{ArtistEndPoint}/{artistId}", data)).Result;
                 Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Update Artist Integration Test Completed");
-                var artistToCompare = ObjectData<PERUSTARS.Domain.Models.Artist>(result.Content.ReadAsStringAsync().Result);
+                var artistToCompare = ObjectData<PERUSTARS.PastProject.Domain.Models.Artist>(result.Content.ReadAsStringAsync().Result);
                 Assert.IsTrue(dto.IsEquivalentToInstance(artistToCompare));
             }
             catch (Exception ex)
@@ -157,7 +157,7 @@ namespace SpecTest.Artist
             {
                 var result = Task.Run(async () => await Client.DeleteAsync($"{ArtistEndPoint}/{artistId}")).Result;
                 Assert.IsTrue(result != null && result.StatusCode == HttpStatusCode.OK, "Update Artist Integration Test Completed");
-                var artistToCompare = ObjectData<PERUSTARS.Domain.Models.Artist>(result.Content.ReadAsStringAsync().Result);
+                var artistToCompare = ObjectData<PERUSTARS.PastProject.Domain.Models.Artist>(result.Content.ReadAsStringAsync().Result);
                 Assert.IsTrue(dto.IsEquivalentToInstance(artistToCompare));
             }
             catch (Exception ex)

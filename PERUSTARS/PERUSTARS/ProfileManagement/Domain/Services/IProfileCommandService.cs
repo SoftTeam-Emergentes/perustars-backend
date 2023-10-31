@@ -1,4 +1,3 @@
-
 using System.Threading.Tasks;
 using MediatR;
 using PERUSTARS.ProfileManagement.Domain.Model.Commands;

@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using System.Collections.Generic;
+using PERUSTARS.DataAnalytics.Domain.Model.Commands;
 using PERUSTARS.DataAnalytics.Domain.Model.Entities;
 using PERUSTARS.DataAnalytics.Domain.Repositories;
 

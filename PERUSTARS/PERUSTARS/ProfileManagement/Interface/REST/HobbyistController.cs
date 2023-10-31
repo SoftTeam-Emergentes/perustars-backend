@@ -5,7 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using PERUSTARS.ProfileManagement.Application.Exceptions;
 using PERUSTARS.ProfileManagement.Domain.Model.Commands;
 using PERUSTARS.ProfileManagement.Domain.Services;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2fee3da5ad887de408f6ed620d123f3bf2f009cd
 using PERUSTARS.ProfileManagement.Interface.REST.Resources;
 
 namespace PERUSTARS.ProfileManagement.Interface.REST
