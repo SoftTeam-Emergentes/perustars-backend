@@ -8,7 +8,6 @@ using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.Shared.Extensions;
 using System;
 
-using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
 using PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Entities;
 
 namespace PERUSTARS.Shared.Infrastructure.Configuration
@@ -237,6 +236,22 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
                 .HasForeignKey(h => h.ArtworkId);
 
             #endregion
+
+
+            #region Notifications
+            // -------CommunicationAndNotificationManagement Bounded Context--------
+            
+            builder.Entity<Notification>().ToTable("Notifications");
+            builder.Entity<Notification>().HasKey(n => n.id);
+            builder.Entity<Notification>().Property(n => n.id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Notification>().Property(n => n.Title).IsRequired();
+            builder.Entity<Notification>().Property(n => n.Description);
+            builder.Entity<Notification>().Property(n => n.ArtistId).IsRequired();
+            builder.Entity<Notification>().Property(n => n.HobbyistId).IsRequired();
+            builder.Entity<Notification>().Property(n => n.Collected).HasDefaultValue(false).IsRequired();
+            
+            #endregion
+
 
 
             builder.ApplySnakeCaseNamingConvention();

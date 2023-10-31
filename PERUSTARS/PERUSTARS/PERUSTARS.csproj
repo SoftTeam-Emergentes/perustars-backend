@@ -30,14 +30,7 @@
     <Folder Include="CommunicationAndNotificationManagement\Application\Commands\Services\" />
     <Folder Include="CommunicationAndNotificationManagement\Application\Events\" />
     <Folder Include="CommunicationAndNotificationManagement\Application\QueryServices\" />
-    <Folder Include="CommunicationAndNotificationManagement\Domain\Model\Commands\" />
-    <Folder Include="CommunicationAndNotificationManagement\Domain\Model\Events\" />
-    <Folder Include="CommunicationAndNotificationManagement\Domain\Model\Queries\" />
-    <Folder Include="CommunicationAndNotificationManagement\Domain\Model\ValueObjects\" />
-    <Folder Include="CommunicationAndNotificationManagement\Domain\Repositories\" />
     <Folder Include="CommunicationAndNotificationManagement\Domain\Services\" />
-    <Folder Include="CommunicationAndNotificationManagement\Infraestructure\" />
-    <Folder Include="CommunicationAndNotificationManagement\Infraestructure\Repositories\" />
     <Folder Include="CommunicationAndNotificationManagement\Interfaces\" />
     <Folder Include="CommunicationAndNotificationManagement\Interfaces\REST\" />
     <Folder Include="CommunicationAndNotificationManagement\Interfaces\REST\Resources\" />
