@@ -69,15 +69,6 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
                     .WithOne()
                     .HasForeignKey<Hobbyist>(u => u.UserId);
 
-            /*builder.Entity<Follower>()
-                    .HasOne(f =>f.Artist)
-                    .WithMany(a => a.FollowersArtist)
-                    .HasForeignKey(h => h.ArtistId);*/
-            
-            /*builder.Entity<Follower>()
-                .HasOne(f =>f.Hobbyist)
-                .WithMany(a => a.FollowedArtists)
-                .HasForeignKey(h => h.HobbyistId);*/
             builder.Entity<Hobbyist>()
                 .HasMany(a => a.FollowedArtists)
                 .WithOne()
