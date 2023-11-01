@@ -1,3 +1,4 @@
+using System.Reflection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,9 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using Microsoft.AspNetCore.Diagnostics;
-using PERUSTARS.Shared.Domain.Repositories;
-using PERUSTARS.Shared.Infrastructure.Configuration;
-using PERUSTARS.Shared.Infrastructure.Repositories;
+
 using PERUSTARS.AtEventManagement.Application.artevents.service;
 using PERUSTARS.AtEventManagement.Domain.Model.Repositories;
 using PERUSTARS.AtEventManagement.Domain.Services.ArtEvent;
@@ -22,6 +21,20 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using Microsoft.AspNetCore.Http;
 using PERUSTARS.AtEventManagement.Application.Participant.Queries;
 using PERUSTARS.AtEventManagement.Domain.Services.Participant;
+using Microsoft.AspNetCore.Http;
+using PERUSTARS.ArtworkManagement.Infrastructure.Repositories;
+using PERUSTARS.IdentityAndAccountManagement.Application.Settings;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Repositories;
+using PERUSTARS.IdentityAndAccountManagement.Infrastructure.Repositories;
+using PERUSTARS.ProfileManagement.Domain.Persistence;
+using PERUSTARS.Shared.Domain.Repositories;
+using PERUSTARS.Shared.Infrastructure.Configuration;
+using PERUSTARS.Shared.Infrastructure.Repositories;
+using PERUSTARS.Shared.Profiles;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using PERUSTARS.IdentityAndAccountManagement.Application.Commands.Services;
+using PERUSTARS.IdentityAndAccountManagement.Application.Middleware;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Services;
 
 namespace PERUSTARS
 {
@@ -76,6 +89,8 @@ namespace PERUSTARS
                 options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+
             // Dependency Injection Configuration
             services.Configure<ExceptionHandlerOptions>(options => {
                 options.ExceptionHandler = default;
@@ -92,18 +107,33 @@ namespace PERUSTARS
             services.AddScoped<IArtEventQueryService, ArtEventQueryService>();
             services.AddScoped<IParticipantQueryService, ParticipantQueryService>();
 
+            
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IIdentityAndAccountManagementCommandService, IdentityAndAccountManagementCommandService>();
 
             // Apply Endpoints Naming Convention
             services.AddRouting(options => options.LowercaseUrls = true);
+            
+            services.Configure<ExceptionHandlerOptions>(options => {
+                options.ExceptionHandler = default;
+                options.ExceptionHandlingPath = PathString.FromUriComponent("/error");
+            });
 
             // AutoMapper Setup
-            services.AddAutoMapper(typeof(Startup).Assembly);
+            services.AddAutoMapper(typeof(ModelToResourceProfile),
+                typeof(CommandToModelProfile),
+                typeof(ResourceToCommandProfile),
+                typeof(ResourceToModelProfile));
+
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PERUSTARS", Version = "v1" });
                 c.EnableAnnotations();
             });
+            
+            
         }
 
       
@@ -135,6 +165,10 @@ namespace PERUSTARS
             app.UseAuthorization();
 
             app.UseMiddleware<ExceptionHandlerMiddleware>();
+            app.UseMiddleware<ErrorHandlerMiddleware>();
+
+            app.UseMiddleware<JwtMiddleware>();
+            
 
             app.UseEndpoints(endpoints =>
             {

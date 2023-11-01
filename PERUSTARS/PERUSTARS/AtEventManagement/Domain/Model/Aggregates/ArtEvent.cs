@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Numerics;
 using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 

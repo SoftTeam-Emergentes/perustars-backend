@@ -1,16 +1,13 @@
-﻿
+﻿using System;
 
-using System;
-
-namespace PERUSTARS.DataAnalytics.Domain.Model.Entities
+namespace PERUSTARS.ArtworkManagement.Interfaces.REST.Resources
 {
-    public class ArtistArtworkRecommendation
+    public class ArtworkRecommendationResource
     {
         public long Id { get; set; }
         public long HobyistId { get; set; }
         public long ArtistId { get; set; }
         public long ArtworkId { get; set; }
         public DateTime RecommendationDateTime { get; set; }
-        public bool Collected { get; set; } = false;
     }
 }

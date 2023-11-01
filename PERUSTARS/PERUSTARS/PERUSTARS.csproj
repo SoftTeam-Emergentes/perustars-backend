@@ -1,8 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,24 +29,29 @@
   </ItemGroup>
 
   <ItemGroup>
+
     <Folder Include="AtEventManagement\Application\ArtEvent\Queries\" />
     <Folder Include="AtEventManagement\Application\Participant\Commands\" />
     <Folder Include="AtEventManagement\Domain\Services\Participant\" />
-    <Folder Include="DataAnalytics\Application\Commands\Handlers\" />
+
+
+
+    <Folder Include="ConductsReportsManagement\Domain\Model\Aggregate\" />
+    <Folder Include="ConductsReportsManagement\Domain\Services\" />
+    <Folder Include="ArtworkManagement\Application\Events\Services\" />
+    <Folder Include="ArtworkManagement\Domain\Model\Aggregates\" />
+    <Folder Include="ArtworkManagement\Domain\Repositories\" />
+    <Folder Include="ArtworkManagement\Infrastructure\Repositories\" />
+    <Folder Include="DataAnalytics\Application\Commands\Services\" />
+    <Folder Include="DataAnalytics\Application\Events\Services\" />
     <Folder Include="DataAnalytics\Application\QueryServices\" />
-    <Folder Include="DataAnalytics\Domain\Model\Queries\" />
-    <Folder Include="DataAnalytics\Domain\Model\ValueObjects\" />
+    <Folder Include="DataAnalytics\Domain\Model\" />
     <Folder Include="DataAnalytics\Domain\Repositories\" />
+    <Folder Include="DataAnalytics\Infrastructure\" />
+
     <Folder Include="DataAnalytics\Infrastructure\Repositories\" />
     <Folder Include="DataAnalytics\Interfaces\REST\Resources\" />
-
-    <Folder Include="ProfileManagement\Application\Commands\" />
-
-    <Folder Include="ArtworkManagement\" />
-    <Folder Include="ArtEventManagement\" />
-    <Folder Include="CommunicationAndNotificationManagement\" />
-    <Folder Include="ConductReportsManagement\" />
-    <Folder Include="ProfileManagement\" />
+    <Folder Include="IdentityAndAccountManagement\Infrastructure\Context\" />
   </ItemGroup>
 
 </Project>

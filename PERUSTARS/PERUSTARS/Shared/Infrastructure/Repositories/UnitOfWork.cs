@@ -2,6 +2,7 @@
 using PERUSTARS.Shared.Domain.Repositories;
 using PERUSTARS.Shared.Infrastructure.Configuration;
 using System.Threading.Tasks;
+using PERUSTARS.Shared.Domain.Repositories;
 
 namespace PERUSTARS.Shared.Infrastructure.Repositories
 {

@@ -1,28 +1,33 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PERUSTARS.DataAnalytics.Domain.Model.Entities;
-using PERUSTARS.IdentityAndAccountManagement.Domain.Model;
-
-using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
-
-using PERUSTARS.Shared.Extensions;
-using System;
-
+using Microsoft.EntityFrameworkCore;
+using PERUSTARS.ConductsReportsManagement.Domain.Model.Entities;
 using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
 using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
 using System.Reflection.Emit;
+using PERUSTARS.ArtworkManagement.Domain.Model.Aggregates;
+using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
+using PERUSTARS.DataAnalytics.Domain.Model.Entities;
+using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
+using PERUSTARS.Shared.Extensions;
+using System;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates;
 
 namespace PERUSTARS.Shared.Infrastructure.Configuration
-
-
 {
     public class AppDbContext: DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<ParticipantEventRegistration> ParticipantEventRegistrations { get; set; }
-        public DbSet<ArtistArtworkRecommendation> ArtistRecommendations { get; set; }
+        public DbSet<ArtworkRecommendation> ArtistRecommendations { get; set; }
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Hobbyist> Hobbyists { get; set; }
         public DbSet<Follower> Followers { get; set; }
+        public DbSet<ConductReport> ConductReports { get; set; }
+        public DbSet<ArtEvent> Events { get; set; }
+        public DbSet<Participant> EventAssistances { get; set; }
+        public DbSet<Artwork> Artworks { get; set; }
+        public DbSet<ArtworkRecommendation> ArtworkRecommendations { get; set; }
+        public DbSet<ArtworkReview> ArtworkReviews { get; set; }
+        public DbSet<HobbyistFavoriteArtwork> HobbyistFavoriteArtworks { get; set; }
         public DbSet<ArtEvent> ArtEvents { get; set; }
         public DbSet<Participant> Participants { get; set; }
 
@@ -34,9 +39,26 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<ConductReport>().ToTable("ConductReport");
+            builder.Entity<ConductReport>().HasKey(c => c.id);
+            builder.Entity<ConductReport>().Property(c => c.id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<ConductReport>().Property(c => c.Title).IsRequired();
+            builder.Entity<ConductReport>().Property(c => c.Description).IsRequired();
+            builder.Entity<ConductReport>().Property(c => c.DateTimeReport);
+            builder.Entity<ConductReport>().Property(c => c.HobbystId).IsRequired();
+
+            #region Users
             builder.Entity<User>().ToTable("Users");
-            builder.Entity<User>().HasKey(u => u.Id);
-            builder.Entity<User>().Property(u => u.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<User>().HasKey(u => u.UserId);
+            builder.Entity<User>().Property(u => u.UserId).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<User>().Property(u => u.Email).IsRequired();
+            builder.Entity<User>().Property(u => u.FirstName);
+            builder.Entity<User>().Property(u => u.LastName).IsRequired();
+            builder.Entity<User>().Property(u => u.Email).IsRequired();
+            builder.Entity<User>().Property(u => u.PasswordHash).IsRequired();
+            #endregion
+            
      
             builder.Entity<Artist>().ToTable("Artists");
             builder.Entity<Artist>()

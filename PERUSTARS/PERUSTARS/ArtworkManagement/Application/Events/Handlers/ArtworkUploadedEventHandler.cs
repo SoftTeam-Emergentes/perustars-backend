@@ -1,0 +1,19 @@
+﻿using System.Threading;
+using System.Threading.Tasks;
+using MediatR;
+using PERUSTARS.ArtworkManagement.Domain.Model.Events;
+
+namespace PERUSTARS.ArtworkManagement.Application.Events.Handlers
+{
+    public class ArtworkUploadedEventHandler : INotificationHandler<ArtworkUploadedEvent>
+    {
+        public ArtworkUploadedEventHandler()
+        {
+        }
+
+        public async Task Handle(ArtworkUploadedEvent notification, CancellationToken cancellationToken)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+}
