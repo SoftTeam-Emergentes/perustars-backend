@@ -2,7 +2,7 @@
 
 namespace PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Commands
 {
-    public class NotifyNewArtworkCreated
+    public class NotifyArtEventCancelledCommand
     {
 
     }

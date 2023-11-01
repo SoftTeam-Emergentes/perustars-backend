@@ -72,6 +72,8 @@ namespace PERUSTARS
                 options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            //Añadir lineas de codigo de whatsapp
+    
             // Dependency Injection Configuration
 
             services.AddScoped<IArtistRepository, ArtistRepository>();

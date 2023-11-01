@@ -3,8 +3,8 @@ using MediatR;
 
 namespace PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Events
 {
-    public class StartedEventNotifiedEvent :INotification
+    public class RescheduledArtEventNotifiedEvent : INotification
     {
-        
+
     }
 }

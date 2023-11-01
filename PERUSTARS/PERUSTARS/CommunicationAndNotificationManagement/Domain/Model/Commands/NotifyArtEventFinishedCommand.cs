@@ -2,7 +2,7 @@
 
 namespace PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Commands
 {
-    public class UpdateArtistProfileCommand
+    public class NotifyArtEventFinishedCommand
     {
 
     }

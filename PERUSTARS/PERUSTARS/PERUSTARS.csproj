@@ -25,10 +25,6 @@
 
   <ItemGroup>
     <Folder Include="CommunicationAndNotificationManagement\Application\Commands\Services\" />
-    <Folder Include="CommunicationAndNotificationManagement\Domain\Services\" />
-    <Folder Include="CommunicationAndNotificationManagement\Interfaces\" />
-    <Folder Include="CommunicationAndNotificationManagement\Interfaces\REST\" />
-    <Folder Include="CommunicationAndNotificationManagement\Interfaces\REST\Resources\" />
     <Folder Include="ArtworkManagement\Application\" />
     <Folder Include="ArtworkManagement\Application\Commands\" />
     <Folder Include="ArtworkManagement\Application\Commands\Handlers\" />

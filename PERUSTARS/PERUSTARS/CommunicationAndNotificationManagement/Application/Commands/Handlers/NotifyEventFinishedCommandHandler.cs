@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PERUSTARS
+namespace PERUSTARS.CommunicationAndNotificationManagement.Application.Commands.Handlers
 {
     public class NotifyEventFinishedCommandHandler
     {

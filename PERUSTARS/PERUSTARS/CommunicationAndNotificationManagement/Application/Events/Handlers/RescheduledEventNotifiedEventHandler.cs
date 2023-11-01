@@ -2,19 +2,22 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Events;
 
 namespace PERUSTARS.CommunicationAndNotificationManagement.Application.Events.Handlers
 {
-    public class RescheduledEventNotifiedEventHandler : INotificationHandler<RescheduledEventNotifiedEvent>
+    public class RescheduledArtEventNotifiedEventHandler : INotificationHandler<RescheduledArtEventNotifiedEvent>
     {
-        public RescheduledEventNotifiedEventHandler()
+        readonly ILogger _logger;
+        public RescheduledArtEventNotifiedEventHandler(ILogger<RescheduledArtEventNotifiedEventHandler> logger)
         {
+            _logger = logger;
         }
 
-        public async Task Handle(RescheduledEventNotifiedEvent notification, CancellationToken cancellationToken)
+        public async Task Handle(RescheduledArtEventNotifiedEvent notification, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            _logger.LogInformation("Art Event has been rescheduled");
         }
     }
 

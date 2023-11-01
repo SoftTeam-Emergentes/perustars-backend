@@ -2,17 +2,21 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Events;
 namespace PERUSTARS.CommunicationAndNotificationManagement.Application.Events.Handlers
 {
     public class SoldArtworkNotifiedEventHandler : INotificationHandler<SoldArtworkNotifiedEvent>
     {
-        public SoldArtworkNotifiedEventHandler()
+        readonly ILogger _logger;
+        public SoldArtworkNotifiedEventHandler(ILogger<SoldArtworkNotifiedEventHandler> logger)
         {
+            _logger = logger;
         }
+        
         public async Task Handle(SoldArtworkNotifiedEvent notification, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            _logger.LogInformation("Artwork has been sold");
         }
     }
 }
