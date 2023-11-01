@@ -6,11 +6,11 @@ namespace PERUSTARS.AtEventManagement.Domain.Services.ArtEvent
 {
     public interface IArtEventQueryService
     {
-        public PERUSTARS.AtEventManagement.Domain.Model.Aggregates.ArtEvent getArtEventById(int id);
-        public void deleteArtEvent(int id);
+        public PERUSTARS.AtEventManagement.Domain.Model.Aggregates.ArtEvent getArtEventById(long id);
+        public void deleteArtEvent(long id);
         public IEnumerable<PERUSTARS.AtEventManagement.Domain.Model.Aggregates.ArtEvent> getArtEvents();
-        public IEnumerable<PERUSTARS.AtEventManagement.Domain.Model.Aggregates.ArtEvent> getArtEventsByHobbyistId(int id);
-        public IEnumerable<PERUSTARS.AtEventManagement.Domain.Model.Aggregates.ArtEvent> getArtEventByArtistId(int id);
+        public IEnumerable<PERUSTARS.AtEventManagement.Domain.Model.Aggregates.ArtEvent> getArtEventsByHobbyistId(long id);
+        public IEnumerable<PERUSTARS.AtEventManagement.Domain.Model.Aggregates.ArtEvent> getArtEventByArtistId(long id);
 
 
     }

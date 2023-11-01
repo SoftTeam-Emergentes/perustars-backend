@@ -14,18 +14,18 @@ namespace PERUSTARS.AtEventManagement.Application.artevents.service
             _artEventRepository = artEventRepository;
         }
 
-        public void deleteArtEvent(int id)
+        public void deleteArtEvent(long id)
         {
             ArtEvent artEvent = _artEventRepository.FindByIdAsync(id).Result;
             _artEventRepository.Remove(artEvent);
         }
 
-        public IEnumerable<ArtEvent> getArtEventByArtistId(int id)
+        public IEnumerable<ArtEvent> getArtEventByArtistId(long id)
         {
             return _artEventRepository.findByArtistIdAsync(id).Result;
         }
 
-        public ArtEvent getArtEventById(int id)
+        public ArtEvent getArtEventById(long id)
         {
             return _artEventRepository.FindByIdAsync(id).Result;
         }
@@ -35,7 +35,7 @@ namespace PERUSTARS.AtEventManagement.Application.artevents.service
             return _artEventRepository.ListAsync().Result;
         }
 
-        public IEnumerable<ArtEvent> getArtEventsByHobbyistId(int id)
+        public IEnumerable<ArtEvent> getArtEventsByHobbyistId(long id)
         {
             return _artEventRepository.findByHobbyistIdAsync(id).Result;
         }

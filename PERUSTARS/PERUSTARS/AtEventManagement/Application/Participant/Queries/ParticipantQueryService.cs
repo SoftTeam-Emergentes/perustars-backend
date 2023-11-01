@@ -12,17 +12,17 @@ namespace PERUSTARS.AtEventManagement.Application.Participant.Queries
             this._participantRepository = participantRepository;
         }
 
-        public IEnumerable<Domain.Model.Aggregates.Participant> getParticipantByEventId(int id)
+        public IEnumerable<Domain.Model.Aggregates.Participant> getParticipantByEventId(long id)
         {
             return _participantRepository.findByArtEventIdAsync(id).Result;
         }
 
-        public IEnumerable<Domain.Model.Aggregates.Participant> getParticipantByHobbyistId(int id)
+        public IEnumerable<Domain.Model.Aggregates.Participant> getParticipantByHobbyistId(long id)
         {
             return _participantRepository.findByHobystIdAsync(id).Result;
         }
 
-        public Domain.Model.Aggregates.Participant getParticipantById(int id)
+        public Domain.Model.Aggregates.Participant getParticipantById(long id)
         {
             return _participantRepository.FindByIdAsync(id).Result;
         }

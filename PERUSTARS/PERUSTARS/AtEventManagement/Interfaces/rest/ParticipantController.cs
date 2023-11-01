@@ -21,7 +21,8 @@ namespace PERUSTARS.AtEventManagement.Interfaces.rest
         }
 
         [HttpGet]
-        public async Task<IActionResult> getParticipants() {
+        public async Task<IActionResult> getParticipants()
+        {
             IEnumerable<Participant> participants = _participantQueryService.GetParticipants();
             return Ok(participants);
         }
@@ -39,3 +40,4 @@ namespace PERUSTARS.AtEventManagement.Interfaces.rest
             return Ok(participants);
         }
     }
+}

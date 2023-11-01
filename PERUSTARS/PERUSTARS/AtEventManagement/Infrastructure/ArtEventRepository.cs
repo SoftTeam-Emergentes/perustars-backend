@@ -20,11 +20,11 @@ namespace PERUSTARS.AtEventManagement.Infrastructure
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<ArtEvent>> findByArtistIdAsync(int artistId)
+        public async Task<IEnumerable<ArtEvent>> findByArtistIdAsync(long artistId)
         {
             return await _dbContext.ArtEvents.Where(a => a.ArtistId == artistId).ToListAsync();
         }
-        public async Task<IEnumerable<ArtEvent>> findByHobbyistIdAsync(int hobbyistId) { 
+        public async Task<IEnumerable<ArtEvent>> findByHobbyistIdAsync(long hobbyistId) { 
             return await _dbContext.ArtEvents.Where(a=>a.Participants.Any(p=>p.HobbyistId==hobbyistId)).ToListAsync();
         }
 

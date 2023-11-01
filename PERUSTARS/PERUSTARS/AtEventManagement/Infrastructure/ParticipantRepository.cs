@@ -47,12 +47,12 @@ namespace PERUSTARS.AtEventManagement.Infrastructure
         //    await _dbContext.SaveChangesAsync();
         //}
 
-        public async Task<IEnumerable<Participant>> findByArtEventIdAsync(int artEventId)
+        public async Task<IEnumerable<Participant>> findByArtEventIdAsync(long artEventId)
         {
             return await _dbContext.Participants.Where(p=>p.ArtEventId == artEventId).ToListAsync();
         }
 
-        public async Task<IEnumerable<Participant>> findByHobystIdAsync(int hobystId)
+        public async Task<IEnumerable<Participant>> findByHobystIdAsync(long hobystId)
         {
             return await _dbContext.Participants.Where(p=>p.HobbyistId == hobystId).ToListAsync();
         }

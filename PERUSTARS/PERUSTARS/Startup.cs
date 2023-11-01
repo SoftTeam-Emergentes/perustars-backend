@@ -19,6 +19,9 @@ using PERUSTARS.AtEventManagement.Application;
 using System.Reflection;
 using MySql.Data.MySqlClient;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using Microsoft.AspNetCore.Http;
+using PERUSTARS.AtEventManagement.Application.Participant.Queries;
+using PERUSTARS.AtEventManagement.Domain.Services.Participant;
 
 namespace PERUSTARS
 {
@@ -74,16 +77,20 @@ namespace PERUSTARS
             });
 
             // Dependency Injection Configuration
-
+            services.Configure<ExceptionHandlerOptions>(options => {
+                options.ExceptionHandler = default;
+                options.ExceptionHandlingPath = PathString.FromUriComponent("/error");
+            });
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
             services.AddScoped<IArtEventRepository, ArtEventRepository>();
+            services.AddScoped<IParticipantRepository, ParticipantRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
 
             services.AddScoped<IArtEventCommandService, ArtEventService>();
             services.AddScoped<IArtEventQueryService, ArtEventQueryService>();
-
+            services.AddScoped<IParticipantQueryService, ParticipantQueryService>();
 
 
             // Apply Endpoints Naming Convention

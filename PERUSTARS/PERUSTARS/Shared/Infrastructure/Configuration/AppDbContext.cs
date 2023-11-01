@@ -41,7 +41,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             builder.Entity<Artist>().ToTable("Artists");
             builder.Entity<Artist>()
             .HasBaseType<User>();
-            builder.Entity<Artist>().Property(a=>a.Id).IsRequired().ValueGeneratedOnAdd();
+            //builder.Entity<Artist>().Property(a=>a.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Artist>()
                     .HasOne(a => a.User)
                     .WithOne(u=>u.artist)
@@ -59,7 +59,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             
 
             builder.Entity<Hobbyist>().ToTable("Hobbyists");
-            builder.Entity<Hobbyist>().Property(a => a.HobbyistId).IsRequired().ValueGeneratedOnAdd();
+            //builder.Entity<Hobbyist>().Property(a => a.HobbyistId).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Hobbyist>().Property(a => a.Age);
             //builder.Entity<Hobbyist>().HasCheckConstraint("Age <= 120");
             //builder.Entity<Hobbyist>().Property(a => a.User);
@@ -107,12 +107,12 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             builder.Entity<Participant>().Property(p=>p.CheckInDateTime).IsRequired();
             builder.Entity<Participant>().Property(p=>p.ParticipantRegistrationDateTime).HasColumnType("timestamp").HasDefaultValue(DateTime.UtcNow).IsRequired();
             builder.Entity<Participant>().Property(p => p.Collected).HasDefaultValue(false).IsRequired();
-            builder.Entity<Participant>()
+            builder.Entity<Participant>()//.Property(p => p.HobbyistId);
                 .HasOne(p => p.Hobyst)
                 .WithMany(h => h.Participants)
                 .HasForeignKey(p => p.HobbyistId);
 
-            builder.Entity<ArtEvent>()
+            builder.Entity<ArtEvent>().Property(ae => ae.ArtistId);
                 .HasOne(ae => ae.Artist)
                 .WithMany(ar => ar.ArtEvents)
                 .HasForeignKey(ae => ae.ArtistId);
@@ -123,30 +123,8 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             //builder.Entity<Event>().ToTable("events");
             //builder.Entity<Event>().HasKey(e => e.EventId);
             //builder.Entity<Event>().Property(e=>e.EventId).IsRequired().ValueGeneratedOnAdd();
-            #region ParticipantEventRegistrations
-
-            builder.Entity<ParticipantEventRegistration>().ToTable("ParticipantEventRegistrations");
-            builder.Entity<ParticipantEventRegistration>().HasKey(p => p.Id);
-            builder.Entity<ParticipantEventRegistration>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<ParticipantEventRegistration>().Property(p => p.EventTitle).IsRequired();
-            builder.Entity<ParticipantEventRegistration>().Property(p => p.ArtistId).IsRequired();
-            builder.Entity<ParticipantEventRegistration>().Property(p => p.HobyistId).IsRequired();
-            builder.Entity<ParticipantEventRegistration>().Property(p => p.RegistrationDate).HasColumnType("timestamp").HasDefaultValue(DateTime.UtcNow).IsRequired();
-            builder.Entity<ParticipantEventRegistration>().Property(p => p.Collected).HasDefaultValue(false).IsRequired();
-
-            #endregion
-
-            #region ArtistRecommendations
-
-            builder.Entity<ArtistArtworkRecommendation>().ToTable("ArtistRecommendations");
-            builder.Entity<ArtistArtworkRecommendation>().HasKey(ar => ar.Id);
-            builder.Entity<ArtistArtworkRecommendation>().Property(ar => ar.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<ArtistArtworkRecommendation>().Property(ar => ar.ArtistId).IsRequired();
-            builder.Entity<ArtistArtworkRecommendation>().Property(ar => ar.HobyistId).IsRequired();
-            builder.Entity<ArtistArtworkRecommendation>().Property(ar => ar.RecommendationDateTime).HasColumnType("timestamp").HasDefaultValue(DateTime.UtcNow).IsRequired();
-            builder.Entity<ArtistArtworkRecommendation>().Property(ar => ar.Collected).HasDefaultValue(false).IsRequired();
-
-            #endregion
+            
+            
 
 
             builder.ApplySnakeCaseNamingConvention();
