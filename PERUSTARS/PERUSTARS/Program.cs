@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using PERUSTARS.Shared.Infrastructure.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,8 @@ namespace PERUSTARS
     public class Program
     {
         public static void Main(string[] args)
-        {           
-
+        {
+            
             var host = CreateHostBuilder(args).Build();
             using (var scope = host.Services.CreateScope())
             using (var context = scope.ServiceProvider.GetService<AppDbContext>())

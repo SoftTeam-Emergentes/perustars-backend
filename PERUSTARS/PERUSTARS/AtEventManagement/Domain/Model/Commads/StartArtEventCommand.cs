@@ -1,7 +1,10 @@
-﻿using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
+﻿using MediatR;
+using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
 
 namespace PERUSTARS.AtEventManagement.Domain.Model.Commads
 {
-    public record StartArtEventCommand(ArtEventStatus status);
+    public class StartArtEventCommand:IRequest<string> { 
+        public int id { get; set; }
+    };
 
 }

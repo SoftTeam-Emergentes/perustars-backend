@@ -6,7 +6,7 @@ using PERUSTARS.ProfileManagement.Domain.Model.Enum;
 
 namespace PERUSTARS.ProfileManagement.Interface.REST.Resources
 {
-    public class RegisterArtistProfile: RegisterUserRequest
+    public class RegisterArtistProfile
     {
         [Required]
         public string BrandName { get; set; }

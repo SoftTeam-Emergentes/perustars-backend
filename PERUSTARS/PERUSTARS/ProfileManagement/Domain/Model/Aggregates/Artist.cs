@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Numerics;
 using PERUSTARS.ArtworkManagement.Domain.Model.Aggregates;
 using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
@@ -13,7 +14,8 @@ namespace PERUSTARS.ProfileManagement.Domain.Model.Aggregates
 {
     public class Artist : User
     {
-        public BigInteger ArtistId { get; set; }
+
+        public long ArtistId { get; set; }
         
         public User User { get; set; }
         public string BrandName { get; set; } //Nickname
@@ -23,8 +25,9 @@ namespace PERUSTARS.ProfileManagement.Domain.Model.Aggregates
         public string ContactEmail { get; set; }
         public int Age { get; set; }
         public Genre Genre { get; set; }
-        
-        public List<string>SocialMediaLink { get; set; } //SocialNetwork
+
+        [NotMapped]
+        public IEnumerable<string>SocialMediaLink { get; set; } //SocialNetwork
 
         //public long SpecialtyId { get; set; }
         //public Specialty SpecialtyArt { get; set; }
