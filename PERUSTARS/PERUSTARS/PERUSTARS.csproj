@@ -7,26 +7,47 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ArtEventManagement\**" />
+    <Compile Remove="CommunicationAndNotificationManagement\**" />
+    <Compile Remove="ConductReportsManagement\**" />
+    <Compile Remove="DataAnalytics\**" />
+    <Content Remove="ArtEventManagement\**" />
+    <Content Remove="CommunicationAndNotificationManagement\**" />
+    <Content Remove="ConductReportsManagement\**" />
+    <Content Remove="DataAnalytics\**" />
+    <EmbeddedResource Remove="ArtEventManagement\**" />
+    <EmbeddedResource Remove="CommunicationAndNotificationManagement\**" />
+    <EmbeddedResource Remove="ConductReportsManagement\**" />
+    <EmbeddedResource Remove="DataAnalytics\**" />
+    <None Remove="ArtEventManagement\**" />
+    <None Remove="CommunicationAndNotificationManagement\**" />
+    <None Remove="ConductReportsManagement\**" />
+    <None Remove="DataAnalytics\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
+
+
+
     <PackageReference Include="MediatR" Version="12.1.1" />
+
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.7" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational.Design" Version="1.1.6" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.11.1" />
-    <PackageReference Include="MySql.EntityFrameworkCore" Version="5.0.3" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.5" />
+    <PackageReference Include="MySql.EntityFrameworkCore" Version="5.0.13" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.1.4" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.11.1" />
   </ItemGroup>
 
   <ItemGroup>
-
     <Folder Include="ConductsReportsManagement\Domain\Model\Aggregate\" />
     <Folder Include="ConductsReportsManagement\Domain\Services\" />
     <Folder Include="ArtworkManagement\Application\Events\Services\" />
@@ -39,7 +60,9 @@
     <Folder Include="DataAnalytics\Infrastructure\" />
     <Folder Include="DataAnalytics\Infrastructure\Repositories\" />
     <Folder Include="DataAnalytics\Interfaces\REST\Resources\" />
+    <Folder Include="ProfileManagement\Application\Commands\" />
     <Folder Include="IdentityAndAccountManagement\Infrastructure\Context\" />
+
   </ItemGroup>
 
 </Project>

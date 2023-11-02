@@ -20,18 +20,25 @@ namespace PERUSTARS.AtEventManagement.Domain.Model.Aggregates
         public IEnumerable<Participant> Participants { get; set; }
         public bool Collected { get; set; }
 
-        public ArtEvent(long id, string title, string description, DateTime? startDateTime, Location location, bool? isOnline, long artistId, ArtEventStatus? currentStatus, IEnumerable<Participant> participants, Artist artist, bool collected)
+        public ArtEvent() { }
+        public ArtEvent(long? id, 
+            string title, 
+            string description, 
+            DateTime? startDateTime, 
+            Location Location, bool? isOnline, 
+            long? artistId, 
+            Artist Artist, ArtEventStatus? currentStatus, IEnumerable<Participant> Participants, bool collected)
         {
             Id = id;
             Title = title;
             Description = description;
             StartDateTime = startDateTime;
-            Location = location;
+            this.Location = Location;
             IsOnline = isOnline;
             ArtistId = artistId;
+            this.Artist = Artist;
             CurrentStatus = currentStatus;
-            Participants = participants;
-            Artist = artist; ;
+            this.Participants = Participants;
             Collected = collected;
         }
     }

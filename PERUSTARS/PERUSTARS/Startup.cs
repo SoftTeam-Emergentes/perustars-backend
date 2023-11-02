@@ -2,16 +2,25 @@ using System.Reflection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using Microsoft.AspNetCore.Diagnostics;
+
+using PERUSTARS.AtEventManagement.Application.artevents.service;
+using PERUSTARS.AtEventManagement.Domain.Model.Repositories;
+using PERUSTARS.AtEventManagement.Domain.Services.ArtEvent;
+using PERUSTARS.AtEventManagement.Infrastructure;
+using PERUSTARS.AtEventManagement.Application;
+using System.Reflection;
+using MySql.Data.MySqlClient;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using Microsoft.AspNetCore.Http;
+using PERUSTARS.AtEventManagement.Application.Participant.Queries;
+using PERUSTARS.AtEventManagement.Domain.Services.Participant;
 using Microsoft.AspNetCore.Http;
 using PERUSTARS.ArtworkManagement.Infrastructure.Repositories;
 using PERUSTARS.IdentityAndAccountManagement.Application.Settings;
@@ -83,28 +92,20 @@ namespace PERUSTARS
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
             // Dependency Injection Configuration
+            services.Configure<ExceptionHandlerOptions>(options => {
+                options.ExceptionHandler = default;
+                options.ExceptionHandlingPath = PathString.FromUriComponent("/error");
+            });
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+            services.AddScoped<IArtEventRepository, ArtEventRepository>();
+            services.AddScoped<IParticipantRepository, ParticipantRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            /*services.AddScoped<IArtistRepository, ArtistRepository>();
-            services.AddScoped<IArtworkRepository, ArtworkRepository>();
-            services.AddScoped<IHobbyistRepository, HobbyistRepository>();
-            services.AddScoped<IEventRepository, EventRepository>();
-            services.AddScoped<IClaimTicketRepository, ClaimTicketRepository>();
-            services.AddScoped<IInterestRepository, InterestRepository>();
-            services.AddScoped<IFavoriteArtworkRepository, FavoriteArtworkRepository>();
-            services.AddScoped<ISpecialtyRepository, SpecialtyRepository>();
-            services.AddScoped<IFollowerRepository, FollowerRepository>();
-            services.AddScoped<IEventAssistanceRepository, EventAssistanceRepository>();
-            services.AddScoped<IArtworkService, ArtworkService>();
-            services.AddScoped<IArtistService, ArtistService>();
-            services.AddScoped<IHobbyistService, HobbyistService>();
-            services.AddScoped<ISpecialtyService, SpecialtyService>();
-            services.AddScoped<IFollowerService, FollowerService>();
-            services.AddScoped<IEventService, EventService>();
-            services.AddScoped<IInterestService, InterestService>();
-            services.AddScoped<IEventAssistanceService, EventAssistanceService>();
-            services.AddScoped<IFavoriteArtworkService, FavoriteArtworkService>();
-            services.AddScoped<IClaimTicketService, ClaimTicketService>();
-            services.AddScoped<ISpecialtyService, SpecialtyService>();*/
+
+
+            services.AddScoped<IArtEventCommandService, ArtEventService>();
+            services.AddScoped<IArtEventQueryService, ArtEventQueryService>();
+            services.AddScoped<IParticipantQueryService, ParticipantQueryService>();
 
             
             services.AddScoped<IUserRepository, UserRepository>();

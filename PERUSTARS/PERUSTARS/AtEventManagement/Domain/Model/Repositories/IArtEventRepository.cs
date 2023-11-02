@@ -7,6 +7,7 @@ namespace PERUSTARS.AtEventManagement.Domain.Model.Repositories
 {
     public interface IArtEventRepository:IBaseRepository<ArtEvent>
     {
-        Task<IEnumerable<ArtEvent>> findByArtistIdAsync(int artistId);
+        Task<IEnumerable<ArtEvent>> findByArtistIdAsync(long artistId);
+        Task<IEnumerable<ArtEvent>> findByHobbyistIdAsync(long hobbyistId);
     }
 }

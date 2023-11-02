@@ -1,6 +1,9 @@
-﻿using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
+﻿using MediatR;
+using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
 
 namespace PERUSTARS.AtEventManagement.Domain.Model.Commads
 {
-    public record CancelArtEventCommand(ArtEventStatus status);
+    public class CancelArtEventCommand:IRequest<string>{
+        public int id { get; set; }
+    }
 }
