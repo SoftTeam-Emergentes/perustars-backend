@@ -7,21 +7,23 @@ using PERUSTARS.IdentityAndAccountManagement.Domain.Repositories;
 using PERUSTARS.Shared.Infrastructure.Configuration;
 using PERUSTARS.Shared.Infrastructure.Repositories;
 
-namespace PERUSTARS.IdentityAndAccountManagement.Infrastructure.Repositories;
-
-public class UserRepository: BaseRepository<User>, IUserRepository
+namespace PERUSTARS.IdentityAndAccountManagement.Infrastructure.Repositories
 {
-    public UserRepository(AppDbContext dbContext) : base(dbContext)
-    { }
-
-    public bool ExistsByEmail(string email)
+    public class UserRepository : BaseRepository<User>, IUserRepository
     {
-        return _dbContext.Users.Any(p => p.Email == email);
-    }
+        public UserRepository(AppDbContext dbContext) : base(dbContext)
+        { }
 
-    public async Task<User> FindByEmailAsync(string email)
-    {
-        return await _dbContext.Users
-            .SingleOrDefaultAsync(p => p.Email == email);
+        public bool ExistsByEmail(string email)
+        {
+            return _dbContext.Users.Any(p => p.Email == email);
+        }
+
+        public async Task<User> FindByEmailAsync(string email)
+        {
+            return await _dbContext.Users
+                .SingleOrDefaultAsync(p => p.Email == email);
+        }
     }
 }
+

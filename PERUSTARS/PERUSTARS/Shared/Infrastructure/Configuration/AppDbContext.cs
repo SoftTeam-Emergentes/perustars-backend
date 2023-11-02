@@ -11,7 +11,7 @@ using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
 
 namespace PERUSTARS.Shared.Infrastructure.Configuration
 {
-    public class AppDbContext: DbContext
+    public class AppDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Artist> Artists { get; set; }
@@ -27,7 +27,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
         public DbSet<ArtworkReview> ArtworkReviews { get; set; }
         public DbSet<HobbyistFavoriteArtwork> HobbyistFavoriteArtworks { get; set; }
 
-        public AppDbContext(DbContextOptions dbContextOptions): base(dbContextOptions)
+        public AppDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
         {
 
         }
@@ -178,24 +178,34 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             #endregion
 
             #region Artworks
-            
+
             builder.Entity<Artwork>().ToTable("Artworks");
             builder.Entity<Artwork>().HasKey(a => a.Id);
             builder.Entity<Artwork>().Property(a => a.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Artwork>().Property(a => a.Title).IsRequired();
             builder.Entity<Artwork>().Property(a => a.Description).IsRequired();
-            builder.Entity<Artwork>().Property(a => a.MainContent.Content).HasColumnName("MainContentContent").IsRequired();
-            builder.Entity<Artwork>().Property(a => a.MainContent.Format).HasColumnName("MainContentFormat").IsRequired();
+            builder.Entity<Artwork>().OwnsOne(a => a.MainContent, mc =>
+            {
+                mc.Property(m => m.Content).HasColumnName("MainContentContent").IsRequired();
+                mc.Property(m => m.Format).HasColumnName("MainContentFormat").IsRequired();
+            });
+            // builder.Entity<Artwork>().Property(a => a.MainContent.Content).HasColumnName("MainContentContent").IsRequired(); // incorrecto
+            // builder.Entity<Artwork>().Property(a => a.MainContent.Format).HasColumnName("MainContentFormat").IsRequired(); // incorrecto
             builder.Entity<Artwork>().Property(a => a.Price).IsRequired();
-            builder.Entity<Artwork>().Property(a => a.CoverImage.Content).HasColumnName("CoverImageContent").IsRequired();
-            builder.Entity<Artwork>().Property(a => a.CoverImage.Format).HasColumnName("CoverImageFormat").IsRequired();
+            builder.Entity<Artwork>().OwnsOne(a => a.CoverImage, mc =>
+            {
+                mc.Property(m => m.Content).HasColumnName("CoverImageContent").IsRequired();
+                mc.Property(m => m.Format).HasColumnName("CoverImageFormat").IsRequired();
+            });
+            // builder.Entity<Artwork>().Property(a => a.CoverImage.Content).HasColumnName("CoverImageContent").IsRequired(); // incorrecto
+            // builder.Entity<Artwork>().Property(a => a.CoverImage.Format).HasColumnName("CoverImageFormat").IsRequired(); // incorrecto
             builder.Entity<Artwork>().Property(a => a.PublishedAt).HasColumnType("timestamp").HasDefaultValue(DateTime.UtcNow).IsRequired();
             builder.Entity<Artwork>().Property(a => a.Status).IsRequired();
             builder.Entity<Artwork>()
                 .HasOne(a => a.Artist)
                 .WithMany()
                 .HasForeignKey(a => a.ArtistId);
-            
+
             #endregion
 
             #region ArtworkRecommendations

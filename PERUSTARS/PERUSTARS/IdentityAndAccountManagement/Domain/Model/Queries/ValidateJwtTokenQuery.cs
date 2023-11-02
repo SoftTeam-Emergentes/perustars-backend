@@ -1,8 +1,10 @@
 ﻿using MediatR;
 
-namespace PERUSTARS.IdentityAndAccountManagement.Domain.Model.Queries;
-
-public class ValidateJwtTokenQuery : IRequest<long?>
+namespace PERUSTARS.IdentityAndAccountManagement.Domain.Model.Queries
 {
-    public string Token { get; set; }
+    public class ValidateJwtTokenQuery : IRequest<long?>
+    {
+        public string Token { get; set; }
+    }
 }
+

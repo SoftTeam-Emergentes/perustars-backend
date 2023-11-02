@@ -11,44 +11,46 @@ using PERUSTARS.IdentityAndAccountManagement.Interfaces.REST.Resources;
 using PERUSTARS.Shared.Domain.Repositories;
 using BCryptNet = BCrypt.Net.BCrypt;
 
-namespace PERUSTARS.IdentityAndAccountManagement.Application.Commands.Handlers;
-
-public class LogInUserCommandHandler: IRequestHandler<LogInUserCommand, AuthenticateResponse>
+namespace PERUSTARS.IdentityAndAccountManagement.Application.Commands.Handlers
 {
-    private readonly IPublisher _publisher;
-    private readonly IMapper _mapper;
-    private readonly IUserRepository _userRepository;
-    private readonly IRequestHandler<GenerateJwtTokenCommand, string> _generateJwtTokenHandler; // Agregar la inyección de dependencia
-
-    public LogInUserCommandHandler(IUserRepository userRepository, IUnitOfWork unitOfWork, IMapper mapper, IPublisher publisher, IRequestHandler<GenerateJwtTokenCommand, string> generateJwtTokenHandler)
+    public class LogInUserCommandHandler : IRequestHandler<LogInUserCommand, AuthenticateResponse>
     {
-        _userRepository = userRepository;
-        _mapper = mapper;
-        _publisher = publisher;
-        _generateJwtTokenHandler = generateJwtTokenHandler;
-    }
+        private readonly IPublisher _publisher;
+        private readonly IMapper _mapper;
+        private readonly IUserRepository _userRepository;
+        private readonly IRequestHandler<GenerateJwtTokenCommand, string> _generateJwtTokenHandler; // Agregar la inyección de dependencia
 
-    public async Task<AuthenticateResponse> Handle(LogInUserCommand request, CancellationToken cancellationToken)
-    {
-        var user = await _userRepository.FindByEmailAsync(request.Email);
-        //Console.WriteLine($"Request: {request.Email}, {request.Password}");
-        //Console.WriteLine($"User: {user.Id}, {user.Name}, {user.LastName}, {user.PasswordHash}");
-
-        if (user == null || !BCryptNet.Verify(request.Password, user.PasswordHash))
+        public LogInUserCommandHandler(IUserRepository userRepository, IUnitOfWork unitOfWork, IMapper mapper, IPublisher publisher, IRequestHandler<GenerateJwtTokenCommand, string> generateJwtTokenHandler)
         {
-            Console.WriteLine("Authentication Error");
-            throw new AppException("Username or password is incorrect.");
+            _userRepository = userRepository;
+            _mapper = mapper;
+            _publisher = publisher;
+            _generateJwtTokenHandler = generateJwtTokenHandler;
         }
-        var generateTokenCommand = new GenerateJwtTokenCommand { User = user };
-        var jwtToken = await _generateJwtTokenHandler.Handle(generateTokenCommand, cancellationToken);
-        
-        var response = _mapper.Map<AuthenticateResponse>(user);
-        response.Token = jwtToken;
-        UserLoggedInEvent userLoggedInEvent = new UserLoggedInEvent
+
+        public async Task<AuthenticateResponse> Handle(LogInUserCommand request, CancellationToken cancellationToken)
         {
-            UserId = response.UserId
-        };
-        await _publisher.Publish(userLoggedInEvent);
-        return response;
+            var user = await _userRepository.FindByEmailAsync(request.Email);
+            //Console.WriteLine($"Request: {request.Email}, {request.Password}");
+            //Console.WriteLine($"User: {user.Id}, {user.Name}, {user.LastName}, {user.PasswordHash}");
+
+            if (user == null || !BCryptNet.Verify(request.Password, user.PasswordHash))
+            {
+                Console.WriteLine("Authentication Error");
+                throw new AppException("Username or password is incorrect.");
+            }
+            var generateTokenCommand = new GenerateJwtTokenCommand { User = user };
+            var jwtToken = await _generateJwtTokenHandler.Handle(generateTokenCommand, cancellationToken);
+
+            var response = _mapper.Map<AuthenticateResponse>(user);
+            response.Token = jwtToken;
+            UserLoggedInEvent userLoggedInEvent = new UserLoggedInEvent
+            {
+                UserId = response.UserId
+            };
+            await _publisher.Publish(userLoggedInEvent);
+            return response;
+        }
     }
 }
+

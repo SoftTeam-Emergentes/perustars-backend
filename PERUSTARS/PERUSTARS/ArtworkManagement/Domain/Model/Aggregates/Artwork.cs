@@ -22,20 +22,5 @@ namespace PERUSTARS.ArtworkManagement.Domain.Model.Aggregates
         public long ArtistId { get; set; }
         public Artist Artist { get; set; }
         public IEnumerable<ArtworkRecommendation> ArtworkRecommendations { get; set; }
-
-        public Artwork(long id, long artistId, string title, string description, ArtworkContent mainContent, float price, IEnumerable<HobbyistFavoriteArtwork> hobbyistsList, ArtworkContent coverImage, IEnumerable<ArtworkReview> reviewsList, DateTime publishedAt, ArtworkStatus status)
-        {
-            Id = id;
-            ArtistId = artistId;
-            Title = title;
-            Description = description;
-            MainContent = mainContent;
-            Price = price;
-            LikedHobbyistsList = hobbyistsList;
-            CoverImage = coverImage;
-            ReviewsList = reviewsList;
-            PublishedAt = publishedAt;
-            Status = status;
-        }
     }
 }

@@ -7,26 +7,28 @@ using PERUSTARS.ProfileManagement.Domain.Model.Queries;
 using PERUSTARS.ProfileManagement.Domain.Repositories;
 using PERUSTARS.ProfileManagement.Interface.REST.Resources;
 
-namespace PERUSTARS.ProfileManagement.Application.QueriesHandler;
-
-public class GetArtistByIdHandler: IRequestHandler<GetArtistByIdQuery,GetArtistFollowers>
+namespace PERUSTARS.ProfileManagement.Application.QueriesHandler
 {
-    private readonly IArtistRepository _artistRepository;
-
-    public GetArtistByIdHandler(IArtistRepository artistRepository)
+    public class GetArtistByIdHandler : IRequestHandler<GetArtistByIdQuery, GetArtistFollowers>
     {
-        _artistRepository = artistRepository;
-        
-    }
+        private readonly IArtistRepository _artistRepository;
 
-    public async Task<GetArtistFollowers> Handle(GetArtistByIdQuery query, CancellationToken cancellationToken)
-    {
-        var artist = await _artistRepository.GetArtistByIdAsync(query.ArtistId);
-        return new GetArtistFollowers
+        public GetArtistByIdHandler(IArtistRepository artistRepository)
         {
-            ArtistId = artist.ArtistId,
-            UserId = artist.UserId,
-            FollowersArtist = artist.FollowersArtist
-        };
+            _artistRepository = artistRepository;
+
+        }
+
+        public async Task<GetArtistFollowers> Handle(GetArtistByIdQuery query, CancellationToken cancellationToken)
+        {
+            var artist = await _artistRepository.GetArtistByIdAsync(query.ArtistId);
+            return new GetArtistFollowers
+            {
+                ArtistId = artist.ArtistId,
+                UserId = artist.UserId,
+                FollowersArtist = artist.FollowersArtist
+            };
+        }
     }
 }
+

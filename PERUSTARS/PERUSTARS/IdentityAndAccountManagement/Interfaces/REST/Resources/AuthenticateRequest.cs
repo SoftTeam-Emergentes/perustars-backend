@@ -1,7 +1,9 @@
-﻿namespace PERUSTARS.IdentityAndAccountManagement.Interfaces.REST.Resources;
-
-public class AuthenticateRequest
+﻿namespace PERUSTARS.IdentityAndAccountManagement.Interfaces.REST.Resources
 {
-    public string Email { get; set; }
-    public string Password { get; set; }
+    public class AuthenticateRequest
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
 }
+

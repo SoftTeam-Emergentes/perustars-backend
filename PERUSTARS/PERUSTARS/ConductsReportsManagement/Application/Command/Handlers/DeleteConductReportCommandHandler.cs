@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.ConductsReportsManagement.Application.Command.Handlers
 {
-    public class DeleteConductReportCommandHandler : IRequestHandler<DeleteConductReportCommand>
+    public class DeleteConductReportCommandHandler : IRequestHandler<DeleteConductReportCommand, Unit>
     {
         private readonly IMapper _mapper;
         private readonly IConductReportRepository _conductReportRepository;
@@ -37,11 +37,6 @@ namespace PERUSTARS.ConductsReportsManagement.Application.Command.Handlers
                 throw new ConductReportDeleteException("The Conduct Report was not deleted");
 
             return Unit.Value;
-        }
-
-        Task IRequestHandler<DeleteConductReportCommand>.Handle(DeleteConductReportCommand request, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
         }
     }
 }

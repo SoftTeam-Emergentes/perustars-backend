@@ -16,17 +16,5 @@ namespace PERUSTARS.ArtworkManagement.Domain.Model.Entities
         public DateTime ReviewDateTime { get; set; }
         public float Calification { get; set; }
         public bool Collected { get; set; } = false;
-
-        public ArtworkReview(long id, long artworkId, long hobbyistId, string title, string comment, DateTime reviewDate, float calification, bool collected)
-        {
-            Id = id;
-            ArtworkId = artworkId;
-            HobbyistId = hobbyistId;
-            Title = title;
-            Comment = comment;
-            ReviewDateTime = reviewDate;
-            Calification = calification;
-            Collected = collected;
-        }
     }
 }

@@ -10,12 +10,5 @@ namespace PERUSTARS.ArtworkManagement.Domain.Model.Entities
         public Artwork Artwork { get; set; }
         public long HobbyistId { get; set; }
         public Hobbyist Hobbyist { get; set; }
-
-        public HobbyistFavoriteArtwork(long id, long artworkId, long hobbyistId)
-        {
-            Id = id;
-            ArtworkId = artworkId;
-            HobbyistId = hobbyistId;
-        }
     }
 }
