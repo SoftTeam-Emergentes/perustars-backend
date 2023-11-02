@@ -4,19 +4,21 @@ using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Commands;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.ProfileManagement.Domain.Model.Commands;
 
-namespace PERUSTARS.Shared.Profiles;
-
-public class CommandToModelProfile: Profile
+namespace PERUSTARS.Shared.Profiles
 {
-    public CommandToModelProfile()
+    public class CommandToModelProfile : Profile
     {
-        CreateMap<RegisterUserCommand, User>();
-        CreateMap<RegisterProfileArtistCommand, Artist>();
-        CreateMap<RegisterProfileHobbyistCommand, Hobbyist>();
-        CreateMap<EditProfileArtistCommand, Artist>();
-        CreateMap<EditProfileHobbyistCommand, Hobbyist>();
-        CreateMap<DeleteProfileArtistCommand, Artist>();
-        CreateMap<DeleteProfileHobbyistCommand, Hobbyist>();
-        CreateMap<FollowArtistCommand, Follower>();
+        public CommandToModelProfile()
+        {
+            CreateMap<RegisterUserCommand, User>();
+            CreateMap<RegisterProfileArtistCommand, Artist>();
+            CreateMap<RegisterProfileHobbyistCommand, Hobbyist>();
+            CreateMap<EditProfileArtistCommand, Artist>();
+            CreateMap<EditProfileHobbyistCommand, Hobbyist>();
+            CreateMap<DeleteProfileArtistCommand, Artist>();
+            CreateMap<DeleteProfileHobbyistCommand, Hobbyist>();
+            CreateMap<FollowArtistCommand, Follower>();
+        }
     }
 }
+

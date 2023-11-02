@@ -7,6 +7,7 @@ using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.Shared.Extensions;
 using System;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates;
+using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
 
 namespace PERUSTARS.Shared.Infrastructure.Configuration
 {

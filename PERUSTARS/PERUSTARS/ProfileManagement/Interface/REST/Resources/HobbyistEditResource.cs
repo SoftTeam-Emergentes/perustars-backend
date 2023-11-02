@@ -1,7 +1,9 @@
-namespace PERUSTARS.ProfileManagement.Interface.REST.Resources;
-
-public class HobbyistEditResource
+namespace PERUSTARS.ProfileManagement.Interface.REST.Resources
 {
-    
-    public int Age { get; set; }
+    public class HobbyistEditResource
+    {
+
+        public int Age { get; set; }
+    }
 }
+

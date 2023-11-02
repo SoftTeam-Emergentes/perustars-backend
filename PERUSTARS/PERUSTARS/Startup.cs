@@ -25,7 +25,6 @@ using Microsoft.AspNetCore.Http;
 using PERUSTARS.IdentityAndAccountManagement.Application.Settings;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Repositories;
 using PERUSTARS.IdentityAndAccountManagement.Infrastructure.Repositories;
-
 using PERUSTARS.Shared.Domain.Repositories;
 using PERUSTARS.Shared.Infrastructure.Configuration;
 using PERUSTARS.Shared.Infrastructure.Repositories;
@@ -38,6 +37,10 @@ using PERUSTARS.ProfileManagement.Application.Commands.Services;
 using PERUSTARS.ProfileManagement.Domain.Repositories;
 using PERUSTARS.ProfileManagement.Domain.Services;
 using PERUSTARS.ProfileManagement.Infrastructure.Repositories;
+using PERUSTARS.ConductsReportsManagement.Domain.Repositories;
+using PERUSTARS.ConductsReportsManagement.Domain.Model.Services;
+using PERUSTARS.ConductsReportsManagement.Infrastructure.Repository;
+using PERUSTARS.ConductsReportsManagement.Application.Command.Services;
 
 namespace PERUSTARS
 {
@@ -60,10 +63,10 @@ namespace PERUSTARS
 
             //AppSettings Section Reference
             var appSettingsSection = Configuration.GetSection("AppSettings");
-            services.Configure<AppSettings>(appSettingsSection);
+            services.Configure<IdentityAndAccountManagement.Application.Settings.AppSettings>(appSettingsSection);
 
             //JSON Web Token Authentication Configuration
-            var appSettings = appSettingsSection.Get<AppSettings>();
+            var appSettings = appSettingsSection.Get<IdentityAndAccountManagement.Application.Settings.AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
 
             //Authentication Service Configuration
@@ -89,7 +92,7 @@ namespace PERUSTARS
 
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseNpgsql(Configuration.GetConnectionString("PostgreSQLConnection"));
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
             });
 
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
@@ -118,7 +121,8 @@ namespace PERUSTARS
             services.AddScoped<IArtistRepository, ArtistRepository>();
             services.AddScoped<IHobbyistRepository, HobbyistRepository>();
 
-
+            services.AddScoped<IConductReportRepository, ConductReportRepository>();
+            services.AddScoped<IConductReportService, ConductReportCommandService>();
             // Apply Endpoints Naming Convention
             services.AddRouting(options => options.LowercaseUrls = true);
             

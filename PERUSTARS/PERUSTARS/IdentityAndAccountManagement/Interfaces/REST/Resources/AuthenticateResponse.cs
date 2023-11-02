@@ -1,10 +1,12 @@
-﻿namespace PERUSTARS.IdentityAndAccountManagement.Interfaces.REST.Resources;
-
-public class AuthenticateResponse
+﻿namespace PERUSTARS.IdentityAndAccountManagement.Interfaces.REST.Resources
 {
-    public int UserId { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string Email { get; set; }
-    public string Token { get; set; }
+    public class AuthenticateResponse
+    {
+        public int UserId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string Token { get; set; }
+    }
 }
+
