@@ -2,7 +2,6 @@ using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
 using System.Collections.Generic;
 using System.Numerics;
 using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
-using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates;
 
 namespace PERUSTARS.ProfileManagement.Domain.Model.Aggregates
@@ -18,9 +17,7 @@ namespace PERUSTARS.ProfileManagement.Domain.Model.Aggregates
         public List<ArtworkRecommendation> ArtworkRecommendations { get; set; }
         public List<Follower> Followers { get; set; }
         public List<Participant> Participants { get; set; }
-        
-        public bool Collected  { get; set; } = false;
-        public IEnumerable<Participant> Participants { get; set; }
-        //public List<EventAssistance> Assistance { get; set; }
+
+        public bool Collected { get; set; } = false;
     }
 }

@@ -5,7 +5,6 @@ using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
 using System.Reflection.Emit;
 using PERUSTARS.ArtworkManagement.Domain.Model.Aggregates;
 using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
-using PERUSTARS.DataAnalytics.Domain.Model.Entities;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.Shared.Extensions;
 using System;
@@ -16,7 +15,6 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
     public class AppDbContext: DbContext
     {
         public DbSet<User> Users { get; set; }
-        public DbSet<ParticipantEventRegistration> ParticipantEventRegistrations { get; set; }
         public DbSet<ArtworkRecommendation> ArtistRecommendations { get; set; }
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Hobbyist> Hobbyists { get; set; }
@@ -40,6 +38,8 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
         {
             base.OnModelCreating(builder);
 
+            #region ConductReports
+
             builder.Entity<ConductReport>().ToTable("ConductReport");
             builder.Entity<ConductReport>().HasKey(c => c.id);
             builder.Entity<ConductReport>().Property(c => c.id).IsRequired().ValueGeneratedOnAdd();
@@ -47,6 +47,9 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             builder.Entity<ConductReport>().Property(c => c.Description).IsRequired();
             builder.Entity<ConductReport>().Property(c => c.DateTimeReport);
             builder.Entity<ConductReport>().Property(c => c.HobbystId).IsRequired();
+
+            #endregion
+
 
             #region Users
             builder.Entity<User>().ToTable("Users");
@@ -58,51 +61,93 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             builder.Entity<User>().Property(u => u.Email).IsRequired();
             builder.Entity<User>().Property(u => u.PasswordHash).IsRequired();
             #endregion
-            
-     
-            builder.Entity<Artist>().ToTable("Artists");
-            builder.Entity<Artist>()
-            .HasBaseType<User>();
-            //builder.Entity<Artist>().Property(a=>a.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<Artist>()
-                    .HasOne(a => a.User)
-                    .WithOne(u=>u.artist)
-                    .HasForeignKey<Artist>(a => a.ArtistId);
-            builder.Entity<Artist>().Property(a => a.Age);
-            //builder.Entity<Artist>().Property(a => a.Followers);
-            builder.Entity<Artist>().Property(a => a.Description);
-            builder.Entity<Artist>().Property(a => a.Genre);
-            builder.Entity<Artist>().Property(a => a.Phrase);
-            builder.Entity<Artist>().Property(a => a.BrandName).HasMaxLength(50);
-            builder.Entity<Artist>().Property(a => a.ContactEmail).HasMaxLength(80);
-            builder.Entity<Artist>().Property(a => a.ContactNumber);
-            //builder.Entity<Artist>().Property(a => a.SocialMediaLink).HasMaxLength(255);
-            builder.Entity<Artist>().Property(a => a.Collected).HasDefaultValue(false);
-            
 
-            builder.Entity<Hobbyist>().ToTable("Hobbyists");
-            //builder.Entity<Hobbyist>().Property(a => a.HobbyistId).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<Hobbyist>().Property(a => a.Age);
-            //builder.Entity<Hobbyist>().HasCheckConstraint("Age <= 120");
-            //builder.Entity<Hobbyist>().Property(a => a.User);
-            //builder.Entity<Hobbyist>().Property(a => a.Followers);
-            builder.Entity<Hobbyist>().Property(a => a.Collected).HasDefaultValue(false);
 
-                  //builder.Entity<Artist>()
-                  //        .HasMany(a => a.Followers)
-                  //        .WithOne(a => a.Artist)
-                  //        .HasForeignKey(a => a.ArtistId);
+            #region Followers
 
             builder.Entity<Follower>().ToTable("Followers");
             builder.Entity<Follower>().HasKey(f => f.Id);
             builder.Entity<Follower>().Property(f => f.Id).IsRequired().ValueGeneratedOnAdd();
-            //builder.Entity<Follower>().Property(f => f.Hobbyist);
-            //builder.Entity<Follower>().Property(f => f.Artist);
             builder.Entity<Follower>().Property(f => f.ArtistId);
             builder.Entity<Follower>().Property(f => f.HobbyistId);
-            builder.Entity<Follower>().Property(a => a.RegistrationDate);
+            builder.Entity<Follower>().Property(a => a.RegistrationDate).HasColumnType("timestamp").HasDefaultValue(DateTime.UtcNow);
             builder.Entity<Follower>().Property(a => a.Collected).HasDefaultValue(false);
-            
+
+            #endregion
+
+
+            #region Artists
+
+            builder.Entity<Artist>().ToTable("Artists");
+            builder.Entity<Artist>().HasKey(a => a.ArtistId);
+            builder.Entity<Artist>().Property(a=>a.ArtistId).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Artist>().Property(a => a.Age);
+            builder.Entity<Artist>().Property(a => a.Description);
+            builder.Entity<Artist>().Property(a => a.Genre).HasConversion<string>();
+            builder.Entity<Artist>().Property(a => a.Phrase);
+            builder.Entity<Artist>().Property(a => a.BrandName).HasMaxLength(50);
+            builder.Entity<Artist>().Property(a => a.ContactEmail).HasMaxLength(80);
+            builder.Entity<Artist>().Property(a => a.ContactNumber);
+            builder.Entity<Artist>().Property(a => a.Collected).HasDefaultValue(false);
+
+            // RelationShips
+            builder.Entity<Artist>()
+                   .HasOne(a => a.User)
+                   .WithOne()
+                   .HasForeignKey<Artist>(a => a.UserId);
+
+            builder.Entity<Artist>()
+                    .HasMany(a => a.Followers)
+                    .WithOne(f => f.Artist)
+                    .HasForeignKey(f => f.ArtistId);
+
+            #endregion
+
+
+            #region Hobbyists
+
+            builder.Entity<Hobbyist>().ToTable("Hobbyists");
+            builder.Entity<Hobbyist>().HasKey(a => a.HobbyistId);
+            builder.Entity<Hobbyist>().Property(a => a.HobbyistId).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Hobbyist>().Property(a => a.Age);
+            builder.Entity<Hobbyist>().Property(a => a.Collected).HasDefaultValue(false);
+
+            // RelationShips
+            builder.Entity<Hobbyist>()
+                   .HasOne(h => h.User)
+                   .WithOne()
+                   .HasForeignKey<Hobbyist>(h => h.UserId);
+
+            builder.Entity<Hobbyist>()
+                    .HasMany(h => h.Followers)
+                    .WithOne(f => f.Hobbyist)
+                    .HasForeignKey(f => f.HobbyistId);
+
+            #endregion
+
+
+            #region Participants
+
+            builder.Entity<Participant>().ToTable("Participants");
+            builder.Entity<Participant>().HasKey(p => p.Id);
+            builder.Entity<Participant>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Participant>().Property(p => p.UserName).IsRequired();
+            builder.Entity<Participant>().Property(p => p.RegisterDateTime).IsRequired();
+            builder.Entity<Participant>().Property(p => p.CheckInDateTime).IsRequired();
+            builder.Entity<Participant>().Property(p => p.ParticipantRegistrationDateTime).HasColumnType("timestamp").HasDefaultValue(DateTime.UtcNow).IsRequired();
+            builder.Entity<Participant>().Property(p => p.Collected).HasDefaultValue(false).IsRequired();
+
+            // Relationships
+            builder.Entity<Participant>()//.Property(p => p.HobbyistId);
+                .HasOne(p => p.Hobyst)
+                .WithMany(h => h.Participants)
+                .HasForeignKey(p => p.HobbyistId);
+
+            #endregion
+
+
+            #region ArtEvents
+
 
             builder.Entity<ArtEvent>().ToTable("ArtEvents");
             builder.Entity<ArtEvent>().HasKey(a => a.Id);
@@ -120,33 +165,19 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             builder.Entity<ArtEvent>().Property(a => a.IsOnline).IsRequired();
             builder.Entity<ArtEvent>().Property(a => a.CurrentStatus).HasConversion(v => v.ToString(), v => (ArtEventStatus)Enum.Parse(typeof(ArtEventStatus), v));
             builder.Entity<ArtEvent>().Property(a=>a.Collected).HasDefaultValue(false).IsRequired();
-            
-            builder.Entity<Participant>().ToTable("Participants");
-            builder.Entity<Participant>().HasKey(p => p.Id);
-            builder.Entity<Participant>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<Participant>().Property(p => p.UserName).IsRequired();
-            builder.Entity<Participant>().Property(p=>p.RegisterDateTime).IsRequired();
-            builder.Entity<Participant>().Property(p=>p.CheckInDateTime).IsRequired();
-            builder.Entity<Participant>().Property(p=>p.ParticipantRegistrationDateTime).HasColumnType("timestamp").HasDefaultValue(DateTime.UtcNow).IsRequired();
-            builder.Entity<Participant>().Property(p => p.Collected).HasDefaultValue(false).IsRequired();
-            builder.Entity<Participant>()//.Property(p => p.HobbyistId);
-                .HasOne(p => p.Hobyst)
-                .WithMany(h => h.Participants)
-                .HasForeignKey(p => p.HobbyistId);
 
-            builder.Entity<ArtEvent>().Property(ae => ae.ArtistId);
-                .HasOne(ae => ae.Artist)
-                .WithMany(ar => ar.ArtEvents)
-                .HasForeignKey(ae => ae.ArtistId);
+            // RelationShips
+            builder.Entity<ArtEvent>()
+               .HasOne(ae => ae.Artist)
+               .WithMany(ar => ar.ArtEvents)
+               .HasForeignKey(ae => ae.ArtistId);
+
             builder.Entity<ArtEvent>()
                 .HasMany(ae => ae.Participants)
                 .WithOne(p => p.ArtEvent)
                 .HasForeignKey(p => p.ArtEventId);
-            //builder.Entity<Event>().ToTable("events");
-            //builder.Entity<Event>().HasKey(e => e.EventId);
-            //builder.Entity<Event>().Property(e=>e.EventId).IsRequired().ValueGeneratedOnAdd();
-            
-            
+
+            #endregion
 
 
             builder.ApplySnakeCaseNamingConvention();
