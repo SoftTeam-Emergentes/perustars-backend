@@ -5,7 +5,6 @@ using AutoMapper;
 using MediatR;
 using PERUSTARS.ProfileManagement.Domain.Model.Commands;
 using PERUSTARS.ProfileManagement.Interface.REST.Resources;
-using ArtistResource = PERUSTARS.Resources.ArtistResource;
 
 namespace PERUSTARS.ProfileManagement.Application.Commands.Handlers
 {
