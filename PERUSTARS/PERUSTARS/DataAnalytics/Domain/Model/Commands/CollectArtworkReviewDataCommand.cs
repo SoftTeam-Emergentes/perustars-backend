@@ -1,8 +1,5 @@
 ﻿using MediatR;
-using Org.BouncyCastle.Math;
-using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
 using PERUSTARS.DataAnalytics.Domain.Model.Enums;
-using PERUSTARS.Domain.Models;
 
 namespace PERUSTARS.DataAnalytics.Domain.Model.Commands
 {

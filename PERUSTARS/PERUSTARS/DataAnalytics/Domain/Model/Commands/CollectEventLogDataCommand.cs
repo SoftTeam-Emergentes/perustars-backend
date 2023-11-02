@@ -10,10 +10,10 @@ namespace PERUSTARS.DataAnalytics.Application.Commands
 {
     public class CollectEventLogDataCommand: IRequest<bool>
     {
-        public long HobbyistId { get;}
-        public long ArtistId { get; }
-        public long Score { get; }
-        public InteractionType InteractionType { get; } = InteractionType.EVENT_PARTICIPATION;
+        public long HobbyistId { get; set; }
+        public long ArtistId { get; set; }
+        public long Score { get; set; }
+        public InteractionType InteractionType { get; set; } = InteractionType.EVENT_PARTICIPATION;
 
 
     }

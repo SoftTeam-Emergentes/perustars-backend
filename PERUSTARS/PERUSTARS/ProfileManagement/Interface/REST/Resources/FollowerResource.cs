@@ -9,6 +9,6 @@ namespace PERUSTARS.ProfileManagement.Interface.REST.Resources
 
         public Artist Artist { get; set; }
         public long ArtistId { get; set; }
-        public bool Collected { get; set; } = false
+        public bool Collected { get; set; } = false;
     }
 }
