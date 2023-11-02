@@ -1,8 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PERUSTARS.ConductsReportsManagement.Domain.Model.Entities;
 using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
-using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
-using PERUSTARS.ArtworkManagement.Domain.Model.Aggregates;
 using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.Shared.Extensions;
@@ -14,17 +12,12 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
     public class AppDbContext: DbContext
     {
         public DbSet<User> Users { get; set; }
-        public DbSet<ArtworkRecommendation> ArtistRecommendations { get; set; }
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Hobbyist> Hobbyists { get; set; }
         public DbSet<Follower> Followers { get; set; }
         public DbSet<ConductReport> ConductReports { get; set; }
         public DbSet<ArtEvent> Events { get; set; }
         public DbSet<Participant> EventAssistances { get; set; }
-        public DbSet<Artwork> Artworks { get; set; }
-        public DbSet<ArtworkRecommendation> ArtworkRecommendations { get; set; }
-        public DbSet<ArtworkReview> ArtworkReviews { get; set; }
-        public DbSet<HobbyistFavoriteArtwork> HobbyistFavoriteArtworks { get; set; }
         public DbSet<ArtEvent> ArtEvents { get; set; }
         public DbSet<Participant> Participants { get; set; }
 
@@ -79,7 +72,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
 
             builder.Entity<Artist>().ToTable("Artists");
             builder.Entity<Artist>().HasKey(a => a.ArtistId);
-            builder.Entity<Artist>().Property(a=>a.ArtistId).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Artist>().Property(a => a.ArtistId).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Artist>().Property(a => a.Age);
             builder.Entity<Artist>().Property(a => a.Description);
             builder.Entity<Artist>().Property(a => a.Genre).HasConversion<string>();
@@ -96,7 +89,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
                    .HasForeignKey<Artist>(a => a.UserId);
 
             builder.Entity<Artist>()
-                    .HasMany(a => a.Followers)
+                    .HasMany(a => a.FollowersArtist)
                     .WithOne(f => f.Artist)
                     .HasForeignKey(f => f.ArtistId);
 
@@ -118,7 +111,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
                    .HasForeignKey<Hobbyist>(h => h.UserId);
 
             builder.Entity<Hobbyist>()
-                    .HasMany(h => h.Followers)
+                    .HasMany(h => h.FollowedArtists)
                     .WithOne(f => f.Hobbyist)
                     .HasForeignKey(f => f.HobbyistId);
 
@@ -137,10 +130,10 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             builder.Entity<Participant>().Property(p => p.Collected).HasDefaultValue(false).IsRequired();
 
             // Relationships
-            // builder.Entity<Participant>()//.Property(p => p.HobbyistId);
-            //     .HasOne(p => p.Hobyst)
-            //     .WithMany(h => h.Participants)
-            //     .HasForeignKey(p => p.HobbyistId);
+            builder.Entity<Participant>()//.Property(p => p.HobbyistId);
+                .HasOne(p => p.Hobyst)
+                .WithMany(h => h.Participants)
+                .HasForeignKey(p => p.HobbyistId);
 
             #endregion
 
@@ -163,7 +156,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             });
             builder.Entity<ArtEvent>().Property(a => a.IsOnline).IsRequired();
             builder.Entity<ArtEvent>().Property(a => a.CurrentStatus).HasConversion(v => v.ToString(), v => (ArtEventStatus)Enum.Parse(typeof(ArtEventStatus), v));
-            builder.Entity<ArtEvent>().Property(a=>a.Collected).HasDefaultValue(false).IsRequired();
+            builder.Entity<ArtEvent>().Property(a => a.Collected).HasDefaultValue(false).IsRequired();
 
             // RelationShips
             builder.Entity<ArtEvent>()
@@ -258,6 +251,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
 
             #endregion
 
+            #endregion
 
             builder.ApplySnakeCaseNamingConvention();
 

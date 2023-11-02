@@ -61,6 +61,9 @@
     <Folder Include="DataAnalytics\Infrastructure\Repositories\" />
     <Folder Include="DataAnalytics\Interfaces\REST\Resources\" />
     <Folder Include="ProfileManagement\Application\Commands\" />
+    <Folder Include="ArtEventManagement\" />
+    <Folder Include="CommunicationAndNotificationManagement\" />
+    <Folder Include="ConductReportsManagement\" />
     <Folder Include="IdentityAndAccountManagement\Infrastructure\Context\" />
 
   </ItemGroup>

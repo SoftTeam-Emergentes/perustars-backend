@@ -18,9 +18,11 @@ using PERUSTARS.AtEventManagement.Application;
 using Microsoft.AspNetCore.Http;
 using PERUSTARS.AtEventManagement.Application.Participant.Queries;
 using PERUSTARS.AtEventManagement.Domain.Services.Participant;
+using Microsoft.AspNetCore.Http;
 using PERUSTARS.IdentityAndAccountManagement.Application.Settings;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Repositories;
 using PERUSTARS.IdentityAndAccountManagement.Infrastructure.Repositories;
+
 using PERUSTARS.Shared.Domain.Repositories;
 using PERUSTARS.Shared.Infrastructure.Configuration;
 using PERUSTARS.Shared.Infrastructure.Repositories;
@@ -32,6 +34,10 @@ using PERUSTARS.ArtworkManagement.Domain.Repositories;
 using PERUSTARS.ArtworkManagement.Infrastructure.Repositories;
 using PERUSTARS.ArtworkManagement.Domain.Services;
 using PERUSTARS.ArtworkManagement.Application.Commands.Services;
+using PERUSTARS.ProfileManagement.Infrastructure.Repositories;
+using PERUSTARS.ProfileManagement.Domain.Repositories;
+using PERUSTARS.ProfileManagement.Domain.Services;
+using PERUSTARS.ProfileManagement.Application.Commands.Services;
 
 namespace PERUSTARS
 {
@@ -83,6 +89,7 @@ namespace PERUSTARS
 
             services.AddDbContext<AppDbContext>(options =>
             {
+                // options.UseNpgsql(Configuration.GetConnectionString("PostgreSQLConnection"));
                 options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
             });
 
@@ -117,6 +124,10 @@ namespace PERUSTARS
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IIdentityAndAccountManagementCommandService, IdentityAndAccountManagementCommandService>();
+            services.AddScoped<IProfileCommandService, ProfileCommandService>();
+            services.AddScoped<IArtistRepository, ArtistRepository>();
+            services.AddScoped<IHobbyistRepository, HobbyistRepository>();
+
 
             // Apply Endpoints Naming Convention
             services.AddRouting(options => options.LowercaseUrls = true);

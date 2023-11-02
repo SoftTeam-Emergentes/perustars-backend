@@ -7,11 +7,11 @@ using PERUSTARS.ArtworkManagement.Domain.Repositories;
 using PERUSTARS.ArtworkManagement.Domain.Model.Commands;
 using PERUSTARS.ArtworkManagement.Interfaces.REST.Resources;
 using System;
-using PERUSTARS.ProfileManagement.Domain.Persistence;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.ArtworkManagement.Domain.Model.Aggregates;
 using PERUSTARS.ArtworkManagement.Domain.Model.Events;
 using PERUSTARS.ArtworkManagement.Domain.Model.Enums;
+using PERUSTARS.ProfileManagement.Domain.Repositories;
 
 namespace PERUSTARS.ArtworkManagement.Application.Commands.Handlers
 {
