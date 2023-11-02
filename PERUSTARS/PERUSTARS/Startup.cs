@@ -37,6 +37,11 @@ using PERUSTARS.ConductsReportsManagement.Domain.Repositories;
 using PERUSTARS.ConductsReportsManagement.Domain.Model.Services;
 using PERUSTARS.ConductsReportsManagement.Infrastructure.Repository;
 using PERUSTARS.ConductsReportsManagement.Application.Command.Services;
+using MediatR;
+using PERUSTARS.CommunicationAndNotificationManagement.Domain.Repositories;
+using PERUSTARS.CommunicationAndNotificationManagement.Domain.Services;
+using PERUSTARS.CommunicationAndNotificationManagement.Infraestructure.Repositories;
+using PERUSTARS.CommunicationAndNotificationManagement.Application.Commands.Services;
 
 namespace PERUSTARS
 {
@@ -129,6 +134,10 @@ namespace PERUSTARS
 
             services.AddScoped<IConductReportRepository, ConductReportRepository>();
             services.AddScoped<IConductReportService, ConductReportCommandService>();
+
+            services.AddScoped<INotificationRepository, NotificationRepository>();
+            services.AddScoped<INotificationCommandService, NotificationCommandService>();
+
             // Apply Endpoints Naming Convention
             services.AddRouting(options => options.LowercaseUrls = true);
             

@@ -2,6 +2,8 @@
 using PERUSTARS.ArtworkManagement.Domain.Model.Aggregates;
 using PERUSTARS.ArtworkManagement.Domain.Model.Commands;
 using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
+using PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Commands;
+using PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Entities;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Commands;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
@@ -29,6 +31,15 @@ namespace PERUSTARS.Shared.Profiles
             CreateMap<ReviewArtworkCommand, ArtworkReview>();
             CreateMap<AssignFavoriteArtworkCommand, HobbyistFavoriteArtwork>();
             CreateMap<FollowArtistCommand, Follower>();
+
+            CreateMap<NotifyUpdatedArtistProfileCommand, Notification>();
+            CreateMap<NotifyNewArtworkCreatedCommand, Notification>();
+            CreateMap<NotifyFollowedArtistCommand, Notification>();
+            CreateMap<NotifyArtworkSoldCommand, Notification>();
+            CreateMap<NotifyArtEventStartedCommand, Notification>();
+            CreateMap<NotifyArtEventFinishedCommand, Notification>();
+            CreateMap<NotifyArtEventCancelledCommand, Notification>();
+            CreateMap<NotifyArtEventRescheduledCommand, Notification>(); 
         }
     }
 }

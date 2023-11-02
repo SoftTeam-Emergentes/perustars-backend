@@ -8,6 +8,7 @@ using System;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates;
 using PERUSTARS.ArtworkManagement.Domain.Model.Aggregates;
 using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
+using PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Entities;
 
 namespace PERUSTARS.Shared.Infrastructure.Configuration
 {
@@ -26,6 +27,8 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
         public DbSet<ArtworkRecommendation> ArtworkRecommendations { get; set; }
         public DbSet<ArtworkReview> ArtworkReviews { get; set; }
         public DbSet<HobbyistFavoriteArtwork> HobbyistFavoriteArtworks { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
+
 
         public AppDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
         {
@@ -265,6 +268,23 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
                 .WithMany(a => a.LikedHobbyistsList)
                 .HasForeignKey(h => h.ArtworkId);
 
+            #endregion
+
+            #region Notifications
+            // -------CommunicationAndNotificationManagement Bounded Context--------
+            
+            builder.Entity<Notification>().ToTable("Notifications");
+            builder.Entity<Notification>().HasKey(n => n.Id);
+            builder.Entity<Notification>().Property(n => n.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Notification>().Property(n => n.Title).IsRequired();
+            builder.Entity<Notification>().Property(n => n.Description);
+            builder.Entity<Notification>().Property(n => n.ArtistId);           //Artist id is nullable
+            builder.Entity<Notification>().Property(n => n.HobbyistId).IsRequired();
+            builder.Entity<Notification>().Property(n => n.Collected).HasDefaultValue(false).IsRequired();
+            builder.Entity<Notification>().Property(n => n.Sender).IsRequired();
+            builder.Entity<Notification>().Property(n => n.SentAt).HasColumnType("timestamp").HasDefaultValue(DateTime.UtcNow).IsRequired(); 
+            builder.Entity<Notification>().Property(n => n.IsRead).HasDefaultValue(false).IsRequired();
+            
             #endregion
 
             builder.ApplySnakeCaseNamingConvention();

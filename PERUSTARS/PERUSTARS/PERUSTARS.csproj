@@ -9,20 +9,64 @@
   <ItemGroup>
     <Compile Remove="ArtEventManagement\**" />
     <Compile Remove="CommunicationAndNotificationManagement\**" />
-    <Compile Remove="ConductReportsManagement\**" />
     <Compile Remove="DataAnalytics\**" />
     <Content Remove="ArtEventManagement\**" />
     <Content Remove="CommunicationAndNotificationManagement\**" />
-    <Content Remove="ConductReportsManagement\**" />
     <Content Remove="DataAnalytics\**" />
     <EmbeddedResource Remove="ArtEventManagement\**" />
     <EmbeddedResource Remove="CommunicationAndNotificationManagement\**" />
-    <EmbeddedResource Remove="ConductReportsManagement\**" />
     <EmbeddedResource Remove="DataAnalytics\**" />
     <None Remove="ArtEventManagement\**" />
     <None Remove="CommunicationAndNotificationManagement\**" />
-    <None Remove="ConductReportsManagement\**" />
     <None Remove="DataAnalytics\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="CommunicationAndNotificationManagement\Application\Commands\Handlers\NotifyAppliedPenaltyCommandHandler.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Application\Commands\Handlers\NotifyArtworkSoldCommandHandler.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Application\Commands\Handlers\NotifyEventCancelledCommandHandler.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Application\Commands\Handlers\NotifyEventFinishedCommandHandler.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Application\Commands\Handlers\NotifyEventRescheduledCommandHandler.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Application\Commands\Handlers\NotifyEventStartedCommandHandler.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Application\Commands\Handlers\NotifyFollowedArtistCommandHandler.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Application\Commands\Handlers\NotifyNewArtworkCreatedCommandHandler.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Application\Commands\Handlers\NotifyUpdatedArtistProfileCommandHandler.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Application\Commands\Services\NotificationCommandService.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Application\Events\Handlers\ArtistProfileUpdatedEventHandler.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Application\Events\Handlers\CancelledEventNotifiedEventHandler.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Application\Events\Handlers\FinishedEventNotifiedEventHandler.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Application\Events\Handlers\FollowedArtistNotifiedEventHandler.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Application\Events\Handlers\NewArtworkCreatedNotifiedEventHandler.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Application\Events\Handlers\PenaltyAppliedNotifiedEventHandler.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Application\Events\Handlers\RescheduledArtEventNotifiedEventHandler.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Application\Events\Handlers\SoldArtworkNotifiedEventHandler.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Application\Events\Handlers\StartedEventNotifiedEventHandler.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Application\Exceptions\NotificationNotSendedException.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Domain\Model\Commands\NotifyArtEventCancelledCommand.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Domain\Model\Commands\NotifyAppliedPenaltyCommand.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Domain\Model\Commands\NotifyArtEventFinishedCommand.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Domain\Model\Commands\NotifyArtEventRescheduledCommand.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Domain\Model\Commands\NotifyArtEventStartedCommand.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Domain\Model\Commands\NotifyArtworkSoldCommand.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Domain\Model\Commands\NotifyFollowedArtistCommand.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Domain\Model\Commands\NotifyNewArtworkCreatedCommand.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Domain\Model\Commands\NotifyUpdatedArtistProfileCommand.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Domain\Model\Entities\Notification.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Domain\Model\Enums\NotificationSender.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Domain\Model\Events\ArtistProfileUpdatedEvent.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Domain\Model\Events\CancelledArtEventNotifiedEvent.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Domain\Model\Events\FinishedArtEventNotifiedEvent.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Domain\Model\Events\FollowedArtistNotifiedEvent.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Domain\Model\Events\NewArtworkCreatedNotifiedEvent.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Domain\Model\Events\PenaltyAppliedNotifiedEvent.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Domain\Model\Events\RescheduledArtEventNotifiedEvent.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Domain\Model\Events\SoldArtworkNotifiedEvent.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Domain\Model\Events\StartedArtEventNotifiedEvent.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Domain\Repositories\INotificationRepository.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Domain\Services\INotificationCommandService.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Infraestructure\Repositories\NotificationRepository.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Interfaces\REST\NotificationsController.cs" />
+    <Compile Include="CommunicationAndNotificationManagement\Interfaces\REST\Resources\NotificationResource.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -62,8 +106,6 @@
     <Folder Include="DataAnalytics\Interfaces\REST\Resources\" />
     <Folder Include="ProfileManagement\Application\Commands\" />
     <Folder Include="ArtEventManagement\" />
-    <Folder Include="CommunicationAndNotificationManagement\" />
-    <Folder Include="ConductReportsManagement\" />
     <Folder Include="IdentityAndAccountManagement\Infrastructure\Context\" />
 
   </ItemGroup>
