@@ -8,20 +8,32 @@
 
   <ItemGroup>
     <Compile Remove="ArtEventManagement\**" />
+    <Compile Remove="ArtworkManagement\**" />
+    <Compile Remove="AtEventManagement\**" />
     <Compile Remove="CommunicationAndNotificationManagement\**" />
     <Compile Remove="ConductReportsManagement\**" />
+    <Compile Remove="ConductsReportsManagement\**" />
     <Compile Remove="DataAnalytics\**" />
     <Content Remove="ArtEventManagement\**" />
+    <Content Remove="ArtworkManagement\**" />
+    <Content Remove="AtEventManagement\**" />
     <Content Remove="CommunicationAndNotificationManagement\**" />
     <Content Remove="ConductReportsManagement\**" />
+    <Content Remove="ConductsReportsManagement\**" />
     <Content Remove="DataAnalytics\**" />
     <EmbeddedResource Remove="ArtEventManagement\**" />
+    <EmbeddedResource Remove="ArtworkManagement\**" />
+    <EmbeddedResource Remove="AtEventManagement\**" />
     <EmbeddedResource Remove="CommunicationAndNotificationManagement\**" />
     <EmbeddedResource Remove="ConductReportsManagement\**" />
+    <EmbeddedResource Remove="ConductsReportsManagement\**" />
     <EmbeddedResource Remove="DataAnalytics\**" />
     <None Remove="ArtEventManagement\**" />
+    <None Remove="ArtworkManagement\**" />
+    <None Remove="AtEventManagement\**" />
     <None Remove="CommunicationAndNotificationManagement\**" />
     <None Remove="ConductReportsManagement\**" />
+    <None Remove="ConductsReportsManagement\**" />
     <None Remove="DataAnalytics\**" />
   </ItemGroup>
 
