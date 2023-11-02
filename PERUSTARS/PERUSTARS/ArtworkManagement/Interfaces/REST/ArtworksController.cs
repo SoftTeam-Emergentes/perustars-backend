@@ -7,6 +7,7 @@ using PERUSTARS.ArtworkManagement.Domain.Services;
 using PERUSTARS.Shared.Infrastructure.Configuration;
 using PERUSTARS.ArtworkManagement.Domain.Model.Commands;
 using PERUSTARS.ArtworkManagement.Interfaces.REST.Resources;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PERUSTARS.ArtworkManagement.Interfaces.REST
 {
@@ -62,10 +63,11 @@ namespace PERUSTARS.ArtworkManagement.Interfaces.REST
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllArtworks()
         {
             var artworks = await _context.Artworks.ToListAsync();
-            
+
             var artworkResources = _mapper.Map<IEnumerable<ArtworkResource>>(artworks);
             return Ok(artworkResources);
         }
