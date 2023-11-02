@@ -1,13 +1,17 @@
+
+
 using System.Collections.Generic;
-using System.Numerics;
-using PERUSTARS.IdentityAndAccountManagement.Domain.Model;
+using System.ComponentModel.DataAnnotations.Schema;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 
 namespace PERUSTARS.ProfileManagement.Interface.REST.Resources
 {
     public class HobbyistResource
     {
-        public BigInteger HobbyistId { get; set; }
-        public List<Follower> Followers { get; set; }
+        [ForeignKey("User")]
+        public long UserId { get; set; }
+        public long HobbyistId { get; set; }
+        public int Age { get; set; }
+        public List<Follower> FollowedArtists { get; set; }
     }
 }
