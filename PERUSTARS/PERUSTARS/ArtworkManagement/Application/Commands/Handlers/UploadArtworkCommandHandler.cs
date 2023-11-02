@@ -11,6 +11,7 @@ using PERUSTARS.ProfileManagement.Domain.Persistence;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.ArtworkManagement.Domain.Model.Aggregates;
 using PERUSTARS.ArtworkManagement.Domain.Model.Events;
+using PERUSTARS.ArtworkManagement.Domain.Model.Enums;
 
 namespace PERUSTARS.ArtworkManagement.Application.Commands.Handlers
 {
@@ -45,6 +46,7 @@ namespace PERUSTARS.ArtworkManagement.Application.Commands.Handlers
             }
 
             var artwork = _mapper.Map<Artwork>(request);
+            artwork.Status = ArtworkStatus.AVAILABLE;
 
             try
             {

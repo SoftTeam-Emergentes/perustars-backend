@@ -31,8 +31,6 @@
     <Folder Include="ConductsReportsManagement\Domain\Services\" />
     <Folder Include="ArtworkManagement\Application\Events\Services\" />
     <Folder Include="ArtworkManagement\Domain\Model\Aggregates\" />
-    <Folder Include="ArtworkManagement\Domain\Repositories\" />
-    <Folder Include="ArtworkManagement\Infrastructure\Repositories\" />
     <Folder Include="DataAnalytics\Application\Commands\Services\" />
     <Folder Include="DataAnalytics\Application\Events\Services\" />
     <Folder Include="DataAnalytics\Application\QueryServices\" />
