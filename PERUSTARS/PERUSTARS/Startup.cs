@@ -15,26 +15,23 @@ using PERUSTARS.AtEventManagement.Domain.Model.Repositories;
 using PERUSTARS.AtEventManagement.Domain.Services.ArtEvent;
 using PERUSTARS.AtEventManagement.Infrastructure;
 using PERUSTARS.AtEventManagement.Application;
-using System.Reflection;
-using MySql.Data.MySqlClient;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using Microsoft.AspNetCore.Http;
 using PERUSTARS.AtEventManagement.Application.Participant.Queries;
 using PERUSTARS.AtEventManagement.Domain.Services.Participant;
-using Microsoft.AspNetCore.Http;
-using PERUSTARS.ArtworkManagement.Infrastructure.Repositories;
 using PERUSTARS.IdentityAndAccountManagement.Application.Settings;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Repositories;
 using PERUSTARS.IdentityAndAccountManagement.Infrastructure.Repositories;
-using PERUSTARS.ProfileManagement.Domain.Persistence;
 using PERUSTARS.Shared.Domain.Repositories;
 using PERUSTARS.Shared.Infrastructure.Configuration;
 using PERUSTARS.Shared.Infrastructure.Repositories;
 using PERUSTARS.Shared.Profiles;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using PERUSTARS.IdentityAndAccountManagement.Application.Commands.Services;
 using PERUSTARS.IdentityAndAccountManagement.Application.Middleware;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Services;
+using PERUSTARS.ArtworkManagement.Domain.Repositories;
+using PERUSTARS.ArtworkManagement.Infrastructure.Repositories;
+using PERUSTARS.ArtworkManagement.Domain.Services;
+using PERUSTARS.ArtworkManagement.Application.Commands.Services;
 
 namespace PERUSTARS
 {
@@ -99,13 +96,22 @@ namespace PERUSTARS
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
             services.AddScoped<IArtEventRepository, ArtEventRepository>();
             services.AddScoped<IParticipantRepository, ParticipantRepository>();
+            services.AddScoped<IArtworkRepository, ArtworkRepository>();
+            services.AddScoped<IArtworkRecommendationRepository, ArtworkRecommendationRepository>();
+            services.AddScoped<IArtworkReviewRepository, ArtworkReviewRepository>();
+            services.AddScoped<IHobbyistFavoriteArtworkRepository, HobbyistFavoriteArtworkRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
 
 
             services.AddScoped<IArtEventCommandService, ArtEventService>();
             services.AddScoped<IArtEventQueryService, ArtEventQueryService>();
             services.AddScoped<IParticipantQueryService, ParticipantQueryService>();
+
+
+            services.AddScoped<IArtworkCommandService, ArtworkCommandService>();
+            services.AddScoped<IArtworkRecommendationCommandService, ArtworkRecommendationCommandService>();
+            services.AddScoped<IArtworkReviewCommandService, ArtworkReviewCommandService>();
+            services.AddScoped<IHobbyistFavoriteArtworkCommandService, HobbyistFavoriteArtworkCommandService>();
 
             
             services.AddScoped<IUserRepository, UserRepository>();

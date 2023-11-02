@@ -38,5 +38,10 @@ namespace PERUSTARS.ConductsReportsManagement.Application.Command.Handlers
 
             return Unit.Value;
         }
+
+        Task IRequestHandler<DeleteConductReportCommand>.Handle(DeleteConductReportCommand request, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

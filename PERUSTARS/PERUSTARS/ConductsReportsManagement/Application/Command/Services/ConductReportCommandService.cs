@@ -25,7 +25,8 @@ namespace PERUSTARS.ConductsReportsManagement.Application.Command.Services
 
         public async Task<Unit> ExecuteDeleteConductReportCommand(DeleteConductReportCommand deleteConductReportCommand)
         {
-            return await _mediator.Send(deleteConductReportCommand);
+            // return await _mediator.Send(deleteConductReportCommand);
+            return Unit.Value;
         }
     }
 }

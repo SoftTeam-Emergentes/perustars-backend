@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using PERUSTARS.ProfileManagement.Domain.Model.Commands;
-using PERUSTARS.ProfileManagement.Domain.Model.Services;
+using PERUSTARS.ProfileManagement.Domain.Services;
 using PERUSTARS.ProfileManagement.Interface.REST.Resources;
 
 namespace PERUSTARS.ProfileManagement.Application.Commands.Services
