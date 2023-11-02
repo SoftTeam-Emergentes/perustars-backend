@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CommunicationAndNotificationManagement\Application\Commands\Services\" />
     <Folder Include="ArtworkManagement\Application\" />
     <Folder Include="ArtworkManagement\Application\Commands\" />
     <Folder Include="ArtworkManagement\Application\Commands\Handlers\" />
@@ -51,7 +50,6 @@
     <Folder Include="DataAnalytics\Infrastructure\" />
     <Folder Include="DataAnalytics\Infrastructure\Repositories\" />
     <Folder Include="DataAnalytics\Interfaces\REST\Resources\" />
-    <Folder Include="ArtworkManagement\" />
     <Folder Include="ProfileManagement\Application\Commands\" />
     <Folder Include="ArtEventManagement\" />
     <Folder Include="ConductReportsManagement\" />

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Entities;
 
 namespace PERUSTARS.Shared.Profiles
 {
@@ -6,7 +7,7 @@ namespace PERUSTARS.Shared.Profiles
     {
         public ModelToResourceProfile()
         {
-
+            
         }
     }
 }

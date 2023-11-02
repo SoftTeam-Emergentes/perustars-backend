@@ -13,43 +13,43 @@ using PERUSTARS.Shared.Domain.Repositories;
 
 namespace PERUSTARS.CommunicationAndNotificationManagement.Application.Commands.Handlers
 {
-    public class NotifyEventFinishedCommandHandler : IRequestHandler<NotifyArtEventFinishedCommand, bool>
+    public class NotifyEventStartedCommandHandler : IRequestHandler<NotifyArtEventStartedCommand, bool>
     {
         public readonly IPublisher _publisher;
         private readonly IMapper _mapper;
         private readonly INotificationRepository _notificationRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public NotifyEventFinishedCommandHandler(IPublisher publisher, IMapper mapper, INotificationRepository notificationRepository, IUnitOfWork unitOfWork)
+        public NotifyEventStartedCommandHandler(IPublisher publisher, IMapper mapper, INotificationRepository notificationRepository, IUnitOfWork unitOfWork)
         {
             _publisher = publisher;
             _mapper = mapper;
             _notificationRepository = notificationRepository;
             _unitOfWork = unitOfWork;
+
         }
 
-        public async Task<bool> Handle(NotifyArtEventFinishedCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(NotifyArtEventStartedCommand request, CancellationToken cancellationToken)
         {
             var notification = _mapper.Map<Notification>(request);
-            notification.Title = "Se ha finalizado un evento";
-            notification.Description = "Se ha finalizado un evento en el que estabas participando";
+            notification.Title = "Ha empezado un evento";
+            notification.Description = "Un evento en el que estabas participando ha comenzado";
             notification.Sender = NotificationSender.ARTIST;
             notification.SentAt = DateTime.UtcNow;
-
+        
             try
             {   
                 await _notificationRepository.AddAsync(notification);
                 await _unitOfWork.CompleteAsync();
-                await _publisher.Publish(new FinishedArtEventNotifiedEvent());
+                await _publisher.Publish(new StartedArtEventNotifiedEvent());
 
             }
             catch (Exception e)
             {
-                throw new ApplicationException($"An error occurred while notifying the event that has been finished: {e.Message}");
+                throw new ApplicationException($"An error occurred while notifying the event that has been shared: {e.Message}");
             }
 
             return await Task.FromResult(true);
-
         }
     }
 }

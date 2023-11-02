@@ -1,6 +1,9 @@
+using MediatR;
+using System.Reflection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,14 +12,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using PERUSTARS.Domain.Models;
-using PERUSTARS.Domain.Persistence.Contexts;
-using PERUSTARS.Domain.Persistence.Repositories;
-using PERUSTARS.Domain.Services;
-using PERUSTARS.Exceptions;
-using PERUSTARS.Persistence.Repositories;
-using PERUSTARS.Services;
-using PERUSTARS.Settings;
+using PERUSTARS.CommunicationAndNotificationManagement.Application.Commands.Services;
+using PERUSTARS.CommunicationAndNotificationManagement.Domain.Repositories;
+using PERUSTARS.CommunicationAndNotificationManagement.Domain.Services;
+using PERUSTARS.CommunicationAndNotificationManagement.Infraestructure.Repositories;
+using PERUSTARS.Shared.Domain.Repositories;
+using PERUSTARS.Shared.Infrastructure.Configuration;
+using PERUSTARS.Shared.Infrastructure.Repositories;
+using Swashbuckle.AspNetCore.Annotations;
+using System.Net.Mime;
 using System.Text;
 
 namespace PERUSTARS
@@ -72,36 +76,17 @@ namespace PERUSTARS
                 options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            //Añadir lineas de codigo de whatsapp
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
     
             // Dependency Injection Configuration
 
-            services.AddScoped<IArtistRepository, ArtistRepository>();
-            services.AddScoped<IArtworkRepository, ArtworkRepository>();
-            services.AddScoped<IHobbyistRepository, HobbyistRepository>();
-            services.AddScoped<IEventRepository, EventRepository>();
-            services.AddScoped<IClaimTicketRepository, ClaimTicketRepository>();
-            services.AddScoped<IInterestRepository, InterestRepository>();
-            services.AddScoped<IFavoriteArtworkRepository, FavoriteArtworkRepository>();
-            services.AddScoped<ISpecialtyRepository, SpecialtyRepository>();
-            services.AddScoped<IFollowerRepository, FollowerRepository>();
-            services.AddScoped<IEventAssistanceRepository, EventAssistanceRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
+ 
+            services.AddScoped<INotificationRepository, NotificationRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddScoped<IArtworkService, ArtworkService>();
-            services.AddScoped<IArtistService, ArtistService>();
-            services.AddScoped<IHobbyistService, HobbyistService>();
-            services.AddScoped<ISpecialtyService, SpecialtyService>();
-            services.AddScoped<IFollowerService, FollowerService>();
-            services.AddScoped<IEventService, EventService>();
-            services.AddScoped<IInterestService, InterestService>();
-            services.AddScoped<IEventAssistanceService, EventAssistanceService>();
-            services.AddScoped<IFavoriteArtworkService, FavoriteArtworkService>();
-            services.AddScoped<IClaimTicketService, ClaimTicketService>();
-            services.AddScoped<ISpecialtyService, SpecialtyService>();
-            services.AddScoped<IUserService, UserService>();
+
+            services.AddScoped<INotificationCommandService, NotificationCommandService>();
 
 
             // Apply Endpoints Naming Convention
@@ -115,7 +100,18 @@ namespace PERUSTARS
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PERUSTARS", Version = "v1" });
                 c.EnableAnnotations();
             });
+
+            
+
+            services.Configure<ExceptionHandlerOptions>(options => {
+                options.ExceptionHandler = default;
+                options.ExceptionHandlingPath = PathString.FromUriComponent("/error");
+            });      
+
+
         }
+        
+
 
       
 

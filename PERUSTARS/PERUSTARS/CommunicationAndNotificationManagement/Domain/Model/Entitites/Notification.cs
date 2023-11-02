@@ -12,9 +12,9 @@ namespace PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Entities
         public string Description { get; set; }
         public long ArtistId { get; set; }
         public long HobbyistId { get; set; }
-        public DateTime SentAt { get; set; } //Fecha en la que se envió la notificación
-        public bool IsRead { get; set; } //Indica si la notificación fue leída
         public NotificationSender Sender { get; set; } //Indica si la notificación fue enviada por un artista o un aficionado
+        public DateTime SentAt { get; set; } //Fecha en la que se envió la notificación
+        public bool IsRead { get; set; } = false; //Indica si la notificación fue leída
         public bool Collected  { get; set; } = false;
     }
 }

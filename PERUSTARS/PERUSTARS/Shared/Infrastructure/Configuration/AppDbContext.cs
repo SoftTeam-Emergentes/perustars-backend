@@ -9,6 +9,7 @@ using PERUSTARS.Shared.Extensions;
 using System;
 
 using PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Entities;
+using PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Enums;
 
 namespace PERUSTARS.Shared.Infrastructure.Configuration
 
@@ -246,11 +247,11 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             builder.Entity<Notification>().Property(n => n.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Notification>().Property(n => n.Title).IsRequired();
             builder.Entity<Notification>().Property(n => n.Description);
-            builder.Entity<Notification>().Property(n => n.ArtistId).IsRequired();
+            builder.Entity<Notification>().Property(n => n.ArtistId);           //Artist id is nullable
             builder.Entity<Notification>().Property(n => n.HobbyistId).IsRequired();
             builder.Entity<Notification>().Property(n => n.Collected).HasDefaultValue(false).IsRequired();
-            builder.Entity<Notification>().Property(n => n.Sender).IsRequired(); 
-            builder.Entity<Notification>().Property(n => n.SentAt).IsRequired(); 
+            builder.Entity<Notification>().Property(n => n.Sender).HasConversion(v => v.ToString(), v => (NotificationSender)Enum.Parse(typeof(NotificationSender), v)); 
+            builder.Entity<Notification>().Property(n => n.SentAt).HasColumnType("timestamp").HasDefaultValue(DateTime.UtcNow).IsRequired(); 
             builder.Entity<Notification>().Property(n => n.IsRead).HasDefaultValue(false).IsRequired();
             
             #endregion
