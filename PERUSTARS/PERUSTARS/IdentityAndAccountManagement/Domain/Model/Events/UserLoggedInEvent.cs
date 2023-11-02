@@ -1,8 +1,10 @@
 ﻿using MediatR;
 
-namespace PERUSTARS.IdentityAndAccountManagement.Domain.Model.Events;
-
-public class UserLoggedInEvent: INotification
+namespace PERUSTARS.IdentityAndAccountManagement.Domain.Model.Events
 {
-    public long UserId { get; set; }
+    public class UserLoggedInEvent : INotification
+    {
+        public long UserId { get; set; }
+    }
 }
+

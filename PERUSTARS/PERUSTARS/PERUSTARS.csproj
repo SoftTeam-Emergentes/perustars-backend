@@ -33,6 +33,7 @@
     <Folder Include="ArtworkManagement\Domain\Model\Aggregates\" />
     <Folder Include="ArtworkManagement\Domain\Repositories\" />
     <Folder Include="ArtworkManagement\Infrastructure\Repositories\" />
+    <Folder Include="DataAnalytics\Application\Commands\Handlers\" />
     <Folder Include="DataAnalytics\Application\Commands\Services\" />
     <Folder Include="DataAnalytics\Application\Events\Services\" />
     <Folder Include="DataAnalytics\Application\QueryServices\" />

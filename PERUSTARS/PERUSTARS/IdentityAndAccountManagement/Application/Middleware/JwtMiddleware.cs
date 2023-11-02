@@ -8,31 +8,33 @@ using PERUSTARS.IdentityAndAccountManagement.Application.Settings;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Queries;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Repositories;
 
-namespace PERUSTARS.IdentityAndAccountManagement.Application.Middleware;
-
-public class JwtMiddleware
+namespace PERUSTARS.IdentityAndAccountManagement.Application.Middleware
 {
-    private readonly RequestDelegate _next;
-    private readonly AppSettings _appSettings;
-    private readonly IRequestHandler<ValidateJwtTokenQuery, long?> _validateJwtTokenQueryHandler;
-
-    public JwtMiddleware(RequestDelegate next, IOptions<AppSettings> appSettings, IRequestHandler<ValidateJwtTokenQuery, long?> validateJwtTokenQueryHandler)
+    public class JwtMiddleware
     {
-        _next = next;
-        _validateJwtTokenQueryHandler = validateJwtTokenQueryHandler;
-        _appSettings = appSettings.Value;
-    }
+        private readonly RequestDelegate _next;
+        private readonly AppSettings _appSettings;
+        private readonly IRequestHandler<ValidateJwtTokenQuery, long?> _validateJwtTokenQueryHandler;
 
-    public async Task Invoke(HttpContext context, IUserRepository userRepository)
-    {
-        string token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
-        var validateJwtTokenQuery = new ValidateJwtTokenQuery { Token = token};
-        var userId = await _validateJwtTokenQueryHandler.Handle(validateJwtTokenQuery, new CancellationToken());
-        if (userId != null)
+        public JwtMiddleware(RequestDelegate next, IOptions<AppSettings> appSettings, IRequestHandler<ValidateJwtTokenQuery, long?> validateJwtTokenQueryHandler)
         {
-            context.Items["User"] = await userRepository.FindByIdAsync(userId.Value);
+            _next = next;
+            _validateJwtTokenQueryHandler = validateJwtTokenQueryHandler;
+            _appSettings = appSettings.Value;
         }
 
-        await _next(context);
+        public async Task Invoke(HttpContext context, IUserRepository userRepository)
+        {
+            string token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+            var validateJwtTokenQuery = new ValidateJwtTokenQuery { Token = token };
+            var userId = await _validateJwtTokenQueryHandler.Handle(validateJwtTokenQuery, new CancellationToken());
+            if (userId != null)
+            {
+                context.Items["User"] = await userRepository.FindByIdAsync(userId.Value);
+            }
+
+            await _next(context);
+        }
     }
 }
+

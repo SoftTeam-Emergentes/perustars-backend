@@ -1,6 +1,8 @@
-﻿namespace PERUSTARS.IdentityAndAccountManagement.Application.Settings;
-
-public class AppSettings
+﻿namespace PERUSTARS.IdentityAndAccountManagement.Application.Settings
 {
-    public string Secret { get; set; }
+    public class AppSettings
+    {
+        public string Secret { get; set; }
+    }
 }
+

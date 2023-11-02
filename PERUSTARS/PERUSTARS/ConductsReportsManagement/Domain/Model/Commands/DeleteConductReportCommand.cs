@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.ConductsReportsManagement.Domain.Model.Commands
 {
-    public class DeleteConductReportCommand : IRequest
+    public class DeleteConductReportCommand : IRequest<Unit>
     {
         public long id;
     }

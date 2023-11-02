@@ -11,45 +11,47 @@ using Microsoft.IdentityModel.Tokens;
 using PERUSTARS.IdentityAndAccountManagement.Application.Settings;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Queries;
 
-namespace PERUSTARS.IdentityAndAccountManagement.Application.Queries.Handlers;
-
-public class ValidateJwtTokenQueryHandler : IRequestHandler<ValidateJwtTokenQuery, long?>
+namespace PERUSTARS.IdentityAndAccountManagement.Application.Queries.Handlers
 {
-    private readonly IOptions<AppSettings> _appSettings;
-
-    public ValidateJwtTokenQueryHandler(IOptions<AppSettings> appSettings)
+    public class ValidateJwtTokenQueryHandler : IRequestHandler<ValidateJwtTokenQuery, long?>
     {
-        _appSettings = appSettings;
-    }
+        private readonly IOptions<AppSettings> _appSettings;
 
-    public async Task<long?> Handle(ValidateJwtTokenQuery request, CancellationToken cancellationToken)
-    {
-        if (string.IsNullOrEmpty(request.Token))
-            return null;
-
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(_appSettings.Value.Secret);
-
-        try
+        public ValidateJwtTokenQueryHandler(IOptions<AppSettings> appSettings)
         {
-            tokenHandler.ValidateToken(request.Token, new TokenValidationParameters
-            {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(key),
-                ValidateIssuer = false,
-                ValidateAudience = false,
-                ClockSkew = TimeSpan.Zero,
-            }, out var validatedToken);
-
-            var jwtToken = (JwtSecurityToken)validatedToken;
-            var userId = long.Parse(jwtToken.Claims.First(claim => claim.Type == ClaimTypes.Sid).Value);
-
-            return userId;
+            _appSettings = appSettings;
         }
-        catch (Exception e)
+
+        public async Task<long?> Handle(ValidateJwtTokenQuery request, CancellationToken cancellationToken)
         {
-            Console.WriteLine(e);
-            return null;
+            if (string.IsNullOrEmpty(request.Token))
+                return null;
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_appSettings.Value.Secret);
+
+            try
+            {
+                tokenHandler.ValidateToken(request.Token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero,
+                }, out var validatedToken);
+
+                var jwtToken = (JwtSecurityToken)validatedToken;
+                var userId = long.Parse(jwtToken.Claims.First(claim => claim.Type == ClaimTypes.Sid).Value);
+
+                return userId;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
         }
     }
 }
+

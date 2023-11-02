@@ -2,10 +2,12 @@
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates;
 using PERUSTARS.Shared.Domain.Repositories;
 
-namespace PERUSTARS.IdentityAndAccountManagement.Domain.Repositories;
-
-public interface IUserRepository: IBaseRepository<User>
+namespace PERUSTARS.IdentityAndAccountManagement.Domain.Repositories
 {
-    bool ExistsByEmail(string email);
-    Task<User> FindByEmailAsync(string email);
+    public interface IUserRepository : IBaseRepository<User>
+    {
+        bool ExistsByEmail(string email);
+        Task<User> FindByEmailAsync(string email);
+    }
 }
+

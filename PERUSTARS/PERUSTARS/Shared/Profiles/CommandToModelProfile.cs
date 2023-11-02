@@ -2,12 +2,14 @@
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Commands;
 
-namespace PERUSTARS.Shared.Profiles;
-
-public class CommandToModelProfile: Profile
+namespace PERUSTARS.Shared.Profiles
 {
-    public CommandToModelProfile()
+    public class CommandToModelProfile : Profile
     {
-        CreateMap<RegisterUserCommand, User>();
+        public CommandToModelProfile()
+        {
+            CreateMap<RegisterUserCommand, User>();
+        }
     }
 }
+

@@ -26,6 +26,16 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using PERUSTARS.IdentityAndAccountManagement.Application.Commands.Services;
 using PERUSTARS.IdentityAndAccountManagement.Application.Middleware;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Services;
+using PERUSTARS.ConductsReportsManagement.Domain.Repositories;
+using PERUSTARS.ConductsReportsManagement.Infrastructure.Repository;
+using PERUSTARS.ConductsReportsManagement.Domain.Model.Services;
+using PERUSTARS.ConductsReportsManagement.Application.Command.Services;
+using PERUSTARS.ArtworkManagement.Domain.Repositories;
+using PERUSTARS.ArtworkManagement.Domain.Services;
+using PERUSTARS.ArtworkManagement.Application.Commands.Services;
+using PERUSTARS.AtEventManagement.Domain.Model.Repositories;
+using PERUSTARS.AtEventManagement.Infrastructure;
+using PERUSTARS.ProfileManagement.Domain.Services;
 
 namespace PERUSTARS
 {
@@ -81,35 +91,39 @@ namespace PERUSTARS
             });
 
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-
-            // Dependency Injection Configuration
-
-            /*services.AddScoped<IArtistRepository, ArtistRepository>();
-            services.AddScoped<IArtworkRepository, ArtworkRepository>();
-            services.AddScoped<IHobbyistRepository, HobbyistRepository>();
-            services.AddScoped<IEventRepository, EventRepository>();
-            services.AddScoped<IClaimTicketRepository, ClaimTicketRepository>();
-            services.AddScoped<IInterestRepository, InterestRepository>();
-            services.AddScoped<IFavoriteArtworkRepository, FavoriteArtworkRepository>();
-            services.AddScoped<ISpecialtyRepository, SpecialtyRepository>();
-            services.AddScoped<IFollowerRepository, FollowerRepository>();
-            services.AddScoped<IEventAssistanceRepository, EventAssistanceRepository>();
-            services.AddScoped<IArtworkService, ArtworkService>();
-            services.AddScoped<IArtistService, ArtistService>();
-            services.AddScoped<IHobbyistService, HobbyistService>();
-            services.AddScoped<ISpecialtyService, SpecialtyService>();
-            services.AddScoped<IFollowerService, FollowerService>();
-            services.AddScoped<IEventService, EventService>();
-            services.AddScoped<IInterestService, InterestService>();
-            services.AddScoped<IEventAssistanceService, EventAssistanceService>();
-            services.AddScoped<IFavoriteArtworkService, FavoriteArtworkService>();
-            services.AddScoped<IClaimTicketService, ClaimTicketService>();
-            services.AddScoped<ISpecialtyService, SpecialtyService>();*/
-
-            
-            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            //Conduct Report
+            services.AddScoped<IConductReportRepository, ConductReportRepository>();
+            services.AddScoped<IConductReportService, ConductReportCommandService>();
+
+            //Artworked
+            services.AddScoped<IArtworkRecommendationRepository, ArtworkRecommendationRepository>();
+            services.AddScoped<IArtworkRepository, ArtworkRepository>();
+            services.AddScoped<IArtworkReviewRepository, ArtworkReviewRepository>();
+            services.AddScoped<IArtworkCommandService, ArtworkCommandService>();
+            services.AddScoped<IArtworkRecommendationCommandService, ArtworkRecommendationCommandService>();
+            services.AddScoped<IArtworkReviewCommandService, ArtworkReviewCommandService>();
+
+
+            //ArtEvent
+            services.AddScoped<IArtEventRepository, ArtEventRepository>();
+            services.AddScoped<IParticipantRepository, ParticipantRepository>();
+
+            //Identity
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IIdentityAndAccountManagementCommandService, IdentityAndAccountManagementCommandService>();
+
+            //Profile
+            services.AddScoped<IArtistRepository>();
+            services.AddScoped<IFollowerRepository>();
+            services.AddScoped<IHobbyistRepository>();
+            services.AddScoped<IProfileCommandService>();
+
+
+
+
+
 
             // Apply Endpoints Naming Convention
             services.AddRouting(options => options.LowercaseUrls = true);

@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Globalization;
 
-namespace PERUSTARS.IdentityAndAccountManagement.Application.Exceptions;
-
-public class AppException : Exception
+namespace PERUSTARS.IdentityAndAccountManagement.Application.Exceptions
 {
-    public AppException() : base()
+    public class AppException : Exception
     {
+        public AppException() : base()
+        {
+        }
+
+        public AppException(string message) : base(message) { }
+
+        public AppException(string message, params object[] args)
+            : base(string.Format(CultureInfo.CurrentCulture, message, args)) { }
+
     }
 
-    public AppException(string message) : base(message) { }
-
-    public AppException(string message, params object[] args)
-        : base(string.Format(CultureInfo.CurrentCulture, message, args)) { }
-
 }
+
