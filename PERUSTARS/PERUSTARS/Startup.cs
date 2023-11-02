@@ -17,7 +17,6 @@ using PERUSTARS.ArtworkManagement.Infrastructure.Repositories;
 using PERUSTARS.IdentityAndAccountManagement.Application.Settings;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Repositories;
 using PERUSTARS.IdentityAndAccountManagement.Infrastructure.Repositories;
-using PERUSTARS.ProfileManagement.Domain.Persistence;
 using PERUSTARS.Shared.Domain.Repositories;
 using PERUSTARS.Shared.Infrastructure.Configuration;
 using PERUSTARS.Shared.Infrastructure.Repositories;
@@ -36,6 +35,9 @@ using PERUSTARS.ArtworkManagement.Application.Commands.Services;
 using PERUSTARS.AtEventManagement.Domain.Model.Repositories;
 using PERUSTARS.AtEventManagement.Infrastructure;
 using PERUSTARS.ProfileManagement.Domain.Services;
+using PERUSTARS.ProfileManagement.Infrastructure.Repositories;
+using PERUSTARS.ProfileManagement.Application.Commands.Services;
+using PERUSTARS.ProfileManagement.Domain.Repositories;
 
 namespace PERUSTARS
 {
@@ -115,10 +117,10 @@ namespace PERUSTARS
             services.AddScoped<IIdentityAndAccountManagementCommandService, IdentityAndAccountManagementCommandService>();
 
             //Profile
-            services.AddScoped<IArtistRepository>();
-            services.AddScoped<IFollowerRepository>();
-            services.AddScoped<IHobbyistRepository>();
-            services.AddScoped<IProfileCommandService>();
+            services.AddScoped<IArtistRepository, ArtistRepository>();
+            //services.AddScoped<IFollowerRepository, FollowerRepository>();
+            services.AddScoped<IHobbyistRepository, HobbyistRepository>();
+            services.AddScoped<IProfileCommandService, ProfileCommandService>();
 
 
 
