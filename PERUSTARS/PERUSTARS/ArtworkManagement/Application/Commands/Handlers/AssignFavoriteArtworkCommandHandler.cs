@@ -8,7 +8,7 @@ using PERUSTARS.ArtworkManagement.Domain.Model.Commands;
 using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
 using PERUSTARS.ArtworkManagement.Domain.Repositories;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
-using PERUSTARS.ProfileManagement.Domain.Persistence;
+using PERUSTARS.ProfileManagement.Domain.Repositories;
 using PERUSTARS.Shared.Domain.Repositories;
 
 namespace PERUSTARS.ArtworkManagement.Application.Commands.Handlers

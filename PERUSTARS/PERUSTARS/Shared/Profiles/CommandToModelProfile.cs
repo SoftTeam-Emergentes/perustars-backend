@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using PERUSTARS.ArtworkManagement.Domain.Model.Aggregates;
+using PERUSTARS.ArtworkManagement.Domain.Model.Commands;
+using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Commands;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
@@ -18,5 +21,12 @@ public class CommandToModelProfile: Profile
         CreateMap<DeleteProfileArtistCommand, Artist>();
         CreateMap<DeleteProfileHobbyistCommand, Hobbyist>();
         CreateMap<FollowArtistCommand, Follower>();
+        CreateMap<UploadArtworkCommand, Artwork>();
+        CreateMap<EditArtworkCommand, Artwork>();
+        CreateMap<DeleteArtworkCommand, Artwork>();
+        CreateMap<PurchaseArtworkCommand, Artwork>();
+        CreateMap<RecommendArtworkCommand, ArtworkRecommendation>();
+        CreateMap<ReviewArtworkCommand, ArtworkReview>();
+        CreateMap<AssignFavoriteArtworkCommand, HobbyistFavoriteArtwork>();
     }
 }

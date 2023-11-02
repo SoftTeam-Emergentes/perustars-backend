@@ -10,7 +10,7 @@ namespace PERUSTARS.ProfileManagement.Domain.Model.Aggregates
         public long FollowerId { get; set; }
         public long HobbyistId { get; set; }
 
-        //public Artist Artist { get; set; }
+        public Artist Artist { get; set; }
         public long ArtistId { get; set; }
         
         public DateTime RegistrationDate { get; set; }

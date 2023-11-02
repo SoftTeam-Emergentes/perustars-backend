@@ -6,6 +6,8 @@ using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.Shared.Extensions;
 using System;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates;
+using PERUSTARS.ArtworkManagement.Domain.Model.Aggregates;
+using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
 
 namespace PERUSTARS.Shared.Infrastructure.Configuration
 {
@@ -20,6 +22,10 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
         public DbSet<Participant> EventAssistances { get; set; }
         public DbSet<ArtEvent> ArtEvents { get; set; }
         public DbSet<Participant> Participants { get; set; }
+        public DbSet<Artwork> Artworks { get; set; }
+        public DbSet<ArtworkRecommendation> ArtworkRecommendations { get; set; }
+        public DbSet<ArtworkReview> ArtworkReviews { get; set; }
+        public DbSet<HobbyistFavoriteArtwork> HobbyistFavoriteArtworks { get; set; }
 
         public AppDbContext(DbContextOptions dbContextOptions): base(dbContextOptions)
         {
@@ -161,7 +167,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             // RelationShips
             builder.Entity<ArtEvent>()
                .HasOne(ae => ae.Artist)
-               .WithMany(ar => ar.ArtEvents)
+               .WithMany()
                .HasForeignKey(ae => ae.ArtistId);
 
             builder.Entity<ArtEvent>()
@@ -187,7 +193,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             builder.Entity<Artwork>().Property(a => a.Status).IsRequired();
             builder.Entity<Artwork>()
                 .HasOne(a => a.Artist)
-                .WithMany(a => a.Artworks)
+                .WithMany()
                 .HasForeignKey(a => a.ArtistId);
             
             #endregion
@@ -201,7 +207,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             builder.Entity<ArtworkRecommendation>().Property(ar => ar.Collected).HasDefaultValue(false).IsRequired();
             builder.Entity<ArtworkRecommendation>()
                 .HasOne(ar => ar.Artist)
-                .WithMany(a => a.ArtworkRecommendations)
+                .WithMany()
                 .HasForeignKey(ar => ar.ArtistId);
             builder.Entity<ArtworkRecommendation>()
                 .HasOne(ar => ar.Hobbyist)
@@ -248,8 +254,6 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
                 .HasOne(h => h.Artwork)
                 .WithMany(a => a.LikedHobbyistsList)
                 .HasForeignKey(h => h.ArtworkId);
-
-            #endregion
 
             #endregion
 

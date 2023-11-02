@@ -1,16 +1,6 @@
 using System.Threading.Tasks;
-using AutoMapper;
 using MediatR;
 using PERUSTARS.ProfileManagement.Domain.Model.Commands;
-<<<<<<< HEAD
-=======
-using System;
-using System.Threading.Tasks;
-using AutoMapper;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using PERUSTARS.ProfileManagement.Domain.Model.Commands;
->>>>>>> 1ac173f69e9a0ad97ac47f42f7400765794e0411
 using PERUSTARS.ProfileManagement.Domain.Services;
 using PERUSTARS.ProfileManagement.Interface.REST.Resources;
 

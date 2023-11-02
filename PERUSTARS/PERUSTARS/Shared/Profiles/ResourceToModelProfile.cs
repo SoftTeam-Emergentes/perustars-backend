@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using PERUSTARS.ArtworkManagement.Domain.Model.Aggregates;
+using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
+using PERUSTARS.ArtworkManagement.Interfaces.REST.Resources;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates;
 using PERUSTARS.IdentityAndAccountManagement.Interfaces.REST.Resources;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
@@ -13,6 +16,11 @@ namespace PERUSTARS.Shared.Profiles
             CreateMap<UserResource, User>();
             CreateMap<ArtistResource, Artist>();
             CreateMap<HobbyistResource, Hobbyist>();
+            CreateMap<ArtworkResource, Artwork>();
+            CreateMap<ArtworkRecommendationResource, ArtworkRecommendation>();
+            CreateMap<ArtworkReviewResource, ArtworkReview>();
+            CreateMap<HobbyistFavoriteArtworkResource, HobbyistFavoriteArtwork>();
+            
         }
     }
 }
