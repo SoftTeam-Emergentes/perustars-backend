@@ -38,7 +38,7 @@ namespace PERUSTARS.IdentityAndAccountManagement.Application.Commands.Handlers
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(key),
-                    SecurityAlgorithms.HmacSha512Signature)
+                    SecurityAlgorithms.Aes256CbcHmacSha512)
             };
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
