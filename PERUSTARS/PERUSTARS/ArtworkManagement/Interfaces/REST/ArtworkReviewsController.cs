@@ -41,10 +41,16 @@ namespace PERUSTARS.ArtworkManagement.Interfaces.REST
         [HttpGet("artworks/{artworkId}")]
         public async Task<IActionResult> GetArtworkReviewsByArtworkId(long artworkId)
         {
+            var existingArtwork = await _context.Artworks.FirstOrDefaultAsync(x => x.Id == artworkId);
+            if (existingArtwork == null)
+            {
+                return NotFound();
+            }
+
             var artworkReviews = await _context.ArtworkReviews.Where(x => x.ArtworkId == artworkId).ToListAsync();
             
             var artworkReviewResources = _mapper.Map<IEnumerable<ArtworkReviewResource>>(artworkReviews);
-            return Ok(artworkReviews);
+            return Ok(artworkReviewResources);
         }
     }
 }

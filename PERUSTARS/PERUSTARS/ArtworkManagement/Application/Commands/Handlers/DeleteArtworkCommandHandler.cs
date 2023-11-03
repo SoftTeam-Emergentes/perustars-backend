@@ -8,6 +8,7 @@ using PERUSTARS.ArtworkManagement.Domain.Model.Commands;
 using PERUSTARS.ArtworkManagement.Application.Exceptions;
 using System;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
+using PERUSTARS.ProfileManagement.Domain.Repositories;
 
 namespace PERUSTARS.ArtworkManagement.Application.Commands.Handlers
 {
@@ -15,20 +16,22 @@ namespace PERUSTARS.ArtworkManagement.Application.Commands.Handlers
     {
         private readonly IPublisher _publisher;
         private readonly IMapper _mapper;
+        private readonly IArtistRepository _artistRepository;
         private readonly IArtworkRepository _artworkRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public DeleteArtworkCommandHandler(IPublisher publisher, IMapper mapper, IArtworkRepository artworkRepository, IUnitOfWork unitOfWork)
+        public DeleteArtworkCommandHandler(IPublisher publisher, IMapper mapper, IArtistRepository artistRepository, IArtworkRepository artworkRepository, IUnitOfWork unitOfWork)
         {
             _publisher = publisher;
             _mapper = mapper;
+            _artistRepository = artistRepository;
             _artworkRepository = artworkRepository;
             _unitOfWork = unitOfWork;
         }
         
         public async Task<Unit> Handle(DeleteArtworkCommand request, CancellationToken cancellationToken)
         {
-            var existingArtist = new Artist(); // TODO: await _artistRepository.FindArtistByIdAsync(request.ArtistId);
+            var existingArtist = await _artistRepository.GetArtistByIdAsync(request.ArtistId);
             if (existingArtist == null)
             {
                 throw new ApplicationException("Artist not found");

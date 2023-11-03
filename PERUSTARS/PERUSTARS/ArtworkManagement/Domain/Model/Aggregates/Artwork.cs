@@ -17,7 +17,7 @@ namespace PERUSTARS.ArtworkManagement.Domain.Model.Aggregates
         public IEnumerable<HobbyistFavoriteArtwork> LikedHobbyistsList { get; set; }
         public ArtworkContent CoverImage { get; set; }
         public IEnumerable<ArtworkReview> ReviewsList { get; set; }
-        public DateTime PublishedAt { get; set; }
+        public DateTime PublishedAt { get; set; } = DateTime.Now;
         public ArtworkStatus Status { get; set; }
         public long ArtistId { get; set; }
         public Artist Artist { get; set; }

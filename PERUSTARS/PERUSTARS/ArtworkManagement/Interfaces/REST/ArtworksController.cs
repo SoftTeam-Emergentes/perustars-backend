@@ -8,6 +8,7 @@ using PERUSTARS.Shared.Infrastructure.Configuration;
 using PERUSTARS.ArtworkManagement.Domain.Model.Commands;
 using PERUSTARS.ArtworkManagement.Interfaces.REST.Resources;
 using Microsoft.AspNetCore.Authorization;
+using System.Linq;
 
 namespace PERUSTARS.ArtworkManagement.Interfaces.REST
 {
@@ -81,14 +82,10 @@ namespace PERUSTARS.ArtworkManagement.Interfaces.REST
                 return NotFound();
             }
 
-            var existingArtwork = await _context.Artworks.FirstOrDefaultAsync(a => a.ArtistId == artistId);
-            if (existingArtwork == null)
-            {
-                return NotFound();
-            }
+            var artworks = await _context.Artworks.Where(a => a.ArtistId == artistId).ToListAsync();
 
-            var artworkResource = _mapper.Map<ArtworkResource>(existingArtwork);
-            return Ok(artworkResource);
+            var artworkResources = _mapper.Map<IEnumerable<ArtworkResource>>(artworks);
+            return Ok(artworkResources);
         }
     }
 }
