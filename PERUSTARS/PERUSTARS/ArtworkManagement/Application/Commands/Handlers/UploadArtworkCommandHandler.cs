@@ -23,17 +23,18 @@ namespace PERUSTARS.ArtworkManagement.Application.Commands.Handlers
         private readonly IArtworkRepository _artworkRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UploadArtworkCommandHandler(IPublisher publisher, IMapper mapper, IArtworkRepository artworkRepository, IUnitOfWork unitOfWork)
+        public UploadArtworkCommandHandler(IPublisher publisher, IMapper mapper, IArtistRepository artistRepository, IArtworkRepository artworkRepository, IUnitOfWork unitOfWork)
         {
             _publisher = publisher;
             _mapper = mapper;
+            _artistRepository = artistRepository;
             _artworkRepository = artworkRepository;
             _unitOfWork = unitOfWork;
         }
 
         public async Task<ArtworkResource> Handle(UploadArtworkCommand request, CancellationToken cancellationToken)
         {
-            var existingArtist = new Artist(); // TODO: await _artistRepository.FindArtistByIdAsync(request.ArtistId);
+            var existingArtist = await _artistRepository.GetArtistByIdAsync(request.ArtistId);
             if (existingArtist == null)
             {
                 throw new ApplicationException("Artist not found");

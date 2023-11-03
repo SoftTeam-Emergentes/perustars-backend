@@ -11,9 +11,9 @@ namespace PERUSTARS.ArtworkManagement.Application.Events.Handlers
         {
         }
 
-        public async Task Handle(ArtworkRecommendedEvent notification, CancellationToken cancellationToken)
+        public Task Handle(ArtworkRecommendedEvent notification, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            return Task.CompletedTask;
         }
     }
 }

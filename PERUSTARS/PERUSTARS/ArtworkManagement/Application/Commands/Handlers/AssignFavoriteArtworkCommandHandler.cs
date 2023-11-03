@@ -35,7 +35,7 @@ namespace PERUSTARS.ArtworkManagement.Application.Commands.Handlers
 
         public async Task<Unit> Handle(AssignFavoriteArtworkCommand request, CancellationToken cancellationToken)
         {
-            var existingHobbyist = new Hobbyist(); // TODO: await _hobbyistRepository.FindHobbyistByIdAsync(request.HobbyistId);
+            var existingHobbyist = await _hobbyistRepository.GetHobbyistByIdAsync(request.HobbyistId);
             if (existingHobbyist == null)
             {
                 throw new ApplicationException("Hobbyist not found");

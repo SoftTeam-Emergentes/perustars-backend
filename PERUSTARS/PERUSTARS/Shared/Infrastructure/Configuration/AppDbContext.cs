@@ -225,7 +225,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             builder.Entity<ArtworkRecommendation>()
                 .HasOne(ar => ar.Hobbyist)
                 .WithMany(h => h.ArtworkRecommendations)
-                .HasForeignKey(ar => ar.HobyistId);
+                .HasForeignKey(ar => ar.HobbyistId);
             builder.Entity<ArtworkRecommendation>()
                 .HasOne(ar => ar.Artwork)
                 .WithMany(a => a.ArtworkRecommendations)
