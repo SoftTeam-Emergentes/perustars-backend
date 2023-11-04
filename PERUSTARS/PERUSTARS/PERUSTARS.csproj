@@ -99,7 +99,6 @@
     <Folder Include="bin\Debug\net6.0-maccatalyst\" />
     <Folder Include="bin\Debug\net6.0-macos\" />
     <Folder Include="bin\Debug\net6.0\" />
-    <Folder Include="bin\Release\net5.0\" />
     <Folder Include="ConductsReportsManagement\Domain\Model\Aggregate\" />
     <Folder Include="ConductsReportsManagement\Domain\Services\" />
     <Folder Include="ArtworkManagement\Application\Events\Services\" />
@@ -156,6 +155,7 @@
     <None Include="bin\Debug\net5.0\System.Security.Cryptography.ProtectedData.dll" />
     <None Include="bin\Debug\net5.0\Ubiety.Dns.Core.dll" />
     <None Include="bin\Debug\net5.0\ZstdNet.dll" />
+    <None Include="bin\Release\net5.0\PERUSTARS.dll" />
   </ItemGroup>
 
 </Project>
