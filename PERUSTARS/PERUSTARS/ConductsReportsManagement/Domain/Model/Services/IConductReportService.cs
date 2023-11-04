@@ -10,7 +10,7 @@ namespace PERUSTARS.ConductsReportsManagement.Domain.Model.Services
 {
     public interface IConductReportService
     {
-        Task<ConductReportResource> ExecuteRegisterConductReportCommand(RegisterConductReportCommand registerConductReportCommand);
+        Task<RegisterCondcutReport> ExecuteRegisterConductReportCommand(RegisterConductReportCommand registerConductReportCommand);
         Task<Unit> ExecuteDeleteConductReportCommand(DeleteConductReportCommand deleteConductReportCommand);
     }
 }

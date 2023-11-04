@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.ConductsReportsManagement.Application.Command.Handlers
 {
-    public class RegisterConductReportCommandHandler: IRequestHandler<RegisterConductReportCommand, ConductReportResource>
+    public class RegisterConductReportCommandHandler: IRequestHandler<RegisterConductReportCommand, RegisterCondcutReport>
     {
         //private readonly IPublisher _publisher;
         private readonly IMapper _mapper;
@@ -28,13 +28,13 @@ namespace PERUSTARS.ConductsReportsManagement.Application.Command.Handlers
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<ConductReportResource> Handle(RegisterConductReportCommand registerConductReportCommand,
+        public async Task<RegisterCondcutReport> Handle(RegisterConductReportCommand registerConductReportCommand,
                                                         CancellationToken cancellationToken)
         {
-            ConductReportResource conductReportResource = new ConductReportResource();
+            RegisterCondcutReport conductReportResource = new RegisterCondcutReport();
 
             if (_conductReportRepository.ExistByTitle(registerConductReportCommand.Title))
-                throw new ApplicationException($"Id '{registerConductReportCommand.id}' is already taken");
+                throw new ApplicationException($"Id '{registerConductReportCommand.Id}' is already taken");
 
             var conductReport = _mapper.Map<ConductReport>(registerConductReportCommand);
 

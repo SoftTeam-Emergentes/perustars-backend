@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.ConductsReportsManagement.Interfaces.REST.resources
 {
-    public class ConductReportResource
+    public class RegisterCondcutReport
     {
         public long id;
         [Required]

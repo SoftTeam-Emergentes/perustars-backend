@@ -28,7 +28,7 @@ namespace PERUSTARS.ConductsReportsManagement.Interfaces.REST
         public async Task<IActionResult> RegisterNewConductReport([FromBody] RegisterConductReport registerConductReport)
         {
             RegisterConductReportCommand registerConductReportCommand = _mapper.Map<RegisterConductReportCommand>(registerConductReport);
-            ConductReportResource conductReportResource = await _conductReportService.ExecuteRegisterConductReportCommand(registerConductReportCommand);
+            RegisterCondcutReport conductReportResource = await _conductReportService.ExecuteRegisterConductReportCommand(registerConductReportCommand);
             return Ok(conductReportResource);
         }
 

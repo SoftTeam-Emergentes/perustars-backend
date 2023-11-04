@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.ConductsReportsManagement.Domain.Model.Commands
 {
-    public class RegisterConductReportCommand : IRequest<ConductReportResource>
+    public class RegisterConductReportCommand : IRequest<RegisterCondcutReport>
     {
-        public long id { get; set; }
+        public long Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime DateTimeReport { get; set; }

@@ -18,7 +18,7 @@ namespace PERUSTARS.ConductsReportsManagement.Application.Command.Services
             _mediator = mediator;
         }
 
-        public async Task<ConductReportResource> ExecuteRegisterConductReportCommand(RegisterConductReportCommand registerConductReportCommand)
+        public async Task<RegisterCondcutReport> ExecuteRegisterConductReportCommand(RegisterConductReportCommand registerConductReportCommand)
         {
             return await _mediator.Send(registerConductReportCommand);
         }
