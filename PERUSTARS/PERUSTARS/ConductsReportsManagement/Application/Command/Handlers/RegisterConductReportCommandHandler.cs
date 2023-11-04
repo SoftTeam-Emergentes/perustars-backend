@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
 using MediatR;
 using PERUSTARS.ConductsReportsManagement.Domain.Model.Commands;
+using PERUSTARS.ConductsReportsManagement.Domain.Model.Events;
 using PERUSTARS.ConductsReportsManagement.Domain.Model.Entities;
 using PERUSTARS.ConductsReportsManagement.Domain.Repositories;
 using PERUSTARS.ConductsReportsManagement.Interfaces.REST.resources;
 using PERUSTARS.Shared.Domain.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,9 +19,8 @@ namespace PERUSTARS.ConductsReportsManagement.Application.Command.Handlers
         private readonly IConductReportRepository _conductReportRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public RegisterConductReportCommandHandler(/*IPublisher publisher,*/IMapper mapper, IConductReportRepository conductReportRepository, IUnitOfWork unitOfWork)
+        public RegisterConductReportCommandHandler(IMapper mapper, IConductReportRepository conductReportRepository, IUnitOfWork unitOfWork)
         {
-            //_publisher = publisher; Case with Event
             _mapper = mapper;
             _conductReportRepository = conductReportRepository;
             _unitOfWork = unitOfWork;

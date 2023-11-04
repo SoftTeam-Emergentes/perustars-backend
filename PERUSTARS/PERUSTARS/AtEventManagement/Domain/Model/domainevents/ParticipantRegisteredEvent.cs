@@ -1,6 +1,10 @@
-﻿namespace PERUSTARS.AtEventManagement.Domain.Model.domainevents
+﻿using MediatR;
+
+namespace PERUSTARS.AtEventManagement.Domain.Model.domainevents
 {
-    public class ParticipantRegisteredEvent
+    public class ParticipantRegisteredEvent: INotification
     {
+        public long HobbyistId { get; set; }
+        public long ArtistId { get; set; }
     }
 }

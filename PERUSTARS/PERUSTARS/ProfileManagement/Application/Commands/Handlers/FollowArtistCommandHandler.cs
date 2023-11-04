@@ -7,6 +7,7 @@ using Org.BouncyCastle.Math;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.ProfileManagement.Domain.Model.Commands;
 using PERUSTARS.ProfileManagement.Domain.Repositories;
+using PERUSTARS.ProfileManagement.Domain.Model.Events;
 using PERUSTARS.Shared.Infrastructure.Configuration;
 
 namespace PERUSTARS.ProfileManagement.Application.Commands.Handlers
@@ -15,13 +16,13 @@ namespace PERUSTARS.ProfileManagement.Application.Commands.Handlers
     {
         private readonly AppDbContext _context;
         private readonly IArtistRepository _artistRepository;
+        private readonly IPublisher _publisher;
 
-        public FollowArtistCommandHandler(AppDbContext context, IArtistRepository artistRepository)
+        public FollowArtistCommandHandler(AppDbContext context, IArtistRepository artistRepository, IPublisher publisher)
         {
             _context = context;
-            _artistRepository= artistRepository;
-
-
+            _artistRepository = artistRepository;
+            _publisher = publisher;
         }
 
         public async Task<Unit> Handle(FollowArtistCommand request, CancellationToken cancellationToken)
@@ -44,7 +45,7 @@ namespace PERUSTARS.ProfileManagement.Application.Commands.Handlers
             }
 
             // Agregar la relación de seguimiento
-            var follower = new Follower { HobbyistId = hobbyist.HobbyistId, ArtistId = artist.ArtistId };
+            var follower = new Follower { HobbyistId = hobbyist.HobbyistId, ArtistId = artist.ArtistId, RegistrationDate = DateTime.Now };
             _context.Followers.Add(follower);
             
             artist.FollowersArtist.Add(follower);
@@ -53,6 +54,12 @@ namespace PERUSTARS.ProfileManagement.Application.Commands.Handlers
             //artist.NumberOfFollowers++;
 
             await _context.SaveChangesAsync(cancellationToken);
+
+            await _publisher.Publish(new ArtistFollowedEvent()
+            {
+                ArtistId = artist.ArtistId,
+                HobbyistId = hobbyist.HobbyistId
+            });
 
             return Unit.Value;
         }

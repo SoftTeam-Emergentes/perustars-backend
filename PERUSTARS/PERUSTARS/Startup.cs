@@ -42,6 +42,11 @@ using PERUSTARS.CommunicationAndNotificationManagement.Domain.Repositories;
 using PERUSTARS.CommunicationAndNotificationManagement.Domain.Services;
 using PERUSTARS.CommunicationAndNotificationManagement.Infraestructure.Repositories;
 using PERUSTARS.CommunicationAndNotificationManagement.Application.Commands.Services;
+using PERUSTARS.DataAnalytics.Interface.ACL;
+using PERUSTARS.DataAnalytics.Domain.Repositories;
+using PERUSTARS.DataAnalytics.Infrastructure.Repositories;
+using PERUSTARS.DataAnalytics.Domain.Services;
+using PERUSTARS.DataAnalytics.Application.Commands.Services;
 
 namespace PERUSTARS
 {
@@ -137,6 +142,10 @@ namespace PERUSTARS
 
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<INotificationCommandService, NotificationCommandService>();
+
+            services.AddScoped<IMLTrainingDataRepository, MLTrainingDataRepository>();
+            services.AddScoped<IDataAnalyticsCommandService, DataAnalyticsCommandService>();
+            services.AddTransient<DataAnalyticsFacade>();
 
             // Apply Endpoints Naming Convention
             services.AddRouting(options => options.LowercaseUrls = true);

@@ -2,6 +2,7 @@
 using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
 using PERUSTARS.AtEventManagement.Domain.Model.Commads;
 using PERUSTARS.AtEventManagement.Domain.Model.Repositories;
+using PERUSTARS.AtEventManagement.Domain.Model.domainevents;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.ProfileManagement.Domain.Repositories;
 using PERUSTARS.Shared.Domain.Repositories;
@@ -16,13 +17,15 @@ namespace PERUSTARS.AtEventManagement.Application.artevents.commands
         private readonly IHobbyistRepository _hobbyistRepository;
         private readonly IArtEventRepository _artEventRepository;
         private readonly IUnitOfWork _unitOfWork;
-        public RegisterParticipantToArtEventCommandHandler(IParticipantRepository participantRepository, IHobbyistRepository hobbyistRepository,IArtEventRepository artEventRepository, IUnitOfWork unitOfWork)
+        private readonly IPublisher _publisher;
+        public RegisterParticipantToArtEventCommandHandler(IParticipantRepository participantRepository, IHobbyistRepository hobbyistRepository,
+            IArtEventRepository artEventRepository, IUnitOfWork unitOfWork, IPublisher publisher)
         {
             _participantRepository = participantRepository;
             _hobbyistRepository = hobbyistRepository;
             _artEventRepository= artEventRepository;
             _unitOfWork = unitOfWork;
-            
+            _publisher = publisher;
         }
         public async Task<string> Handle(RegisterParticipantToArtEventCommand request, CancellationToken cancellationToken)
         {
@@ -43,6 +46,11 @@ namespace PERUSTARS.AtEventManagement.Application.artevents.commands
             
             await _participantRepository.AddAsync(participant);
             await _unitOfWork.CompleteAsync();
+            await _publisher.Publish(new ParticipantRegisteredEvent()
+            {
+                ArtistId = artEvent.ArtistId.Value,
+                HobbyistId = hobbyist.HobbyistId
+            });
             return "Your participation was registered: ";
         }
     }

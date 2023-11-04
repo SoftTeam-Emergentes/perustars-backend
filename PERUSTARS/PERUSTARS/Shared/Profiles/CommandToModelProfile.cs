@@ -4,6 +4,8 @@ using PERUSTARS.ArtworkManagement.Domain.Model.Commands;
 using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
 using PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Commands;
 using PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Entities;
+using PERUSTARS.DataAnalytics.Domain.Model.Commands;
+using PERUSTARS.DataAnalytics.Domain.Model.Entities;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Commands;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
@@ -39,7 +41,12 @@ namespace PERUSTARS.Shared.Profiles
             CreateMap<NotifyArtEventStartedCommand, Notification>();
             CreateMap<NotifyArtEventFinishedCommand, Notification>();
             CreateMap<NotifyArtEventCancelledCommand, Notification>();
-            CreateMap<NotifyArtEventRescheduledCommand, Notification>(); 
+            CreateMap<NotifyArtEventRescheduledCommand, Notification>();
+
+            CreateMap<CollectArtworkReviewDataCommand, MLTrainingData>();
+            CreateMap<CollectEventLogDataCommand, MLTrainingData>();
+            CreateMap<CollectFollowedArtistDataCommand, MLTrainingData>();
+            CreateMap<CollectPenaltyAppliedDataCommand, MLTrainingData>();
         }
     }
 }

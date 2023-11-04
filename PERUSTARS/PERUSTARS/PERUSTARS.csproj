@@ -9,16 +9,12 @@
   <ItemGroup>
     <Compile Remove="ArtEventManagement\**" />
     <Compile Remove="CommunicationAndNotificationManagement\**" />
-    <Compile Remove="DataAnalytics\**" />
     <Content Remove="ArtEventManagement\**" />
     <Content Remove="CommunicationAndNotificationManagement\**" />
-    <Content Remove="DataAnalytics\**" />
     <EmbeddedResource Remove="ArtEventManagement\**" />
     <EmbeddedResource Remove="CommunicationAndNotificationManagement\**" />
-    <EmbeddedResource Remove="DataAnalytics\**" />
     <None Remove="ArtEventManagement\**" />
     <None Remove="CommunicationAndNotificationManagement\**" />
-    <None Remove="DataAnalytics\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -96,16 +92,11 @@
     <Folder Include="ConductsReportsManagement\Domain\Services\" />
     <Folder Include="ArtworkManagement\Application\Events\Services\" />
     <Folder Include="ArtworkManagement\Domain\Model\Aggregates\" />
-    <Folder Include="DataAnalytics\Application\Commands\Services\" />
-    <Folder Include="DataAnalytics\Application\Events\Services\" />
-    <Folder Include="DataAnalytics\Application\QueryServices\" />
-    <Folder Include="DataAnalytics\Domain\Model\" />
-    <Folder Include="DataAnalytics\Domain\Repositories\" />
-    <Folder Include="DataAnalytics\Infrastructure\" />
-    <Folder Include="DataAnalytics\Infrastructure\Repositories\" />
-    <Folder Include="DataAnalytics\Interfaces\REST\Resources\" />
+    <Folder Include="DataAnalytics\Application\Jobs\" />
+    <Folder Include="DataAnalytics\Domain\Model\Aggregates\" />
+    <Folder Include="DataAnalytics\Domain\Model\Events\" />
+    <Folder Include="DataAnalytics\Infrastructure\FeignClients\" />
     <Folder Include="ProfileManagement\Application\Commands\" />
-    <Folder Include="ArtEventManagement\" />
     <Folder Include="IdentityAndAccountManagement\Infrastructure\Context\" />
 
   </ItemGroup>
