@@ -42,7 +42,7 @@ namespace PERUSTARS.ArtworkManagement.Application.Commands.Handlers
                 throw new ArtworkNotFoundException("Artwork not found");
             }
 
-            var existingHobbyist = new Hobbyist(); // TODO: await _hobbyistRepository.FindHobbyistByIdAsync(request.HobbyistId);
+            var existingHobbyist = await _hobbyistRepository.GetHobbyistByIdAsync(request.HobbyistId);
             if (existingHobbyist == null)
             {
                 throw new ApplicationException("Hobbyist not found");

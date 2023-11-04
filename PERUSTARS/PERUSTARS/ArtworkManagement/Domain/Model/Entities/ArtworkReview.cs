@@ -13,7 +13,7 @@ namespace PERUSTARS.ArtworkManagement.Domain.Model.Entities
         public Hobbyist Hobbyist { get; set; }
         public string Title { get; set; }
         public string Comment { get; set; }
-        public DateTime ReviewDateTime { get; set; }
+        public DateTime ReviewDateTime { get; set; } = DateTime.Now;
         public float Calification { get; set; }
         public bool Collected { get; set; } = false;
     }
