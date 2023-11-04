@@ -71,6 +71,11 @@
     <Content Include="bin\Debug\net5.0\PERUSTARS.deps.json" />
     <Content Include="bin\Debug\net5.0\PERUSTARS.runtimeconfig.dev.json" />
     <Content Include="bin\Debug\net5.0\PERUSTARS.runtimeconfig.json" />
+    <Content Include="bin\Release\net5.0\appsettings.Development.json" />
+    <Content Include="bin\Release\net5.0\appsettings.json" />
+    <Content Include="bin\Release\net5.0\PERUSTARS.deps.json" />
+    <Content Include="bin\Release\net5.0\PERUSTARS.runtimeconfig.dev.json" />
+    <Content Include="bin\Release\net5.0\PERUSTARS.runtimeconfig.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -155,7 +160,48 @@
     <None Include="bin\Debug\net5.0\System.Security.Cryptography.ProtectedData.dll" />
     <None Include="bin\Debug\net5.0\Ubiety.Dns.Core.dll" />
     <None Include="bin\Debug\net5.0\ZstdNet.dll" />
+    <None Include="bin\Release\net5.0\AutoMapper.dll" />
+    <None Include="bin\Release\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll" />
+    <None Include="bin\Release\net5.0\BCrypt.Net-Next.dll" />
+    <None Include="bin\Release\net5.0\BouncyCastle.Crypto.dll" />
+    <None Include="bin\Release\net5.0\FluentAssertions.dll" />
+    <None Include="bin\Release\net5.0\Google.Protobuf.dll" />
+    <None Include="bin\Release\net5.0\K4os.Compression.LZ4.dll" />
+    <None Include="bin\Release\net5.0\K4os.Compression.LZ4.Streams.dll" />
+    <None Include="bin\Release\net5.0\K4os.Hash.xxHash.dll" />
+    <None Include="bin\Release\net5.0\MediatR.Contracts.dll" />
+    <None Include="bin\Release\net5.0\MediatR.dll" />
+    <None Include="bin\Release\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll" />
+    <None Include="bin\Release\net5.0\Microsoft.Bcl.AsyncInterfaces.dll" />
+    <None Include="bin\Release\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll" />
+    <None Include="bin\Release\net5.0\Microsoft.EntityFrameworkCore.dll" />
+    <None Include="bin\Release\net5.0\Microsoft.EntityFrameworkCore.InMemory.dll" />
+    <None Include="bin\Release\net5.0\Microsoft.EntityFrameworkCore.Relational.Design.dll" />
+    <None Include="bin\Release\net5.0\Microsoft.EntityFrameworkCore.Relational.dll" />
+    <None Include="bin\Release\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
+    <None Include="bin\Release\net5.0\Microsoft.Extensions.DependencyInjection.dll" />
+    <None Include="bin\Release\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll" />
+    <None Include="bin\Release\net5.0\Microsoft.IdentityModel.Logging.dll" />
+    <None Include="bin\Release\net5.0\Microsoft.IdentityModel.Protocols.dll" />
+    <None Include="bin\Release\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll" />
+    <None Include="bin\Release\net5.0\Microsoft.IdentityModel.Tokens.dll" />
+    <None Include="bin\Release\net5.0\Microsoft.OpenApi.dll" />
+    <None Include="bin\Release\net5.0\MySql.Data.dll" />
+    <None Include="bin\Release\net5.0\MySql.EntityFrameworkCore.dll" />
     <None Include="bin\Release\net5.0\PERUSTARS.dll" />
+    <None Include="bin\Release\net5.0\PERUSTARS.exe" />
+    <None Include="bin\Release\net5.0\PERUSTARS.pdb" />
+    <None Include="bin\Release\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll" />
+    <None Include="bin\Release\net5.0\Swashbuckle.AspNetCore.Annotations.dll" />
+    <None Include="bin\Release\net5.0\Swashbuckle.AspNetCore.Swagger.dll" />
+    <None Include="bin\Release\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll" />
+    <None Include="bin\Release\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll" />
+    <None Include="bin\Release\net5.0\System.Configuration.ConfigurationManager.dll" />
+    <None Include="bin\Release\net5.0\System.Diagnostics.DiagnosticSource.dll" />
+    <None Include="bin\Release\net5.0\System.IdentityModel.Tokens.Jwt.dll" />
+    <None Include="bin\Release\net5.0\System.Security.Cryptography.ProtectedData.dll" />
+    <None Include="bin\Release\net5.0\Ubiety.Dns.Core.dll" />
+    <None Include="bin\Release\net5.0\ZstdNet.dll" />
   </ItemGroup>
 
 </Project>
