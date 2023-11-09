@@ -139,6 +139,7 @@ namespace PERUSTARS
             services.AddScoped<IProfileCommandService, ProfileCommandService>();
             services.AddScoped<IArtistRepository, ArtistRepository>();
             services.AddScoped<IHobbyistRepository, HobbyistRepository>();
+            services.AddScoped<IFollowerRepository, FollowerRepository>();
 
             services.AddScoped<IConductReportRepository, ConductReportRepository>();
             services.AddScoped<IConductReportService, ConductReportCommandService>();
