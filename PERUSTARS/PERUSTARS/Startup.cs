@@ -47,6 +47,7 @@ using PERUSTARS.DataAnalytics.Domain.Repositories;
 using PERUSTARS.DataAnalytics.Infrastructure.Repositories;
 using PERUSTARS.DataAnalytics.Domain.Services;
 using PERUSTARS.DataAnalytics.Application.Commands.Services;
+using Microsoft.Extensions.Logging;
 
 namespace PERUSTARS
 {
@@ -66,6 +67,8 @@ namespace PERUSTARS
             services.AddCors();
 
             services.AddControllers();
+
+            services.AddLogging(builder => { builder.AddConsole(); });
 
             //AppSettings Section Reference
             var appSettingsSection = Configuration.GetSection("AppSettings");

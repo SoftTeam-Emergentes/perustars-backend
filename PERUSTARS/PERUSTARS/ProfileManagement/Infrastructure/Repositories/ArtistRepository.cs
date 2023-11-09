@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -27,11 +28,11 @@ namespace PERUSTARS.ProfileManagement.Infrastructure.Repositories
             return _dbContext.Artists.SingleOrDefaultAsync(a =>a.BrandName ==brandname);
         }
 
-        public Task<Artist> GetArtistByIdAsync(long artistId)
+        public async Task<Artist> GetArtistByIdAsync(long artistId)
         {
             try
             {
-                return _dbContext.Artists.SingleOrDefaultAsync(a => a.ArtistId == artistId);
+                return await _dbContext.Artists.Where(a => a.ArtistId == artistId).Include(a => a.User).SingleOrDefaultAsync();
             }
             catch (Exception ex)
             {
@@ -58,6 +59,11 @@ namespace PERUSTARS.ProfileManagement.Infrastructure.Repositories
                 Console.WriteLine(e);
                 throw new Exception("Error deleting artist profile",e);
             }
+        }
+
+        public async Task<IEnumerable<Artist>> GetAllArtists()
+        {
+            return await _dbContext.Artists.Include(a => a.User).ToListAsync();
         }
     }
 }
