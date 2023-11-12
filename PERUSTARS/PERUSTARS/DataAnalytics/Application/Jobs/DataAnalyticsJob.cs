@@ -27,7 +27,7 @@ namespace PERUSTARS.DataAnalytics.Application.Jobs
         {
             bool isSuccess = await _peruStarsMLServiceFeignClient.ComputeRecommendationSystem();
             if (isSuccess) _logger.LogInformation("Remote call to perustars-ml-api was successfully executed");
-            else _logger.LogInformation("Remote call to perustars-ml-api failed");
+            else _logger.LogError("Remote call to perustars-ml-api failed");
         }
 
         public Task StartAsync(CancellationToken cancellationToken)

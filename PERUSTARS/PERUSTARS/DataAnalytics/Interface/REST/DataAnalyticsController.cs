@@ -24,7 +24,7 @@ namespace PERUSTARS.DataAnalytics.Interface.REST
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError, "An error ocurred while trying to call perustars-ml-service");
             }
-            return Ok(result);
+            return Ok(result.Data);
         }
     }
 }

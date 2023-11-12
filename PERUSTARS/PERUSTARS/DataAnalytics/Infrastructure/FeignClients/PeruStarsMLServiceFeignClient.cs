@@ -39,7 +39,7 @@ namespace PERUSTARS.DataAnalytics.Infrastructure.FeignClients
             HttpResponseMessage response = await _httpClient.GetAsync(path);
             if (!response.IsSuccessStatusCode)
             {
-                _logger.LogInformation("Something went wrong when calling perustars-ml-api");
+                _logger.LogError("Something went wrong when calling perustars-ml-api");
                 return new MLResponse { Data = null, statusCode = HttpStatusCode.InternalServerError };
             }
             MLDto data = await response.Content.ReadFromJsonAsync<MLDto>();
