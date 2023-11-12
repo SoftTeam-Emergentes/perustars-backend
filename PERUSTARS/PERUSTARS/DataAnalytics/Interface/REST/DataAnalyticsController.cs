@@ -7,7 +7,6 @@ using System.Net;
 namespace PERUSTARS.DataAnalytics.Interface.REST
 {
     [ApiController]
-    [Route("/data-analytics")]
     public class DataAnalyticsController : ControllerBase
     {
         private readonly PeruStarsMLServiceFeignClient _peruStarsMLServiceFeignClient;
@@ -17,7 +16,7 @@ namespace PERUSTARS.DataAnalytics.Interface.REST
             _peruStarsMLServiceFeignClient = peruStarsMLServiceFeignClient;
         }   
 
-        [HttpGet(Name = "/hobbyists/{hobbyistId}/recommended-artists")]
+        [HttpGet("api/data-analytics/hobbyists/{hobbyistId}/recommended-artists")]
         public async Task<IActionResult> GetFavouristArtistsFrom(long hobbyistId)
         {
             MLResponse result = await _peruStarsMLServiceFeignClient.GetHobbyistRecommendedArtist(hobbyistId);
