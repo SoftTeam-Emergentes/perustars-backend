@@ -48,6 +48,8 @@ using PERUSTARS.DataAnalytics.Infrastructure.Repositories;
 using PERUSTARS.DataAnalytics.Domain.Services;
 using PERUSTARS.DataAnalytics.Application.Commands.Services;
 using Microsoft.Extensions.Logging;
+using PERUSTARS.DataAnalytics.Application.Jobs;
+using PERUSTARS.DataAnalytics.Infrastructure.FeignClients;
 
 namespace PERUSTARS
 {
@@ -150,6 +152,7 @@ namespace PERUSTARS
             services.AddScoped<IMLTrainingDataRepository, MLTrainingDataRepository>();
             services.AddScoped<IDataAnalyticsCommandService, DataAnalyticsCommandService>();
             services.AddTransient<DataAnalyticsFacade>();
+            services.AddTransient<PeruStarsMLServiceFeignClient>();
 
             // Apply Endpoints Naming Convention
             services.AddRouting(options => options.LowercaseUrls = true);
@@ -171,7 +174,9 @@ namespace PERUSTARS
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PERUSTARS", Version = "v1" });
                 c.EnableAnnotations();
             });
-            
+
+            services.AddHttpClient();
+            services.AddHostedService<DataAnalyticsJob>();
             
         }
 

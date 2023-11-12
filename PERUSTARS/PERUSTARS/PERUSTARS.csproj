@@ -108,10 +108,8 @@
     <Folder Include="ConductsReportsManagement\Domain\Services\" />
     <Folder Include="ArtworkManagement\Application\Events\Services\" />
     <Folder Include="ArtworkManagement\Domain\Model\Aggregates\" />
-    <Folder Include="DataAnalytics\Application\Jobs\" />
     <Folder Include="DataAnalytics\Domain\Model\Aggregates\" />
     <Folder Include="DataAnalytics\Domain\Model\Events\" />
-    <Folder Include="DataAnalytics\Infrastructure\FeignClients\" />
     <Folder Include="ProfileManagement\Application\Commands\" />
     <Folder Include="IdentityAndAccountManagement\Infrastructure\Context\" />
 
