@@ -8,18 +8,21 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using PERUSTARS.Shared.Domain.Repositories;
 
 namespace PERUSTARS.IdentityAndAccountManagement.Application.Queries.Handlers
 {
     public class UpdateUserQueryHandler : IRequestHandler<UpdateUserQuery, KeyValuePair<string, long>>
     {
         private readonly IUserRepository _userRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<UpdateUserQueryHandler> _logger;
 
-        public UpdateUserQueryHandler(IUserRepository userRepository, ILogger<UpdateUserQueryHandler> logger)
+        public UpdateUserQueryHandler(IUserRepository userRepository, ILogger<UpdateUserQueryHandler> logger, IUnitOfWork unitOfWork)
         {
             _userRepository = userRepository;
             _logger = logger;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<KeyValuePair<string, long>> Handle(UpdateUserQuery query, CancellationToken cancellationToken)
@@ -34,7 +37,8 @@ namespace PERUSTARS.IdentityAndAccountManagement.Application.Queries.Handlers
 
             try
             {
-                await _userRepository.AddAsync(existingUser);
+                _userRepository.Update(existingUser);
+                await _unitOfWork.CompleteAsync();
             }
             catch(Exception exception)
             {
