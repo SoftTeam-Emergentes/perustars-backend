@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.ConductsReportsManagement.Interfaces.REST
 {
-    [Route("api/conductReports/[controller]")]
+    [Route("api/v1/conductReports/[controller]")]
     [ApiController]
     public class ConductReportController : ControllerBase
     {

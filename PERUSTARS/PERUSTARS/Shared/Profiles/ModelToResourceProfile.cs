@@ -21,6 +21,7 @@ namespace PERUSTARS.Shared.Profiles
             CreateMap<ArtworkRecommendation, ArtworkRecommendationResource>();
             CreateMap<ArtworkReview, ArtworkReviewResource>();
             CreateMap<HobbyistFavoriteArtwork, HobbyistFavoriteArtworkResource>();
+            CreateMap<Follower, FollowerResource>();
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.Shared.Domain.Repositories;
@@ -13,5 +14,6 @@ namespace PERUSTARS.ProfileManagement.Domain.Repositories
         Task<Artist> GetArtistByIdAsync(long artistId);
 
         Task<bool> DeleteArtistProfileAsync(Artist artist);
+        Task<IEnumerable<Artist>> GetAllArtists();
     }
 }

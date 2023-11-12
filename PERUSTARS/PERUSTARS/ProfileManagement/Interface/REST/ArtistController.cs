@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
@@ -97,6 +98,14 @@ namespace PERUSTARS.ProfileManagement.Interface.REST
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [HttpGet("")]
+        public async Task<IActionResult> GetAllArtists()
+        {
+            var result = await _mediator.Send(new GetAllArtistsQuery());
+            var response = _mapper.Map<IEnumerable<Artist>, IEnumerable<GetAllArtistsResource>>(result);
+            return Ok(response);
         }
     }
 }

@@ -6,6 +6,9 @@ using PERUSTARS.IdentityAndAccountManagement.Domain.Services;
 using PERUSTARS.IdentityAndAccountManagement.Interfaces.REST.Resources;
 using System.Threading.Tasks;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Attributes;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Queries;
+using System.Collections.Generic;
+using MediatR;
 
 namespace PERUSTARS.IdentityAndAccountManagement.Interfaces.REST
 {
@@ -15,10 +18,12 @@ namespace PERUSTARS.IdentityAndAccountManagement.Interfaces.REST
     {
         private readonly IMapper _mapper;
         private readonly IIdentityAndAccountManagementCommandService _identityAndAccountManagementCommandService;
-        public UsersController(IMapper mapper, IIdentityAndAccountManagementCommandService identityAndAccountManagementCommandService)
+        private readonly IMediator _mediator;
+        public UsersController(IMapper mapper, IIdentityAndAccountManagementCommandService identityAndAccountManagementCommandService, IMediator mediator)
         {
             _mapper = mapper;
             _identityAndAccountManagementCommandService = identityAndAccountManagementCommandService;
+            _mediator = mediator;
         }
         [HttpPost("register")]
         [AllowAnonymous]
@@ -37,6 +42,21 @@ namespace PERUSTARS.IdentityAndAccountManagement.Interfaces.REST
             AuthenticateResponse authenticateResponse =
                 await _identityAndAccountManagementCommandService.ExecuteLogInUserCommand(logInUserCommand);
             return Ok(authenticateResponse);
+        }
+
+        [AllowAnonymous]
+        [HttpPut("{userId}")]
+        public async Task<IActionResult> UpdateUserInformation(long userId, [FromBody] UpdateUserRequest updateUserRequest)
+        {
+            UpdateUserQuery updateUserQuery = new UpdateUserQuery()
+            {
+                UserId = userId,
+                FirstName = updateUserRequest.FirstName,
+                LastName = updateUserRequest.LastName
+            };
+            KeyValuePair<string, long> response = await _mediator.Send(updateUserQuery);
+            if(response.Value == 400) return BadRequest(response.Key);
+            return Ok(response.Key);
         }
     }
 }

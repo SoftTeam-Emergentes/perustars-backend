@@ -13,7 +13,7 @@ namespace PERUSTARS.ArtworkManagement.Application.Events.Handlers
 
         public Task Handle(ArtworkDeletedEvent notification, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            return Task.CompletedTask;
         }
     }
 }

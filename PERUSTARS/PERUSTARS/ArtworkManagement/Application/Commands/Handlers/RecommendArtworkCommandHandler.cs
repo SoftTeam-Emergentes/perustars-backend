@@ -9,6 +9,7 @@ using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
 using PERUSTARS.ArtworkManagement.Domain.Model.Events;
 using PERUSTARS.ArtworkManagement.Domain.Repositories;
 using PERUSTARS.ArtworkManagement.Interfaces.REST.Resources;
+using PERUSTARS.ProfileManagement.Application.Exceptions;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.ProfileManagement.Domain.Repositories;
 using PERUSTARS.Shared.Domain.Repositories;
@@ -25,11 +26,14 @@ namespace PERUSTARS.ArtworkManagement.Application.Commands.Handlers
         private readonly IArtworkRecommendationRepository _artworkRecommendationRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public RecommendArtworkCommandHandler(IPublisher publisher, IMapper mapper, IArtworkRepository artworkRepository, IUnitOfWork unitOfWork)
+        public RecommendArtworkCommandHandler(IPublisher publisher, IMapper mapper, IArtworkRepository artworkRepository, IHobbyistRepository hobbyistRepository, IArtistRepository artistRepository, IArtworkRecommendationRepository artworkRecommendationRepository, IUnitOfWork unitOfWork)
         {
             _publisher = publisher;
             _mapper = mapper;
             _artworkRepository = artworkRepository;
+            _hobbyistRepository = hobbyistRepository;
+            _artistRepository = artistRepository;
+            _artworkRecommendationRepository = artworkRecommendationRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -41,21 +45,19 @@ namespace PERUSTARS.ArtworkManagement.Application.Commands.Handlers
                 throw new ArtworkNotFoundException("Artwork not found");
             }
 
-            var existingHobbyist = new Hobbyist(); // TODO: await _hobbyistRepository.FindHobbyistByIdAsync(request.HobbyistId);
+            var existingHobbyist = await _hobbyistRepository.GetHobbyistByIdAsync(request.HobbyistId);
             if (existingHobbyist == null)
             {
-                throw new ApplicationException("Hobbyist not found");
-                // TODO: throw new HobbyistNotFoundException("Hobbyist not found");
+                throw new ProfileNotFoundException("Hobbyist not found");
             }
 
-            var existingArtist = new Artist(); // TODO: await _artistRepository.FindArtistByIdAsync(request.ArtistId);
+            var existingArtist = await _artistRepository.GetArtistByIdAsync(request.ArtistId);
             if (existingArtist == null)
             {
-                throw new ApplicationException("Artist not found");
-                // TODO: throw new ArtistNotFoundException("Artist not found");
+                throw new ProfileNotFoundException("Artist not found");
             }
 
-            var existingArtworkRecommendation = new ArtworkRecommendation(); // TODO: await _artworkRecommendationRepository.FindArtworkRecommendationByHobbyistIdAndArtistIdAndArtworkIdAsync(request.HobbyistId, request.ArtistId, request.ArtworkId);
+            var existingArtworkRecommendation = await _artworkRecommendationRepository.FindArtworkRecommendationByHobbyistIdAndArtistIdAndArtworkIdAsync(request.HobbyistId, request.ArtistId, request.ArtworkId);
             if (existingArtworkRecommendation != null)
             {
                 throw new ApplicationException("Artwork recommendation already exists");

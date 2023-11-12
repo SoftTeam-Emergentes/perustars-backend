@@ -42,6 +42,14 @@ using PERUSTARS.CommunicationAndNotificationManagement.Domain.Repositories;
 using PERUSTARS.CommunicationAndNotificationManagement.Domain.Services;
 using PERUSTARS.CommunicationAndNotificationManagement.Infraestructure.Repositories;
 using PERUSTARS.CommunicationAndNotificationManagement.Application.Commands.Services;
+using PERUSTARS.DataAnalytics.Interface.ACL;
+using PERUSTARS.DataAnalytics.Domain.Repositories;
+using PERUSTARS.DataAnalytics.Infrastructure.Repositories;
+using PERUSTARS.DataAnalytics.Domain.Services;
+using PERUSTARS.DataAnalytics.Application.Commands.Services;
+using Microsoft.Extensions.Logging;
+using PERUSTARS.DataAnalytics.Application.Jobs;
+using PERUSTARS.DataAnalytics.Infrastructure.FeignClients;
 
 namespace PERUSTARS
 {
@@ -61,6 +69,8 @@ namespace PERUSTARS
             services.AddCors();
 
             services.AddControllers();
+
+            services.AddLogging(builder => { builder.AddConsole(); });
 
             //AppSettings Section Reference
             var appSettingsSection = Configuration.GetSection("AppSettings");
@@ -131,12 +141,18 @@ namespace PERUSTARS
             services.AddScoped<IProfileCommandService, ProfileCommandService>();
             services.AddScoped<IArtistRepository, ArtistRepository>();
             services.AddScoped<IHobbyistRepository, HobbyistRepository>();
+            services.AddScoped<IFollowerRepository, FollowerRepository>();
 
             services.AddScoped<IConductReportRepository, ConductReportRepository>();
             services.AddScoped<IConductReportService, ConductReportCommandService>();
 
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<INotificationCommandService, NotificationCommandService>();
+
+            services.AddScoped<IMLTrainingDataRepository, MLTrainingDataRepository>();
+            services.AddScoped<IDataAnalyticsCommandService, DataAnalyticsCommandService>();
+            services.AddTransient<DataAnalyticsFacade>();
+            services.AddTransient<PeruStarsMLServiceFeignClient>();
 
             // Apply Endpoints Naming Convention
             services.AddRouting(options => options.LowercaseUrls = true);
@@ -158,7 +174,9 @@ namespace PERUSTARS
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PERUSTARS", Version = "v1" });
                 c.EnableAnnotations();
             });
-            
+
+            services.AddHttpClient();
+            services.AddHostedService<DataAnalyticsJob>();
             
         }
 

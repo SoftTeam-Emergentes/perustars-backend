@@ -9,6 +9,8 @@ using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates;
 using PERUSTARS.ArtworkManagement.Domain.Model.Aggregates;
 using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
 using PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Entities;
+using PERUSTARS.DataAnalytics.Domain.Model.Entities;
+using PERUSTARS.DataAnalytics.Domain.Model.Enums;
 
 namespace PERUSTARS.Shared.Infrastructure.Configuration
 {
@@ -28,6 +30,8 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
         public DbSet<ArtworkReview> ArtworkReviews { get; set; }
         public DbSet<HobbyistFavoriteArtwork> HobbyistFavoriteArtworks { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+
+        public DbSet<MLTrainingData> TrainingData { get; set; }
 
 
         public AppDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
@@ -225,7 +229,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             builder.Entity<ArtworkRecommendation>()
                 .HasOne(ar => ar.Hobbyist)
                 .WithMany(h => h.ArtworkRecommendations)
-                .HasForeignKey(ar => ar.HobyistId);
+                .HasForeignKey(ar => ar.HobbyistId);
             builder.Entity<ArtworkRecommendation>()
                 .HasOne(ar => ar.Artwork)
                 .WithMany(a => a.ArtworkRecommendations)
@@ -284,7 +288,20 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             builder.Entity<Notification>().Property(n => n.Sender).IsRequired();
             builder.Entity<Notification>().Property(n => n.SentAt).HasColumnType("timestamp").HasDefaultValue(DateTime.UtcNow).IsRequired(); 
             builder.Entity<Notification>().Property(n => n.IsRead).HasDefaultValue(false).IsRequired();
-            
+
+            #endregion
+
+            #region MLTrainingData
+
+            builder.Entity<MLTrainingData>().ToTable("MLTrainingData");
+            builder.Entity<MLTrainingData>().HasKey(m => m.Id);
+            builder.Entity<MLTrainingData>().Property(m => m.Id).ValueGeneratedOnAdd().IsRequired();
+            builder.Entity<MLTrainingData>().Property(m => m.HobbyistId).IsRequired();
+            builder.Entity<MLTrainingData>().Property(m => m.ArtistId).IsRequired();
+            builder.Entity<MLTrainingData>().Property(m => m.Score).IsRequired();
+            builder.Entity<MLTrainingData>().Property(m => m.InteractionType).HasConversion<string>();
+            builder.Entity<MLTrainingData>().Property(m => m.Collected).HasDefaultValue(false);
+
             #endregion
 
             builder.ApplySnakeCaseNamingConvention();

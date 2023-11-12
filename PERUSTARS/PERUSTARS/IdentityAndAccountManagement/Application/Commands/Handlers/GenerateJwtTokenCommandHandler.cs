@@ -33,9 +33,10 @@ namespace PERUSTARS.IdentityAndAccountManagement.Application.Commands.Handlers
                 Subject = new ClaimsIdentity(new[]
                 {
                 new Claim(ClaimTypes.Sid, request.User.UserId.ToString()),
-                new Claim(ClaimTypes.Name, request.User.Email)
+                new Claim(ClaimTypes.Email, request.User.Email),
+                new Claim(ClaimTypes.Name, request.User.FirstName + " " + request.User.LastName)
             }),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.UtcNow.AddHours(4),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha512Signature)
