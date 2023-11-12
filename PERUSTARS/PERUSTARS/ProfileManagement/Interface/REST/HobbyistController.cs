@@ -14,7 +14,7 @@ using PERUSTARS.Shared.Infrastructure.Configuration;
 
 namespace PERUSTARS.ProfileManagement.Interface.REST
 {
-    [Route("api/hobbyist/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class HobbyistController: ControllerBase
     {

@@ -21,7 +21,7 @@ namespace PERUSTARS.ProfileManagement.Application.Events.Handlers
             await _dataAnalyticsFacade.ExecuteCollectFollowedArtistDataCommand(new DataAnalyticACLResource()
             {
                 ArtistId = notification.ArtistId,
-                HobbyistId = notification.HobbyistId
+                HobbyistId = notification.HobbyistId,
             });
         }
     }

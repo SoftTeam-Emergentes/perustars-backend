@@ -14,7 +14,6 @@ namespace PERUSTARS.ProfileManagement.Interface.REST.Resources
         public string Phrase { get; set; }
         public int ContactNumber { get; set; }
         public string ContactEmail { get; set; }
-        public Genre Genre { get; set; }
         public List<string> SocialMediaLink { get; set; }
     }
 }

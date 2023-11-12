@@ -103,7 +103,7 @@ namespace PERUSTARS
 
             services.AddDbContext<AppDbContext>(options =>
             {
-                // options.UseNpgsql(Configuration.GetConnectionString("PostgreSQLConnection"));
+                //options.UseNpgsql(Configuration.GetConnectionString("PostgresSQLConnection"));
                 options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
             });
 

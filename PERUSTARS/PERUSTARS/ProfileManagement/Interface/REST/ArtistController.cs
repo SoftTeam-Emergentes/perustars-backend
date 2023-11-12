@@ -17,7 +17,7 @@ using PERUSTARS.Shared.Infrastructure.Configuration;
 
 namespace PERUSTARS.ProfileManagement.Interface.REST
 {
-    [Route("api/artists/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class ArtistController: ControllerBase
     {
@@ -77,7 +77,9 @@ namespace PERUSTARS.ProfileManagement.Interface.REST
             EditProfileArtistCommand editProfileArtistCommand = new EditProfileArtistCommand
             {
                 ArtistId = artistId,
+                BrandName = artistResource.BrandName,
               Age=artistResource.Age,
+              SocialMediaLink = artistResource.SocialMediaLink,
               Description = artistResource.Description,
               Phrase = artistResource.Phrase,
               ContactNumber = artistResource.ContactNumber,
@@ -100,9 +102,10 @@ namespace PERUSTARS.ProfileManagement.Interface.REST
             }
         }
 
-        [HttpGet("")]
-        public async Task<IActionResult> GetAllArtists()
+        [HttpGet("artists")]
+        public async Task<IActionResult> GetAllArtists( )
         {
+            
             var result = await _mediator.Send(new GetAllArtistsQuery());
             var response = _mapper.Map<IEnumerable<Artist>, IEnumerable<GetAllArtistsResource>>(result);
             return Ok(response);

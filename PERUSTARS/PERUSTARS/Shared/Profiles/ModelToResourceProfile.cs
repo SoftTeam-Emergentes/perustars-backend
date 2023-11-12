@@ -15,7 +15,10 @@ namespace PERUSTARS.Shared.Profiles
         {
             CreateMap<User, AuthenticateResponse>();
             CreateMap<User, UserResource>();
+            CreateMap<Follower, FollowerArtistResource>();
+            CreateMap<Follower, FollowerHobbyistResource>();
             CreateMap<Artist, ArtistResource>();
+            CreateMap<Artist, GetAllArtistsResource>();
             CreateMap<Hobbyist, HobbyistResource>();
             CreateMap<Artwork, ArtworkResource>();
             CreateMap<ArtworkRecommendation, ArtworkRecommendationResource>();

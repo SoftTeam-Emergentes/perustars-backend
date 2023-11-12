@@ -13,7 +13,7 @@ using PERUSTARS.ProfileManagement.Interface.REST.Resources;
 namespace PERUSTARS.ProfileManagement.Interface.REST
 {
     [ApiController]
-    [Route("api/followers")]
+    [Route("api/v1")]
     public class FollowerController:ControllerBase
     {
         private readonly IMediator _mediator;
@@ -27,7 +27,7 @@ namespace PERUSTARS.ProfileManagement.Interface.REST
             _mapper = mapper;
         }
 
-        [HttpPost("follower")]
+        [HttpPost("register")]
         public async Task<IActionResult> FollowArtist([FromBody] FollowArtistCommand followArtistCommand)
         {
             try
