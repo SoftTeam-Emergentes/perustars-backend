@@ -10,7 +10,7 @@ using PERUSTARS.ArtworkManagement.Interfaces.REST.Resources;
 
 namespace PERUSTARS.ArtworkManagement.Interfaces.REST
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class ArtworkRecommendationsController : ControllerBase
     {

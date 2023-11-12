@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace PERUSTARS.ArtworkManagement.Interfaces.REST
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class ArtworksController : ControllerBase
     {
