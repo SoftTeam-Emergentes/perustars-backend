@@ -45,6 +45,7 @@
           "Microsoft.EntityFrameworkCore.Relational.Design": "1.1.6",
           "Microsoft.IdentityModel.Tokens": "6.11.1",
           "MySql.EntityFrameworkCore": "5.0.13",
+          "Npgsql": "8.0.0-rc.2",
           "Swashbuckle.AspNetCore": "6.5.0",
           "Swashbuckle.AspNetCore.Annotations": "6.1.4",
           "System.IdentityModel.Tokens.Jwt": "6.11.1",
