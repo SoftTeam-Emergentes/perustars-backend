@@ -13,7 +13,7 @@ using PERUSTARS.ProfileManagement.Interface.REST.Resources;
 namespace PERUSTARS.ProfileManagement.Interface.REST
 {
     [ApiController]
-    [Route("api/v1")]
+    [Route("api/v1/[controller]")]
     public class FollowerController:ControllerBase
     {
         private readonly IMediator _mediator;
@@ -42,7 +42,7 @@ namespace PERUSTARS.ProfileManagement.Interface.REST
                 return BadRequest($"Error could not follow the artist {ex.Message}");//u
             }
         }
-        [HttpGet("/artist/{artistId}")]
+        [HttpGet("artist/{artistId}")]
         public async Task<IActionResult> GetAllFollowersFromArtist(long artistId)
         {
             var result = await _mediator.Send(new GetAllFollowersByArtistQuery() { ArtistId = artistId });
