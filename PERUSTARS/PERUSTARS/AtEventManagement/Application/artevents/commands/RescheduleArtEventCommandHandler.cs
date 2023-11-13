@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
 using PERUSTARS.AtEventManagement.Domain.Model.Commads;
+using PERUSTARS.AtEventManagement.Domain.Model.domainevents;
 using PERUSTARS.AtEventManagement.Domain.Model.Repositories;
 using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
 using PERUSTARS.Shared.Domain.Repositories;
@@ -13,10 +14,12 @@ namespace PERUSTARS.AtEventManagement.Application.artevents.commands
     {
         private readonly IArtEventRepository _artEventRepository;
         private readonly IUnitOfWork _unitOfWork;
-        public RescheduleArtEventCommandHandler(IArtEventRepository artEventRepository, IUnitOfWork unitOfWork)
+        private readonly IPublisher _publisher;
+        public RescheduleArtEventCommandHandler(IArtEventRepository artEventRepository, IUnitOfWork unitOfWork, IPublisher publisher)
         {
             _artEventRepository = artEventRepository;
             _unitOfWork = unitOfWork;
+            _publisher = publisher;
         }
         public async Task<string> Handle(RescheduleArtEventCommand request, CancellationToken cancellationToken)
         {
@@ -27,6 +30,14 @@ namespace PERUSTARS.AtEventManagement.Application.artevents.commands
                 artEvent.CurrentStatus = ArtEventStatus.RESCHEDULED;
                 _artEventRepository.Update(artEvent);
                 await _unitOfWork.CompleteAsync();
+                await _publisher.Publish(new ArtEventRescheduledEvent()
+                {
+                    Title = artEvent.Title,
+                    Description = artEvent.Description,
+                    CurrentStatus = ArtEventStatus.RESCHEDULED,
+                    StartDate = (System.DateTime)artEvent.StartDateTime,
+                    Location = artEvent.Location
+                });
                 return "Art Event rescheduled!!";
             }
             else {

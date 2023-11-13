@@ -47,6 +47,15 @@ namespace PERUSTARS.AtEventManagement.Interfaces.rest
             string response = await _artEventCommandService.cancelArtEvent(cancelArtEventCommand);
             return Ok(response);
         }
+        [HttpPost("start/{id}")]
+        public async Task<IActionResult> startArtEvent(int id) {
+            StartArtEventCommand startArtEventCommand = new StartArtEventCommand();
+            startArtEventCommand.id= id;
+            string response= await _artEventCommandService.startArtEventCommand(startArtEventCommand);
+            return Ok(response);
+
+        }
+
         [HttpPut("edit")]
         public async Task<IActionResult> editArtEvent([FromBody] EditArtEventCommand editArtEventCommand)
         {

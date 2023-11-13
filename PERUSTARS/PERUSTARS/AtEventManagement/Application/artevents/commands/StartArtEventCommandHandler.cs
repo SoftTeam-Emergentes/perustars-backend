@@ -30,6 +30,8 @@ namespace PERUSTARS.AtEventManagement.Application.artevents.commands
             else
             {
                 artEvent.CurrentStatus = ArtEventStatus.STARTED;
+                _artEventRepository.Update(artEvent);
+                _unitOfWork.CompleteAsync();
                 return "Event started!!";
 
             }
