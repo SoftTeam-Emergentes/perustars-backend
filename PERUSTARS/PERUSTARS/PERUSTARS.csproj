@@ -7,13 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="ArtEventManagement\**" />
     <Compile Remove="CommunicationAndNotificationManagement\**" />
-    <Content Remove="ArtEventManagement\**" />
     <Content Remove="CommunicationAndNotificationManagement\**" />
     <EmbeddedResource Remove="ArtEventManagement\**" />
     <EmbeddedResource Remove="CommunicationAndNotificationManagement\**" />
-    <None Remove="ArtEventManagement\**" />
     <None Remove="CommunicationAndNotificationManagement\**" />
   </ItemGroup>
 
