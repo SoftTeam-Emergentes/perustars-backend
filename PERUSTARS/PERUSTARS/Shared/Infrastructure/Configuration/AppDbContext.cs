@@ -1,13 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using PERUSTARS.ConductsReportsManagement.Domain.Model.Entities;
-using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
 using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.Shared.Extensions;
 using System;
+using PERUSTARS.ArtEventManagement.Domain.Model.Aggregates;
+using PERUSTARS.ArtEventManagement.Domain.Model.ValueObjects;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates;
 using PERUSTARS.ArtworkManagement.Domain.Model.Aggregates;
-using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
 using PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Entities;
 using PERUSTARS.DataAnalytics.Domain.Model.Entities;
 using PERUSTARS.DataAnalytics.Domain.Model.Enums;

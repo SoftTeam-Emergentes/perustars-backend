@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using PERUSTARS.ArtworkManagement.Domain.Model.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
-using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
+using PERUSTARS.ArtEventManagement.Domain.Model.Aggregates;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates;
 
 

@@ -1,8 +1,8 @@
 ﻿﻿using System;
 using MediatR;
-using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
+ using PERUSTARS.ArtEventManagement.Domain.Model.ValueObjects;
 
-namespace PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Commands
+ namespace PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Commands
 {
     public class NotifyArtEventRescheduledCommand : IRequest<bool>
     {

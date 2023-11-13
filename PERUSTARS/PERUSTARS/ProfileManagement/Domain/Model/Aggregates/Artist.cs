@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Numerics;
-using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
 using System.Text.Json.Serialization;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Aggregates;
 using PERUSTARS.ProfileManagement.Domain.Model.Enum;

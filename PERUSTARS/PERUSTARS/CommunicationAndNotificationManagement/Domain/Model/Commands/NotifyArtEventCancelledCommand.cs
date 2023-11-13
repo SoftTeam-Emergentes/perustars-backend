@@ -1,7 +1,7 @@
 ﻿﻿using System;
 using MediatR;
-using PERUSTARS.AtEventManagement.Domain.Model.ValueObjects;
-using PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Entities;
+ using PERUSTARS.ArtEventManagement.Domain.Model.ValueObjects;
+ using PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Entities;
 
 namespace PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Commands
 {
