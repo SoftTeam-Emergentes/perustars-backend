@@ -50,6 +50,9 @@ using PERUSTARS.DataAnalytics.Application.Commands.Services;
 using Microsoft.Extensions.Logging;
 using PERUSTARS.AtEventManagement.Application.Participant.Command.Service;
 
+using PERUSTARS.DataAnalytics.Application.Jobs;
+using PERUSTARS.DataAnalytics.Infrastructure.FeignClients;
+
 namespace PERUSTARS
 {
     public class Startup
@@ -102,7 +105,7 @@ namespace PERUSTARS
 
             services.AddDbContext<AppDbContext>(options =>
             {
-                // options.UseNpgsql(Configuration.GetConnectionString("PostgreSQLConnection"));
+                //options.UseNpgsql(Configuration.GetConnectionString("PostgresSQLConnection"));
                 options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
             });
 
@@ -151,6 +154,7 @@ namespace PERUSTARS
             services.AddScoped<IMLTrainingDataRepository, MLTrainingDataRepository>();
             services.AddScoped<IDataAnalyticsCommandService, DataAnalyticsCommandService>();
             services.AddTransient<DataAnalyticsFacade>();
+            services.AddTransient<PeruStarsMLServiceFeignClient>();
 
             // Apply Endpoints Naming Convention
             services.AddRouting(options => options.LowercaseUrls = true);
@@ -172,7 +176,9 @@ namespace PERUSTARS
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PERUSTARS", Version = "v1" });
                 c.EnableAnnotations();
             });
-            
+
+            services.AddHttpClient();
+            services.AddHostedService<DataAnalyticsJob>();
             
         }
 

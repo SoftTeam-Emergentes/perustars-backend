@@ -11,7 +11,8 @@ namespace PERUSTARS.ProfileManagement.Interface.REST.Resources
         [ForeignKey("User")]
         public long UserId { get; set; }
         public long HobbyistId { get; set; }
+        
         public int Age { get; set; }
-        public List<Follower> FollowedArtists { get; set; }
+        public List<FollowerHobbyistResource> FollowedArtists { get; set; }
     }
 }

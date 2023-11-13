@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -86,7 +86,9 @@
 
 
 
-    <PackageReference Include="MediatR" Version="12.1.1" />
+    <PackageReference Include="MediatR" Version="12.1.1">
+      <Aliases></Aliases>
+    </PackageReference>
 
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.13" />
@@ -95,9 +97,11 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational.Design" Version="1.1.6" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.11.1" />
     <PackageReference Include="MySql.EntityFrameworkCore" Version="5.0.13" />
+    <PackageReference Include="Npgsql" Version="8.0.0-rc.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.1.4" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.11.1" />
+
   </ItemGroup>
 
   <ItemGroup>
@@ -108,10 +112,8 @@
     <Folder Include="ConductsReportsManagement\Domain\Services\" />
     <Folder Include="ArtworkManagement\Application\Events\Services\" />
     <Folder Include="ArtworkManagement\Domain\Model\Aggregates\" />
-    <Folder Include="DataAnalytics\Application\Jobs\" />
     <Folder Include="DataAnalytics\Domain\Model\Aggregates\" />
     <Folder Include="DataAnalytics\Domain\Model\Events\" />
-    <Folder Include="DataAnalytics\Infrastructure\FeignClients\" />
     <Folder Include="ProfileManagement\Application\Commands\" />
     <Folder Include="IdentityAndAccountManagement\Infrastructure\Context\" />
 

@@ -9,6 +9,7 @@ using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Commands;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Events;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Repositories;
 using PERUSTARS.IdentityAndAccountManagement.Interfaces.REST.Resources;
+using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.Shared.Domain.Repositories;
 using BCryptNet = BCrypt.Net.BCrypt;
 
@@ -46,15 +47,17 @@ namespace PERUSTARS.IdentityAndAccountManagement.Application.Commands.Handlers
                 return new AuthenticateResponse
                 {
                     Token = null,
-                    Message = "Username or password is incorrect."
+                    Message = "Username or password is incorrect.",
+                    UserType = null
                 };
             }
             var generateTokenCommand = new GenerateJwtTokenCommand { User = user };
             var jwtToken = await _generateJwtTokenHandler.Handle(generateTokenCommand, cancellationToken);
 
-            var response = new AuthenticateResponse { 
+            var response = new AuthenticateResponse {
                 Token = jwtToken,
-                Message = "User logged in successfully"
+                Message = "User logged in successfully",
+                UserType = user.Artist != null ? "Artist" : (user.Hobbyist != null ? "Hobbyist" : null)
             };
             UserLoggedInEvent userLoggedInEvent = new UserLoggedInEvent();
             await _publisher.Publish(userLoggedInEvent);

@@ -98,7 +98,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             // RelationShips
             builder.Entity<Artist>()
                    .HasOne(a => a.User)
-                   .WithOne()
+                   .WithOne(u => u.Artist)
                    .HasForeignKey<Artist>(a => a.UserId);
 
             builder.Entity<Artist>()
@@ -120,7 +120,7 @@ namespace PERUSTARS.Shared.Infrastructure.Configuration
             // RelationShips
             builder.Entity<Hobbyist>()
                    .HasOne(h => h.User)
-                   .WithOne()
+                   .WithOne(u => u.Hobbyist)
                    .HasForeignKey<Hobbyist>(h => h.UserId);
 
             builder.Entity<Hobbyist>()

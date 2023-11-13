@@ -21,8 +21,7 @@ namespace PERUSTARS.IdentityAndAccountManagement.Infrastructure.Repositories
 
         public async Task<User> FindByEmailAsync(string email)
         {
-            return await _dbContext.Users
-                .SingleOrDefaultAsync(p => p.Email == email);
+            return await _dbContext.Users.Include(u => u.Artist).Include(u => u.Hobbyist).Where(u => u.Email == email).FirstAsync();
         }
     }
 }

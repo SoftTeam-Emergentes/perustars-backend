@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Queries;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Repositories;
 using PERUSTARS.IdentityAndAccountManagement.Interfaces.REST.Resources;
@@ -10,8 +11,6 @@ namespace PERUSTARS.IdentityAndAccountManagement.Application.Queries.Handlers
     public class GetUserQueryHandler : IRequestHandler<GetUserQuery, UserResource>
     {
         private readonly IUserRepository _userRepository;
-
-
         public GetUserQueryHandler(IUserRepository userRepository)
         {
             _userRepository = userRepository;
