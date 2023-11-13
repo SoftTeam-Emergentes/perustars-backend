@@ -8,6 +8,7 @@ using PERUSTARS.ProfileManagement.Domain.Repositories;
 using PERUSTARS.Shared.Domain.Repositories;
 using System.Threading;
 using System.Threading.Tasks;
+using System;
 
 namespace PERUSTARS.AtEventManagement.Application.artevents.commands
 {
@@ -35,7 +36,7 @@ namespace PERUSTARS.AtEventManagement.Application.artevents.commands
                 id: 0,
                 userName: "A",
                 registerDateTime: new System.DateTime(),
-                checkInDateTime: null,
+                checkInDateTime: DateTime.UtcNow,
                 hobbyistId: request.hobbyistId,
                 artEventId: request.artEventId,
                 hobbyist: hobbyist,

@@ -24,6 +24,7 @@ namespace PERUSTARS.AtEventManagement.Domain.Model.Aggregates
             UserName = userName;
             RegisterDateTime = registerDateTime;
             CheckInDateTime = checkInDateTime;
+            ParticipantRegistrationDateTime = DateTime.UtcNow;
             HobbyistId = hobbyistId;
             ArtEventId = artEventId;
             Hobyst = hobbyist;

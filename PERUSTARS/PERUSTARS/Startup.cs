@@ -48,6 +48,7 @@ using PERUSTARS.DataAnalytics.Infrastructure.Repositories;
 using PERUSTARS.DataAnalytics.Domain.Services;
 using PERUSTARS.DataAnalytics.Application.Commands.Services;
 using Microsoft.Extensions.Logging;
+using PERUSTARS.AtEventManagement.Application.Participant.Command.Service;
 
 namespace PERUSTARS
 {
@@ -125,7 +126,7 @@ namespace PERUSTARS
             services.AddScoped<IArtEventCommandService, ArtEventService>();
             services.AddScoped<IArtEventQueryService, ArtEventQueryService>();
             services.AddScoped<IParticipantQueryService, ParticipantQueryService>();
-
+            services.AddScoped<IParticipantCommandService, ParticipantCommandService>();
 
             services.AddScoped<IArtworkCommandService, ArtworkCommandService>();
             services.AddScoped<IArtworkRecommendationCommandService, ArtworkRecommendationCommandService>();

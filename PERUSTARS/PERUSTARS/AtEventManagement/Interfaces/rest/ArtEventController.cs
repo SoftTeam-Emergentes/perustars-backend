@@ -77,5 +77,14 @@ namespace PERUSTARS.AtEventManagement.Interfaces.rest
             string response= await _artEventCommandService.registerParticipantToArtEvent(registerParticipantToArtEvent);
             return Ok(response);
         }
+
+        [HttpDelete("id")]
+        public async Task<IActionResult> deleteArtEvent(int id) {
+            DeleteArtEventCommand deleteArtEventCommand = new DeleteArtEventCommand();
+            deleteArtEventCommand.id=id;
+            string response = await _artEventCommandService.deleteArtEvent(deleteArtEventCommand);
+            return Ok(response);
+        }
+
     }
 }
