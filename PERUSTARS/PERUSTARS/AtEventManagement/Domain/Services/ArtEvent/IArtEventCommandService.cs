@@ -12,5 +12,6 @@ namespace PERUSTARS.AtEventManagement.Domain.Services.ArtEvent
         Task<string> finishArtEvent(FinishArtEventCommand finishArtEventCommand);
         Task<string> rescheduleArtEvent(RescheduleArtEventCommand rescheduleArtEventCommand);
         Task<string> startArtEventCommand(StartArtEventCommand startArtEventCommand);
+        Task<string> deleteArtEvent(DeleteArtEventCommand deleteArtEventCommand);
     }
 }

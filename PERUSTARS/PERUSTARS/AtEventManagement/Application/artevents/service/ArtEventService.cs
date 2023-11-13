@@ -50,5 +50,9 @@ namespace PERUSTARS.AtEventManagement.Application.artevents.service
         {
             return await _mediator.Send(startArtEventCommand);
         }
+
+        public async Task<string> deleteArtEvent(DeleteArtEventCommand deleteArtEventCommand) {
+            return await _mediator.Send(deleteArtEventCommand);
+        }
     }
 }

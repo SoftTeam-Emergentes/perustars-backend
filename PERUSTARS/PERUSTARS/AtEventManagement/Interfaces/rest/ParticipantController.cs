@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata;
 using PERUSTARS.AtEventManagement.Domain.Model.Aggregates;
+using PERUSTARS.AtEventManagement.Domain.Model.Commads;
 using PERUSTARS.AtEventManagement.Domain.Services.Participant;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,10 +15,12 @@ namespace PERUSTARS.AtEventManagement.Interfaces.rest
     {
         private readonly IMapper _mapper;
         private readonly IParticipantQueryService _participantQueryService;
-        public ParticipantController(IMapper mapper, IParticipantQueryService participantQueryService)
+        private readonly IParticipantCommandService _participantCommandService;
+        public ParticipantController(IMapper mapper, IParticipantQueryService participantQueryService, IParticipantCommandService participantCommandService)
         {
             _mapper = mapper;
             _participantQueryService = participantQueryService;
+            _participantCommandService=participantCommandService;
         }
 
         [HttpGet]
@@ -27,17 +30,25 @@ namespace PERUSTARS.AtEventManagement.Interfaces.rest
             return Ok(participants);
         }
 
-        [HttpGet("/hobbyist/{id}")]
+        [HttpGet("hobbyist/{id}")]
         public async Task<IActionResult> getParticipantsByHobbyistId(int id)
         {
             IEnumerable<Participant> participants = _participantQueryService.getParticipantByHobbyistId(id);
             return Ok(participants);
         }
-        [HttpGet("/artevent/{id}")]
+        [HttpGet("artevent/{id}")]
         public async Task<IActionResult> getParticipantsByArtEventId(int id)
         {
             IEnumerable<Participant> participants = _participantQueryService.getParticipantByEventId(id);
             return Ok(participants);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> deleteParticipant(int id) {
+            DeleteParticipantCommand d = new DeleteParticipantCommand();
+            d.id = id;
+            string response = _participantCommandService.deleteParticipant(d).Result;
+            return Ok(response);
         }
     }
 }
