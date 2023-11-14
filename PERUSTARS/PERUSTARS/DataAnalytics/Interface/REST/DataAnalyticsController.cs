@@ -3,10 +3,13 @@ using PERUSTARS.DataAnalytics.Infrastructure.FeignClients;
 using PERUSTARS.DataAnalytics.Infrastructure.FeignClients.Resources.Response;
 using System.Threading.Tasks;
 using System.Net;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Attributes;
 
 namespace PERUSTARS.DataAnalytics.Interface.REST
 {
     [ApiController]
+    [Authorize]
+    [Route("api/v1/[controller]")]
     public class DataAnalyticsController : ControllerBase
     {
         private readonly PeruStarsMLServiceFeignClient _peruStarsMLServiceFeignClient;
@@ -16,7 +19,7 @@ namespace PERUSTARS.DataAnalytics.Interface.REST
             _peruStarsMLServiceFeignClient = peruStarsMLServiceFeignClient;
         }   
 
-        [HttpGet("api/data-analytics/hobbyists/{hobbyistId}/recommended-artists")]
+        [HttpGet("hobbyists/{hobbyistId}/recommended-artists")]
         public async Task<IActionResult> GetFavouristArtistsFrom(long hobbyistId)
         {
             MLResponse result = await _peruStarsMLServiceFeignClient.GetHobbyistRecommendedArtist(hobbyistId);

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Attributes;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.ProfileManagement.Domain.Model.Commands;
 using PERUSTARS.ProfileManagement.Domain.Model.Queries;
@@ -12,22 +13,23 @@ using PERUSTARS.ProfileManagement.Interface.REST.Resources;
 
 namespace PERUSTARS.ProfileManagement.Interface.REST
 {
+    [Authorize]
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class FollowerController:ControllerBase
+    public class FollowersController:ControllerBase
     {
         private readonly IMediator _mediator;
         private readonly IProfileCommandService _profileCommandService;
         private readonly IMapper _mapper;
 
-        public FollowerController(IMediator mediator, IProfileCommandService profileCommandService, IMapper mapper)
+        public FollowersController(IMediator mediator, IProfileCommandService profileCommandService, IMapper mapper)
         {
             _mediator = mediator;
             _profileCommandService = profileCommandService;
             _mapper = mapper;
         }
 
-        [HttpPost("register")]
+        [HttpPost]
         public async Task<IActionResult> FollowArtist([FromBody] FollowArtistCommand followArtistCommand)
         {
             try

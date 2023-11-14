@@ -5,7 +5,7 @@ using PERUSTARS.ArtEventManagement.Domain.Model.domainevents;
 using PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Commands;
 using PERUSTARS.CommunicationAndNotificationManagement.Domain.Services;
 
-namespace PERUSTARS.ArtEventManagement.Application.artevents.events
+namespace PERUSTARS.ArtEventManagement.Application.ArtEvents.Events
 {
     public class ArtEventRescheduledEventHandler : INotificationHandler<ArtEventRescheduledEvent>
     {

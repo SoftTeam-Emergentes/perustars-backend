@@ -12,6 +12,7 @@ using MediatR;
 
 namespace PERUSTARS.IdentityAndAccountManagement.Interfaces.REST
 {
+    [Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -43,8 +44,7 @@ namespace PERUSTARS.IdentityAndAccountManagement.Interfaces.REST
                 await _identityAndAccountManagementCommandService.ExecuteLogInUserCommand(logInUserCommand);
             return Ok(authenticateResponse);
         }
-
-        [AllowAnonymous]
+        
         [HttpPut("{userId}")]
         public async Task<IActionResult> UpdateUserInformation(long userId, [FromBody] UpdateUserRequest updateUserRequest)
         {

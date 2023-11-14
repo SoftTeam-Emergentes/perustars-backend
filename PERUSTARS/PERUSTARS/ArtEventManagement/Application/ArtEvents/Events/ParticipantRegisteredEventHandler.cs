@@ -4,7 +4,7 @@ using MediatR;
 using PERUSTARS.ArtEventManagement.Domain.Model.domainevents;
 using PERUSTARS.DataAnalytics.Interface.ACL;
 
-namespace PERUSTARS.ArtEventManagement.Application.artevents.events
+namespace PERUSTARS.ArtEventManagement.Application.ArtEvents.Events
 {
     public class ParticipantRegisteredEventHandler : INotificationHandler<ParticipantRegisteredEvent>
     {

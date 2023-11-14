@@ -7,16 +7,19 @@ using PERUSTARS.ArtEventManagement.Domain.Model.Commads;
 using PERUSTARS.ArtEventManagement.Domain.Model.ValueObjects;
 using PERUSTARS.ArtEventManagement.Domain.Services.ArtEvent;
 using PERUSTARS.ArtEventManagement.Interfaces.Resources;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Attributes;
 
-namespace PERUSTARS.ArtEventManagement.Interfaces.rest
+namespace PERUSTARS.ArtEventManagement.Interfaces.REST
 {
-    [Route("/api/v1/artevents")]
-    public class ArtEventController : ControllerBase
+    [ApiController]
+    [Authorize]
+    [Route("/api/v1/[controller]")]
+    public class ArtEventsController : ControllerBase
     {
         private readonly IMapper _mapper;
         private readonly IArtEventCommandService _artEventCommandService;
         private readonly IArtEventQueryService _artEventQueryService;
-        public ArtEventController(IMapper mapper, IArtEventCommandService artEventCommandService, IArtEventQueryService artEventQueryService)
+        public ArtEventsController(IMapper mapper, IArtEventCommandService artEventCommandService, IArtEventQueryService artEventQueryService)
         {
             _mapper = mapper;
             _artEventCommandService = artEventCommandService;
@@ -54,7 +57,7 @@ namespace PERUSTARS.ArtEventManagement.Interfaces.rest
 
         }
 
-        [HttpPut("edit")]
+        [HttpPut]
         public async Task<IActionResult> editArtEvent([FromBody] EditArtEventCommand editArtEventCommand)
         {
             string response= await _artEventCommandService.editArtEvent(editArtEventCommand);

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Attributes;
 using PERUSTARS.ProfileManagement.Application.Exceptions;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.ProfileManagement.Domain.Model.Commands;
@@ -17,15 +17,16 @@ using PERUSTARS.Shared.Infrastructure.Configuration;
 
 namespace PERUSTARS.ProfileManagement.Interface.REST
 {
+    [Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class ArtistController: ControllerBase
+    public class ArtistsController: ControllerBase
     {
         private readonly IProfileCommandService _profileCommandService;
         private readonly IMapper _mapper;
         private readonly IMediator _mediator;
         private readonly AppDbContext _context;
-        public ArtistController(AppDbContext context, IProfileCommandService profileCommandService, IMapper mapper, IMediator mediator)
+        public ArtistsController(AppDbContext context, IProfileCommandService profileCommandService, IMapper mapper, IMediator mediator)
         {
             _mapper = mapper;
             _profileCommandService = profileCommandService;
@@ -33,11 +34,11 @@ namespace PERUSTARS.ProfileManagement.Interface.REST
             _context = context;
         }
 
-        [HttpPost("register")]
+        [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> RegisterNewProfileArtist([FromBody] RegisterArtistProfile registerArtistProfile)
         {
-            RegisterProfileArtistCommand registerProfileArtistCommand = _mapper.Map<RegisterProfileArtistCommand>(registerArtistProfile);
+            RegisterProfileArtistCommand registerProfileArtistCommand = _mapper.Map<RegisterArtistProfile, RegisterProfileArtistCommand>(registerArtistProfile);
             ArtistResource artistResource = await _profileCommandService.ExecuteRegisterProfileCommand(registerProfileArtistCommand);
             return Ok(artistResource);
         }
@@ -56,7 +57,7 @@ namespace PERUSTARS.ProfileManagement.Interface.REST
             return Ok(artistResource);
         }
 
-        [HttpDelete("delete/{artistId}")]
+        [HttpDelete("{artistId}")]
         public async Task<IActionResult> DeleteProfileArtist(long artistId)
         {
             DeleteProfileArtistCommand deleteProfileArtistCommand = new DeleteProfileArtistCommand()
@@ -71,7 +72,7 @@ namespace PERUSTARS.ProfileManagement.Interface.REST
 
         }
 
-        [HttpPut("edit/{artistId}")]
+        [HttpPut("{artistId}")]
         public async Task<IActionResult> EditProfileArtist(long artistId, [FromBody]  ArtistEditResource artistResource)
         {
             EditProfileArtistCommand editProfileArtistCommand = new EditProfileArtistCommand
@@ -102,8 +103,8 @@ namespace PERUSTARS.ProfileManagement.Interface.REST
             }
         }
 
-        [HttpGet("artists")]
-        public async Task<IActionResult> GetAllArtists( )
+        [HttpGet]
+        public async Task<IActionResult> GetAllArtists()
         {
             
             var result = await _mediator.Send(new GetAllArtistsQuery());

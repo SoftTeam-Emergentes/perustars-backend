@@ -7,7 +7,7 @@ using PERUSTARS.ArtEventManagement.Domain.Model.Commads;
 using PERUSTARS.ArtEventManagement.Domain.Model.Repositories;
 using PERUSTARS.Shared.Domain.Repositories;
 
-namespace PERUSTARS.ArtEventManagement.Application.artevents.commands
+namespace PERUSTARS.ArtEventManagement.Application.ArtEvents.Commands
 {
     public class DeleteArtEventCommandHandler : IRequestHandler<DeleteArtEventCommand, string>
     {

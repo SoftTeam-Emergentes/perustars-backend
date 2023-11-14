@@ -6,7 +6,7 @@ using PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Commands;
 using PERUSTARS.CommunicationAndNotificationManagement.Domain.Services;
 using PERUSTARS.Shared.Domain.Repositories;
 
-namespace PERUSTARS.ArtEventManagement.Application.artevents.events
+namespace PERUSTARS.ArtEventManagement.Application.ArtEvents.Events
 {
     public class CancelledArtEventEventHandler : INotificationHandler<ArtEventCancelledEvent>
     {

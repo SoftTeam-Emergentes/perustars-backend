@@ -4,6 +4,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Attributes;
 using PERUSTARS.ProfileManagement.Application.Exceptions;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.ProfileManagement.Domain.Model.Commands;
@@ -14,15 +15,16 @@ using PERUSTARS.Shared.Infrastructure.Configuration;
 
 namespace PERUSTARS.ProfileManagement.Interface.REST
 {
+    [Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class HobbyistController: ControllerBase
+    public class HobbyistsController: ControllerBase
     {
         private readonly IProfileCommandService _profileCommandService;
         private readonly IMapper _mapper;
         private readonly AppDbContext _context;
         private readonly IMediator _mediator;
-        public HobbyistController(IProfileCommandService profileCommandService, IMediator mediator, IMapper mapper, AppDbContext context)
+        public HobbyistsController(IProfileCommandService profileCommandService, IMediator mediator, IMapper mapper, AppDbContext context)
         {
             _mapper = mapper;
             _profileCommandService = profileCommandService;
@@ -30,7 +32,8 @@ namespace PERUSTARS.ProfileManagement.Interface.REST
             _mediator = mediator;
         }
 
-        [HttpPost("register")]
+        [AllowAnonymous]
+        [HttpPost]
         public async Task<IActionResult> RegisterNewProfileHobbyist([FromBody] RegisterHobbyistProfile registerHobbyistProfile)
         {
             RegisterProfileHobbyistCommand registerProfileHobbyistCommand = _mapper.Map<RegisterProfileHobbyistCommand>(registerHobbyistProfile);
@@ -51,7 +54,7 @@ namespace PERUSTARS.ProfileManagement.Interface.REST
             return Ok(hobbyistResource);
         }
         
-        [HttpDelete("delete/{hobbyistId}")]
+        [HttpDelete("{hobbyistId}")]
         public async Task<IActionResult> DeleteProfileHobbyist(long hobbyistId)
         {
             DeleteProfileHobbyistCommand deleteProfileHobbyistCommand = new DeleteProfileHobbyistCommand()
@@ -66,7 +69,7 @@ namespace PERUSTARS.ProfileManagement.Interface.REST
 
         }
         
-        [HttpPut("edit/{hobbyistId}")]
+        [HttpPut("{hobbyistId}")]
         public async Task<IActionResult> EditProfileHobbyist(long hobbyistId, [FromBody]  HobbyistEditResource hobbyistResource)
         {
             EditProfileHobbyistCommand editProfileHobbyistCommand = new EditProfileHobbyistCommand()

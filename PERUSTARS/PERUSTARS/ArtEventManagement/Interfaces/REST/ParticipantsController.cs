@@ -5,16 +5,19 @@ using Microsoft.AspNetCore.Mvc;
 using PERUSTARS.ArtEventManagement.Domain.Model.Aggregates;
 using PERUSTARS.ArtEventManagement.Domain.Model.Commads;
 using PERUSTARS.ArtEventManagement.Domain.Services.Participant;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Attributes;
 
-namespace PERUSTARS.ArtEventManagement.Interfaces.rest
+namespace PERUSTARS.ArtEventManagement.Interfaces.REST
 {
-    [Route("/api/v1/participants")]
-    public class ParticipantController : ControllerBase
+    [ApiController]
+    [Route("/api/v1/[controller]")]
+    [Authorize]
+    public class ParticipantsController : ControllerBase
     {
         private readonly IMapper _mapper;
         private readonly IParticipantQueryService _participantQueryService;
         private readonly IParticipantCommandService _participantCommandService;
-        public ParticipantController(IMapper mapper, IParticipantQueryService participantQueryService, IParticipantCommandService participantCommandService)
+        public ParticipantsController(IMapper mapper, IParticipantQueryService participantQueryService, IParticipantCommandService participantCommandService)
         {
             _mapper = mapper;
             _participantQueryService = participantQueryService;

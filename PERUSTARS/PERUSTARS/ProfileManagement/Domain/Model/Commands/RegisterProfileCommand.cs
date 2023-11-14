@@ -23,7 +23,7 @@ namespace PERUSTARS.ProfileManagement.Domain.Model.Commands
         public Genre Genre { get; set; }
         public List<string> SocialMediaLink { get; set; } //SocialNetwork
         //Seguir
-        public List<int> FollowersArtist { get; set; }
+        //public List<int> FollowersArtist { get; set; }
     }
 
 

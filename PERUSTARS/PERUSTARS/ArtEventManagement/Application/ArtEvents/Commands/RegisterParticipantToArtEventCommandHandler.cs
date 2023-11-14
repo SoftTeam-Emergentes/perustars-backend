@@ -10,7 +10,7 @@ using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;
 using PERUSTARS.ProfileManagement.Domain.Repositories;
 using PERUSTARS.Shared.Domain.Repositories;
 
-namespace PERUSTARS.ArtEventManagement.Application.artevents.commands
+namespace PERUSTARS.ArtEventManagement.Application.ArtEvents.Commands
 {
     public class RegisterParticipantToArtEventCommandHandler : IRequestHandler<RegisterParticipantToArtEventCommand, string>
     {

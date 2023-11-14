@@ -3,7 +3,7 @@ using PERUSTARS.ArtEventManagement.Domain.Model.Aggregates;
 using PERUSTARS.ArtEventManagement.Domain.Model.Repositories;
 using PERUSTARS.ArtEventManagement.Domain.Services.ArtEvent;
 
-namespace PERUSTARS.ArtEventManagement.Application.artevents.service
+namespace PERUSTARS.ArtEventManagement.Application.ArtEvents.Service
 {
     public class ArtEventQueryService: IArtEventQueryService
     {
