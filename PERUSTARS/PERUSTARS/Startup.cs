@@ -1,3 +1,4 @@
+using System;
 using System.Reflection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -9,13 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using Microsoft.AspNetCore.Diagnostics;
-using PERUSTARS.AtEventManagement.Application.artevents.service;
-using PERUSTARS.AtEventManagement.Domain.Model.Repositories;
-using PERUSTARS.AtEventManagement.Domain.Services.ArtEvent;
-using PERUSTARS.AtEventManagement.Infrastructure;
 using Microsoft.AspNetCore.Http;
-using PERUSTARS.AtEventManagement.Application.Participant.Queries;
-using PERUSTARS.AtEventManagement.Domain.Services.Participant;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Repositories;
 using PERUSTARS.IdentityAndAccountManagement.Infrastructure.Repositories;
 using PERUSTARS.Shared.Domain.Repositories;
@@ -48,8 +43,13 @@ using PERUSTARS.DataAnalytics.Infrastructure.Repositories;
 using PERUSTARS.DataAnalytics.Domain.Services;
 using PERUSTARS.DataAnalytics.Application.Commands.Services;
 using Microsoft.Extensions.Logging;
-using PERUSTARS.AtEventManagement.Application.Participant.Command.Service;
-
+using PERUSTARS.ArtEventManagement.Application.ArtEvents.Service;
+using PERUSTARS.ArtEventManagement.Application.Participant.Command.Service;
+using PERUSTARS.ArtEventManagement.Application.Participant.Queries;
+using PERUSTARS.ArtEventManagement.Domain.Model.Repositories;
+using PERUSTARS.ArtEventManagement.Domain.Services.ArtEvent;
+using PERUSTARS.ArtEventManagement.Domain.Services.Participant;
+using PERUSTARS.ArtEventManagement.Infrastructure;
 using PERUSTARS.DataAnalytics.Application.Jobs;
 using PERUSTARS.DataAnalytics.Infrastructure.FeignClients;
 
@@ -105,8 +105,8 @@ namespace PERUSTARS
 
             services.AddDbContext<AppDbContext>(options =>
             {
-                //options.UseNpgsql(Configuration.GetConnectionString("PostgresSQLConnection"));
-                options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseNpgsql(Configuration.GetConnectionString("PostgresSQLConnection"));
+                //options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
             });
 
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
@@ -175,6 +175,23 @@ namespace PERUSTARS
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PERUSTARS", Version = "v1" });
                 c.EnableAnnotations();
+                c.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    Description = "JWT Authorization header using the Bearer Scheme"
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "bearerAuth" }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
             });
 
             services.AddHttpClient();

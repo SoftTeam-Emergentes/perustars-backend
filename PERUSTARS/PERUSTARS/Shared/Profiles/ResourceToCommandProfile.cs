@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using PERUSTARS.ArtEventManagement.Domain.Model.Commads;
+using PERUSTARS.ArtEventManagement.Interfaces.REST.Resources;
 using PERUSTARS.ArtworkManagement.Domain.Model.Commands;
 using PERUSTARS.ArtworkManagement.Interfaces.REST.Resources;
 using PERUSTARS.CommunicationAndNotificationManagement.Domain.Model.Commands;
@@ -30,6 +32,7 @@ namespace PERUSTARS.Shared.Profiles
             CreateMap<NotificationResource, NotifyArtEventFinishedCommand>();
             CreateMap<NotificationResource, NotifyArtEventCancelledCommand>();
             CreateMap<NotificationResource, NotifyArtEventRescheduledCommand>();
+            CreateMap<UpdateArtEventResource, EditArtEventCommand>();
         }
     }
 }

@@ -7,10 +7,12 @@ using Microsoft.EntityFrameworkCore;
 using PERUSTARS.ArtworkManagement.Domain.Model.Commands;
 using PERUSTARS.ArtworkManagement.Domain.Services;
 using PERUSTARS.ArtworkManagement.Interfaces.REST.Resources;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Attributes;
 using PERUSTARS.Shared.Infrastructure.Configuration;
 
 namespace PERUSTARS.ArtworkManagement.Interfaces.REST
 {
+    [Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
     public class HobbyistFavoriteArtworksController : ControllerBase

@@ -8,30 +8,38 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+  using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Attributes;
 
 
-namespace PERUSTARS.CommunicationAndNotificationManagement.Interfaces.REST
+  namespace PERUSTARS.CommunicationAndNotificationManagement.Interfaces.REST
 {
-    [Route("api/[controller]")]
+    [Authorize]
+    [Route("api/v1")]
     [ApiController]
     public class NotificationsController : ControllerBase
     {
-        private readonly INotificationCommandService _notificatioCommandService;
+        private readonly INotificationCommandService _notificationCommandService;
         private readonly IMapper _mapper;
 
-        [HttpGet("artist/{artistId}")]
+        public NotificationsController(INotificationCommandService notificationCommandService, IMapper mapper)
+        {
+            _notificationCommandService = notificationCommandService;
+            _mapper = mapper;
+        }
+
+        [HttpGet("artists/{artistId}/notifications")]
         public async Task<IActionResult> GetNotificationsByArtistId(long artistId)
         {
-            var notifications = await _notificatioCommandService.ListNotificationsReceivedBydArtistIdAsync(artistId);
+            var notifications = await _notificationCommandService.ListNotificationsReceivedBydArtistIdAsync(artistId);
             var result = _mapper.Map<IEnumerable<NotificationResource>>(notifications);
             
             return Ok(result);
         }
 
-        [HttpGet("hobbyist/{hoobyistId}")]
-        public async Task<IActionResult> GetNotificationsByHobbyistId(long hoobyistId)
+        [HttpGet("hobbyists/{hobbyistId}/notifications")]
+        public async Task<IActionResult> GetNotificationsByHobbyistId(long hobbyistId)
         {
-            var notifications = await _notificatioCommandService.ListNotificationsReceivedByHobbyistIdAsync(hoobyistId);
+            var notifications = await _notificationCommandService.ListNotificationsReceivedByHobbyistIdAsync(hobbyistId);
             var result = _mapper.Map<IEnumerable<NotificationResource>>(notifications);
 
             return Ok(result);

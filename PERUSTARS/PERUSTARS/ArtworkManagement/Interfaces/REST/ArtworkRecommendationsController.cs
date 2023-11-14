@@ -7,9 +7,11 @@ using PERUSTARS.ArtworkManagement.Domain.Services;
 using PERUSTARS.Shared.Infrastructure.Configuration;
 using PERUSTARS.ArtworkManagement.Domain.Model.Commands;
 using PERUSTARS.ArtworkManagement.Interfaces.REST.Resources;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Attributes;
 
 namespace PERUSTARS.ArtworkManagement.Interfaces.REST
 {
+    [Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
     public class ArtworkRecommendationsController : ControllerBase

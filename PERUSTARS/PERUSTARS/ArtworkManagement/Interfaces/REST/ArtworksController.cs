@@ -7,11 +7,12 @@ using PERUSTARS.ArtworkManagement.Domain.Services;
 using PERUSTARS.Shared.Infrastructure.Configuration;
 using PERUSTARS.ArtworkManagement.Domain.Model.Commands;
 using PERUSTARS.ArtworkManagement.Interfaces.REST.Resources;
-using Microsoft.AspNetCore.Authorization;
 using System.Linq;
+using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Attributes;
 
 namespace PERUSTARS.ArtworkManagement.Interfaces.REST
 {
+    [Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
     public class ArtworksController : ControllerBase
@@ -64,7 +65,7 @@ namespace PERUSTARS.ArtworkManagement.Interfaces.REST
         }
 
         [HttpGet]
-        [AllowAnonymous]
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public async Task<IActionResult> GetAllArtworks()
         {
             var artworks = await _context.Artworks.ToListAsync();
