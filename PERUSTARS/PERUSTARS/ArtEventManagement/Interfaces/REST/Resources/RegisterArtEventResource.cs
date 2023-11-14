@@ -1,7 +1,7 @@
 ﻿using System;
 using PERUSTARS.ArtEventManagement.Domain.Model.ValueObjects;
 
-namespace PERUSTARS.ArtEventManagement.Interfaces.Resources
+namespace PERUSTARS.ArtEventManagement.Interfaces.REST.Resources
 {
     public class RegisterArtEventResource
     {

@@ -10,7 +10,7 @@ using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Attributes;
 namespace PERUSTARS.ArtEventManagement.Interfaces.REST
 {
     [ApiController]
-    [Route("/api/v1/[controller]")]
+    [Route("/api/v1")]
     [Authorize]
     public class ParticipantsController : ControllerBase
     {
@@ -31,20 +31,20 @@ namespace PERUSTARS.ArtEventManagement.Interfaces.REST
             return Ok(participants);
         }
 
-        [HttpGet("hobbyist/{id}")]
+        [HttpGet("participants/hobbyist/{id}")]
         public async Task<IActionResult> getParticipantsByHobbyistId(int id)
         {
             IEnumerable<Participant> participants = _participantQueryService.getParticipantByHobbyistId(id);
             return Ok(participants);
         }
-        [HttpGet("artevent/{id}")]
+        [HttpGet("participants/artevent/{id}")]
         public async Task<IActionResult> getParticipantsByArtEventId(int id)
         {
             IEnumerable<Participant> participants = _participantQueryService.getParticipantByEventId(id);
             return Ok(participants);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("participants/{id}")]
         public async Task<IActionResult> deleteParticipant(int id) {
             DeleteParticipantCommand d = new DeleteParticipantCommand();
             d.id = id;

@@ -5,6 +5,8 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PERUSTARS.CommunicationAndNotificationManagement.Domain.Services;
+using PERUSTARS.CommunicationAndNotificationManagement.Interfaces.REST.Resources;
 using PERUSTARS.IdentityAndAccountManagement.Domain.Model.Attributes;
 using PERUSTARS.ProfileManagement.Application.Exceptions;
 using PERUSTARS.ProfileManagement.Domain.Model.Aggregates;

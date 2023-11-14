@@ -105,8 +105,8 @@ namespace PERUSTARS
 
             services.AddDbContext<AppDbContext>(options =>
             {
-                //options.UseNpgsql(Configuration.GetConnectionString("PostgresSQLConnection"));
-                options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseNpgsql(Configuration.GetConnectionString("PostgresSQLConnection"));
+                //options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
             });
 
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));

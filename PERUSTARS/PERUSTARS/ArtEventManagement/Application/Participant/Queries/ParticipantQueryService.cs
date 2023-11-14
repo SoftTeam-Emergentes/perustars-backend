@@ -9,7 +9,7 @@ namespace PERUSTARS.ArtEventManagement.Application.Participant.Queries
         private readonly IParticipantRepository _participantRepository;
         public ParticipantQueryService(IParticipantRepository participantRepository)
         {
-            this._participantRepository = participantRepository;
+            _participantRepository = participantRepository;
         }
 
         public IEnumerable<Domain.Model.Aggregates.Participant> getParticipantByEventId(long id)

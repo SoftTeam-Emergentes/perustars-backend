@@ -14,14 +14,20 @@ using System.Threading.Tasks;
   namespace PERUSTARS.CommunicationAndNotificationManagement.Interfaces.REST
 {
     [Authorize]
-    [Route("api/v1/[controller]")]
+    [Route("api/v1")]
     [ApiController]
     public class NotificationsController : ControllerBase
     {
         private readonly INotificationCommandService _notificationCommandService;
         private readonly IMapper _mapper;
 
-        [HttpGet("artist/{artistId}")]
+        public NotificationsController(INotificationCommandService notificationCommandService, IMapper mapper)
+        {
+            _notificationCommandService = notificationCommandService;
+            _mapper = mapper;
+        }
+
+        [HttpGet("artists/{artistId}/notifications")]
         public async Task<IActionResult> GetNotificationsByArtistId(long artistId)
         {
             var notifications = await _notificationCommandService.ListNotificationsReceivedBydArtistIdAsync(artistId);
@@ -30,10 +36,10 @@ using System.Threading.Tasks;
             return Ok(result);
         }
 
-        [HttpGet("hobbyist/{hoobyistId}")]
-        public async Task<IActionResult> GetNotificationsByHobbyistId(long hoobyistId)
+        [HttpGet("hobbyists/{hobbyistId}/notifications")]
+        public async Task<IActionResult> GetNotificationsByHobbyistId(long hobbyistId)
         {
-            var notifications = await _notificationCommandService.ListNotificationsReceivedByHobbyistIdAsync(hoobyistId);
+            var notifications = await _notificationCommandService.ListNotificationsReceivedByHobbyistIdAsync(hobbyistId);
             var result = _mapper.Map<IEnumerable<NotificationResource>>(notifications);
 
             return Ok(result);
