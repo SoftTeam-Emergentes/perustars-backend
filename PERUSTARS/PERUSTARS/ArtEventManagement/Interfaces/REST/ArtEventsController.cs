@@ -25,7 +25,7 @@ namespace PERUSTARS.ArtEventManagement.Interfaces.REST
             _artEventCommandService = artEventCommandService;
             _artEventQueryService = artEventQueryService;
         }
-        [HttpPost]
+        [HttpPost("art-events/add")]
         public async Task<IActionResult> RegisterArtEvent([FromBody] RegisterArtEventResource registerArtEventResource) {
             Location location = new Location(registerArtEventResource.Country, registerArtEventResource.City, registerArtEventResource.Latitude, registerArtEventResource.Longitude);
             RegisterArtEventCommand registerArtEventCommand = new RegisterArtEventCommand(registerArtEventResource.Title, registerArtEventResource.Description, registerArtEventResource.StartDateTime
@@ -34,51 +34,51 @@ namespace PERUSTARS.ArtEventManagement.Interfaces.REST
             return Ok(response);
         }
 
-        [HttpGet("artevents/{id}")]
+        [HttpGet("art-events/{id}")]
         public async Task<IActionResult> GetArtEvent(int id)
         {
             ArtEvent artEvent = _artEventQueryService.getArtEventById(id);
             return Ok(artEvent);
         }
 
-        [HttpPatch("artevents/{id}/cancel")]
+        [HttpPatch("art-events/{id}/cancel")]
         public async Task<IActionResult> cancelArtEvent(int id) {
             CancelArtEventCommand cancelArtEventCommand = new CancelArtEventCommand();
             cancelArtEventCommand.id= id;
             string response = await _artEventCommandService.cancelArtEvent(cancelArtEventCommand);
             return Ok(response);
         }
-        [HttpPatch("artevents/{id}/start")]
+        [HttpPatch("art-events/{id}/start")]
         public async Task<IActionResult> startArtEvent(int id) {
             StartArtEventCommand startArtEventCommand = new StartArtEventCommand();
             startArtEventCommand.id= id;
             string response= await _artEventCommandService.startArtEventCommand(startArtEventCommand);
             return Ok(response);
         }
-        [HttpPut("artevents/{id}")]
+        [HttpPut("art-events/{id}")]
         public async Task<IActionResult> editArtEvent([FromBody] UpdateArtEventResource updateArtEventResource)
         {
             var editArtEventCommand = _mapper.Map<UpdateArtEventResource, EditArtEventCommand>(updateArtEventResource);
             string response= await _artEventCommandService.editArtEvent(editArtEventCommand);
             return Ok(response);
         }
-        [HttpGet("artevents")]
+        [HttpGet("art-events")]
         public async Task<IActionResult> getALlEvents(){
             IEnumerable<ArtEvent> events= _artEventQueryService.getArtEvents();
             return Ok(events);
         }
-        [HttpGet("artists/{id}/artevents")]
+        [HttpGet("artists/{id}/art-events")]
         public async Task<IActionResult> getByArtist(int id) { 
             IEnumerable<ArtEvent> events= _artEventQueryService.getArtEventByArtistId(id);
             return Ok(events);
         }
-        [HttpPost("artevents/{id}/participant")]
+        [HttpPost("art-events/{id}/participant")]
         public async Task<IActionResult> createParticipant([FromBody] RegisterParticipantToArtEventCommand registerParticipantToArtEvent) { 
             string response= await _artEventCommandService.registerParticipantToArtEvent(registerParticipantToArtEvent);
             return Ok(response);
         }
 
-        [HttpDelete("artevents/{id}")]
+        [HttpDelete("art-events/{id}")]
         public async Task<IActionResult> deleteArtEvent(int id) {
             DeleteArtEventCommand deleteArtEventCommand = new DeleteArtEventCommand();
             deleteArtEventCommand.id=id;

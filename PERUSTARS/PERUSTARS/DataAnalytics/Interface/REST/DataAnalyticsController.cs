@@ -9,7 +9,7 @@ namespace PERUSTARS.DataAnalytics.Interface.REST
 {
     [ApiController]
     [Authorize]
-    [Route("api/v1/[controller]")]
+    [Route("api/v1")]
     public class DataAnalyticsController : ControllerBase
     {
         private readonly PeruStarsMLServiceFeignClient _peruStarsMLServiceFeignClient;
@@ -19,7 +19,7 @@ namespace PERUSTARS.DataAnalytics.Interface.REST
             _peruStarsMLServiceFeignClient = peruStarsMLServiceFeignClient;
         }   
 
-        [HttpGet("hobbyists/{hobbyistId}/recommended-artists")]
+        [HttpGet("data-analytics/hobbyists/{hobbyistId}/recommended-artists")]
         public async Task<IActionResult> GetFavouristArtistsFrom(long hobbyistId)
         {
             MLResponse result = await _peruStarsMLServiceFeignClient.GetHobbyistRecommendedArtist(hobbyistId);
