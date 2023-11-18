@@ -9,27 +9,33 @@ using PERUSTARS.ProfileManagement.Domain.Model.Commands;
 using PERUSTARS.ProfileManagement.Domain.Repositories;
 using PERUSTARS.ProfileManagement.Domain.Model.Events;
 using PERUSTARS.Shared.Infrastructure.Configuration;
-
+using PERUSTARS.Shared.Domain.Repositories;
 namespace PERUSTARS.ProfileManagement.Application.Commands.Handlers
 {
     public class FollowArtistCommandHandler : IRequestHandler<FollowArtistCommand, Unit>
     {
         private readonly AppDbContext _context;
         private readonly IArtistRepository _artistRepository;
+        private readonly IHobbyistRepository _hobbyistRepository;
+        private readonly IFollowerRepository _followerRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IPublisher _publisher;
 
-        public FollowArtistCommandHandler(AppDbContext context, IArtistRepository artistRepository, IPublisher publisher)
+        public FollowArtistCommandHandler(AppDbContext context, IArtistRepository artistRepository, IPublisher publisher, IHobbyistRepository hobbyistRepository,IFollowerRepository followerRepository, IUnitOfWork unitOfWork)
         {
             _context = context;
             _artistRepository = artistRepository;
             _publisher = publisher;
+            _hobbyistRepository = hobbyistRepository;
+            _followerRepository = followerRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Unit> Handle(FollowArtistCommand request, CancellationToken cancellationToken)
         {
-            var hobbyist = await _context.Hobbyists.FindAsync(request.HobbyistId);
-            var artist = await _context.Artists.FindAsync(request.ArtistId);
-
+            var hobbyist = await _hobbyistRepository.FindByIdAsync(request.HobbyistId);
+            var artist = await _artistRepository.FindByIdAsync(request.ArtistId);
+            
             if (hobbyist == null || artist == null)
             {
                 throw new ApplicationException("El aficionado o el artista no existen en la base de datos.");
@@ -45,15 +51,11 @@ namespace PERUSTARS.ProfileManagement.Application.Commands.Handlers
             }
 
             // Agregar la relación de seguimiento
-            var follower = new Follower { HobbyistId = hobbyist.HobbyistId, ArtistId = artist.ArtistId, RegistrationDate = DateTime.Now };
-            _context.Followers.Add(follower);
+            var follower = new Follower {  Collected=false,Hobbyist=hobbyist,Artist=artist,Id=0,HobbyistId = hobbyist.HobbyistId, ArtistId = artist.ArtistId, RegistrationDate = DateTime.Now };
+
+            await _followerRepository.AddAsync(follower);
+            await _unitOfWork.CompleteAsync();
             
-            artist.FollowersArtist.Add(follower);
-
-           
-            //artist.NumberOfFollowers++;
-
-            await _context.SaveChangesAsync(cancellationToken);
 
             await _publisher.Publish(new ArtistFollowedEvent()
             {
