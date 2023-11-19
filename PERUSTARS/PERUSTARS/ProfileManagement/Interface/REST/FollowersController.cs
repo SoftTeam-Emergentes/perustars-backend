@@ -51,5 +51,10 @@ namespace PERUSTARS.ProfileManagement.Interface.REST
             var response = _mapper.Map<IEnumerable<Follower>, IEnumerable<FollowerResource>>(result);
             return Ok(response);
         }
+        [HttpDelete("hobbyist/{hobbyistId}")]
+        public async Task<IActionResult> DeleteFollowerByHobbyistId(long hobbyistId) {
+            var response = await _mediator.Send(new DeleteFollowerCommand() { HobbyistId = hobbyistId });
+            return Ok(response);
+        }
     }
 }

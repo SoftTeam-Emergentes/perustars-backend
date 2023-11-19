@@ -8,5 +8,7 @@ namespace PERUSTARS.ProfileManagement.Domain.Repositories
     public interface IFollowerRepository: IBaseRepository<Follower>
     {
         Task<IEnumerable<Follower>> GetFollowerByArtistIdAsync(long artistId);
+        Task<Follower> findFollowerByHobbyistId(long hobbyistId);
+        Task<IEnumerable<Artist>> findFollowedArtistByHobbyistId(long hobbyistId);
     }
 }
