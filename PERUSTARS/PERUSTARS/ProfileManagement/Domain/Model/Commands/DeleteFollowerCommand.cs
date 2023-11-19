@@ -2,7 +2,7 @@
 
 namespace PERUSTARS.ProfileManagement.Domain.Model.Commands
 {
-    public class DeleteFollower:IRequest<string>
+    public class DeleteFollowerCommand:IRequest<string>
     {
         public long HobbyistId { get; set; }
     }
