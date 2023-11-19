@@ -17,7 +17,7 @@ namespace PERUSTARS.ProfileManagement.Infrastructure.Repositories
 
         public async Task<IEnumerable<Artist>> findFollowedArtistByHobbyistId(long hobbyistId)
         {
-            return await _dbContext.Followers.Where(f=>f.HobbyistId== hobbyistId).Select(f=>f.Artist).ToList();
+            return await _dbContext.Followers.Where(f=>f.HobbyistId== hobbyistId).Select(f=>f.Artist).ToListAsync();
         }
 
         public async Task<Follower> findFollowerByHobbyistId(long hobbyistId)
