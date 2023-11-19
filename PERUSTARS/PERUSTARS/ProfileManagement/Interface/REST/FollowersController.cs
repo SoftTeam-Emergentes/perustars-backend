@@ -16,7 +16,7 @@ namespace PERUSTARS.ProfileManagement.Interface.REST
     [Authorize]
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class FollowersController:ControllerBase
+    public class FollowersController : ControllerBase
     {
         private readonly IMediator _mediator;
         private readonly IProfileCommandService _profileCommandService;
@@ -34,8 +34,8 @@ namespace PERUSTARS.ProfileManagement.Interface.REST
         {
             try
             {
-               await _profileCommandService.ExecuteFollowArtistCommand(followArtistCommand);
-                
+                await _profileCommandService.ExecuteFollowArtistCommand(followArtistCommand);
+
                 //await _mediator.Send(followArtistCommand); //u
                 return Ok("The hobbyist has begun to follow the artist.");//u
             }
@@ -49,6 +49,16 @@ namespace PERUSTARS.ProfileManagement.Interface.REST
         {
             var result = await _mediator.Send(new GetAllFollowersByArtistQuery() { ArtistId = artistId });
             var response = _mapper.Map<IEnumerable<Follower>, IEnumerable<FollowerResource>>(result);
+            return Ok(response);
+        }
+        [HttpDelete("hobbyist/{hobbyistId}")]
+        public async Task<IActionResult> DeleteFollowerByHobbyistId(long hobbyistId) {
+            var response = await _mediator.Send(new DeleteFollowerCommand() { HobbyistId = hobbyistId });
+            return Ok(response);
+        }
+        [HttpGet("artist/hobbyist/{hobbyistId}")]
+        public async Task<IActionResult> GetFollowedArtistByHobbyistId(long hobbyistId) {
+            var response = await _mediator.Send(new GetFollowedArtistByHobbyistIdQuery() { HobbyistId = hobbyistId });
             return Ok(response);
         }
     }
