@@ -34,7 +34,9 @@ namespace PERUSTARS.IdentityAndAccountManagement.Application.Commands.Handlers
                 {
                 new Claim(ClaimTypes.Sid, request.User.UserId.ToString()),
                 new Claim(ClaimTypes.Email, request.User.Email),
-                new Claim(ClaimTypes.Name, request.User.FirstName + " " + request.User.LastName)
+                new Claim(ClaimTypes.Name, request.User.FirstName + " " + request.User.LastName),
+                new Claim(ClaimTypes.Role, request.User.Artist != null ? "Artist" : (request.User.Hobbyist != null ? "Hobbyist" : "")),
+                new Claim(ClaimTypes.NameIdentifier, request.User.Artist != null ? request.User.Artist.ArtistId.ToString() : (request.User.Hobbyist != null ? request.User.Hobbyist.HobbyistId.ToString() : ""))
             }),
                 Expires = DateTime.UtcNow.AddHours(4),
                 SigningCredentials = new SigningCredentials(
@@ -42,6 +44,8 @@ namespace PERUSTARS.IdentityAndAccountManagement.Application.Commands.Handlers
                     SecurityAlgorithms.HmacSha512Signature)
             };
             var tokenHandler = new JwtSecurityTokenHandler();
+            tokenHandler.InboundClaimTypeMap.Clear();
+            tokenHandler.InboundClaimTypeMap.Add("nameid", "usertypeid");
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenStr = tokenHandler.WriteToken(token);
 

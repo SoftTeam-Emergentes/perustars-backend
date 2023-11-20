@@ -48,7 +48,6 @@ namespace PERUSTARS.IdentityAndAccountManagement.Application.Commands.Handlers
                 {
                     Token = null,
                     Message = "Username or password is incorrect.",
-                    UserType = null
                 };
             }
             var generateTokenCommand = new GenerateJwtTokenCommand { User = user };
@@ -56,8 +55,7 @@ namespace PERUSTARS.IdentityAndAccountManagement.Application.Commands.Handlers
 
             var response = new AuthenticateResponse {
                 Token = jwtToken,
-                Message = "User logged in successfully",
-                UserType = user.Artist != null ? "Artist" : (user.Hobbyist != null ? "Hobbyist" : null)
+                Message = "User logged in successfully"
             };
             UserLoggedInEvent userLoggedInEvent = new UserLoggedInEvent();
             await _publisher.Publish(userLoggedInEvent);
