@@ -44,8 +44,6 @@ namespace PERUSTARS.IdentityAndAccountManagement.Application.Commands.Handlers
                     SecurityAlgorithms.HmacSha512Signature)
             };
             var tokenHandler = new JwtSecurityTokenHandler();
-            tokenHandler.InboundClaimTypeMap.Clear();
-            tokenHandler.InboundClaimTypeMap.Add("nameid", "usertypeid");
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenStr = tokenHandler.WriteToken(token);
 
