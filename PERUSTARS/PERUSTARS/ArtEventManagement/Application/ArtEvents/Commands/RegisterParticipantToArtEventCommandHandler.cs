@@ -30,8 +30,8 @@ namespace PERUSTARS.ArtEventManagement.Application.ArtEvents.Commands
         }
         public async Task<string> Handle(RegisterParticipantToArtEventCommand request, CancellationToken cancellationToken)
         {
-            ArtEvent artEvent = _artEventRepository.FindByIdAsync(request.artEventId).Result;
-            Hobbyist hobbyist = _hobbyistRepository.FindByIdAsync(request.hobbyistId).Result;
+            ArtEvent artEvent = await _artEventRepository.FindByIdAsync(request.artEventId);
+            Hobbyist hobbyist = await _hobbyistRepository.FindByIdAsync(request.hobbyistId);
             Domain.Model.Aggregates.Participant participant = new Domain.Model.Aggregates.Participant(
                 id: 0,
                 userName: "A",

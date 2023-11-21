@@ -72,7 +72,7 @@ namespace PERUSTARS.ArtEventManagement.Interfaces.REST
             IEnumerable<ArtEvent> events= _artEventQueryService.getArtEventByArtistId(id);
             return Ok(events);
         }
-        [HttpPost("art-events/{id}/participant")]
+        [HttpPost("art-events/participant")]
         public async Task<IActionResult> createParticipant([FromBody] RegisterParticipantToArtEventCommand registerParticipantToArtEvent) { 
             string response= await _artEventCommandService.registerParticipantToArtEvent(registerParticipantToArtEvent);
             return Ok(response);

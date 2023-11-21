@@ -28,7 +28,7 @@ namespace PERUSTARS.ArtEventManagement.Domain.Model.Aggregates
             ArtEventId = artEventId;
             Hobyst = hobbyist;
             ArtEvent = artEvent;
-            Collected = collected;
+            Collected = false;
         }
     }
 }

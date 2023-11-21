@@ -24,7 +24,7 @@ namespace PERUSTARS.ArtEventManagement.Interfaces.REST
             _participantCommandService=participantCommandService;
         }
 
-        [HttpGet]
+        [HttpGet("participants")]
         public async Task<IActionResult> getParticipants()
         {
             IEnumerable<Participant> participants = _participantQueryService.GetParticipants();

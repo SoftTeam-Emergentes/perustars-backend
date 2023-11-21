@@ -8,7 +8,7 @@ namespace PERUSTARS.ArtEventManagement.Domain.Model.Aggregates
     public class ArtEvent
     {
         
-        public long? Id { get; set; }
+        public long Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime? StartDateTime { get; set; }
@@ -18,10 +18,26 @@ namespace PERUSTARS.ArtEventManagement.Domain.Model.Aggregates
         public Artist Artist { get; set; }
         public ArtEventStatus? CurrentStatus { get; set; }
         public IEnumerable<Participant> Participants { get; set; }
-        public bool Collected { get; set; }
+        public bool Collected { get; set; }=false;
 
         public ArtEvent() { }
-        public ArtEvent(long? id, 
+        public ArtEvent(string title,
+            string description,
+            DateTime? startDateTime,
+            Location Location, bool? isOnline,
+            long? artistId,
+            Artist Artist) {
+            Title = title;
+            Description = description;
+            StartDateTime = startDateTime;
+            this.Location = Location;
+            IsOnline = isOnline;
+            ArtistId = artistId;
+            this.Artist = Artist;
+            this.CurrentStatus = ArtEventStatus.REGISTERED;
+            this.Participants= new List<Participant>();
+        }
+        public ArtEvent(long id, 
             string title, 
             string description, 
             DateTime? startDateTime, 
