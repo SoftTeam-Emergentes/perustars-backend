@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
@@ -40,6 +42,15 @@ namespace PERUSTARS.ProfileManagement.Interface.REST
             HobbyistResource hobbyistResource = await _profileCommandService.ExecuteRegisterProfileCommand(registerProfileHobbyistCommand);
             return Ok(hobbyistResource);
         }
+        [HttpGet("user/{userId}")]
+        public async Task<IActionResult> GetHobbyistByArtistId(long userId)
+        {
+            List<Hobbyist> hobbyists = await _context.Hobbyists.Where(h => h.UserId == userId).ToListAsync();
+            if(hobbyists.Count != 1) return NotFound(new { message = "Hobbyist not found" });
+            HobbyistResource hobbyistResource = _mapper.Map<Hobbyist, HobbyistResource>(hobbyists.First());
+            return Ok(hobbyistResource);
+        }
+
         [HttpGet("{hobbyistId}")]
         public async Task<IActionResult> GetHobbyist(long hobbyistId)
         {
